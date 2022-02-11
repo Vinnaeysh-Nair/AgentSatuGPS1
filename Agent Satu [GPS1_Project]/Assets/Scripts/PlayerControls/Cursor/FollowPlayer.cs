@@ -5,12 +5,13 @@ public class FollowPlayer : MonoBehaviour
     //Components
     public GameObject playerBody;
     public PlayerMovement playerMovement;
+    public PlayerController controller;
 
     //Fields
     //[SerializeField] [Range(0f, 1f)] private float offsetY;   (offset crouch height if needed)
     private bool wasCrouching;
     private float crouchHeight;
-    
+
     void Awake()
     {
         crouchHeight = playerMovement.GetPlayerHeight() * 0.5f;
@@ -18,13 +19,10 @@ public class FollowPlayer : MonoBehaviour
     
     void Update()
     {
-        if (playerMovement.GetCrouch())
+        Follow();
+        if (playerMovement.GetCrouch() && controller.GetGrounded())
         {
             AdjustPos();
-        }
-        else
-        {
-            Follow();
         }
     }
 
