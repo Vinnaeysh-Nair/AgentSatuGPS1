@@ -3,7 +3,7 @@ using UnityEngine;
 public class CrosshairAiming : MonoBehaviour
 {
     //Components;
-    public Camera cam;
+    private Camera cam;
     public Transform pivotTransform;
 
     private SpriteRenderer spriteRenderer;
@@ -19,6 +19,7 @@ public class CrosshairAiming : MonoBehaviour
 
     void Awake()
     {
+        cam = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()
