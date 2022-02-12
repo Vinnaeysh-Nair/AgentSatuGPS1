@@ -1,4 +1,5 @@
 using System.Collections;
+using Mono.Cecil.Cil;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
         //Find Ground collider
         platformCollider = transform.Find("PlatformDetector").GetComponent<BoxCollider2D>();
 
-        //Find Hit colliders, these colliders are triggers
+        //Find Hit colliders, these colliders should be triggers
         BoxCollider2D[] hitColliders = transform.Find("HitDetector").GetComponentsInChildren<BoxCollider2D>();
         upperBodyCollider = hitColliders[0];
         lowerBodyCollider = hitColliders[1];
@@ -70,19 +71,19 @@ public class PlayerController : MonoBehaviour
     //To detect if touching anything on platformLayerMask
     void Update()
     {
-        Collider2D collidedPlatform = TouchingPlatformCheck();
+        RaycastHit2D collidedPlatform = TouchingPlatformCheck();
         
         //Nothing detected
-        if (collidedPlatform == null) return;
+        if (collidedPlatform.collider == null) return;
         
-        //When touching solid ground
-        if (collidedPlatform.CompareTag("Solid Ground"))
+        //When touching ground
+        if (collidedPlatform.normal == Vector2.up)
         {
             grounded = true;
             return;
         }
         
-        //When touching anything other than solid ground
+        //When touching anything other than ground
         canWallJump = true;
     }
     
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
         //Jump
         if (jump && grounded)
         {
+           
             grounded = false;
             verticalMove = jumpForce;
             
@@ -179,6 +181,8 @@ public class PlayerController : MonoBehaviour
         {
             horizontalMove = horizontalMoveDir * horizontalMoveSpeed;
 
+            
+            //After crouching, re-enable upper body collider
             if (wasCrouching)
             {
                 EnableUpperBodyCollider(true);
@@ -195,7 +199,7 @@ public class PlayerController : MonoBehaviour
         
         rb.velocity = new Vector2(horizontalMove, verticalMove);
         
-
+        
         
         //Flip player according to mouse position
         Vector2 mousePos = aim.GetMousePos();
@@ -260,7 +264,7 @@ public class PlayerController : MonoBehaviour
     //         //animCon.OnLanding();
     //     }
     // }
-    private Collider2D TouchingPlatformCheck()
+    private RaycastHit2D TouchingPlatformCheck()
     {
         //Offset incase of uneven terrain
         float extraHeightTest = .1f;
@@ -269,22 +273,22 @@ public class PlayerController : MonoBehaviour
 
         //Draw BoxCast ground check
         RaycastHit2D rayCastHit = Physics2D.BoxCast(platformCollider.bounds.center, platformCollider.bounds.size + new Vector3(extraWidthTest, extraHeightTest, 0f), 0f, Vector2.down, 0f, platformLayerMask);
-        Color rayColor;
-        if (rayCastHit.collider != null)
-        {
-            rayColor = Color.green;
-        }
-        else
-        {
-            rayColor = Color.red;
-        }
+        // Color rayColor;
+        // if (rayCastHit.collider != null)
+        // {
+        //     rayColor = Color.green;
+        // }
+        // else
+        // {
+        //     rayColor = Color.red;
+        // }
         
         //See boxcast gizmos
-        //Debug.DrawRay(platformCollider.bounds.center + new Vector3(platformCollider.bounds.extents.x, 0f), Vector2.down * (platformCollider.bounds.extents.y + extraHeightTest), rayColor);
-        //Debug.DrawRay(platformCollider.bounds.center - new Vector3(platformCollider.bounds.extents.x, 0f), Vector2.down * (platformCollider.bounds.extents.y + extraHeightTest), rayColor);
-        //Debug.DrawRay(platformCollider.bounds.center - new Vector3(platformCollider.bounds.extents.x, platformCollider.bounds.extents.y), Vector2.right, rayColor);
+        // Debug.DrawRay(platformCollider.bounds.center + new Vector3(platformCollider.bounds.extents.x, 0f), Vector2.down * (platformCollider.bounds.extents.y + extraHeightTest), rayColor);
+        // Debug.DrawRay(platformCollider.bounds.center - new Vector3(platformCollider.bounds.extents.x, 0f), Vector2.down * (platformCollider.bounds.extents.y + extraHeightTest), rayColor);
+        // Debug.DrawRay(platformCollider.bounds.center - new Vector3(platformCollider.bounds.extents.x, platformCollider.bounds.extents.y), Vector2.right, rayColor);
 
-        return rayCastHit.collider;
+        return rayCastHit;
     }
     
     // private void OnDrawGizmos()
