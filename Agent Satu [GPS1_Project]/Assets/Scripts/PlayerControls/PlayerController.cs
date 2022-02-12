@@ -77,14 +77,14 @@ public class PlayerController : MonoBehaviour
         if (collidedPlatform.collider == null) return;
         
         //When touching ground
-        if (collidedPlatform.normal == Vector2.up)
+        if (collidedPlatform.normal == Vector2.left || collidedPlatform.normal == Vector2.right)
         {
-            grounded = true;
+            canWallJump = true;
             return;
         }
         
         //When touching anything other than ground
-        canWallJump = true;
+        grounded = true;
     }
     
     
