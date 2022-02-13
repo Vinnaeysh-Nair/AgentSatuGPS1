@@ -24,7 +24,7 @@ public class BulletTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        abilityGauge = Mathf.Clamp(abilityGauge, 0f, 1f);
+        
 
         if (abilityGauge <= 0)
         {
@@ -62,6 +62,8 @@ public class BulletTime : MonoBehaviour
             RefillGauge();
             DisableScreenEffect();
         }
+        abilityGauge = Mathf.Clamp(abilityGauge, 0f, 1f);
+        
     }
     
     private void ActivateBulletTime()
@@ -129,6 +131,5 @@ public class BulletTime : MonoBehaviour
                 bulletTimeScreenEffect.GetComponent<Image>().color = color;
             }
         }
-
     }
 }
