@@ -13,9 +13,10 @@ public class EnemiesHpSystem : MonoBehaviour
 
     void Update()
     {
-        if (hpCount == 0)
+        if (hpCount <= 0)
         {
             DestroyImmediate(enemiesToDestroy, true);
+            hpCount = 5;
         }
     }
 
