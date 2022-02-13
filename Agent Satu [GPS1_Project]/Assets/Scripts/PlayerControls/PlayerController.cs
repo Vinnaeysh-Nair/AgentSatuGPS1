@@ -97,7 +97,6 @@ public class PlayerController : MonoBehaviour
         //Jump
         if (jump && grounded)
         {
-           
             grounded = false;
             verticalMove = jumpForce;
             
