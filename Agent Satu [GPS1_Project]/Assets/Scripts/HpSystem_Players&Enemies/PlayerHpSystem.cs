@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHpSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int hpCountPlayer;
+    public GameObject playerToDestroy;
+    public GameObject bulletDetectEnemies;
+
     void Start()
     {
-        
+        hpCountPlayer = 5;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if(hpCountPlayer >= 0)
+        {
+            DestroyImmediate(playerToDestroy, true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D bulletDetectEnemies)
+    {
+        Debug.Log("Player hit");
+        hpCountPlayer -= 1;
         
+        Debug.Log(hpCountPlayer);
     }
 }
