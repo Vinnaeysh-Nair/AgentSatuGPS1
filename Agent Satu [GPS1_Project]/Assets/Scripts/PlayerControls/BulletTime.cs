@@ -104,32 +104,34 @@ public class BulletTime : MonoBehaviour
         // color.a = .3f;
         //
         // bulletTimeScreenEffect.GetComponent<Image>().color = color;
-        
-        if (bulletTimeScreenEffect != null)
+
+        if (bulletTimeScreenEffect == null)
         {
-            Color color = bulletTimeScreenEffect.GetComponent<Image>().color;
+            Debug.Log("No image reference to bullet time screen effect");
+            return;
+        }
         
-            if (color.a < 0.25f)
-            {
-                color.a += 0.01f;
+        Color color = bulletTimeScreenEffect.GetComponent<Image>().color;
         
-                bulletTimeScreenEffect.GetComponent<Image>().color = color;
-            }
+        if (color.a < 0.25f)
+        {
+            color.a += 0.01f;
+        
+            bulletTimeScreenEffect.GetComponent<Image>().color = color;
         }
     }
 
     private void DisableScreenEffect()
     {
-        if (bulletTimeScreenEffect != null)
+        if (bulletTimeScreenEffect == null) return;
+        
+        Color color = bulletTimeScreenEffect.GetComponent<Image>().color;
+        
+        if (color.a > 0f)
         {
-            Color color = bulletTimeScreenEffect.GetComponent<Image>().color;
+            color.a -= 0.01f;
         
-            if (color.a > 0f)
-            {
-                color.a -= 0.01f;
-        
-                bulletTimeScreenEffect.GetComponent<Image>().color = color;
-            }
+            bulletTimeScreenEffect.GetComponent<Image>().color = color;
         }
     }
 }
