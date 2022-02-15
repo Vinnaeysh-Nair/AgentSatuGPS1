@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("General Movement")]
     [SerializeField] private float horizontalMoveSpeed = 20f;
     [SerializeField] private float jumpForce = 30f;
+    [SerializeField] private float gravity = 9f;
     [SerializeField] [Range(0f, 1f)] private float horizontalLerp = .3f;
     [SerializeField] [Range(0f, 1f)] private float verticalLerp = .8f;
     private bool grounded = true;
@@ -41,10 +42,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float xWallJumpForce;
     [SerializeField] private float yWallJumpForce;
     [SerializeField] private float leftOrRightJumpCooldownTime = .3f;
+    [SerializeField] [Range(0f, 1f)] private float wallJumpGravityReduction = .2f;
     private bool canWallJump = false;
     private float wallJumpDelay = .08f;
     private bool jumpedToLeft = false;
     private bool jumpedToRight = false;
+    
 
     
     //Groundcheck fields
@@ -58,6 +61,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        //Set to customized gravity
+        rb.gravityScale = gravity;
         
         //Find Ground collider
         platformCollider = transform.Find("PlatformDetector").GetComponent<BoxCollider2D>();
@@ -104,6 +110,10 @@ public class PlayerController : MonoBehaviour
         } 
         else if (jump && canWallJump)
         {
+            //Reduce gravity, reset after a timer
+            rb.gravityScale *= 1 - wallJumpGravityReduction;
+            StartCoroutine(ResetGravityScale());
+            
             //Create overlapBox to detect collision on left and right of the player
             Collider2D leftBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x - platformCollider.bounds.extents.x - .09f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
             Collider2D rightBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x + platformCollider.bounds.extents.x + .09f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
@@ -255,6 +265,13 @@ public class PlayerController : MonoBehaviour
         
         else if (jumpedToRight)
             jumpedToRight = false;
+    }
+
+    private IEnumerator ResetGravityScale()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        rb.gravityScale = gravity;
     }
     // private void OnCollisionEnter2D(Collision2D collision)
     // {
