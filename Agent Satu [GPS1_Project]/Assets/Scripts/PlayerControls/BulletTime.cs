@@ -24,8 +24,6 @@ public class BulletTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (abilityGauge <= 0)
         {
             StartCoroutine(DeactivateBulletTime());
@@ -41,13 +39,11 @@ public class BulletTime : MonoBehaviour
                 //Minimum gauge before bullet time can be used
                 if (abilityGauge <= minGaugeBeforeUse) return;
                 ActivateBulletTime();
-                //EnableScreenEffect();
             }
             //Trigger bullet time off
             else
             {
                 StartCoroutine(DeactivateBulletTime());
-                //DisableScreenEffect();
             }
         }
 
@@ -81,7 +77,6 @@ public class BulletTime : MonoBehaviour
     
             Time.timeScale += (1f / backToNormalTimeLength) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            
         }
         activated = false;
     }
