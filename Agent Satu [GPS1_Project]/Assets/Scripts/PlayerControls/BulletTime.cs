@@ -95,11 +95,8 @@ public class BulletTime : MonoBehaviour
 
     private void EnableScreenEffect()
     {
-        // Color color = bulletTimeScreenEffect.GetComponent<Image>().color;
-        // color.a = .3f;
-        //
-        // bulletTimeScreenEffect.GetComponent<Image>().color = color;
-
+        //Automate finding screen effect
+        
         if (bulletTimeScreenEffect == null)
         {
             Debug.Log("No image reference to bullet time screen effect");
