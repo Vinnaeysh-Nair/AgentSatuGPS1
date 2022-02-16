@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class SetupLimbHp : MonoBehaviour
 {
     
-    #region Singleton, Initialise pooler instance, Populate setup list
+    #region Singleton, Populate setup list
 
     public static SetupLimbHp setupLimbInstance;
     void Awake()

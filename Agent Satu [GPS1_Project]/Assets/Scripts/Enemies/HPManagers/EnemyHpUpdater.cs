@@ -58,8 +58,11 @@ public class EnemyHpUpdater : MonoBehaviour
     }
     
 
-    private void OnMouseDown()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.transform.CompareTag("Bullet")) return;
+        
+        //Debug.Log("taking damage");
         //Disabling this script doesn't affect the colliders, therefore physics can still happen, thus need to check if this script is enabled.
         if (!enabled) return; 
         TakeLimbDamage(1);
