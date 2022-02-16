@@ -9,6 +9,7 @@ public class EnemyHpUpdater : MonoBehaviour
     private Ragdoll ragdoll;
     
     [SerializeField] private int limbHp;
+    private TagManager tagManager;
     
     void Awake()
     {
@@ -21,6 +22,7 @@ public class EnemyHpUpdater : MonoBehaviour
         overallHpManager = GetComponentInParent<OverallHp>();
         dismemberment = transform.Find("/EnemyHpManagers/ConfigureDismemberment").GetComponent<Dismemberment>();
         ragdoll = GetComponentInParent<Ragdoll>();
+        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         
         CopyLimbHp();
     }
@@ -32,15 +34,27 @@ public class EnemyHpUpdater : MonoBehaviour
         SetupLimbHp.Limb foundLimb = setupLimb.limbList.Find(limb => limb.GetLimbName() == limbName);
         limbHp = foundLimb.GetInitialHp();
     }
+    
     private void TakeLimbDamage(int dmg)
     {
         if (limbHp > 0)
-        {
             limbHp -= dmg;
-        }
-        
+
         if(limbHp <= 0)
             dismemberment.Dismember(transform.gameObject);
+
+            
+        //If both legs dismembered, activate ragdoll
+        int legCount = overallHpManager.GetLegDismemberedCount();
+        if (transform.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+        {
+            legCount += 1;
+            overallHpManager.SetLegDismemberedCount(legCount);
+        }
+                
+
+        if (overallHpManager.GetLegDismemberedCount()  == 2)
+            ragdoll.ActivateRagdoll();
     }
 
     private void TakeOverallDamage(int dmg)
@@ -62,12 +76,9 @@ public class EnemyHpUpdater : MonoBehaviour
     {
         if (!collision.transform.CompareTag("Bullet")) return;
         
-        //Debug.Log("taking damage");
         //Disabling this script doesn't affect the colliders, therefore physics can still happen, thus need to check if this script is enabled.
-        if (!enabled) return; 
+        //if (!enabled) return; 
         TakeLimbDamage(1);
         TakeOverallDamage(1);
     }
-
-
 }

@@ -4,7 +4,12 @@ using UnityEngine.U2D.Animation;
 
 //Attached to each enemy types (manual).
 public class Ragdoll : MonoBehaviour
-{ 
+{
+    private TagManager tagManager;
+    void Start()
+    {
+        tagManager = tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+    }
     public void ActivateRagdoll()
     {
         //GetComponent<Animator>().enabled = false;
@@ -14,9 +19,10 @@ public class Ragdoll : MonoBehaviour
         {
             Transform limb = transform.GetChild(i);
             
-            if (limb.gameObject.activeInHierarchy && limb.CompareTag("Limb"))
+            if (limb.gameObject.activeInHierarchy)
             {
-                RagdollEffect(limb);
+                if(limb.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || limb.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+                    RagdollEffect(limb);
             }
         }
     }
