@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using System.Collections;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -15,17 +17,21 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float flingDampening = 1f;
     private bool hitRegistered = false;
     private int bulletDamage = 1;
-    
-    
-    void Start()
+
+
+    void Awake()
     {
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        
-        
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    //Each time spawned from pool
+    void OnEnable()
+    {
         rb.velocity = transform.right * bulletSpeed;
     }
 
+    //Hit enemy
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
         Instantiate(impactEffect, transform.position, transform.rotation);
@@ -52,8 +58,9 @@ public class BulletBehaviour : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    
-    
+
+
+    //Determine force to push collided enemy's limbs
     private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)
     {
         float flingX = bulletRb.velocity.x * flingDampening;

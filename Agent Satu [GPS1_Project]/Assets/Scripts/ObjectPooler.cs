@@ -27,7 +27,8 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] GameObject[] objectArr;
     
     //Fields
-    private const int poolSize = 5;
+    private const int smallPoolSize = 5;
+    private const int bigPoolSize = 20;
     private TagManager tagManager;
     
     
@@ -42,7 +43,12 @@ public class ObjectPooler : MonoBehaviour
         {
             this.name = name;
             this.gameObj = gameObj;
-            this.size = poolSize;
+            
+            if(!gameObj.CompareTag("Bullet"))
+                this.size = smallPoolSize;
+            else
+                this.size = bigPoolSize;
+            
         }
 
         public void SetName(string name)
