@@ -10,7 +10,7 @@ public class Ragdoll : MonoBehaviour
     {
         tagManager = tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
     }
-    public void ActivateRagdoll()
+    public void ActivateRagdoll(Vector2 bulletDirection)
     {
         //GetComponent<Animator>().enabled = false;
         
@@ -21,8 +21,13 @@ public class Ragdoll : MonoBehaviour
             
             if (limb.gameObject.activeInHierarchy)
             {
-                if(limb.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || limb.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+                if (limb.CompareTag(tagManager.tagScriptableObject.limbOthersTag) ||
+                    limb.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+                {
                     RagdollEffect(limb);
+                    limb.GetComponent<Rigidbody2D>().AddForce(bulletDirection, ForceMode2D.Impulse);
+                }
+                    
             }
         }
     }

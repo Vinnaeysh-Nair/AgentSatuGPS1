@@ -1,36 +1,64 @@
-using System.Collections;
 using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Rigidbody2D rb;
-    public float bulletSpeed = 40f;
-    public float bulletDamage = 50f;
-    public GameObject impactEffect;
+    //Components
+    private TagManager tagManager;
+    private Rigidbody2D rb;
+    
+    //Fields
+    [Header("General")]
+    [SerializeField] private float bulletSpeed = 40f;
+    [SerializeField] private GameObject impactEffect;
+    
+    [Header("Force on enemy when dismembering and ragdolling")]
+    [SerializeField] [Range(0f, 1f)] private float flingDampening = 1f;
+    private bool hitRegistered = false;
+    private int bulletDamage = 1;
+    
     
     void Start()
     {
+        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+        
+        
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * bulletSpeed;
-        DestroySelf();
     }
 
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        // EnemyBehaviour enemy = hitInfo.GetComponent<EnemyBehaviour>();
-        //
-        // if (enemy != null)
-        // {
-        //     enemy.TakeDamage(bulletDamage);
-        // }
-
         Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
-    }
 
-    //If doesn't hit anything, destroy self after 5 secs
-    private void DestroySelf()
+        if (!hitInfo.CompareTag(tagManager.tagScriptableObject.limbLegTag) && !hitInfo.CompareTag(tagManager.tagScriptableObject.limbOthersTag))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
+        
+        if (!hitRegistered)
+        {
+            hitRegistered = true;
+            
+            EnemyHpUpdater enemyHpUpdater = hitInfo.GetComponent<EnemyHpUpdater>();
+            if (enemyHpUpdater == null) return;
+            
+            
+            Vector2 bulletDirection = CheckBulletDirection(rb);
+            enemyHpUpdater.TakeLimbDamage(bulletDamage, bulletDirection);
+            enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
+            
+            gameObject.SetActive(false);
+        }
+    }
+    
+    
+    private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)
     {
-        Destroy(gameObject, 5f);
+        float flingX = bulletRb.velocity.x * flingDampening;
+        float flingY = bulletRb.velocity.y * flingDampening;
+
+        return new Vector2(flingX, flingY);
     }
 }

@@ -8,8 +8,6 @@ public class Dismemberment : MonoBehaviour
     //Components
     private ObjectPooler objectPooler;
 
-    [SerializeField] private float flingX = 50f;
-    [SerializeField] private float flingY = 50f;
     
     void Awake()
     {
@@ -17,14 +15,14 @@ public class Dismemberment : MonoBehaviour
     }
 
     
-    public void Dismember(GameObject limb)
+    public void Dismember(GameObject limb, Vector2 flingDirection)
     {
         //Disable original limb
         limb.SetActive(false);
         
         
         //Spawning new limb
-        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, Quaternion.identity);
+        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, transform.rotation);
         if (detachedLimb == null) return;
         
         //Set up detached limb
@@ -42,34 +40,10 @@ public class Dismemberment : MonoBehaviour
         //Apply physics
         Rigidbody2D limbRb = detachedLimb.GetComponent<Rigidbody2D>();
         limbRb.isKinematic = false;
+
+       
+        
         //Apply more physics for impact
-        limbRb.AddForce(new Vector2(flingX, flingY), ForceMode2D.Impulse);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!collision.transform.CompareTag("Bullet")) return;
-        Rigidbody2D bulletRb = collision.rigidbody;
-        
-        
-        //Debug.Log(bulletRb.velocity.x + ", " + bulletRb.velocity.y);
-        if (bulletRb.velocity.x > 0)
-        {
-            flingX = 10f;
-        }
-        else
-        {
-            flingX = -10f;
-        }
-
-        if (bulletRb.velocity.y > 0)
-        {
-            flingY = 10f;
-        }
-        else
-        {
-            flingY = -10f;
-        }
-        
+        limbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }
