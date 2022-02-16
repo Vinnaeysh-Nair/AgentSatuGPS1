@@ -8,16 +8,17 @@ using System.Collections.Generic;
 public class SetupLimbHp : MonoBehaviour
 {
     
-    #region Singleton, Initialise pooler instance, Populate setup list
+    #region Singleton, Populate setup list
 
     public static SetupLimbHp setupLimbInstance;
     void Awake()
     {
         setupLimbInstance = this;
     }
-
+    
     void Start()
     {
+        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         PopulateList();
     }
     
@@ -27,6 +28,7 @@ public class SetupLimbHp : MonoBehaviour
     //Fields
     [SerializeField] private Transform[] enemyArr;
     public List<Limb> limbList;
+    private TagManager tagManager;
 
     
     //Limb class for setting limb hp
@@ -76,7 +78,7 @@ public class SetupLimbHp : MonoBehaviour
                 Transform child = enemy.GetChild(i);
                 
                 //If it is a limb
-                if (child.CompareTag("Limb"))
+                if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag)  )
                 {
                     Limb newLimb = new Limb(child);
                     string tempName = newLimb.GetLimbName();

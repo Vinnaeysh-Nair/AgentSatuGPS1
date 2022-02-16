@@ -8,6 +8,7 @@ using UnityEngine;
     - for enemies, only drop one type of each enemies, as limbs of the same name can be reused by the pooler.
     - no additional rule for pooling standalone gameObjects, just drag and drop inside.
  */
+
 public class ObjectPooler : MonoBehaviour
 {
     #region Singleton
@@ -26,7 +27,9 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] GameObject[] objectArr;
     
     //Fields
-    private const int poolSize = 5;
+    private const int smallPoolSize = 5;
+    private const int bigPoolSize = 20;
+    private TagManager tagManager;
     
     
     [System.Serializable] 
@@ -40,7 +43,12 @@ public class ObjectPooler : MonoBehaviour
         {
             this.name = name;
             this.gameObj = gameObj;
-            this.size = poolSize;
+            
+            if(!gameObj.CompareTag("Bullet"))
+                this.size = smallPoolSize;
+            else
+                this.size = bigPoolSize;
+            
         }
 
         public void SetName(string name)
@@ -67,6 +75,8 @@ public class ObjectPooler : MonoBehaviour
 
     void Start()
     {
+        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+        
         //Stops ObjectPooler from creating more pools than necessary when entering and exiting playmode.
         if (pools.Count > 0) pools.Clear();
         
@@ -86,7 +96,7 @@ public class ObjectPooler : MonoBehaviour
                 {
                     GameObject child = obj.transform.GetChild(i).gameObject;
 
-                    if (child.CompareTag("Limb"))
+                    if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag))
                     {
                         Pool newPool = new Pool(child.name, child);
                         pools.Add(newPool);

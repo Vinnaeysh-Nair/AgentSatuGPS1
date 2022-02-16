@@ -22,9 +22,12 @@ public class CrosshairAiming : MonoBehaviour
         cam = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    
+    //Fix camera not following after a certain distance from spawn position
     void Update()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log(cam.ScreenToWorldPoint(Input.mousePosition));
         PointToMouse();
     }
     

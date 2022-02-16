@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
@@ -6,6 +7,7 @@ public class Dismemberment : MonoBehaviour
 {
     //Components
     private ObjectPooler objectPooler;
+
     
     void Awake()
     {
@@ -13,14 +15,14 @@ public class Dismemberment : MonoBehaviour
     }
 
     
-    public void Dismember(GameObject limb)
+    public void Dismember(GameObject limb, Vector2 flingDirection)
     {
         //Disable original limb
         limb.SetActive(false);
         
         
         //Spawning new limb
-        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, Quaternion.identity);
+        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, transform.rotation);
         if (detachedLimb == null) return;
         
         //Set up detached limb
@@ -38,7 +40,10 @@ public class Dismemberment : MonoBehaviour
         //Apply physics
         Rigidbody2D limbRb = detachedLimb.GetComponent<Rigidbody2D>();
         limbRb.isKinematic = false;
+
+       
+        
         //Apply more physics for impact
-        //limbRb.AddForce(new Vector2(1 * 0f, 1 * 0f), ForceMode2D.Impulse);
+        limbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }

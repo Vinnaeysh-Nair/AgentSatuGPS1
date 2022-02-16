@@ -17,11 +17,17 @@ public class CameraTarget : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector2 targetPos = (Vector2) playerBody.position + aim.GetMousePos();
-
-        targetPos.x = Mathf.Clamp(targetPos.x, -threshold + playerBody.position.x, threshold + playerBody.position.x);
-        targetPos.y = Mathf.Clamp(targetPos.y, -threshold + playerBody.position.y, threshold + playerBody.position.y);
-
+        Vector2 playerPos = playerBody.position;
+        
+        //Find position between player and cursor
+        Vector2 targetPos =  (playerPos + aim.GetMousePos())/2;
+        
+        
+        //Limit by threshold amount
+        targetPos.x = Mathf.Clamp(targetPos.x, -threshold + playerPos.x, threshold + playerPos.x);
+        targetPos.y = Mathf.Clamp(targetPos.y, -threshold + playerPos.y, threshold + playerPos.y);
+        
+        
         transform.position = targetPos;
     }
 }
