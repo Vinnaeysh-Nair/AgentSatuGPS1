@@ -16,7 +16,7 @@ public class FindLimbs : MonoBehaviour
             Transform obj = transform.GetChild(i);
             
             //When object is limb
-            if (obj.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || obj.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+            if (obj.CompareTag(tagManager.tagSO.limbOthersTag) || obj.CompareTag(tagManager.tagSO.limbLegTag) || obj.CompareTag(tagManager.tagSO.limbHeadTag))
             {
                 obj.AddComponent<Dismemberment>();
                 obj.AddComponent<EnemyHpUpdater>();

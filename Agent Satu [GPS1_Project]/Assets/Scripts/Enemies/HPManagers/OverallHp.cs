@@ -11,7 +11,7 @@ public class OverallHp : MonoBehaviour
     //Fields
     [SerializeField] private int overallHp = 4;
     [SerializeField] private int legDismemberedCount = 0;
-
+    private bool isHeadDismembered = false;
 
     void Awake()
     {
@@ -27,22 +27,31 @@ public class OverallHp : MonoBehaviour
     {
         return overallHp;
     }
-
-    public void SetOverallHp(int overallHp)
-    {
-        this.overallHp = overallHp;
-    }
-
+    
     public int GetLegDismemberedCount()
     {
         return this.legDismemberedCount;
     }
 
+    public bool GetIsHeadDismembered()
+    {
+        return isHeadDismembered;
+    }
+
+    public void SetOverallHp(int overallHp)
+    {
+        this.overallHp = overallHp;
+    }
+    
     public void SetLegDismemberedCount(int legDismemberedCount)
     {
         this.legDismemberedCount = legDismemberedCount;
     }
     
+    public void SetIsHeadDismemberedToTrue()
+    {
+        this.isHeadDismembered = true;
+    }
     
     //Get overall hp based on enemy type name in the EnemyType list
     private void CopyInitialHp()

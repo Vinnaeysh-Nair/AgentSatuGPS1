@@ -14,7 +14,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private GameObject impactEffect;
     
     [Header("Force on enemy when dismembering and ragdolling")]
-    [SerializeField] [Range(0f, 1f)] private float flingDampening = 1f;
+    [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
     private bool hitRegistered = false;
     private int bulletDamage = 1;
 
@@ -35,13 +35,20 @@ public class BulletBehaviour : MonoBehaviour
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
         Instantiate(impactEffect, transform.position, transform.rotation);
-
-        if (!hitInfo.CompareTag(tagManager.tagScriptableObject.limbLegTag) && !hitInfo.CompareTag(tagManager.tagScriptableObject.limbOthersTag))
+        
+        if (hitInfo.CompareTag("Player"))
+        {
+            Debug.Log(hitInfo);
+            return;
+        }
+        
+        //If not hitting any limbs, return
+        if (!hitInfo.CompareTag(tagManager.tagSO.limbLegTag) && !hitInfo.CompareTag(tagManager.tagSO.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagSO.limbHeadTag))
         {
             gameObject.SetActive(false);
             return;
         }
-        
+
         
         if (!hitRegistered)
         {
@@ -63,8 +70,8 @@ public class BulletBehaviour : MonoBehaviour
     //Determine force to push collided enemy's limbs
     private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)
     {
-        float flingX = bulletRb.velocity.x * flingDampening;
-        float flingY = bulletRb.velocity.y * flingDampening;
+        float flingX = bulletRb.velocity.x * forceDampening;
+        float flingY = bulletRb.velocity.y * forceDampening;
 
         return new Vector2(flingX, flingY);
     }
