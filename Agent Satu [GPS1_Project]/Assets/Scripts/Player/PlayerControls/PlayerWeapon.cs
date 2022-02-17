@@ -52,8 +52,6 @@ public class PlayerWeapon : MonoBehaviour
     }
     void Update()
     {
-        PrintAmmo();
-        
         if (wepId == 0)
         {
             SingleClickShooting();
@@ -64,7 +62,7 @@ public class PlayerWeapon : MonoBehaviour
         //Below are guns that need to check for reloading
         
         //If need to reload and have ammo
-        if (HaveAmmo())
+        if (HaveAmmo() && !ClipFull())
         {
             if (Input.GetButtonDown("Reload") || ClipEmpty())
             {
@@ -130,7 +128,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Shoot()
     {
         DecreaseAmmo();
-        
+
         GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
         StartCoroutine(SetBulletInactive(shotBullet));
         
@@ -168,24 +166,22 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
-            Debug.Log("reloading");
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve
             int reloadAmount = clipSize - currClip;
-            if (reloadAmount >= currAmmoReserve)
+            if (reloadAmount > currAmmoReserve)
             {
                 currClip = currAmmoReserve;
                 currAmmoReserve = 0;
             }
             else
             {
-                currClip += reloadAmount;
+                currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
- 
             reloading = false;
         }
     }
