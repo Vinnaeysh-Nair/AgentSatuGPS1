@@ -91,11 +91,17 @@ public class PlayerWeapon : MonoBehaviour
             SingleClickShooting();
         }
     }
-
+    
     private bool ClipEmpty()
     {
         if (currClip > 0) return false;
         return true;
+    }
+    
+    private bool ClipFull()
+    {
+        if (currClip == clipSize) return true;
+        return false;
     }
     private bool HaveAmmo()
     {
@@ -162,6 +168,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
+            Debug.Log("reloading");
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
