@@ -707,9 +707,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6770698419541710769, guid: 62adda993dbe0144cbf3ab098c28c944, type: 3}
+      propertyPath: enemyTypesList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770698419541710769, guid: 62adda993dbe0144cbf3ab098c28c944, type: 3}
       propertyPath: enemyTypesList.Array.data[0].enemyType
       value: 
       objectReference: {fileID: 8027019340131393575}
+    - target: {fileID: 6770698419541710769, guid: 62adda993dbe0144cbf3ab098c28c944, type: 3}
+      propertyPath: enemyTypesList.Array.data[1].enemyType
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770698419541710769, guid: 62adda993dbe0144cbf3ab098c28c944, type: 3}
+      propertyPath: enemyTypesList.Array.data[1].initialHp
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6770698420484891615, guid: 62adda993dbe0144cbf3ab098c28c944, type: 3}
       propertyPath: enemyArr.Array.data[0]
       value: 
@@ -1025,6 +1037,10 @@ PrefabInstance:
     - target: {fileID: 943058393439860941, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943058393439860956, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943058393439860980, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
       propertyPath: m_Name
