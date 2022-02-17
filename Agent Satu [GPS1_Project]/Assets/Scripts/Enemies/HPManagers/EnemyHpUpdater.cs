@@ -3,19 +3,13 @@ using UnityEngine;
 //Updates limb and overall hp, attached to all limbs (auto - by FindLimbs script).
 public class EnemyHpUpdater : MonoBehaviour
 {
-    
-    //Components
     private SetupLimbHp setupLimb;
     private OverallHp overallHpManager;
     private Dismemberment dismemberment;
     private Ragdoll ragdoll;
-    private TagManager tagManager;
     
-    
-    //Fields
-    //Take away [SerializeField after debugging]
     [SerializeField] private int limbHp;
-    
+    private TagManager tagManager;
     
     void Awake()
     {

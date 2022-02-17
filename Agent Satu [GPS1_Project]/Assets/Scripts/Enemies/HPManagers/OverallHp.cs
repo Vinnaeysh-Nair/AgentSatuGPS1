@@ -9,9 +9,8 @@ public class OverallHp : MonoBehaviour
     
     
     //Fields
-    //Take away [SerializeField after debugging]
     [SerializeField] private int overallHp = 4;
-    private int legDismemberedCount = 0;
+    [SerializeField] private int legDismemberedCount = 0;
 
 
     void Awake()
