@@ -25,9 +25,9 @@ public class Ragdoll : MonoBehaviour
 
             if (!limb.gameObject.activeInHierarchy) continue;
             
-            if (limb.CompareTag(tagManager.tagScriptableObject.limbOthersTag) ||
-                limb.CompareTag(tagManager.tagScriptableObject.limbLegTag) ||
-                limb.CompareTag(tagManager.tagScriptableObject.limbHeadTag))
+            if (limb.CompareTag(tagManager.tagSO.limbOthersTag) ||
+                limb.CompareTag(tagManager.tagSO.limbLegTag) ||
+                limb.CompareTag(tagManager.tagSO.limbHeadTag))
             {
                 RagdollEffect(limb, flingDirection);
             }

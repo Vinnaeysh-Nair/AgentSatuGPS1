@@ -47,15 +47,15 @@ public class EnemyHpUpdater : MonoBehaviour
             dismemberment.Dismember(transform.gameObject,  flingDirection);
             
             //Check if head dismembered
-            if(transform.CompareTag(tagManager.tagScriptableObject.limbHeadTag))
+            if(transform.CompareTag(tagManager.tagSO.limbHeadTag))
             {
                 overallHpManager.SetIsHeadDismemberedToTrue();
             }
         }
-            
+           
         
         //Check if legs dismembered
-        if (transform.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+        if (transform.CompareTag(tagManager.tagSO.limbLegTag))
         {
             int legCount = overallHpManager.GetLegDismemberedCount();
             legCount += 1;

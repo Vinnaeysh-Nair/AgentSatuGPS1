@@ -37,7 +37,7 @@ public class BulletBehaviour : MonoBehaviour
         Instantiate(impactEffect, transform.position, transform.rotation);
 
         //If not hitting any limbs, return
-        if (!hitInfo.CompareTag(tagManager.tagScriptableObject.limbLegTag) && !hitInfo.CompareTag(tagManager.tagScriptableObject.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagScriptableObject.limbHeadTag))
+        if (!hitInfo.CompareTag(tagManager.tagSO.limbLegTag) && !hitInfo.CompareTag(tagManager.tagSO.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagSO.limbHeadTag))
         {
             gameObject.SetActive(false);
             return;
