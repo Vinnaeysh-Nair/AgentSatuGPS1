@@ -7,7 +7,8 @@ public class BulletBehaviour : MonoBehaviour
     //Components
     private TagManager tagManager;
     private Rigidbody2D rb;
-    
+    private PlayerHpSystem playerHp;
+
     //Fields
     [Header("General")]
     [SerializeField] private float bulletSpeed = 40f;
@@ -22,6 +23,7 @@ public class BulletBehaviour : MonoBehaviour
     void Awake()
     {
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+        playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -36,12 +38,14 @@ public class BulletBehaviour : MonoBehaviour
     {
         Instantiate(impactEffect, transform.position, transform.rotation);
         
+        //If hit player
         if (hitInfo.CompareTag("Player"))
         {
-            Debug.Log(hitInfo);
+            playerHp.TakeDamage(bulletDamage);
             return;
         }
         
+        //If hit enemies
         //If not hitting any limbs, return
         if (!hitInfo.CompareTag(tagManager.tagSO.limbLegTag) && !hitInfo.CompareTag(tagManager.tagSO.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagSO.limbHeadTag))
         {
