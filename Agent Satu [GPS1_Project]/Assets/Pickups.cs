@@ -18,7 +18,7 @@ public class Pickups : MonoBehaviour
     //Text
     [Space] [Space]
     [Header("Each id and their corresponding effects, do not change the notes")]
-    [TextArea] [SerializeField] private string notes = "placeholder";
+    [TextArea(3,7)] [SerializeField] private string notes = "placeholder";
     
     void Start()
     {

@@ -23,7 +23,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float reloadTime = 1f;
     [SerializeField] private int clipSize;
-    [SerializeField] private float shootStanceDelay = 1f;
+    //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
     [SerializeField] private bool isMultishot = false;
 
