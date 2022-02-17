@@ -5,6 +5,7 @@ public class Pickups : MonoBehaviour
 {
     //Components
     private PlayerInventory playerInventory;
+    private PlayerHpSystem playerHp;
     private List<PlayerInventory.Weapons> weaponsList;
 
     //Fields
@@ -23,6 +24,7 @@ public class Pickups : MonoBehaviour
     void Start()
     {
         playerInventory = transform.Find("/Player/Pivot/Arms/PlayerInventory").GetComponent<PlayerInventory>();
+        playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
         weaponsList = playerInventory.GetWeaponsList();
     }
     
@@ -41,10 +43,9 @@ public class Pickups : MonoBehaviour
 
     private void TriggerEffect()
     {
-        if (pickupId == 5)
+        if (pickupId == 0)
         {
-            //add player health thing
-            Debug.Log("health replenished");
+            playerHp.ReplenishHealth(replenishAmount);
         }
         else
         {

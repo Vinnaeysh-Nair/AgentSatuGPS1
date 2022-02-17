@@ -9,6 +9,7 @@ public class PlayerHpSystem : MonoBehaviour
     void Start()
     {
         currHp = hpCountPlayer;
+        TakeDamage(3);
     }
     
     public void TakeDamage(int dmg)
@@ -23,5 +24,11 @@ public class PlayerHpSystem : MonoBehaviour
             //Debug.Log("ded");
             //Add lose condition
         }
+    }
+
+    public void ReplenishHealth(int amount)
+    {
+        if (currHp == hpCountPlayer) return;
+        currHp += amount;
     }
 }
