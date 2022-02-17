@@ -78,7 +78,7 @@ public class SetupLimbHp : MonoBehaviour
                 Transform child = enemy.GetChild(i);
                 
                 //If it is a limb
-                if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag)  )
+                if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag) || child.CompareTag(tagManager.tagScriptableObject.limbHeadTag) )
                 {
                     Limb newLimb = new Limb(child);
                     string tempName = newLimb.GetLimbName();

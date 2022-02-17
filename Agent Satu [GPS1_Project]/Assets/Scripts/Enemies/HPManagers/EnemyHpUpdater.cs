@@ -35,30 +35,46 @@ public class EnemyHpUpdater : MonoBehaviour
         limbHp = foundLimb.GetInitialHp();
     }
     
-    public void TakeLimbDamage(int dmg,Vector2 bulletDirection)
+    public void TakeLimbDamage(int dmg,Vector2 flingDirection)
     {
+        //Limb hp decerement
         if (limbHp > 0)
             limbHp -= dmg;
 
-        if(limbHp <= 0)
-            dismemberment.Dismember(transform.gameObject,  bulletDirection);
-
+        //If hp 0, dismember this limb
+        if (limbHp <= 0)
+        {
+            dismemberment.Dismember(transform.gameObject,  flingDirection);
             
-        //If both legs dismembered, activate ragdoll
-        int legCount = overallHpManager.GetLegDismemberedCount();
+            //Check if head dismembered
+            if(transform.CompareTag(tagManager.tagScriptableObject.limbHeadTag))
+            {
+                overallHpManager.SetIsHeadDismemberedToTrue();
+            }
+        }
+            
+        
+        //Check if legs dismembered
         if (transform.CompareTag(tagManager.tagScriptableObject.limbLegTag))
         {
+            int legCount = overallHpManager.GetLegDismemberedCount();
             legCount += 1;
             overallHpManager.SetLegDismemberedCount(legCount);
         }
-                
+        
+        //If Head dismemebred, activate ragdoll  
+        if (overallHpManager.GetIsHeadDismembered())
+            ragdoll.ActivateRagdoll(flingDirection);   
+        
 
+        //If both legs dismembered, activate ragdoll
         if (overallHpManager.GetLegDismemberedCount()  == 2)
-            ragdoll.ActivateRagdoll(bulletDirection);
+            ragdoll.ActivateRagdoll(flingDirection);
     } 
 
-    public void TakeOverallDamage(int dmg, Vector2 bulletDirection)
+    public void TakeOverallDamage(int dmg, Vector2 flingDirection)
     {
+        //Overall Hp decerement
         int overallHp = overallHpManager.GetOverallHp();
         
         if (overallHp > 0)
@@ -67,8 +83,10 @@ public class EnemyHpUpdater : MonoBehaviour
             overallHpManager.SetOverallHp(overallHp);
         }
         
+        
+        //If overall hp = 0, ragdoll this enemy
         if(overallHp <= 0)
-            ragdoll.ActivateRagdoll(bulletDirection);
+            ragdoll.ActivateRagdoll(flingDirection);
     }
     
 

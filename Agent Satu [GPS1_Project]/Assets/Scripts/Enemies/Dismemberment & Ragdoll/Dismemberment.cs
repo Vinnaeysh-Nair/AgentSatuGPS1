@@ -8,7 +8,8 @@ public class Dismemberment : MonoBehaviour
     //Components
     private ObjectPooler objectPooler;
 
-    
+    //Dismemberment
+    [SerializeField] private float dismemberedLimbGravity = 3f;
     void Awake()
     {
         objectPooler = ObjectPooler.objPoolerInstance;
@@ -40,10 +41,11 @@ public class Dismemberment : MonoBehaviour
         //Apply physics
         Rigidbody2D limbRb = detachedLimb.GetComponent<Rigidbody2D>();
         limbRb.isKinematic = false;
+        limbRb.gravityScale = dismemberedLimbGravity;
 
-       
-        
-        //Apply more physics for impact
+
+
+        //Fling according to bullet direction
         limbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }

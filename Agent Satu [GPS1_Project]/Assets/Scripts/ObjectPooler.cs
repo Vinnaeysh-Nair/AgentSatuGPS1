@@ -96,7 +96,7 @@ public class ObjectPooler : MonoBehaviour
                 {
                     GameObject child = obj.transform.GetChild(i).gameObject;
 
-                    if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag))
+                    if (child.CompareTag(tagManager.tagScriptableObject.limbOthersTag) || child.CompareTag(tagManager.tagScriptableObject.limbLegTag) || child.CompareTag(tagManager.tagScriptableObject.limbHeadTag))
                     {
                         Pool newPool = new Pool(child.name, child);
                         pools.Add(newPool);
