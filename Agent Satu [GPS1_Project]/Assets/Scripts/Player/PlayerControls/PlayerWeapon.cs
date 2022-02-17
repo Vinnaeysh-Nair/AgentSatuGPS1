@@ -52,6 +52,8 @@ public class PlayerWeapon : MonoBehaviour
     }
     void Update()
     {
+        PrintAmmo();
+        
         if (wepId == 0)
         {
             SingleClickShooting();
@@ -62,17 +64,22 @@ public class PlayerWeapon : MonoBehaviour
         //Below are guns that need to check for reloading
         
         //If need to reload and have ammo
-        if (ClipEmpty() && HaveAmmo())
+        if (HaveAmmo())
         {
-            StartCoroutine(Reload());
-            return;
+            if (Input.GetButtonDown("Reload") || ClipEmpty())
+            {
+                StartCoroutine(Reload());
+                return;
+            }
         }
-
+        
         //Check if clip is emptied too
         if (ClipEmpty())
         {
             return;
         }
+        
+        
         
         //Shooting type
         if (isContinuousShooting)
