@@ -3,21 +3,27 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private Weapons[] weaponsArray;
+    [Header("Array elements corresponds to order of gun in the PlayerInventory object (Pistol is excluded)")]
+    [SerializeField] private List<Weapons> weaponsList;
 
-    public Weapons[] GetWeaponsArray()
+    public List<Weapons> GetWeaponsList()
     {
-        return weaponsArray;
+        return weaponsList;
     }
     
     
     [System.Serializable]
     public class Weapons
     {
+        [Header("Id put (Element number + 1), Total ammo free to change in anyway")]
         [SerializeField] private int weaponId;
         [SerializeField] private int totalAmmo;
 
         //Getter
+        public int GetWeaponId()
+        {
+            return weaponId;
+        }
         public int GetTotalAmmo()
         {
             return totalAmmo;

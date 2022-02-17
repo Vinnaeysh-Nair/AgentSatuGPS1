@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -6,11 +7,14 @@ public class PlayerWeapon : MonoBehaviour
 {
     //Components
     public GameObject bullet;
+    
+    [Header("Shotgun uses extraFirePoint, the others use only firePoint and can ignore extra (put arr size 0)")]
     public Transform firePoint;
+    public Transform[] extraFirePoint;
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
-    private PlayerInventory.Weapons[] weaponsArray;
+    private List<PlayerInventory.Weapons> weaponsList;
     
     
     //Fields
@@ -20,6 +24,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float reloadTime = 1f;
     [SerializeField] private int clipSize;
     [SerializeField] private float shootStanceDelay = 1f;
+    [SerializeField] private bool isContinuousShooting = false;
+    [SerializeField] private bool isMultishot = false;
 
     private float nextFireTime = 0f;
     private int currTotalAmmo;
@@ -33,7 +39,7 @@ public class PlayerWeapon : MonoBehaviour
         pooler = ObjectPooler.objPoolerInstance;
         
         inventory = GetComponentInParent<PlayerInventory>();
-        weaponsArray = inventory.GetWeaponsArray();
+        weaponsList = inventory.GetWeaponsList();
     }
 
     void Start()
@@ -41,7 +47,7 @@ public class PlayerWeapon : MonoBehaviour
         currClip = clipSize;
 
         if (wepId == 0) return;
-        currTotalAmmo = weaponsArray[wepId - 1].GetTotalAmmo();
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
         currAmmoReserve = currTotalAmmo - clipSize;
     }
     void Update()
@@ -68,17 +74,14 @@ public class PlayerWeapon : MonoBehaviour
             return;
         }
         
-        //Shooting 
-        if (wepId == 1)
+        //Shooting type
+        if (isContinuousShooting)
         {
             ContinuousShooting();
-            return;
         }
-
-        if (wepId == 2)
+        else
         {
             SingleClickShooting();
-            return;
         }
     }
 
@@ -99,7 +102,6 @@ public class PlayerWeapon : MonoBehaviour
         {
             nextFireTime = Time.time + (1f / fireRate);
             Shoot();
-            PrintAmmo();
         }
     }
 
@@ -109,20 +111,25 @@ public class PlayerWeapon : MonoBehaviour
         {
             nextFireTime = Time.time + (1f / fireRate);
             Shoot();
-            PrintAmmo();
         }
     }
     
     private void Shoot()
     {
-        if (wepId != 0)
-        {
-            currClip--;
-            currTotalAmmo--;
-            weaponsArray[wepId - 1].SetTotalAmmo(currTotalAmmo);
-        }
+        DecreaseAmmo();
+        
         GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
         StartCoroutine(SetBulletInactive(shotBullet));
+        
+        
+        //For shotgun
+        if (!isMultishot) return;
+        foreach (Transform point in extraFirePoint)
+        {
+            shotBullet = pooler.SpawnFromPool(bullet.name, point.position, point.rotation);
+            StartCoroutine(SetBulletInactive(shotBullet));
+        }
+        
         
         
         //Instantiate(bullet, firePoint.position, firePoint.rotation);
@@ -133,6 +140,17 @@ public class PlayerWeapon : MonoBehaviour
         //animCon.OnStopShooting();
     }
 
+
+    private void DecreaseAmmo()
+    {
+        if (wepId != 0)
+        {
+            currClip--;
+            currTotalAmmo--;
+            weaponsList[wepId - 1].SetTotalAmmo(currTotalAmmo);
+        }
+    }
+
     private IEnumerator Reload()
     {
         if (!reloading)
@@ -140,13 +158,29 @@ public class PlayerWeapon : MonoBehaviour
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
-            currClip = clipSize;
-            currAmmoReserve -= clipSize;
-            
+
+            //Check if reloadAmount exceeds reserve
+            int reloadAmount = clipSize - currClip;
+            if (reloadAmount >= currAmmoReserve)
+            {
+                currClip = currAmmoReserve;
+                currAmmoReserve = 0;
+            }
+            else
+            {
+                currClip += reloadAmount;
+                currAmmoReserve -= reloadAmount;
+            }
+ 
             reloading = false;
         }
     }
-    
+
+    public void ReplenishAmmo(int replenishAmount)
+    {
+        currTotalAmmo += replenishAmount;
+        currAmmoReserve += replenishAmount;
+    }
     
     //Become inactive after a duration after being fired. 
     private IEnumerator SetBulletInactive(GameObject shotBullet)
