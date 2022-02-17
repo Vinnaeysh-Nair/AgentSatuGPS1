@@ -1,15 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class PlayerHpSystem : MonoBehaviour
 {
+    //Components
+    public SceneLoader sceneLoader;
+    
+    //Fields
     public int hpCountPlayer = 5;
     private int currHp;
-
-
+    private bool isTakingDamage = false;
+    
+    
     void Start()
     {
         currHp = hpCountPlayer;
-        TakeDamage(3);
     }
     
     public void TakeDamage(int dmg)
@@ -22,7 +28,8 @@ public class PlayerHpSystem : MonoBehaviour
         if (currHp <= 0)
         {
             //Debug.Log("ded");
-            //Add lose condition
+            //Add lose scene
+            sceneLoader.LoadLoseScene();
         }
     }
 

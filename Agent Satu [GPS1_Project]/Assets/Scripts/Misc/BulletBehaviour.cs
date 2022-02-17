@@ -16,10 +16,12 @@ public class BulletBehaviour : MonoBehaviour
     
     [Header("Force on enemy when dismembering and ragdolling")]
     [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
-    private bool hitRegistered = false;
+    private bool hitRegistered = false;             
     private int bulletDamage = 1;
 
 
+    
+    
     void Awake()
     {
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
@@ -41,8 +43,16 @@ public class BulletBehaviour : MonoBehaviour
         //If hit player
         if (hitInfo.CompareTag("Player"))
         {
-            playerHp.TakeDamage(bulletDamage);
-            return;
+            //To make sure bullet only hit one time
+            if (!hitRegistered)
+            {
+                hitRegistered = true;
+                
+                playerHp.TakeDamage(bulletDamage);
+                
+                gameObject.SetActive(false);
+                return;
+            }
         }
         
         //If hit enemies
