@@ -1734,6 +1734,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9aab21370440ed4883025950388aa77, type: 3}
+--- !u!1 &656793433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2325768324292502367, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+  m_PrefabInstance: {fileID: 9086641615468039972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &656793436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656793433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b74c6c059b1b746a628b3a99f9f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedWeapon: 0
 --- !u!1 &666808725
 GameObject:
   m_ObjectHideFlags: 0
@@ -5043,6 +5061,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2325768322479266967, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: m_Name
+      value: SMG (placeholder)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325768324214892411, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: m_Name
+      value: Shotgun (placeholder)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325768324214892411, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2915316199683281924, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
       propertyPath: m_RootOrder
       value: 0
