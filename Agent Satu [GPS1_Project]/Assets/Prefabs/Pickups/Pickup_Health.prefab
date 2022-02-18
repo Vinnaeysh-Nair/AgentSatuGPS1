@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7617619203332630780}
   - component: {fileID: 7617619203332630781}
   m_Layer: 9
-  m_Name: Pickups1 (placeholder)
+  m_Name: Pickup_Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.6327904, g: 0.3015664, b: 0.8113208, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4caf5e9466f4a499dc27658c736ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupId: 4
-  replenishAmount: 10
+  pickupId: 0
+  replenishAmount: 3
   notes: '*wep names are placeholders
 
     0 - Replenish health

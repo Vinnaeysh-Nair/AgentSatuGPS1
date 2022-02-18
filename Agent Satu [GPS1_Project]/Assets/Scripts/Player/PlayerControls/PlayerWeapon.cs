@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -27,6 +28,7 @@ public class PlayerWeapon : MonoBehaviour
     //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
     [SerializeField] private bool isMultishot = false;
+    public bool isUnlocked = false;
 
     private float nextFireTime = 0f;
     private int currTotalAmmo;
