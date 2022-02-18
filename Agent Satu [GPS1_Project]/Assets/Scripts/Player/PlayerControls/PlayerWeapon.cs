@@ -17,6 +17,7 @@ public class PlayerWeapon : MonoBehaviour
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
+    private SpriteRenderer spriteRenderer;
     
     
     //Fields
@@ -42,6 +43,7 @@ public class PlayerWeapon : MonoBehaviour
         pooler = ObjectPooler.objPoolerInstance;
         
         inventory = GetComponentInParent<PlayerInventory>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         weaponsList = inventory.GetWeaponsList();
     }
 
@@ -194,7 +196,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
-            
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
@@ -211,7 +212,6 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
-            PrintAmmo();
             reloading = false;
         }
     }

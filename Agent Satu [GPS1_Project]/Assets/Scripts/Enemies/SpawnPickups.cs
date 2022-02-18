@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class SpawnPickups : MonoBehaviour
@@ -6,6 +7,7 @@ public class SpawnPickups : MonoBehaviour
     [SerializeField] Transform[] picksUpSpawnedWhenDead = new Transform[2];
     [SerializeField] [Range(0f, 1f)] private float bulletPickUpSpawnRate = 0.6f;
     [SerializeField] private float spawnForce = 1f;
+    [SerializeField] private float spawnOffsetY = 6f;
 
     private ObjectPooler pooler;
 
@@ -29,20 +31,20 @@ public class SpawnPickups : MonoBehaviour
         if (rng > bulletPickUpSpawnRate)
         { 
             //Spawn health
-            //Debug.Log("spawned health");
+            Debug.Log("spawned health");
             itemIndex = 1;
         }
         else
         {
             //Spawn bullet pickup
-            //Debug.Log("spawned bullet pickup");
+            Debug.Log("spawned bullet pickup");
         }
        
-        Debug.Log(transform.position);
-        GameObject spawnedItem = pooler.SpawnFromPool(picksUpSpawnedWhenDead[itemIndex].name, transform.position, transform.rotation);
+        
+        Vector2 enemyPos = transform.position;
+        GameObject spawnedItem = pooler.SpawnFromPool(picksUpSpawnedWhenDead[itemIndex].name, new Vector2(enemyPos.x, enemyPos.y + spawnOffsetY), Quaternion.identity);
 
         Rigidbody2D spawnedItemRb = spawnedItem.GetComponent<Rigidbody2D>();
-        spawnedItemRb.AddForce(Vector2.up * spawnForce);
-        
+        spawnedItemRb.AddForce(new Vector2(Random.Range(-2f, 2f), 1 * spawnForce), ForceMode2D.Impulse);
     }
 }

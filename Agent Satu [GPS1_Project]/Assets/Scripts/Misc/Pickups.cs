@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class Pickups : MonoBehaviour
     public int replenishAmount;
 
     private bool collected = false;
+    private PlayerWeapon[] playerWeapons;
 
     //Text
     [Space] [Space]
@@ -24,7 +26,10 @@ public class Pickups : MonoBehaviour
     void Start()
     {
         playerInventory = transform.Find("/Player/Pivot/Arms/PlayerInventory").GetComponent<PlayerInventory>();
+        playerWeapons = playerInventory.GetComponentsInChildren<PlayerWeapon>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
+        
+        
         weaponsList = playerInventory.GetWeaponsList();
     }
     
@@ -37,7 +42,8 @@ public class Pickups : MonoBehaviour
             
             collected = true;
             TriggerEffect();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            collected = false;
         }
     }
 
@@ -63,8 +69,16 @@ public class Pickups : MonoBehaviour
             wep.ReplenishAmmo(replenishAmount);
         }
         
+        UnlockWeapon(pickupId);
+        
         //Update inventory
         int currTotal = weaponsList[pickupId - 1].GetTotalAmmo();
         weaponsList[pickupId - 1].SetTotalAmmo(currTotal + replenishAmount);   
+    }
+
+    private void UnlockWeapon(int wepId)
+    {
+        if (playerWeapons[wepId].isUnlocked) return;
+        playerWeapons[wepId].isUnlocked = true;
     }
 }

@@ -22,25 +22,30 @@ public class WeaponSwitching : MonoBehaviour
         {
             if (!IsNextWeaponUnlocked()) return;
             
+            
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
             else
                 selectedWeapon++;
+            
         }
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (!IsPrevWeaponUnlocked()) return;
             
+            
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
             else
                 selectedWeapon--;
+            
         }
         
+        //Changing through num keys
         for(int i=0;i<10;i++)
         {
-            if(Input.GetKeyDown((KeyCode)(48+i)) && transform.childCount >= i+1)
+            if(Input.GetKeyDown((KeyCode)(48+i)) && transform.childCount >= i)
             {
                 //avoid getting null reference when pressing '0'
                 if (i == 0) return;
@@ -70,6 +75,8 @@ public class WeaponSwitching : MonoBehaviour
             i++;
         }
     }
+
+    
     
     private bool IsNextWeaponUnlocked()
     {

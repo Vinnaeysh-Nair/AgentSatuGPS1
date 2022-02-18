@@ -16,8 +16,9 @@ public class BulletBehaviour : MonoBehaviour
     
     [Header("Force on enemy when dismembering and ragdolling")]
     [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
+    [SerializeField] private int bulletDamage = 1;
     private bool hitRegistered = false;             
-    private int bulletDamage = 1;
+    
 
 
     
@@ -51,6 +52,8 @@ public class BulletBehaviour : MonoBehaviour
                 playerHp.TakeDamage(bulletDamage);
                 
                 gameObject.SetActive(false);
+
+                hitRegistered = false;
                 return;
             }
         }
@@ -77,6 +80,7 @@ public class BulletBehaviour : MonoBehaviour
             enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
             
             gameObject.SetActive(false);
+            hitRegistered = false;
         }
     }
 
