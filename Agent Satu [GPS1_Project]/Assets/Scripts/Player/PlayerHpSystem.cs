@@ -10,8 +10,7 @@ public class PlayerHpSystem : MonoBehaviour
     //Fields
     public int hpCountPlayer = 5;
     private int currHp;
-    private bool isTakingDamage = false;
-    
+  
     
     void Start()
     {
@@ -31,6 +30,7 @@ public class PlayerHpSystem : MonoBehaviour
             //Add lose scene
             sceneLoader.LoadLoseScene();
         }
+
     }
 
     public void ReplenishHealth(int amount)
