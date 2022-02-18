@@ -26,20 +26,14 @@ public class SpawnPickups : MonoBehaviour
     { 
         //Determine spawn health/pickups/none
         float rng = Random.Range(0f, 1f);
+        
+        //If index is 0, spawn bullet pickup; if 1, spawn health
         int itemIndex = 0;
-
         if (rng > bulletPickUpSpawnRate)
-        { 
-            //Spawn health
-            Debug.Log("spawned health");
+        {
             itemIndex = 1;
         }
-        else
-        {
-            //Spawn bullet pickup
-            Debug.Log("spawned bullet pickup");
-        }
-       
+
         
         Vector2 enemyPos = transform.position;
         GameObject spawnedItem = pooler.SpawnFromPool(picksUpSpawnedWhenDead[itemIndex].name, new Vector2(enemyPos.x, enemyPos.y + spawnOffsetY), Quaternion.identity);

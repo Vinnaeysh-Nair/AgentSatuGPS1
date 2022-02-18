@@ -14,21 +14,27 @@ public class Pickups : MonoBehaviour
     
     [Header("Applicable to both ammo and health")]
     public int replenishAmount;
-
     private bool collected = false;
     private PlayerWeapon[] playerWeapons;
+
 
     //Text
     [Space] [Space]
     [Header("Each id and their corresponding effects, do not change the notes")]
     [TextArea(3,7)] [SerializeField] private string notes;
-    
+
+
     void Start()
     {
         playerInventory = transform.Find("/Player/Pivot/Arms/PlayerInventory").GetComponent<PlayerInventory>();
-        playerWeapons = playerInventory.GetComponentsInChildren<PlayerWeapon>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
-        
+
+        int size = playerInventory.transform.childCount;
+        playerWeapons = new PlayerWeapon[size];
+        for (int i = 0; i < size; i++)
+        {
+            playerWeapons[i] = playerInventory.transform.GetChild(i).GetComponent<PlayerWeapon>();
+        }
         
         weaponsList = playerInventory.GetWeaponsList();
     }
