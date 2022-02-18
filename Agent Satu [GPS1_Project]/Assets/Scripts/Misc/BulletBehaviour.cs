@@ -51,6 +51,8 @@ public class BulletBehaviour : MonoBehaviour
                 playerHp.TakeDamage(bulletDamage);
                 
                 gameObject.SetActive(false);
+
+                hitRegistered = false;
                 return;
             }
         }
@@ -77,6 +79,7 @@ public class BulletBehaviour : MonoBehaviour
             enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
             
             gameObject.SetActive(false);
+            hitRegistered = false;
         }
     }
 

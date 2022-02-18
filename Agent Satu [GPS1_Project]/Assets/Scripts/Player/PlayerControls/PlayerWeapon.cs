@@ -194,7 +194,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
-            
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
@@ -211,7 +210,6 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
-            PrintAmmo();
             reloading = false;
         }
     }
