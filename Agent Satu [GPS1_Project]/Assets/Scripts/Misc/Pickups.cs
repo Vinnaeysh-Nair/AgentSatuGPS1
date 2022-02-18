@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,7 +69,7 @@ public class Pickups : MonoBehaviour
             wep.ReplenishAmmo(replenishAmount);
         }
         
-        UnlockWeapon(pickupId - 1);
+        UnlockWeapon(pickupId);
         
         //Update inventory
         int currTotal = weaponsList[pickupId - 1].GetTotalAmmo();
