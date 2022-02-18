@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -43,13 +44,16 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     void Start()
-    {
+    { 
         currClip = clipSize;
-
-        if (wepId == 0) return;
-        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
-        currAmmoReserve = currTotalAmmo - clipSize;
+        SynchWithTotalAmmo();
     }
+
+    void OnEnable()
+    {
+        SynchWithTotalAmmo();
+    }
+
     void Update()
     {
         if (wepId == 0)
@@ -105,6 +109,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (currAmmoReserve > 0) return true;
         return false;
+    }
+
+    private void SynchWithTotalAmmo()
+    {
+        if (wepId == 0) return;
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+        currAmmoReserve = currTotalAmmo - clipSize;
     }
     
     private void SingleClickShooting()
