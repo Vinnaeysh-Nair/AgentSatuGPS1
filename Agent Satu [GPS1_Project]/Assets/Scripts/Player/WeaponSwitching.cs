@@ -38,9 +38,10 @@ public class WeaponSwitching : MonoBehaviour
                 selectedWeapon--;
         }
         
+        //Changing through num keys
         for(int i=0;i<10;i++)
         {
-            if(Input.GetKeyDown((KeyCode)(48+i)) && transform.childCount >= i+1)
+            if(Input.GetKeyDown((KeyCode)(48+i)) && transform.childCount >= i)
             {
                 //avoid getting null reference when pressing '0'
                 if (i == 0) return;
