@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4368804462698970442
+--- !u!1 &2821646112491986842
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4368804462698970441}
+  - component: {fileID: 2821646112491986841}
   m_Layer: 0
   m_Name: EnemyHpManagers
   m_TagString: Untagged
@@ -16,25 +16,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4368804462698970441
+--- !u!4 &2821646112491986841
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804462698970442}
+  m_GameObject: {fileID: 2821646112491986842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0655148, y: -0.16700026, z: -0.030382207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4368804464505803166}
-  - {fileID: 4368804463572133372}
-  - {fileID: 4368804464584209756}
+  - {fileID: 2821646114432758606}
+  - {fileID: 2821646113499105068}
+  - {fileID: 2821646114355992460}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4368804463572133373
+--- !u!1 &2821646113499105069
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,8 +42,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4368804463572133372}
-  - component: {fileID: 4368804463572133363}
+  - component: {fileID: 2821646113499105068}
+  - component: {fileID: 2821646113499105059}
   m_Layer: 0
   m_Name: SetupOverallHp
   m_TagString: Untagged
@@ -51,37 +51,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4368804463572133372
+--- !u!4 &2821646113499105068
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804463572133373}
+  m_GameObject: {fileID: 2821646113499105069}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4368804462698970441}
+  m_Father: {fileID: 2821646112491986841}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4368804463572133363
+--- !u!114 &2821646113499105059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804463572133373}
+  m_GameObject: {fileID: 2821646113499105069}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9937f4ca4338274ca72c8cb731441bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypesList:
-  - enemyType: {fileID: 2118064387428176566, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+  - enemyType: {fileID: 220444070245630442, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
     initialHp: 4
---- !u!1 &4368804464505803167
+--- !u!1 &2821646114355992461
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,79 +89,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4368804464505803166}
-  - component: {fileID: 4368804464505803165}
-  m_Layer: 0
-  m_Name: SetupLimbHp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4368804464505803166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804464505803167}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4368804462698970441}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4368804464505803165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804464505803167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e18d02aebcbd56740a8d13d10f5db9d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyArr:
-  - {fileID: 2118064387428176527, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-  limbList:
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176518, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 3
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176525, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 2
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176524, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176519, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176523, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176516, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176526, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
-  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
-    limb: {fileID: 2118064387428176520, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
-    initialHp: 0
---- !u!1 &4368804464584209757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4368804464584209756}
-  - component: {fileID: 4368804464584209747}
+  - component: {fileID: 2821646114355992460}
+  - component: {fileID: 2821646114355992451}
   m_Layer: 0
   m_Name: ConfigureDismemberment
   m_TagString: Untagged
@@ -169,31 +98,102 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4368804464584209756
+--- !u!4 &2821646114355992460
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804464584209757}
+  m_GameObject: {fileID: 2821646114355992461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4368804462698970441}
+  m_Father: {fileID: 2821646112491986841}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4368804464584209747
+--- !u!114 &2821646114355992451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368804464584209757}
+  m_GameObject: {fileID: 2821646114355992461}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dismemberedLimbGravity: 3
+--- !u!1 &2821646114432758607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2821646114432758606}
+  - component: {fileID: 2821646114432758605}
+  m_Layer: 0
+  m_Name: SetupLimbHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2821646114432758606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2821646114432758607}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2821646112491986841}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2821646114432758605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2821646114432758607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18d02aebcbd56740a8d13d10f5db9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyArr:
+  - {fileID: 220444070245630419, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+  limbList:
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630426, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 3
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630417, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 2
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630416, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 1
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630427, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 0
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630423, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 0
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630424, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 0
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630418, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 0
+  - enemyName: 'pig asset (ObjectPooler + HingeJoint) '
+    limb: {fileID: 220444070245630420, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+    initialHp: 0
