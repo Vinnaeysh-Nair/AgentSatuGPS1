@@ -38,6 +38,7 @@ public class SpawnPickups : MonoBehaviour
             Debug.Log("spawned bullet pickup");
         }
        
+        Debug.Log(transform.position);
         GameObject spawnedItem = pooler.SpawnFromPool(picksUpSpawnedWhenDead[itemIndex].name, transform.position, transform.rotation);
 
         Rigidbody2D spawnedItemRb = spawnedItem.GetComponent<Rigidbody2D>();
