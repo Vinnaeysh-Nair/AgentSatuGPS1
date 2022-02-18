@@ -6,13 +6,9 @@ public class CrosshairAiming : MonoBehaviour
     private Camera cam;
     public Transform pivotTransform;
     
-    private bool facingRight = true;
-    
-    
     //Fields
     private Vector2 mousePos;
-    public float angleTowards;
-    
+
     public Vector2 GetMousePos()
     {
         return mousePos;
@@ -33,8 +29,7 @@ public class CrosshairAiming : MonoBehaviour
     private void PointToMouse()
     {
         Vector2 lookDir = mousePos - (Vector2) pivotTransform.position;
-        
-        angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        float angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         
         //If pointing to left side, invert the pivot's x rotation and angleTowards
         //to accomodate sprite rotations
