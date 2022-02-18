@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'pig asset (ObjectPooler + HingeJoint) '
       objectReference: {fileID: 0}
+    - target: {fileID: 2118064387428176566, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbbc50b75e29d149b6d7e1c86923789, type: 3}
 --- !u!1 &533599608
@@ -674,6 +678,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e329e593ace04db1a7a85d2e10f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1856418233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6303830195310578207, guid: 583e4ef373f7dea469c243f98d967c0b, type: 3}
+  m_PrefabInstance: {fileID: 4589428040695709624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1944511237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1194,6 +1203,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2081887062126786333, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: isUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2852554737090319095, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1246,6 +1259,10 @@ PrefabInstance:
       propertyPath: playerWeapons.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4839336898231885162, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: bulletTimeScreenEffect
+      value: 
+      objectReference: {fileID: 1856418233}
     - target: {fileID: 5116286082675090395, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1269,6 +1286,14 @@ PrefabInstance:
     - target: {fileID: 7123895432117431872, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
       propertyPath: isUnlocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123895432117431872, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: isMultishot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7123895432117431872, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
+      propertyPath: isContinuousShooting
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7123895432117431878, guid: 28e5a56dfbbaea54cb48be388a71fa18, type: 3}
       propertyPath: m_IsActive
@@ -1549,6 +1574,18 @@ PrefabInstance:
     - target: {fileID: 4864459219089539913, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864459219309995866, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864459220664978766, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.830474
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864459221056468959, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.830474
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}

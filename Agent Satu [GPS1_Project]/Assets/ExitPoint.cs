@@ -10,5 +10,4 @@ public class ExitPoint : MonoBehaviour
             sceneLoader.LoadNextLevel();
         }
     }
-    
 }
