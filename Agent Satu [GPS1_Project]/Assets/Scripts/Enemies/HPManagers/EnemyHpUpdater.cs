@@ -24,7 +24,7 @@ public class EnemyHpUpdater : MonoBehaviour
         dismemberment = transform.Find("/EnemyHpManagers/ConfigureDismemberment").GetComponent<Dismemberment>();
         ragdoll = GetComponentInParent<Ragdoll>();
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        spawnPickups = GetComponent<SpawnPickups>();
+        spawnPickups = GetComponentInParent<SpawnPickups>();
         
         CopyLimbHp();
     }

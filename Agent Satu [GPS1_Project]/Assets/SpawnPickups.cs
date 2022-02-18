@@ -3,12 +3,17 @@ using UnityEngine;
 public class SpawnPickups : MonoBehaviour
 {
     //Components
-    public Transform[] picksUpSpawnedWhenDead;
-    public float spawnForce = 1f;
+    [SerializeField] Transform[] picksUpSpawnedWhenDead = new Transform[2];
+    [SerializeField] [Range(0f, 1f)] private float bulletSpawnRate = 0.6f;
+    [SerializeField] private float spawnForce = 1f;
+
+    private ObjectPooler pooler;
 
     void Awake()
     {
         enabled = false;
+        
+        pooler = ObjectPooler.objPoolerInstance;
     }
     void OnEnable()
     {
@@ -18,47 +23,25 @@ public class SpawnPickups : MonoBehaviour
     private void SpawnItem()
     { 
         //Determine spawn health/pickups/none
-        float outerRNG = Random.Range(0f, 1f);
-        int spawnId = 0;
-       
-       
-        
-        
-        if (outerRNG < 0.5f)
-        {
-            
-            float innerRNG = Random.Range(0f, 1f);
-           
-            if (innerRNG < 0.2)
-            {
-                spawnId = 1;
-            }
-            else if (innerRNG < 0.4)
-            {
-                spawnId = 2;
-            }
-            else if (innerRNG < 0.6)
-            {
-                spawnId = 3;
-            }    
-            else if (innerRNG < 0.8)
-            {
-                spawnId = 4;
-            }
-            else
-            {
-                spawnId = 5;
-            }
-            //Spawn bulletspickups
-            //Spawn with spawnId
-           
-        }
-        else if (outerRNG < 0.8){
-            //Spawn health
-            //Spawn with spawnId
-        }
+        float rng = Random.Range(0f, 1f);
+        int itemIndex = 0;
 
-        Rigidbody2D spawnItemRb = picksUpSpawnedWhenDead[spawnId].GetComponent<Rigidbody2D>();
-        spawnItemRb.AddForce(Vector2.up * spawnForce);
+        if (rng > bulletSpawnRate)
+        { 
+            //Spawn health
+            Debug.Log("spawned health");
+            itemIndex = 1;
+        }
+        else
+        {
+            //Spawn bullet pickup
+            Debug.Log("spawned bullet pickup");
+        }
+       
+        GameObject spawnedItem = pooler.SpawnFromPool(picksUpSpawnedWhenDead[itemIndex].name, transform.position, transform.rotation);
+
+        Rigidbody2D spawnedItemRb = spawnedItem.GetComponent<Rigidbody2D>();
+        spawnedItemRb.AddForce(Vector2.up * spawnForce);
+        
     }
 }
