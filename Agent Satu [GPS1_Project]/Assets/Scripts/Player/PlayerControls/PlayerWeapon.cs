@@ -44,14 +44,36 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     void Start()
-    { 
-        currClip = clipSize;
-        SynchWithTotalAmmo();
-    }
-
-    void OnEnable()
     {
-        SynchWithTotalAmmo();
+        if (wepId == 0) return;
+        
+        //Initial setup
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+        if (currTotalAmmo >= clipSize)
+        {
+            currClip = clipSize;
+            currAmmoReserve = currTotalAmmo - clipSize;
+        }
+        else
+        {
+            currClip = currTotalAmmo;
+            currAmmoReserve = 0;
+        }
+    }
+    
+    private void OnEnable()
+    {
+        if (wepId == 0) return;
+
+        //If theres a change in totalAmmo, update the reserve
+        int prevTotalAmmo = currTotalAmmo;
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+
+        int diff = currTotalAmmo - prevTotalAmmo;
+        if (diff > 0)
+        {
+            currAmmoReserve += diff;
+        }
     }
 
     void Update()
@@ -109,13 +131,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (currAmmoReserve > 0) return true;
         return false;
-    }
-
-    private void SynchWithTotalAmmo()
-    {
-        if (wepId == 0) return;
-        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
-        currAmmoReserve = currTotalAmmo - clipSize;
     }
     
     private void SingleClickShooting()
@@ -177,6 +192,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
+            
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
@@ -193,6 +209,7 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
+            PrintAmmo();
             reloading = false;
         }
     }
