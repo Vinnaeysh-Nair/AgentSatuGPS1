@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -44,12 +45,37 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        currClip = clipSize;
-
         if (wepId == 0) return;
+        
+        //Initial setup
         currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
-        currAmmoReserve = currTotalAmmo - clipSize;
+        if (currTotalAmmo >= clipSize)
+        {
+            currClip = clipSize;
+            currAmmoReserve = currTotalAmmo - clipSize;
+        }
+        else
+        {
+            currClip = currTotalAmmo;
+            currAmmoReserve = 0;
+        }
     }
+    
+    private void OnEnable()
+    {
+        if (wepId == 0) return;
+
+        //If theres a change in totalAmmo, update the reserve
+        int prevTotalAmmo = currTotalAmmo;
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+
+        int diff = currTotalAmmo - prevTotalAmmo;
+        if (diff > 0)
+        {
+            currAmmoReserve += diff;
+        }
+    }
+
     void Update()
     {
         if (wepId == 0)
@@ -166,6 +192,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (!reloading)
         {
+            
             reloading = true;
             
             yield return new WaitForSeconds(reloadTime);
@@ -182,6 +209,7 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
+            PrintAmmo();
             reloading = false;
         }
     }
