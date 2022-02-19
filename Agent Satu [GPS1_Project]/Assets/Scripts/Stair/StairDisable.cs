@@ -11,7 +11,7 @@ public class StairDisable : MonoBehaviour
     void Awake()
     {
         stairCollider = GetComponentInParent<EdgeCollider2D>();
-        platformCollider = transform.Find("/Player/PlayerBody/PlatformDetector").GetComponent<BoxCollider2D>();
+        platformCollider = transform.Find("/Player/PlayerBody/Detectors/PlatformDetector").GetComponent<BoxCollider2D>();
 
         //No collision at the start
         if(disabledAtStart)

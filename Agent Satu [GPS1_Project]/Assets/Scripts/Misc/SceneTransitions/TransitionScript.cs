@@ -8,12 +8,9 @@ public class TransitionScript : MonoBehaviour
     public KeyCode transitionButton;
     public Animator transition;
     public float transitionTime = 1f;
-    public GameObject entranceCollider;
 
     void Update()
     {
-        
-        
         if (Input.GetKeyDown(transitionButton))
         {
             LoadNextLevel();
@@ -38,7 +35,6 @@ public class TransitionScript : MonoBehaviour
     {
         if (entranceCollider.gameObject.tag == "Player")
         {
-            Debug.Log("Entrance triggered");
             LoadNextLevel();
         }
     }

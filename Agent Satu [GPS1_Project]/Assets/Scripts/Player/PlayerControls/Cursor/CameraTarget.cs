@@ -14,6 +14,7 @@ public class CameraTarget : MonoBehaviour
     void Awake()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
+        aim = transform.Find("/Player/PlayerBody/Pivots + Arms/LeftPivot/LeftArm").GetComponent<CrosshairAiming>();
     }
     void FixedUpdate()
     {
