@@ -26,7 +26,7 @@ public class Pickups : MonoBehaviour
 
     void Start()
     {
-        playerInventory = transform.Find("/Player/Pivot/Arms/PlayerInventory").GetComponent<PlayerInventory>();
+        playerInventory = transform.Find("/Player/PlayerBody/Pivots + Arms/LeftPivot/LeftArm/PlayerInventory").GetComponent<PlayerInventory>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
 
         int size = playerInventory.transform.childCount;
