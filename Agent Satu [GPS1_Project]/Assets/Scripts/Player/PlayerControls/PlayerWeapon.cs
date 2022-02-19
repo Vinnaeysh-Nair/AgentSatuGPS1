@@ -9,13 +9,7 @@ public class PlayerWeapon : MonoBehaviour
 {
     //Components
     public GameObject bullet;
-    
-    [Header("Shotgun uses extraFirePoint, the others use only firePoint and can ignore extra (put arr size 0)")]
-    //public Transform firePoint;
-    //public Transform[] extraFirePoint;
-
     public Transform[] firePoints;
-    
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
@@ -174,20 +168,6 @@ public class PlayerWeapon : MonoBehaviour
             GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             StartCoroutine(SetBulletInactive(shotBullet));
         }
-        
-        //StartCoroutine(SetBulletInactive(shotBullet));
-        
-        
-        //For shotgun
-        // if (!isMultishot) return;
-        // foreach (Transform point in extraFirePoint)
-        // {
-        //     shotBullet = pooler.SpawnFromPool(bullet.name, point.position, point.rotation);
-        //     StartCoroutine(SetBulletInactive(shotBullet));
-        // }
-        
-        
-        
         //Instantiate(bullet, firePoint.position, firePoint.rotation);
         //animCon.OnShooting();
 
