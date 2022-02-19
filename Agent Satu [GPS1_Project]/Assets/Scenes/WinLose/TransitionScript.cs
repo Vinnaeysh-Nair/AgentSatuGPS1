@@ -9,6 +9,7 @@ public class TransitionScript : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
     public GameObject entranceCollider;
+
     void Update()
     {
         
@@ -33,10 +34,12 @@ public class TransitionScript : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D entranceCollider)
     {
-        if(entranceCollider==collision)
+        if (entranceCollider.gameObject.tag == "Player")
+        {
             Debug.Log("Entrance triggered");
-        //LoadNextLevel();
+            LoadNextLevel();
+        }
     }
 }
