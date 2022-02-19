@@ -4,16 +4,16 @@ using UnityEngine;
 public class CameraTarget : MonoBehaviour
 {
     //Components
-    private CrosshairAiming aim;
+    [SerializeField] private CrosshairAiming aim;
     private Transform playerBody;
-    
+
     //Field
     [SerializeField] private float threshold;
+    
 
     void Awake()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
-        aim = transform.Find("/Player/Pivot/Arms").GetComponent<CrosshairAiming>();
     }
     void FixedUpdate()
     {

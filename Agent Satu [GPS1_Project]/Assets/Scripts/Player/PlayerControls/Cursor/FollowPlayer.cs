@@ -3,19 +3,14 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     //Components
-    public GameObject playerBody;
+    public GameObject followPoint;
     public PlayerMovement playerMovement;
     public PlayerController controller;
 
     //Fields
     //[SerializeField] [Range(0f, 1f)] private float offsetY;   (offset crouch height if needed)
     private bool wasCrouching;
-    private float crouchHeight;
-
-    void Awake()
-    {
-        crouchHeight = playerMovement.GetPlayerHeight() * 0.5f;
-    }
+    [SerializeField] private float crouchHeight;
     
     void Update()
     {
@@ -30,7 +25,7 @@ public class FollowPlayer : MonoBehaviour
     private void Follow()
     {
         wasCrouching = false;
-        transform.position = playerBody.transform.position;
+        transform.position = followPoint.transform.position;
     }
     
     
