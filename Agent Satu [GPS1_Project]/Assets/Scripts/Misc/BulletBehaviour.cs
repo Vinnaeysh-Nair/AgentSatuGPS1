@@ -39,8 +39,6 @@ public class BulletBehaviour : MonoBehaviour
     //Hit enemy
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        if(hitInfo.CompareTag("Bullet")) return;
-        
         Instantiate(impactEffect, transform.position, transform.rotation);
         
         //If hit player
@@ -59,6 +57,8 @@ public class BulletBehaviour : MonoBehaviour
                 return;
             }
         }
+
+
         
         //If hit enemies
         //If not hitting any limbs, return
@@ -67,8 +67,12 @@ public class BulletBehaviour : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-
         
+        //If is enemy's bullet, no friendly fire
+        if (transform.CompareTag("Bullet - Enemy")) return;
+
+
+        //Take Damage
         if (!hitRegistered)
         {
             hitRegistered = true;
