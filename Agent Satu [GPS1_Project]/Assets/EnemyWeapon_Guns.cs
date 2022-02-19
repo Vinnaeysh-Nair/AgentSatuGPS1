@@ -36,7 +36,20 @@ public class EnemyWeapon_Guns : MonoBehaviour
             firePoints[i] = transform.GetChild(i);
         }
     }
-
+    
+    //For testing
+    // void Update()
+    // {
+    //     if (isBurst)
+    //     {
+    //         StartBurstShooting();
+    //     }
+    //     else
+    //     {
+    //         StartShooting();
+    //     }
+    // }
+    
     
     //Call from enemy AI script, when player is detected
     //For single shot firing pattern (eg. pistol)
@@ -50,7 +63,7 @@ public class EnemyWeapon_Guns : MonoBehaviour
     }
     
     //For burst firing pattern (eg. SMG)
-    public void StartBurstShooting(int bulletPerBurst)
+    public void StartBurstShooting()
     {
         if (canStartBurstShooting && Time.time > nextFireTime)
         {
