@@ -11,14 +11,16 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject bullet;
     
     [Header("Shotgun uses extraFirePoint, the others use only firePoint and can ignore extra (put arr size 0)")]
-    public Transform firePoint;
-    public Transform[] extraFirePoint;
+    //public Transform firePoint;
+    //public Transform[] extraFirePoint;
+
+    public Transform[] firePoints;
+    
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
-    private SpriteRenderer spriteRenderer;
-    
+
     
     //Fields
     [Header("Settings")]
@@ -28,7 +30,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int clipSize;
     //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
-    [SerializeField] private bool isMultishot = false;
+    //[SerializeField] private bool isMultishot = false;
     public bool isUnlocked = false;
 
     private float nextFireTime = 0f;
@@ -43,12 +45,20 @@ public class PlayerWeapon : MonoBehaviour
         pooler = ObjectPooler.objPoolerInstance;
         
         inventory = GetComponentInParent<PlayerInventory>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         weaponsList = inventory.GetWeaponsList();
     }
 
     void Start()
     {
+        //Get firepoints
+        int size = transform.childCount;
+        firePoints = new Transform[size];
+        for (int i = 0; i < size; i++)
+        {
+            firePoints[i] = transform.GetChild(i).transform;
+        }
+        
+        //If pistol, ignore setting up ammo
         if (wepId == 0) return;
         
         //Initial setup
@@ -159,17 +169,22 @@ public class PlayerWeapon : MonoBehaviour
     {
         DecreaseAmmo();
 
-        GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
-        StartCoroutine(SetBulletInactive(shotBullet));
+        foreach (Transform firePoint in firePoints)
+        {
+            GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
+            StartCoroutine(SetBulletInactive(shotBullet));
+        }
+        
+        //StartCoroutine(SetBulletInactive(shotBullet));
         
         
         //For shotgun
-        if (!isMultishot) return;
-        foreach (Transform point in extraFirePoint)
-        {
-            shotBullet = pooler.SpawnFromPool(bullet.name, point.position, point.rotation);
-            StartCoroutine(SetBulletInactive(shotBullet));
-        }
+        // if (!isMultishot) return;
+        // foreach (Transform point in extraFirePoint)
+        // {
+        //     shotBullet = pooler.SpawnFromPool(bullet.name, point.position, point.rotation);
+        //     StartCoroutine(SetBulletInactive(shotBullet));
+        // }
         
         
         
