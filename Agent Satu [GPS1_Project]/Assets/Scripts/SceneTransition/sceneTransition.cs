@@ -1,5 +1,5 @@
 using UnityEngine;
-using unityEngine.scene
+using UnityEngine;
 
 public class sceneTransition : MonoBehaviour
 {
