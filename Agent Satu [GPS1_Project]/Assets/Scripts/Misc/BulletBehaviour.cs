@@ -39,6 +39,8 @@ public class BulletBehaviour : MonoBehaviour
     //Hit enemy
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
+        if(hitInfo.CompareTag("Bullet")) return;
+        
         Instantiate(impactEffect, transform.position, transform.rotation);
         
         //If hit player

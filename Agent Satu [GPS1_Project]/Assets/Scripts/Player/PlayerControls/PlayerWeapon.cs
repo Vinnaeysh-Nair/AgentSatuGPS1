@@ -197,7 +197,7 @@ public class PlayerWeapon : MonoBehaviour
         if (!reloading)
         {
             reloading = true;
-            
+
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve
