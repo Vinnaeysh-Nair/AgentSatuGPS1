@@ -49,7 +49,7 @@ public class BulletBehaviour : MonoBehaviour
             {
                 hitRegistered = true;
                 print("hit");
-                //playerHp.TakeDamage(bulletDamage);
+                playerHp.TakeDamage(bulletDamage);
                 
                 gameObject.SetActive(false);
 
