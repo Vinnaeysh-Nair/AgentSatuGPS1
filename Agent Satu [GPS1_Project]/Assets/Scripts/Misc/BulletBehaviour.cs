@@ -48,9 +48,8 @@ public class BulletBehaviour : MonoBehaviour
             if (!hitRegistered)
             {
                 hitRegistered = true;
-                print("hit");
-                playerHp.TakeDamage(bulletDamage);
                 
+                playerHp.TakeDamage(bulletDamage);
                 gameObject.SetActive(false);
 
                 hitRegistered = false;
