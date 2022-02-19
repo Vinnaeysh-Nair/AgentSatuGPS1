@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -15,6 +17,7 @@ public class PlayerWeapon : MonoBehaviour
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
+    private SpriteRenderer spriteRenderer;
     
     
     //Fields
@@ -26,6 +29,7 @@ public class PlayerWeapon : MonoBehaviour
     //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
     [SerializeField] private bool isMultishot = false;
+    public bool isUnlocked = false;
 
     private float nextFireTime = 0f;
     private int currTotalAmmo;
@@ -39,17 +43,43 @@ public class PlayerWeapon : MonoBehaviour
         pooler = ObjectPooler.objPoolerInstance;
         
         inventory = GetComponentInParent<PlayerInventory>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         weaponsList = inventory.GetWeaponsList();
     }
 
     void Start()
     {
-        currClip = clipSize;
-
         if (wepId == 0) return;
+        
+        //Initial setup
         currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
-        currAmmoReserve = currTotalAmmo - clipSize;
+        if (currTotalAmmo >= clipSize)
+        {
+            currClip = clipSize;
+            currAmmoReserve = currTotalAmmo - clipSize;
+        }
+        else
+        {
+            currClip = currTotalAmmo;
+            currAmmoReserve = 0;
+        }
     }
+    
+    private void OnEnable()
+    {
+        if (wepId == 0) return;
+
+        //If theres a change in totalAmmo, update the reserve
+        int prevTotalAmmo = currTotalAmmo;
+        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+
+        int diff = currTotalAmmo - prevTotalAmmo;
+        if (diff > 0)
+        {
+            currAmmoReserve += diff;
+        }
+    }
+
     void Update()
     {
         if (wepId == 0)
@@ -167,7 +197,7 @@ public class PlayerWeapon : MonoBehaviour
         if (!reloading)
         {
             reloading = true;
-            
+
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve

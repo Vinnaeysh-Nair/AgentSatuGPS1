@@ -4,7 +4,6 @@ public class PlayerMovement : MonoBehaviour
 {
     //Components
     private PlayerController controller;
-    public new SpriteRenderer renderer;
 
     //General movement fields
     private float horizontalMove;
@@ -31,15 +30,11 @@ public class PlayerMovement : MonoBehaviour
         return playerPos;
     }
     
-    public float GetPlayerHeight()
-    {
-        return renderer.sprite.bounds.size.y;
-    }
+ 
 
     void Awake()
     {
         controller = GetComponent<PlayerController>();
-        renderer = GetComponent<SpriteRenderer>();
     }
     void Update()
     {

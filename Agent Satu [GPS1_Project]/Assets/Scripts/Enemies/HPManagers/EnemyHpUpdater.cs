@@ -10,6 +10,7 @@ public class EnemyHpUpdater : MonoBehaviour
     
     [SerializeField] private int limbHp;
     private TagManager tagManager;
+    private SpawnPickups spawnPickups;
     
     void Awake()
     {
@@ -23,6 +24,7 @@ public class EnemyHpUpdater : MonoBehaviour
         dismemberment = transform.Find("/EnemyHpManagers/ConfigureDismemberment").GetComponent<Dismemberment>();
         ragdoll = GetComponentInParent<Ragdoll>();
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+        spawnPickups = GetComponentInParent<SpawnPickups>();
         
         CopyLimbHp();
     }
@@ -62,14 +64,15 @@ public class EnemyHpUpdater : MonoBehaviour
             overallHpManager.SetLegDismemberedCount(legCount);
         }
         
-        //If Head dismemebred, activate ragdoll  
+        //If Head dismemebered, activate ragdoll  
         if (overallHpManager.GetIsHeadDismembered())
-            ragdoll.ActivateRagdoll(flingDirection);   
+            Die(flingDirection);
         
 
         //If both legs dismembered, activate ragdoll
-        if (overallHpManager.GetLegDismemberedCount()  == 2)
-            ragdoll.ActivateRagdoll(flingDirection);
+        if (overallHpManager.GetLegDismemberedCount() == 2)
+            Die(flingDirection);
+            
     } 
 
     public void TakeOverallDamage(int dmg, Vector2 flingDirection)
@@ -86,7 +89,13 @@ public class EnemyHpUpdater : MonoBehaviour
         
         //If overall hp = 0, ragdoll this enemy
         if(overallHp <= 0)
-            ragdoll.ActivateRagdoll(flingDirection);
+            Die(flingDirection);
+    }
+
+    private void Die(Vector2 flingDirection)
+    {
+        ragdoll.ActivateRagdoll(flingDirection);
+        spawnPickups.enabled = true;
     }
     
 

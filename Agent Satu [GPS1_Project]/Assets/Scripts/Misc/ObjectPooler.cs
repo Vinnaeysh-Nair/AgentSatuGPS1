@@ -24,11 +24,11 @@ public class ObjectPooler : MonoBehaviour
 
     //Components
     [Header("Insert gameObjects to pool here:")]
-    [SerializeField] GameObject[] objectArr;
-    
+    [SerializeField] private GameObject[] objectArr;
+
     //Fields
     private const int smallPoolSize = 5;
-    private const int bigPoolSize = 20;
+    private const int bigPoolSize = 15;
     private TagManager tagManager;
     
     

@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = gravity;
         
         //Find Ground collider
-        platformCollider = transform.Find("PlatformDetector").GetComponent<BoxCollider2D>();
+        platformCollider = transform.Find("Detectors/PlatformDetector").GetComponent<BoxCollider2D>();
 
         //Find Hit colliders, these colliders should be triggers
-        BoxCollider2D[] hitColliders = transform.Find("HitDetector").GetComponentsInChildren<BoxCollider2D>();
+        BoxCollider2D[] hitColliders = transform.Find("Detectors/HitDetector").GetComponentsInChildren<BoxCollider2D>();
         upperBodyCollider = hitColliders[0];
         lowerBodyCollider = hitColliders[1];
     }
@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ResetGravityScale());
             
             //Create overlapBox to detect collision on left and right of the player
-            Collider2D leftBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x - platformCollider.bounds.extents.x - .09f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
-            Collider2D rightBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x + platformCollider.bounds.extents.x + .09f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
+            Collider2D leftBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x - platformCollider.bounds.extents.x - .15f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
+            Collider2D rightBox = Physics2D.OverlapBox(new Vector2(platformCollider.bounds.center.x + platformCollider.bounds.extents.x + .17f, platformCollider.bounds.center.y), new Vector2(.1f, .1f), 0f);
             
             //Wall jump direction according to side detected
             int wallJumpDir = 0;
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
     
     // private void OnDrawGizmos()
     // {
-    //     Gizmos.DrawCube(new Vector2(platformCollider.bounds.center.x + platformCollider.bounds.extents.x + .05f, platformCollider.bounds.center.y), new Vector3(.1f, .1f, 0f));
-    //     Gizmos.DrawCube(new Vector2(platformCollider.bounds.center.x - platformCollider.bounds.extents.x - .05f, platformCollider.bounds.center.y), new Vector3(.1f, .1f, 0f));
+    //     Gizmos.DrawCube(new Vector2(platformCollider.bounds.center.x + platformCollider.bounds.extents.x + .15f, platformCollider.bounds.center.y), new Vector3(.1f, .1f, 0f));
+    //     Gizmos.DrawCube(new Vector2(platformCollider.bounds.center.x - platformCollider.bounds.extents.x - .15f, platformCollider.bounds.center.y), new Vector3(.1f, .1f, 0f));
     // }
 }
