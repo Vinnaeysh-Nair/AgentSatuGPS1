@@ -8,6 +8,7 @@ public class CrosshairAiming : MonoBehaviour
     
     //Fields
     private Vector2 mousePos;
+    public float followAngleOffset;
 
     public Vector2 GetMousePos()
     {
@@ -36,12 +37,12 @@ public class CrosshairAiming : MonoBehaviour
         if (angleTowards > 90f || angleTowards < -90f)
         {
             //Inverted rotation
-            pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards);
+            pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
         }
         else 
         {
             //Normal rotation
-            pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards);
+            pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
         }
     }
     

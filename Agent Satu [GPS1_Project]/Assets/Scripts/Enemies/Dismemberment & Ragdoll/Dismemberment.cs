@@ -23,7 +23,7 @@ public class Dismemberment : MonoBehaviour
         
         
         //Spawning new limb
-        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, transform.rotation);
+        GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, Quaternion.identity);
         if (detachedLimb == null) return;
         
         //Set up detached limb
@@ -31,20 +31,23 @@ public class Dismemberment : MonoBehaviour
         detachedLimb.transform.localScale = objActualScale;
         
         //Disable unwanted components
-        detachedLimb.GetComponent<SpriteSkin>().enabled = false;
+        if (detachedLimb.TryGetComponent(out SpriteSkin spriteSkin))
+        {
+            spriteSkin.enabled = false;
+        }
         if (detachedLimb.TryGetComponent(out HingeJoint2D hingeJoint))
         {
             hingeJoint.enabled = false;
         }
 
         
-        //Apply physics
+        //Setup
         Rigidbody2D limbRb = detachedLimb.GetComponent<Rigidbody2D>();
         limbRb.isKinematic = false;
+        limbRb.drag = .5f;
         limbRb.gravityScale = dismemberedLimbGravity;
-
-
-
+       
+        //Apply physics
         //Fling according to bullet direction
         limbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }

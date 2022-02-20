@@ -36,18 +36,21 @@ public class Ragdoll : MonoBehaviour
 
     private void RagdollEffect(Transform limb, Vector2 flingDirection)
     {
-        limb.GetComponent<SpriteSkin>().enabled = false;
+        ////Disable unwanted components
+        if (TryGetComponent(out SpriteSkin spriteSkin))
+        {
+            spriteSkin.enabled = false;
+        }
+        if (TryGetComponent(out HingeJoint2D hingeJoint2D))
+        {
+            hingeJoint2D.enabled = false;
+        }
         
         //Setup
         Rigidbody2D ragdolledLimb = limb.GetComponent<Rigidbody2D>();
         ragdolledLimb.isKinematic = false;
         ragdolledLimb.gravityScale = ragdolledLimbGravity;
         
-        //Disable hingeJoint if exists
-        if (TryGetComponent(out HingeJoint2D hingeJoint))
-        {
-            hingeJoint.enabled = false;
-        }
         
         //Fling according to bullet direction
         ragdolledLimb.AddForce(flingDirection, ForceMode2D.Impulse);
