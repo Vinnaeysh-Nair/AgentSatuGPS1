@@ -20,7 +20,7 @@ public class Dismemberment : MonoBehaviour
     {
         //Disable original limb
         limb.SetActive(false);
-        
+
         
         //Spawning new limb
         GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, Quaternion.identity);

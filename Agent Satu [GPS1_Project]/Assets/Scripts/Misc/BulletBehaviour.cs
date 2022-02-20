@@ -39,11 +39,13 @@ public class BulletBehaviour : MonoBehaviour
     //Hit enemy
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        Instantiate(impactEffect, transform.position, transform.rotation);
+        
         
         //If hit player
         if (hitInfo.CompareTag("Player"))
         {
+            if (transform.CompareTag("Bullet - Player")) return;
+            
             //To make sure bullet only hit one time
             if (!hitRegistered)
             {
@@ -51,7 +53,8 @@ public class BulletBehaviour : MonoBehaviour
                 
                 playerHp.TakeDamage(bulletDamage);
                 gameObject.SetActive(false);
-
+                
+                Instantiate(impactEffect, transform.position, transform.rotation);
                 hitRegistered = false;
                 return;
             }
@@ -64,6 +67,7 @@ public class BulletBehaviour : MonoBehaviour
         if (!hitInfo.CompareTag(tagManager.tagSO.limbLegTag) && !hitInfo.CompareTag(tagManager.tagSO.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagSO.limbHeadTag))
         {
             gameObject.SetActive(false);
+            Instantiate(impactEffect, transform.position, transform.rotation);
             return;
         }
         
@@ -85,6 +89,7 @@ public class BulletBehaviour : MonoBehaviour
             enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
             
             gameObject.SetActive(false);
+            Instantiate(impactEffect, transform.position, transform.rotation);
             hitRegistered = false;
         }
     }

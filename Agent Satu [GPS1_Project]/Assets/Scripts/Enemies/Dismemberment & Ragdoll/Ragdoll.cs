@@ -43,6 +43,7 @@ public class Ragdoll : MonoBehaviour
         }
         if (TryGetComponent(out HingeJoint2D hingeJoint2D))
         {
+            
             hingeJoint2D.enabled = false;
         }
         
