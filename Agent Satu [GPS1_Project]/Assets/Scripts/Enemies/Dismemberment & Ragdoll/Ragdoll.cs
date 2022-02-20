@@ -37,23 +37,23 @@ public class Ragdoll : MonoBehaviour
     private void RagdollEffect(Transform limb, Vector2 flingDirection)
     {
         ////Disable unwanted components
-        if (TryGetComponent(out SpriteSkin spriteSkin))
+        if (limb.TryGetComponent(out SpriteSkin spriteSkin))
         {
             spriteSkin.enabled = false;
         }
-        if (TryGetComponent(out HingeJoint2D hingeJoint2D))
+        if (limb.TryGetComponent(out HingeJoint2D hingeJoint2D))
         {
             
             hingeJoint2D.enabled = false;
         }
         
         //Setup
-        Rigidbody2D ragdolledLimb = limb.GetComponent<Rigidbody2D>();
-        ragdolledLimb.isKinematic = false;
-        ragdolledLimb.gravityScale = ragdolledLimbGravity;
+        Rigidbody2D ragdolledLimbRb = limb.GetComponent<Rigidbody2D>();
+        ragdolledLimbRb.isKinematic = false;
+        ragdolledLimbRb.gravityScale = ragdolledLimbGravity;
         
         
         //Fling according to bullet direction
-        ragdolledLimb.AddForce(flingDirection, ForceMode2D.Impulse);
+        ragdolledLimbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }
