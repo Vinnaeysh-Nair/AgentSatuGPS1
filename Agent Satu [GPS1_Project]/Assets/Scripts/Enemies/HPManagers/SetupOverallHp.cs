@@ -24,7 +24,7 @@ public class SetupOverallHp : MonoBehaviour
     [System.Serializable]
     public class EnemyType
     {
-        [Header("Only insert one enemy of each type")]
+        [Header("Only insert one enemy of each type (variant excluded)")]
         [SerializeField] private GameObject enemyType;
         [SerializeField] private int initialHp;
 
