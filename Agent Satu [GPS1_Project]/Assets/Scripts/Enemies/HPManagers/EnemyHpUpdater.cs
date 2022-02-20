@@ -7,7 +7,7 @@ public class EnemyHpUpdater : MonoBehaviour
     private OverallHp overallHpManager;
     private Dismemberment dismemberment;
     private Ragdoll ragdoll;
-    private testFollow enemyPatrol;
+   
     
     [SerializeField] private int limbHp;
     private TagManager tagManager;
@@ -26,7 +26,7 @@ public class EnemyHpUpdater : MonoBehaviour
         ragdoll = GetComponentInParent<Ragdoll>();
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         spawnPickups = GetComponentInParent<SpawnPickups>();
-        enemyPatrol = GetComponentInParent<testFollow>();
+      
         
         CopyLimbHp();
     }
@@ -96,7 +96,11 @@ public class EnemyHpUpdater : MonoBehaviour
 
     private void Die(Vector2 flingDirection)
     {
-        enemyPatrol.dead = true;
+        if (transform.parent.TryGetComponent(out testFollow enemyPatrol))
+        {
+            enemyPatrol.enabled = false;
+        }
+        
         overallHpManager.SetOverallHp(0);
         ragdoll.ActivateRagdoll(flingDirection);
         spawnPickups.enabled = true;

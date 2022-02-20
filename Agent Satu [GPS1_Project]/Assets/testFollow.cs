@@ -5,7 +5,7 @@ using Vector2 = UnityEngine.Vector2;
 
 public class testFollow : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
     public Transform[] patrolPoints;
     private int currentPointIndex = 0;
     
@@ -22,6 +22,8 @@ public class testFollow : MonoBehaviour
  
     void Start()
     {
+        playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
+        
         nextPos = patrolPoints[0];
     }
 

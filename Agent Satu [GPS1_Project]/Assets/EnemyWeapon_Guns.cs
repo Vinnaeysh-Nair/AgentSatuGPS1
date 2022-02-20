@@ -40,15 +40,15 @@ public class EnemyWeapon_Guns : MonoBehaviour
     //For testing
     void Update()
     {
-        if (!testShooting) return;
-        if (isBurst)
-        {
-            StartBurstShooting();
-        }
-        else
-        {
-            StartShooting();
-        }
+        // if (!testShooting) return;
+        // if (isBurst)
+        // {
+        //     StartBurstShooting();
+        // }
+        // else
+        // {
+        //     StartShooting();
+        // }
     }
     
     
