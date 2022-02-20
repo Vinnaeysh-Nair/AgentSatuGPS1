@@ -8,15 +8,18 @@ public class EnemiesAi : MonoBehaviour
     private bool playerInsideArea = false;
     public bool checkIfBurstFire = false;
     public EnemyWeapon_Guns enemyGun;
+    //public OverallHp overallHp;
+    //private int tempHp;
+    //public BoxCollider2D boxCollider;
 
-    void Start()
+    void Awake()
     {
-        //Debug.Log(playerInsideArea);
-        
+        //tempHp = overallHp.GetOverallHp();
     }
-
+    
     void Update()
     {
+        //tempHp = overallHp.GetOverallHp();
         //Debug.Log(playerPosition);
         if (playerInsideArea)
         {
@@ -32,6 +35,11 @@ public class EnemiesAi : MonoBehaviour
                 enemyGun.StartShooting();
             }
         }
+
+        /*if(tempHp <= 0)
+        {
+            disableCollider();
+        }*/
     }
 
     void OnTriggerEnter2D(Collider2D visionCone)
@@ -53,4 +61,9 @@ public class EnemiesAi : MonoBehaviour
             //Debug.Log(playerInsideArea);
         }
     }
+
+    /*void disableCollider()
+    {
+        boxCollider.enabled = false;
+    }*/
 }
