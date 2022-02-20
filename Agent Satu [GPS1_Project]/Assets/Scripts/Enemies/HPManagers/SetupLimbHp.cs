@@ -26,7 +26,7 @@ public class SetupLimbHp : MonoBehaviour
     
     
     //Fields
-    [Header("Only insert one enemy of each type (variant excluded)")]
+    [Header("Variants included (diff weps enemies are diff elements)")]
     [SerializeField] private Transform[] enemyArr;
     public List<Limb> limbList;
     private TagManager tagManager;
