@@ -39,7 +39,7 @@ public class Dismemberment : MonoBehaviour
         {
             hingeJoint.enabled = false;
         }
-
+        
         
         //Setup
         Rigidbody2D limbRb = detachedLimb.GetComponent<Rigidbody2D>();

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6164949329774536309
+--- !u!1 &6207316393108689110
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,206 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6164949329774536308}
-  - component: {fileID: 6164949329774536315}
-  m_Layer: 0
-  m_Name: SetupOverallHp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6164949329774536308
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949329774536309}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6164949330780618433}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6164949329774536315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949329774536309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9937f4ca4338274ca72c8cb731441bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypesList:
-  - enemyType: {fileID: 2444030418990903632, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyType: {fileID: 8641046283785957026, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyType: {fileID: 5868072624904859741, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
---- !u!1 &6164949330439934487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6164949330439934486}
-  - component: {fileID: 6164949330439934485}
-  m_Layer: 0
-  m_Name: SetupLimbHp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6164949330439934486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949330439934487}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6164949330780618433}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6164949330439934485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949330439934487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e18d02aebcbd56740a8d13d10f5db9d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyArr:
-  - {fileID: 2444030418990903636, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-  - {fileID: 8641046283785957027, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-  - {fileID: 5868072624904859729, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-  limbList:
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030420790259347, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 2
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030420311665809, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030419200491755, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030418955536570, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030420825630560, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_Melee
-    limb: {fileID: 2444030420213986376, guid: 72cef31575ea9b74aa914031e8fc8ba3, type: 3}
-    initialHp: 3
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 3495158049401067774, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 2
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 6949199898211179664, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 5707630184176524747, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 5868180239874308659, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 3170327775838043546, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyName: 'GangMember_Pistol '
-    limb: {fileID: 6155360927680805372, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072625462272812, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 2
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072624193558305, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072624735778074, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072625314159155, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072625078411206, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
-  - enemyName: GangMember_SMG
-    limb: {fileID: 5868072625478913997, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
-    initialHp: 3
---- !u!1 &6164949330513589973
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6164949330513589972}
-  - component: {fileID: 6164949330513589979}
-  m_Layer: 0
-  m_Name: ConfigureDismemberment
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6164949330513589972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949330513589973}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6164949330780618433}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6164949330513589979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949330513589973}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dismemberedLimbGravity: 3
---- !u!1 &6164949330780618434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6164949330780618433}
+  - component: {fileID: 6207316393108689109}
   m_Layer: 0
   m_Name: EnemyHpManagers
   m_TagString: Untagged
@@ -215,21 +16,220 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6164949330780618433
+--- !u!4 &6207316393108689109
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164949330780618434}
+  m_GameObject: {fileID: 6207316393108689110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0655148, y: -0.16700026, z: -0.030382207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6164949330439934486}
-  - {fileID: 6164949329774536308}
-  - {fileID: 6164949330513589972}
+  - {fileID: 6207316393984113666}
+  - {fileID: 6207316394115614816}
+  - {fileID: 6207316393907280064}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6207316393907280065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6207316393907280064}
+  - component: {fileID: 6207316393907280079}
+  m_Layer: 0
+  m_Name: ConfigureDismemberment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6207316393907280064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316393907280065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6207316393108689109}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6207316393907280079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316393907280065}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
+--- !u!1 &6207316393984113667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6207316393984113666}
+  - component: {fileID: 6207316393984113665}
+  m_Layer: 0
+  m_Name: SetupLimbHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6207316393984113666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316393984113667}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6207316393108689109}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6207316393984113665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316393984113667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18d02aebcbd56740a8d13d10f5db9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyArr:
+  - {fileID: 8130032433453023146, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+  - {fileID: 7115653738529018180, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+  - {fileID: 6620586144497779847, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+  limbList:
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032431754322029, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 2
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032432347898479, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032433394175509, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032433689298500, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032431800773022, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_Melee(Patrol) Variant
+    limb: {fileID: 8130032432263396022, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 2726229416271374105, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 2
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 8440956207144395639, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 6512587581305463340, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 4916591973379999188, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 4515857942000943741, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyName: 'GangMember_Pistol '
+    limb: {fileID: 4627717625349998107, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586143980410874, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 2
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586143787017207, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586143255478732, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586144906571493, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586144670296848, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
+  - enemyName: GangMember_SMG
+    limb: {fileID: 6620586143997066011, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
+--- !u!1 &6207316394115614817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6207316394115614816}
+  - component: {fileID: 6207316394115614831}
+  m_Layer: 0
+  m_Name: SetupOverallHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6207316394115614816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316394115614817}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6207316393108689109}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6207316394115614831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207316394115614817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9937f4ca4338274ca72c8cb731441bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypesList:
+  - enemyType: {fileID: 8130032433453023150, guid: 7352fcbc64ad7a549b058f1fe15120ff, type: 3}
+    initialHp: 3
+  - enemyType: {fileID: 7115653738529018181, guid: 66042980706e8194fb1342b07adb2a9e, type: 3}
+    initialHp: 3
+  - enemyType: {fileID: 6620586144497779851, guid: 119457a76d3f847488a97c7a126be1c7, type: 3}
+    initialHp: 3
