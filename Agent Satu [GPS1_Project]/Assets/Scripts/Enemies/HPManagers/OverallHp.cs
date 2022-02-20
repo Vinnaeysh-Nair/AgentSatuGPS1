@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -6,8 +7,8 @@ public class OverallHp : MonoBehaviour
 {    
     //Components
     private SetupOverallHp setupOverallHp;
-    
-    
+
+
     //Fields
     [SerializeField] private int overallHp = 4;
     [SerializeField] private int legDismemberedCount = 0;
