@@ -1,18 +1,22 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
 public class EnemyAI_Melee : MonoBehaviour
 {
+    //Components
     private PlayerMovement playerMovement;
+    
+    //Fields
     public Transform[] patrolPoints;
     private int currentPointIndex = 0;
     
-    public float speed = 1f;
-    public bool facingRight = false;
+    [SerializeField] private float speed = 1f;
+    private bool facingRight = false;
 
-    public bool detected = false;
-    public bool dead = false;
+    private bool detected = false;
+    private bool dead = false;
     
     //Patrol point system
     private int nextPosIndex;

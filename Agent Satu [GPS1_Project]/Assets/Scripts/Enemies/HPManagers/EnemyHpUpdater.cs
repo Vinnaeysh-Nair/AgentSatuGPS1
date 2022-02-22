@@ -22,12 +22,12 @@ public class EnemyHpUpdater : MonoBehaviour
         dismemberment = transform.GetComponent<Dismemberment>();
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         ragdoll = transform.GetComponentInParent<Ragdoll>();
-        
-        Transform root = transform.root;
-        spawnPickups = root.GetComponent<SpawnPickups>();
+
+        Transform grandparent = transform.parent.parent;
+        spawnPickups = grandparent.GetComponent<SpawnPickups>();
         
         //Get Hp components
-        overallHp = root.GetComponent<OverallHp>();
+        overallHp = grandparent.GetComponent<OverallHp>();
         limbHp = GetComponent<LimbHp>();
         
         currLimbHp = limbHp.GetInitialHp();
@@ -80,7 +80,7 @@ public class EnemyHpUpdater : MonoBehaviour
 
     private void Die(Vector2 flingDirection)
     {
-        if (transform.parent.TryGetComponent(out EnemyAI_Melee enemyAI))
+        if (transform.parent.parent.TryGetComponent(out EnemyAI_Melee enemyAI))
         {
             enemyAI.enabled = false;
         }

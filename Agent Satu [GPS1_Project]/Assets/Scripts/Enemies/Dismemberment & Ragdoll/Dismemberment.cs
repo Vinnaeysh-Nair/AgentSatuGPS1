@@ -8,11 +8,18 @@ public class Dismemberment : MonoBehaviour
     //Components
     private ObjectPooler objectPooler;
 
-    //Dismemberment
+    //Fields
     [SerializeField] private float dismemberedLimbGravity = 3f;
+    private Vector3 objActualScale;
     void Awake()
     {
         objectPooler = ObjectPooler.objPoolerInstance;
+    }
+
+    void Start()
+    {
+        //Save scale of the original object (the parent to the limbs)
+        objActualScale = transform.parent.parent.localScale;
     }
 
     
@@ -25,7 +32,7 @@ public class Dismemberment : MonoBehaviour
         if (detachedLimb == null) return;
         
         //Set up detached limb
-        Vector3 objActualScale = limb.transform.root.localScale;       //Save scale of the original object (the parent to the limbs)
+             
         detachedLimb.transform.localScale = objActualScale;
         
         //Disable unwanted components
