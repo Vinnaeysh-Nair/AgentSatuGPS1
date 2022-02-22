@@ -14,6 +14,8 @@ public class Ragdoll : MonoBehaviour
     {
         tagManager = tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
     }
+    
+    //Applied to original (not dismembered) limbs
     public void ActivateRagdoll(Vector2 flingDirection)
     {
         //GetComponent<Animator>().enabled = false;
@@ -34,21 +36,17 @@ public class Ragdoll : MonoBehaviour
         }
     }
 
-    private void RagdollEffect(Transform limb, Vector2 flingDirection)
+    private void RagdollEffect(Transform limbToRagdoll, Vector2 flingDirection)
     {
         ////Disable unwanted components
-        if (limb.TryGetComponent(out SpriteSkin spriteSkin))
-        {
-            spriteSkin.enabled = false;
-        }
-        if (limb.TryGetComponent(out HingeJoint2D hingeJoint2D))
-        {
-            
-            hingeJoint2D.enabled = false;
-        }
+        // if (limbToRagdoll.TryGetComponent(out SpriteSkin spriteSkin))
+        // {
+        //     spriteSkin.enabled = false;
+        // }
+
         
         //Setup
-        Rigidbody2D ragdolledLimbRb = limb.GetComponent<Rigidbody2D>();
+        Rigidbody2D ragdolledLimbRb = limbToRagdoll.GetComponent<Rigidbody2D>();
         ragdolledLimbRb.isKinematic = false;
         ragdolledLimbRb.gravityScale = ragdolledLimbGravity;
         

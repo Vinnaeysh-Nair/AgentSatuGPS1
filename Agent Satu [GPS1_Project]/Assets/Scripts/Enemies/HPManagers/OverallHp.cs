@@ -1,19 +1,19 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 //Attached to all gameObjects tagged with "Enemy" (auto - by SetupOverallHp script).
-public class OverallHp : MonoBehaviour
+public class OverallHp : EnemyHp
 {    
     //Components
     private SetupOverallHp setupOverallHp;
 
 
     //Fields
-    [SerializeField] private int overallHp = 4;
-    [SerializeField] private int legDismemberedCount = 0;
+    [SerializeField] private int initialOverallHp;
+    private int legDismemberedCount = 0;
     private bool isHeadDismembered = false;
 
+    
     void Awake()
     {
         setupOverallHp = SetupOverallHp.setupOverallInstance;
@@ -21,12 +21,14 @@ public class OverallHp : MonoBehaviour
     
     void Start()
     {
-        CopyInitialHp();
+        //CopyInitialHp();
+        hp = initialOverallHp;
     }
     
+    //Getter
     public int GetOverallHp()
     {
-        return overallHp;
+        return initialOverallHp;
     }
     
     public int GetLegDismemberedCount()
@@ -39,9 +41,10 @@ public class OverallHp : MonoBehaviour
         return isHeadDismembered;
     }
 
+    //Setter
     public void SetOverallHp(int overallHp)
     {
-        this.overallHp = overallHp;
+        this.initialOverallHp = overallHp;
     }
     
     public void SetLegDismemberedCount(int legDismemberedCount)
@@ -62,7 +65,7 @@ public class OverallHp : MonoBehaviour
         {
             if (typeList[i].GetEnemyTypeName() == transform.name)
             {
-                overallHp = typeList[i].GetInitialHp();
+                initialOverallHp = typeList[i].GetInitialHp();
             }
         }
     }

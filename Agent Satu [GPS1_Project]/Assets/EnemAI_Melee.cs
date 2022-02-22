@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
-public class testFollow : MonoBehaviour
+public class EnemyAI_Melee : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     public Transform[] patrolPoints;

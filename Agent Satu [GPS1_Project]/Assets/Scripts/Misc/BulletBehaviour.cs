@@ -34,13 +34,14 @@ public class BulletBehaviour : MonoBehaviour
     void OnEnable()
     {
         rb.velocity = transform.right * bulletSpeed;
+        
+        //Reset boolean to allow bullet to hit again
+        hitRegistered = false;
     }
 
-    //Hit enemy
+    //When hitting anything
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        
-        
         //If hit player
         if (hitInfo.CompareTag("Player"))
         {
@@ -55,7 +56,6 @@ public class BulletBehaviour : MonoBehaviour
                 gameObject.SetActive(false);
                 
                 Instantiate(impactEffect, transform.position, transform.rotation);
-                hitRegistered = false;
                 return;
             }
         }
@@ -85,12 +85,12 @@ public class BulletBehaviour : MonoBehaviour
             
             
             Vector2 bulletDirection = CheckBulletDirection(rb);
+            
             enemyHpUpdater.TakeLimbDamage(bulletDamage, bulletDirection);
             enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
             
             gameObject.SetActive(false);
             Instantiate(impactEffect, transform.position, transform.rotation);
-            hitRegistered = false;
         }
     }
 

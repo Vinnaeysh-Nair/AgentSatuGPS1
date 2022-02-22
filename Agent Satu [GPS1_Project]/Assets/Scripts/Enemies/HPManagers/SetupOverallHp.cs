@@ -18,7 +18,7 @@ public class SetupOverallHp : MonoBehaviour
     
     void Start()
     {
-        AttachHp();
+        //AttachHp();
     }
     
     [System.Serializable]
@@ -55,7 +55,7 @@ public class SetupOverallHp : MonoBehaviour
     
         foreach (GameObject enemy in foundEnemy)
         {
-            enemy.AddComponent<OverallHp>();
+            //enemy.AddComponent<OverallHp>();
         }
     }
     

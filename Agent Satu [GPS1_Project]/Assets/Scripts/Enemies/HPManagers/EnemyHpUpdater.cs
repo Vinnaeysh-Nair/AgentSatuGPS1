@@ -3,117 +3,90 @@ using UnityEngine;
 //Updates limb and overall hp, attached to all limbs (auto - by FindLimbs script).
 public class EnemyHpUpdater : MonoBehaviour
 {
-    private SetupLimbHp setupLimb;
-    private OverallHp overallHpManager;
-    private Dismemberment dismemberment;
-    private Ragdoll ragdoll;
-   
-    
-    [SerializeField] private int limbHp;
+ 
+    //Components
     private TagManager tagManager;
     private SpawnPickups spawnPickups;
     
-    void Awake()
-    {
-        setupLimb = SetupLimbHp.setupLimbInstance;
-    }
+    private Dismemberment dismemberment;
+    private Ragdoll ragdoll;
+    [SerializeField] private OverallHp overallHp;
+    private LimbHp limbHp;
     
-    
+
+    //Fields
+    [SerializeField] private int currLimbHp;
+
     void Start()
     {
-        overallHpManager = GetComponentInParent<OverallHp>();
-        dismemberment = transform.Find("/EnemyHpManagers/ConfigureDismemberment").GetComponent<Dismemberment>();
-        ragdoll = GetComponentInParent<Ragdoll>();
+        dismemberment = transform.GetComponent<Dismemberment>();
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        spawnPickups = GetComponentInParent<SpawnPickups>();
-      
+        ragdoll = transform.GetComponentInParent<Ragdoll>();
         
-        CopyLimbHp();
+        Transform root = transform.root;
+        spawnPickups = root.GetComponent<SpawnPickups>();
+        
+        //Get Hp components
+        overallHp = root.GetComponent<OverallHp>();
+        limbHp = GetComponent<LimbHp>();
+        
+        currLimbHp = limbHp.GetInitialHp();
     }
 
-    //Get limb hp based on limb name in Limb list
-    private void CopyLimbHp()
-    {
-        string limbName = transform.name;
-        SetupLimbHp.Limb foundLimb = setupLimb.limbList.Find(limb => limb.GetLimbName() == limbName);
-        limbHp = foundLimb.GetInitialHp();
-    }
     
     public void TakeLimbDamage(int dmg,Vector2 flingDirection)
     {
-        //Limb hp decerement
-        if (limbHp > 0)
-            limbHp -= dmg;
+        //Limb hp decrement
+        if (currLimbHp > 0)
+            currLimbHp -= dmg;
 
         //If hp 0, dismember this limb
-        if (limbHp <= 0)
+        if (currLimbHp <= 0)
         {
             dismemberment.Dismember(transform.gameObject,  flingDirection);
             
             //Check if head dismembered
             if(transform.CompareTag(tagManager.tagSO.limbHeadTag))
             {
-                overallHpManager.SetIsHeadDismemberedToTrue();
+                overallHp.SetIsHeadDismemberedToTrue();
+            }
+            
+            //Check if legs dismembered
+            if (transform.CompareTag(tagManager.tagSO.limbLegTag))
+            {
+                int legCount = overallHp.GetLegDismemberedCount();
+                legCount += 1;
+                overallHp.SetLegDismemberedCount(legCount);
             }
         }
-           
-        
-        //Check if legs dismembered
-        if (transform.CompareTag(tagManager.tagSO.limbLegTag))
-        {
-            int legCount = overallHpManager.GetLegDismemberedCount();
-            legCount += 1;
-            overallHpManager.SetLegDismemberedCount(legCount);
-        }
-        
-        //If Head dismemebered, activate ragdoll  
-        if (overallHpManager.GetIsHeadDismembered())
-            Die(flingDirection);
-        
-
-        //If both legs dismembered, activate ragdoll
-        if (overallHpManager.GetLegDismemberedCount() == 2)
-            Die(flingDirection);
-            
     } 
 
     public void TakeOverallDamage(int dmg, Vector2 flingDirection)
     {
         //Overall Hp decerement
-        int overallHp = overallHpManager.GetOverallHp();
+        int currOverallHp = overallHp.GetOverallHp();
         
-        if (overallHp > 0)
+        if (currOverallHp > 0)
         {
-            overallHp -= dmg;
-            overallHpManager.SetOverallHp(overallHp);
+            currOverallHp -= dmg;
+            overallHp.SetOverallHp(currOverallHp);
         }
         
         
-        //If overall hp = 0, ragdoll this enemy
-        if(overallHp <= 0)
+        //If overall hp = 0, head or both legs are dismembered, ragdoll this enemy
+        if(currOverallHp <= 0 || overallHp.GetIsHeadDismembered() || overallHp.GetLegDismemberedCount() == 2)
             Die(flingDirection);
     }
 
     private void Die(Vector2 flingDirection)
     {
-        if (transform.parent.TryGetComponent(out testFollow enemyPatrol))
+        if (transform.parent.TryGetComponent(out EnemyAI_Melee enemyAI))
         {
-            enemyPatrol.enabled = false;
+            enemyAI.enabled = false;
         }
         
-        overallHpManager.SetOverallHp(0);
+        overallHp.SetOverallHp(0);
         ragdoll.ActivateRagdoll(flingDirection);
         spawnPickups.enabled = true;
     }
-    
-
-    // private void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     if (!collision.transform.CompareTag("Bullet")) return;
-    //     
-    //     //Disabling this script doesn't affect the colliders, therefore physics can still happen, thus need to check if this script is enabled.
-    //     //if (!enabled) return; 
-    //     TakeLimbDamage(1);
-    //     TakeOverallDamage(1);
-    // }
 }

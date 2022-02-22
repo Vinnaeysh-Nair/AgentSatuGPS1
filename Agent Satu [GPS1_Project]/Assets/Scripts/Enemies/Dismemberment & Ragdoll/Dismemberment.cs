@@ -18,16 +18,14 @@ public class Dismemberment : MonoBehaviour
     
     public void Dismember(GameObject limb, Vector2 flingDirection)
     {
-        //Disable original limb
-        limb.SetActive(false);
-
+       
         
         //Spawning new limb
         GameObject detachedLimb = objectPooler.SpawnFromPool(limb.name, limb.transform.position, Quaternion.identity);
         if (detachedLimb == null) return;
         
         //Set up detached limb
-        Vector3 objActualScale = limb.transform.parent.localScale;       //Save scale of the original object (the parent to the limbs)
+        Vector3 objActualScale = limb.transform.root.localScale;       //Save scale of the original object (the parent to the limbs)
         detachedLimb.transform.localScale = objActualScale;
         
         //Disable unwanted components
@@ -35,9 +33,9 @@ public class Dismemberment : MonoBehaviour
         {
             spriteSkin.enabled = false;
         }
-        if (detachedLimb.TryGetComponent(out HingeJoint2D hingeJoint))
+        if (detachedLimb.TryGetComponent(out HingeJoint2D joint))
         {
-            hingeJoint.enabled = false;
+            joint.enabled = false;
         }
         
         
@@ -50,5 +48,8 @@ public class Dismemberment : MonoBehaviour
         //Apply physics
         //Fling according to bullet direction
         limbRb.AddForce(flingDirection, ForceMode2D.Impulse);
+        
+        //Disable original limb
+        limb.SetActive(false);
     }
 }

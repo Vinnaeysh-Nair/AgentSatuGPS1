@@ -19,7 +19,7 @@ public class SetupLimbHp : MonoBehaviour
     void Start()
     {
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        PopulateList();
+        //PopulateList();
     }
     
     #endregion
