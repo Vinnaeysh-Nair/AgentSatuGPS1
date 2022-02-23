@@ -20,6 +20,9 @@ public class Ragdoll : MonoBehaviour
     {
         //GetComponent<Animator>().enabled = false;
         
+        //If root container object is flipped, when Ragdoll activates, flip the limbs container as well (fixes the rotation bug where dismembered parts rotations crazily)
+        Vector3 rotationCorrection = transform.parent.eulerAngles;
+        transform.eulerAngles = rotationCorrection;
         
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -43,15 +46,17 @@ public class Ragdoll : MonoBehaviour
         // {
         //     spriteSkin.enabled = false;
         // }
+        
 
         
-        //Setup
+        //Setup rigidbody
         Rigidbody2D ragdolledLimbRb = limbToRagdoll.GetComponent<Rigidbody2D>();
         ragdolledLimbRb.isKinematic = false;
         ragdolledLimbRb.gravityScale = ragdolledLimbGravity;
         
         
         //Fling according to bullet direction
+       //ragdolledLimbRb.gameObject.transform.parent.parent.eulerAngles = new Vector3(0f, 0f, 0f);
         ragdolledLimbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }

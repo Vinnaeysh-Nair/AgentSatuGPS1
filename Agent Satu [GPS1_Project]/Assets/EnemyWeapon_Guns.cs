@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -22,6 +23,7 @@ public class EnemyWeapon_Guns : MonoBehaviour
     private bool canStartBurstShooting = true;
     private int shotBullet = 0;
     
+    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
@@ -36,7 +38,12 @@ public class EnemyWeapon_Guns : MonoBehaviour
             firePoints[i] = transform.GetChild(i);
         }
     }
-    
+
+    private void OnDisable()
+    {
+        //print("disabled");
+    }
+
     //For testing
     void Update()
     {
