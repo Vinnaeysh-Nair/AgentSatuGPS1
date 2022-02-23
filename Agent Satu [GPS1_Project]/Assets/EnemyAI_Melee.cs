@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class EnemyAI_Melee : MonoBehaviour
     private bool facingRight = false;
 
     private bool detected = false;
-    private bool dead = false;
-    
+    public bool isDead = false;
+
     //Patrol point system
     private int nextPosIndex;
     private Transform nextPos;
@@ -30,9 +31,14 @@ public class EnemyAI_Melee : MonoBehaviour
         nextPos = patrolPoints[0];
     }
 
+    private void OnDisable()
+    {
+        isDead = true;
+    }
+
     private void FixedUpdate()
     {
-        if (dead) return;
+        if (isDead) return;
         
         if (!detected)
         {
@@ -42,6 +48,7 @@ public class EnemyAI_Melee : MonoBehaviour
         {
             FollowPlayer();
         }
+   
     }
 
     public void Patrol()
