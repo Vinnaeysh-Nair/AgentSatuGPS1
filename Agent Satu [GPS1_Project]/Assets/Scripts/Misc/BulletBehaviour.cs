@@ -34,9 +34,11 @@ public class BulletBehaviour : MonoBehaviour
     void OnEnable()
     {
         rb.velocity = transform.right * bulletSpeed;
+        StartCoroutine(SetBulletInactive(gameObject));
         
         //Reset boolean to allow bullet to hit again
         hitRegistered = false;
+        
     }
 
     //When hitting anything
@@ -102,5 +104,12 @@ public class BulletBehaviour : MonoBehaviour
         float flingY = bulletRb.velocity.y * forceDampening;
 
         return new Vector2(flingX, flingY);
+    }
+    
+    //Become inactive after a duration after being fired. 
+    private IEnumerator SetBulletInactive(GameObject shotBullet)
+    {
+        yield return new WaitForSeconds(1f);
+        shotBullet.SetActive(false);
     }
 }

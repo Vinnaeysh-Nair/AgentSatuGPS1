@@ -4,11 +4,13 @@ using UnityEngine;
 public class CameraTarget : MonoBehaviour
 {
     //Components
-    [SerializeField] private CrosshairAiming aim;
+    private CrosshairAiming aim;
     private Transform playerBody;
 
     //Field
-    [SerializeField] private float threshold;
+    [SerializeField] private float thresholdX;
+    [SerializeField] private float thresholdYUp;
+    [SerializeField] private float thresholdYDown;
     
 
     void Awake()
@@ -25,8 +27,8 @@ public class CameraTarget : MonoBehaviour
         
         
         //Limit by threshold amount
-        targetPos.x = Mathf.Clamp(targetPos.x, -threshold + playerPos.x, threshold + playerPos.x);
-        targetPos.y = Mathf.Clamp(targetPos.y, -threshold + playerPos.y, threshold + playerPos.y);
+        targetPos.x = Mathf.Clamp(targetPos.x, -thresholdX + playerPos.x, thresholdX + playerPos.x);
+        targetPos.y = Mathf.Clamp(targetPos.y, -thresholdYDown + playerPos.y, thresholdYUp + playerPos.y);
         
         
         transform.position = targetPos;
