@@ -20,11 +20,6 @@ public class PlayerMovement : MonoBehaviour
         return horizontalMove;
     }
     
-    public bool GetCrouch()
-    {
-        return crouch;
-    }
-
     public Vector2 GetPlayerPos()
     {
         return playerPos;

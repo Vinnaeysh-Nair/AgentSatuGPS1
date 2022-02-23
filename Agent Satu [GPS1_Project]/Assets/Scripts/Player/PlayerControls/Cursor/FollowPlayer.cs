@@ -4,7 +4,6 @@ public class FollowPlayer : MonoBehaviour
 {
     //Components
     public GameObject followPoint;
-    public PlayerMovement playerMovement;
     public PlayerController controller;
 
     //Fields
@@ -15,7 +14,7 @@ public class FollowPlayer : MonoBehaviour
     void Update()
     {
         Follow();
-        if (playerMovement.GetCrouch() && controller.GetGrounded())
+        if (controller.GetPlayerIsCrouching() && controller.GetGrounded())
         {
             AdjustPos();
         }
