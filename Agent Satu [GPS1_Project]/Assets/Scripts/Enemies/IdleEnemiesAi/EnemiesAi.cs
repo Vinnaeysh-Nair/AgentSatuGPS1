@@ -6,37 +6,28 @@ public class EnemiesAi : MonoBehaviour
 {
     public GameObject visionCone;
     private bool playerInsideArea = false;
-    public bool checkIfBurstFire = false;
+    //public bool checkIfBurstFire = false;
     public EnemyWeapon_Guns enemyGun;
-    //public OverallHp overallHp;
-    //private int tempHp;
+    //private OverallHp overallHp;
+    //private int enemiesHp;
+
     //public BoxCollider2D boxCollider;
 
     void Awake()
     {
-        //tempHp = overallHp.GetOverallHp();
+       //overallHp = GetComponent<OverallHp>();
     }
     
     void Update()
     {
-        //tempHp = overallHp.GetOverallHp();
+        //enemiesHp = overallHp.GetOverallHp();
         //Debug.Log(playerPosition);
         if (playerInsideArea)
         {
-            if (checkIfBurstFire)
-            {
-                //burst fire mode doesnt work for now
-                //Debug.Log("burst fire");
-                enemyGun.StartBurstShooting();
-            }
-            else
-            {
-                //Debug.Log("single fire");
-                enemyGun.StartShooting();
-            }
+            enemyGun.StartShooting();
         }
 
-        /*if(tempHp <= 0)
+        /*if (enemiesHp <= 0)
         {
             disableCollider();
         }*/
@@ -64,6 +55,6 @@ public class EnemiesAi : MonoBehaviour
 
     /*void disableCollider()
     {
-        boxCollider.enabled = false;
+        Destroy(gameObject);
     }*/
 }
