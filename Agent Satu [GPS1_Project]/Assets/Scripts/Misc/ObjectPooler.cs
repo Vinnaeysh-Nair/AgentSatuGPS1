@@ -44,10 +44,10 @@ public class ObjectPooler : MonoBehaviour
             this.name = name;
             this.gameObj = gameObj;
             
-            if(!gameObj.CompareTag("Bullet - Player") && !gameObj.CompareTag("Bullet - Enemy"))
-                this.size = smallPoolSize;
-            else
+            if(gameObj.CompareTag("Bullet"))
                 this.size = bigPoolSize;
+            else
+                this.size = smallPoolSize;
             
         }
 

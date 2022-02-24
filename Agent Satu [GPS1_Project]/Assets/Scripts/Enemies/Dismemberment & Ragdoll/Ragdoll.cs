@@ -10,6 +10,7 @@ public class Ragdoll : MonoBehaviour
     
     //Fields
     [SerializeField] private float ragdolledLimbGravity = 5f;
+
     void Start()
     {
         tagManager = tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
@@ -56,7 +57,6 @@ public class Ragdoll : MonoBehaviour
         
         
         //Fling according to bullet direction
-       //ragdolledLimbRb.gameObject.transform.parent.parent.eulerAngles = new Vector3(0f, 0f, 0f);
         ragdolledLimbRb.AddForce(flingDirection, ForceMode2D.Impulse);
     }
 }
