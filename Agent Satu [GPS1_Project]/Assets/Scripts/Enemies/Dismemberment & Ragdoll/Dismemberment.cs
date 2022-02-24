@@ -12,6 +12,7 @@ public class Dismemberment : MonoBehaviour
     private Vector3 objActualScale;
     private bool dismembered = false;
     
+    
     void Awake()
     {
         objectPooler = ObjectPooler.objPoolerInstance;
@@ -53,6 +54,8 @@ public class Dismemberment : MonoBehaviour
         {
             joint.enabled = false;
         }
+
+        detachedLimb.GetComponent<LimbHp>().enabled = false;
         
         
         //Setup rigidbody

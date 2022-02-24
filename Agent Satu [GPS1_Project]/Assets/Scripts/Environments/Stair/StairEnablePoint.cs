@@ -17,7 +17,6 @@ public class StairEnablePoint : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            print("enabled");
             foreach (BoxCollider2D detectors in platformDetectors)
             {
                 Physics2D.IgnoreCollision(detectors, stairCollider, false);

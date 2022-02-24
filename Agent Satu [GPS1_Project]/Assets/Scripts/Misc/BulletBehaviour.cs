@@ -76,47 +76,21 @@ public class BulletBehaviour : MonoBehaviour
 
             if (deflectedTimes > maxDeflectionTimes)
             {
-                gameObject.SetActive(false);
                 SpawnBulletImpactEffect();
+                gameObject.SetActive(false);
             }
             return;
         }
         
         
-        //If hit player
-        if (hitObject.CompareTag("Player"))
-        {
-            //Prevent player hitting self
-            if (transform.CompareTag("Bullet - Player")) return;
-            
-            //Player take damage
-            if (!hitRegistered)     //To make sure bullet only hit one time
-            {
-                hitRegistered = true;
-                
-                playerHp.TakeDamage(bulletDamage);
-                gameObject.SetActive(false);
-                
-                SpawnBulletImpactEffect();
-                return;
-            }
-        }
-    
-    
-        
-        //If hit enemies
-        //If is enemy's bullet, no friendly fire
-        if (transform.CompareTag("Bullet - Enemy")) return;
-        
-        
-        //If not hit any limbs
+        //If hit anything
+        SpawnBulletImpactEffect();
+        gameObject.SetActive(false);
         if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
         {
-            gameObject.SetActive(false);
-            SpawnBulletImpactEffect();
             return;
         }
-
+        
         
         //Enemy take damage
         if (!hitRegistered)
@@ -124,17 +98,39 @@ public class BulletBehaviour : MonoBehaviour
             hitRegistered = true;
             
             EnemyHpUpdater enemyHpUpdater = hitObject.GetComponent<EnemyHpUpdater>();
-            if (enemyHpUpdater == null) return;
-            
-            
-            Vector2 bulletDirection = CheckBulletDirection(rb);
-            
-            enemyHpUpdater.TakeLimbDamage(bulletDamage, bulletDirection);
-            enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
-            
-            gameObject.SetActive(false);
-            SpawnBulletImpactEffect();
+            EnemyTakeDamage(enemyHpUpdater);
         }
+    }
+
+    //To detect hits on player (because HitDetectors are triggers)
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.CompareTag("Player")) return;
+        
+        if (!hitRegistered)
+        {
+            hitRegistered = true;
+            PlayerTakeDamage();
+        }
+    }
+
+    private void PlayerTakeDamage()
+    {
+        playerHp.TakeDamage(bulletDamage);
+                
+        SpawnBulletImpactEffect();
+        gameObject.SetActive(false);
+    }
+
+    private void EnemyTakeDamage(EnemyHpUpdater enemyHpUpdater)
+    {
+        if (enemyHpUpdater == null) return;
+            
+            
+        Vector2 bulletDirection = CheckBulletDirection(rb);
+            
+        enemyHpUpdater.TakeLimbDamage(bulletDamage, bulletDirection);
+        enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
     }
 
     private void SpawnBulletImpactEffect()
