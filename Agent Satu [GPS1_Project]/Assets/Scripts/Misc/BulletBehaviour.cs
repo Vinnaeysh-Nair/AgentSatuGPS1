@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Numerics;
+using Unity.VisualScripting;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -8,6 +12,7 @@ public class BulletBehaviour : MonoBehaviour
     private TagManager tagManager;
     private Rigidbody2D rb;
     private PlayerHpSystem playerHp;
+    private ObjectPooler pooler;
 
     //Fields
     [Header("General")]
@@ -17,72 +22,108 @@ public class BulletBehaviour : MonoBehaviour
     [Header("Force on enemy when dismembering and ragdolling")]
     [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
     [SerializeField] private int bulletDamage = 1;
-    private bool hitRegistered = false;             
+    private bool hitRegistered = false;
     
+    //Wall deflection
+    [Header("Bullet Deflection")] 
+    [SerializeField] private int maxDeflectionTimes;
+    private Vector2 prevVelocity;
+    private int deflectedTimes = 0;
 
-
-    
+    public Vector2 GetPrevVelocity()
+    {
+        return prevVelocity;
+    }
     
     void Awake()
     {
+        pooler = ObjectPooler.objPoolerInstance;
+        
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
         rb = GetComponent<Rigidbody2D>();
     }
+    
+    
+
 
     //Each time spawned from pool
     void OnEnable()
     {
         rb.velocity = transform.right * bulletSpeed;
+        
+        //Disable bullet after a duration
         StartCoroutine(SetBulletInactive(gameObject));
         
         //Reset boolean to allow bullet to hit again
         hitRegistered = false;
-        
+    }
+  
+    void FixedUpdate()
+    {
+        prevVelocity = rb.velocity;
     }
 
     //When hitting anything
-    void OnTriggerEnter2D (Collider2D hitInfo)
+    private void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        //If hit player
-        if (hitInfo.CompareTag("Player"))
+        Collider2D hitObject = hitInfo.collider;
+
+        //If hit deflection wall
+        if (hitObject.CompareTag("Wall - Deflect"))
         {
+            deflectedTimes += 1;
+
+            if (deflectedTimes > maxDeflectionTimes)
+            {
+                gameObject.SetActive(false);
+                SpawnBulletImpactEffect();
+            }
+            return;
+        }
+        
+        
+        //If hit player
+        if (hitObject.CompareTag("Player"))
+        {
+            //Prevent player hitting self
             if (transform.CompareTag("Bullet - Player")) return;
             
-            //To make sure bullet only hit one time
-            if (!hitRegistered)
+            //Player take damage
+            if (!hitRegistered)     //To make sure bullet only hit one time
             {
                 hitRegistered = true;
                 
                 playerHp.TakeDamage(bulletDamage);
                 gameObject.SetActive(false);
                 
-                Instantiate(impactEffect, transform.position, transform.rotation);
+                SpawnBulletImpactEffect();
                 return;
             }
         }
-
-
+    
+    
         
         //If hit enemies
-        //If not hitting any limbs, return
-        if (!hitInfo.CompareTag(tagManager.tagSO.limbLegTag) && !hitInfo.CompareTag(tagManager.tagSO.limbOthersTag) && !hitInfo.CompareTag(tagManager.tagSO.limbHeadTag))
-        {
-            gameObject.SetActive(false);
-            Instantiate(impactEffect, transform.position, transform.rotation);
-            return;
-        }
-        
         //If is enemy's bullet, no friendly fire
         if (transform.CompareTag("Bullet - Enemy")) return;
+        
+        
+        //If not hit any limbs
+        if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
+        {
+            gameObject.SetActive(false);
+            SpawnBulletImpactEffect();
+            return;
+        }
 
-
-        //Take Damage
+        
+        //Enemy take damage
         if (!hitRegistered)
         {
             hitRegistered = true;
             
-            EnemyHpUpdater enemyHpUpdater = hitInfo.GetComponent<EnemyHpUpdater>();
+            EnemyHpUpdater enemyHpUpdater = hitObject.GetComponent<EnemyHpUpdater>();
             if (enemyHpUpdater == null) return;
             
             
@@ -92,10 +133,16 @@ public class BulletBehaviour : MonoBehaviour
             enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
             
             gameObject.SetActive(false);
-            Instantiate(impactEffect, transform.position, transform.rotation);
+            SpawnBulletImpactEffect();
         }
     }
 
+    private void SpawnBulletImpactEffect()
+    {
+        //Instantiate(impactEffect, transform.position, transform.rotation);
+        pooler.SpawnFromPool(impactEffect.name, transform.position, transform.rotation);
+    }
+    
 
     //Determine force to push collided enemy's limbs
     private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)
