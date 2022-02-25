@@ -28,7 +28,7 @@ public class BulletBehaviour : MonoBehaviour
     [Header("Bullet Deflection")] 
     [SerializeField] private int maxDeflectionTimes;
     private Vector2 prevVelocity;
-    private int deflectedTimes = 0;
+    private int deflectedTimes;
 
     public Vector2 GetPrevVelocity()
     {
@@ -52,11 +52,14 @@ public class BulletBehaviour : MonoBehaviour
     {
         rb.velocity = transform.right * bulletSpeed;
         
-        //Disable bullet after a duration
-        StartCoroutine(SetBulletInactive(gameObject));
-        
         //Reset boolean to allow bullet to hit again
         hitRegistered = false;
+        
+        //Reset deflected times
+        deflectedTimes = 0;
+        
+        //Disable bullet after a duration
+        StartCoroutine(SetBulletInactive(gameObject));
     }
   
     void FixedUpdate()

@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //If ceiling above, keep crouching
+            //If ceiling above, keep crouching (ignore stairs)
             if (ceilingCheck != null && !ceilingCheck.CompareTag("Stair"))
             {
                 horizontalMove = Crouch(horizontalMoveDir);
@@ -222,7 +222,7 @@ public class PlayerController : MonoBehaviour
         EnableUpperBodyPlatformDetector(false);
         EnableUpperBodyHitDetector(false);
             
-        ceilingCheck = Physics2D.OverlapBox(new Vector2(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .10f), new Vector2(.5f, lowerBodyPlatformDetector.bounds.size.y), 0f, platformLayerMask);
+        ceilingCheck = Physics2D.OverlapBox(new Vector2(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .005f), new Vector2(.5f, lowerBodyPlatformDetector.bounds.size.y), 0f, platformLayerMask);
             
   
         if (horizontalMoveDir > 0f || horizontalMoveDir < 0f)
@@ -385,28 +385,31 @@ public class PlayerController : MonoBehaviour
 
         //Draw BoxCast ground check
         RaycastHit2D rayCastHit = Physics2D.BoxCast(lowerBodyPlatformDetector.bounds.center, lowerBodyPlatformDetector.bounds.size + new Vector3(extraWidthTest, extraHeightTest, 0f), 0f, Vector2.down, 0f, platformLayerMask);
-        // Color rayColor;
-        // if (rayCastHit.collider != null)
-        // {
-        //     rayColor = Color.green;
-        // }
-        // else
-        // {
-        //     rayColor = Color.red;
-        // }
-        
-        //See boxcast gizmos
-        // Debug.DrawRay(lowerBodyPlatformDetector.bounds.center + new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
-        // Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
-        // Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, lowerBodyPlatformDetector.bounds.extents.y), Vector2.right, rayColor);
-
+        //DrawRayCast(rayCastHit, extraHeightTest, extraWidthTest);
        
-       return rayCastHit;
-        
+        return rayCastHit;
     }
 
+    private void DrawRayCast(RaycastHit2D rayCastHit, float extraHeightTest, float extraWidthTest)
+    {
+         Color rayColor;
+         if (rayCastHit.collider != null)
+         {
+             rayColor = Color.green;
+         }
+         else
+         {
+             rayColor = Color.red;
+         }
+        
+        //See boxcast gizmos
+         Debug.DrawRay(lowerBodyPlatformDetector.bounds.center + new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
+         Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
+         Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, lowerBodyPlatformDetector.bounds.extents.y), Vector2.right, rayColor);
+    }
+    
     // private void OnDrawGizmos()
     // {
-    //     Gizmos.DrawCube(new Vector3(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .10f, 0f), new Vector3(.5f, lowerBodyPlatformDetector.bounds.size.y, 0f));
+    //     Gizmos.DrawCube(new Vector3(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .005f, 0f), new Vector3(.5f, lowerBodyPlatformDetector.bounds.size.y, 0f));
     // }
 }
