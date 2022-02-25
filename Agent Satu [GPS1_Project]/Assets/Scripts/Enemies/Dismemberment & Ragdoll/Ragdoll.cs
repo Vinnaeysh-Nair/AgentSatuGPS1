@@ -1,5 +1,5 @@
+using Cinemachine;
 using UnityEngine;
-using UnityEngine.U2D.Animation;
 
 
 //Attached to each enemy types (manual).
@@ -10,6 +10,7 @@ public class Ragdoll : MonoBehaviour
     
     //Fields
     [SerializeField] private float ragdolledLimbGravity = 5f;
+
 
     void Start()
     {
@@ -22,8 +23,10 @@ public class Ragdoll : MonoBehaviour
         //GetComponent<Animator>().enabled = false;
         
         //If root container object is flipped, when Ragdoll activates, flip the limbs container as well (fixes the rotation bug where dismembered parts rotations crazily)
-        Vector3 rotationCorrection = transform.parent.eulerAngles;
-        transform.eulerAngles = rotationCorrection;
+        Vector3 parentRotation = transform.parent.eulerAngles;
+        transform.eulerAngles = parentRotation;
+        
+        
         
         for (int i = 0; i < transform.childCount; i++)
         {
