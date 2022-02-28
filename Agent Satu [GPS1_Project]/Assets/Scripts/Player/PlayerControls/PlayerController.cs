@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask platformLayerMask;
     private Collider2D ceilingCheck;
     
+    
+    
+    
     //Getter
     public bool GetGrounded()
     {
@@ -184,6 +187,32 @@ public class PlayerController : MonoBehaviour
         else if (mouseDir <= 0 && facingRight)
         {
             Flip();
+        }
+    }
+
+    //For when player is on Stairs (prevents sliding off when not moving0
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Stair"))
+        {
+            //If dropping, player not affected by gravity anymore
+            if (playerIsCrouching)
+            {
+                rb.gravityScale = gravity;
+            }
+            else
+            {
+                rb.gravityScale = 0f;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        //If not on stairs anymore, reset gravity
+        if (other.CompareTag("Stair"))
+        {
+            rb.gravityScale = gravity;
         }
     }
 

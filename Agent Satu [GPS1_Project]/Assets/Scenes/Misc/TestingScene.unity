@@ -872,6 +872,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8158545817748984104, guid: 1b78ff683e7c61347b9be2f51a080f2c, type: 3}
   m_PrefabInstance: {fileID: 6402856256810012998}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1289408372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7983095177887151665, guid: c9aab21370440ed4883025950388aa77, type: 3}
+  m_PrefabInstance: {fileID: 8296615767850383798}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1289408377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289408372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d47a87ef82fba42a67f3376a98d649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1490563396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059175769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.056026, y: 8.7198, z: -0.28073955}
+  m_LocalPosition: {x: 25.64, y: -2.07, z: -0.28073955}
   m_LocalScale: {x: 5.5264244, y: 1.4844503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3288,8 +3305,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4039511320154537391, guid: c9aab21370440ed4883025950388aa77, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7983095177887150540, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983095177887150540, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: playerPhysMat
+      value: 
+      objectReference: {fileID: 6200000, guid: 771f9d72221f6614d9ca3177b823392c, type: 2}
+    - target: {fileID: 7983095177887150540, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: disabledAtStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983095177887150541, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983095177887150541, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983095177887150543, guid: c9aab21370440ed4883025950388aa77, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 1ffa49520cf070e46a29f593ca7b1488, type: 2}
     - target: {fileID: 8025333698942938812, guid: c9aab21370440ed4883025950388aa77, type: 3}
       propertyPath: m_RootOrder
       value: 2
