@@ -59,9 +59,8 @@ public class PlayerController : MonoBehaviour
     //Groundcheck and Ceiling check fields
     [SerializeField] private LayerMask platformLayerMask;
     private Collider2D ceilingCheck;
-    
-    
-    
+
+   private bool droppedFromStair = false;
     
     //Getter
     public bool GetGrounded()
@@ -116,6 +115,36 @@ public class PlayerController : MonoBehaviour
         grounded = true;
     }
     
+    
+    //For when player is on Stairs (prevents sliding off when not moving)
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Stair"))
+        {
+            if (playerIsCrouching && !droppedFromStair)
+            {
+                droppedFromStair = true;
+                StartCoroutine(SetDroppedFromStairToFalse());
+            }
+            
+            
+            if (droppedFromStair)
+            {
+                rb.gravityScale = gravity;
+                return;
+            }
+            rb.gravityScale = 0f;
+        }
+    }
+    
+    //If not on stairs anymore, set gravity again (player going too fast into stairs will end up hopping a bit, causing them to leave the stairs)
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Stair"))
+        {
+            rb.gravityScale = gravity;
+        }
+    }
     
     public void Move(float horizontalMoveDir, bool jump, bool crouch, bool dodgeroll)
     {
@@ -190,31 +219,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //For when player is on Stairs (prevents sliding off when not moving0
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.CompareTag("Stair"))
-        {
-            //If dropping, player not affected by gravity anymore
-            if (playerIsCrouching)
-            {
-                rb.gravityScale = gravity;
-            }
-            else
-            {
-                rb.gravityScale = 0f;
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //If not on stairs anymore, reset gravity
-        if (other.CompareTag("Stair"))
-        {
-            rb.gravityScale = gravity;
-        }
-    }
 
     //Movement functions
     private float DefaultMove(float horizontalMoveDir)
@@ -379,6 +383,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(wallJumpDelay);
         
         canWallJump = false;
+    }
+    
+    private IEnumerator SetDroppedFromStairToFalse()
+    {
+        yield return new WaitForSeconds(.5f);
+        droppedFromStair = false;
     }
 
     private IEnumerator ResetWallJump()
