@@ -8,6 +8,7 @@ public class BulletTime : MonoBehaviour
     //Components
     [Header("Components")]
     [SerializeField] private GameObject bulletTimeScreenEffect;
+    [SerializeField] private BarChange bulletTimeBar;
     
     //Fields
     [Header("Settings")]
@@ -60,6 +61,7 @@ public class BulletTime : MonoBehaviour
         }
         abilityGauge = Mathf.Clamp(abilityGauge, 0f, 1f);
         
+        bulletTimeBar.SetBarAmount(abilityGauge);
     }
     
     private void ActivateBulletTime()

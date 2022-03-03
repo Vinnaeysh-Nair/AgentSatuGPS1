@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 
 public class PlayerWeapon : MonoBehaviour
@@ -32,14 +31,32 @@ public class PlayerWeapon : MonoBehaviour
     private int currAmmoReserve;
     private int currClip;
     private bool reloading = false;
+
+    private DisplayAmmoCount displayAmmoCount;
     
 
+    public int GetWepId()
+    {
+        return wepId;
+    }
+
+    public int GetCurrClip()
+    {
+        return currClip;
+    }
+
+    public int GetCurrAmmoReserve()
+    {
+        return currAmmoReserve;
+    }
+    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
         
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsList = inventory.GetWeaponsList();
+        displayAmmoCount = GetComponent<DisplayAmmoCount>();
     }
 
     void Start()
@@ -71,6 +88,8 @@ public class PlayerWeapon : MonoBehaviour
     
     private void OnEnable()
     {
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        
         if (wepId == 0) return;
 
         //If theres a change in totalAmmo, update the reserve
@@ -168,6 +187,9 @@ public class PlayerWeapon : MonoBehaviour
             GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             StartCoroutine(SetBulletInactive(shotBullet));
         }
+        
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        
         //Instantiate(bullet, firePoint.position, firePoint.rotation);
         //animCon.OnShooting();
 
@@ -207,6 +229,8 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
+            
+            displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
             reloading = false;
         }
     }
