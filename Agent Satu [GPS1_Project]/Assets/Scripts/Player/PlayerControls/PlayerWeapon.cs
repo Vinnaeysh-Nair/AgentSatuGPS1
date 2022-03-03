@@ -180,9 +180,9 @@ public class PlayerWeapon : MonoBehaviour
             GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             StartCoroutine(SetBulletInactive(shotBullet));
         }
-        
-        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
-        
+
+        UpdateAmmoDisplay();
+
         //Instantiate(bullet, firePoint.position, firePoint.rotation);
         //animCon.OnShooting();
 
@@ -222,8 +222,8 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
-            
-            displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+
+            UpdateAmmoDisplay();
             reloading = false;
         }
     }
@@ -232,6 +232,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         currTotalAmmo += replenishAmount;
         currAmmoReserve += replenishAmount;
+
+        UpdateAmmoDisplay();
+    }
+
+    private void UpdateAmmoDisplay()
+    {
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
     }
     
     //Become inactive after a duration after being fired. 
@@ -239,10 +246,5 @@ public class PlayerWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         shotBullet.SetActive(false);
-    }
-
-    private void PrintAmmo()
-    {
-        Debug.Log(currClip + "/" + currAmmoReserve);
     }
 }

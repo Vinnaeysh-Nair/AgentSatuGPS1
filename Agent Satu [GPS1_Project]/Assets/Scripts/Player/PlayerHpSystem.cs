@@ -10,7 +10,7 @@ public class PlayerHpSystem : MonoBehaviour
     //Fields
     [SerializeField] private int hpCountPlayer = 5;
     private int currHp;
-  
+
     
     void Start()
     {
@@ -23,8 +23,7 @@ public class PlayerHpSystem : MonoBehaviour
         currHp -= dmg;
         
         //Scale healthbar
-        float percentage =(float) currHp / hpCountPlayer;
-        healthBar.SetBarAmount(percentage);
+        healthBar.SetBarAmount(ConvertToPercentage());
 
         if (currHp > 0) return;
         sceneLoader.LoadLoseScene();
@@ -34,5 +33,14 @@ public class PlayerHpSystem : MonoBehaviour
     {
         if (currHp == hpCountPlayer) return;
         currHp += amount;
+        
+        //Scale healthbar
+        healthBar.SetBarAmount(ConvertToPercentage());
+    }
+
+    private float ConvertToPercentage()
+    {
+        float percentage = (float) currHp / hpCountPlayer;
+        return percentage;
     }
 }
