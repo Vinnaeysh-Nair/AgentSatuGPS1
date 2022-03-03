@@ -1,13 +1,13 @@
-using System;
 using UnityEngine;
 using System.Collections;
 
 public class EnemyWeapon_Guns : MonoBehaviour
 {
     //Components
-    private ObjectPooler pooler;
     public GameObject bullet;
-
+    private ObjectPooler pooler;
+    private PauseMenu pauseMenu;
+    
 
     //Fields
     [SerializeField] private float fireRate = 1f;
@@ -27,6 +27,7 @@ public class EnemyWeapon_Guns : MonoBehaviour
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
+        pauseMenu = PauseMenu.Instance;
     }
     
     void Start()
@@ -37,11 +38,6 @@ public class EnemyWeapon_Guns : MonoBehaviour
         {
             firePoints[i] = transform.GetChild(i);
         }
-    }
-
-    private void OnDisable()
-    {
-        //print("disabled");
     }
 
     //For testing
@@ -63,6 +59,8 @@ public class EnemyWeapon_Guns : MonoBehaviour
     //For single shot firing pattern (eg. pistol)
     public void StartShooting()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         if (Time.time > nextFireTime)
         {
             Shoot(bullet, firePoints);
@@ -73,6 +71,8 @@ public class EnemyWeapon_Guns : MonoBehaviour
     //For burst firing pattern (eg. SMG)
     public void StartBurstShooting()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         if (canStartBurstShooting && Time.time > nextFireTime)
         {
             nextFireTime = Time.time + (1f / fireRate);

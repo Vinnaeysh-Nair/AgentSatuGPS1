@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PauseMenu : MonoBehaviour
 {
@@ -47,11 +49,22 @@ public class PauseMenu : MonoBehaviour
         pauseMenuCanvas.enabled = true;
     }
 
-    private void Unpause()
+    public void Unpause()
     {
         Time.timeScale = timeScaleBeforePause;
         
         gameIsPaused = false;
         pauseMenuCanvas.enabled = false;
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void SettingsMenu()
+    {
+        //pauseMenuCanvas.enabled = false;
+        print("not yet implemented");
     }
 }

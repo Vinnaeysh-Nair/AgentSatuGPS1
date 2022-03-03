@@ -17,6 +17,8 @@ public class PlayerWeapon : MonoBehaviour
     //UI
     private DisplayAmmoCount displayAmmoCount;
     private PauseMenu pauseMenu;
+    
+    
 
     
     //Fields
