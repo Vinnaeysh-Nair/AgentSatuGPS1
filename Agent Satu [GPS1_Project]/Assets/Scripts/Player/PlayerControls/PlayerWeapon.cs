@@ -13,6 +13,10 @@ public class PlayerWeapon : MonoBehaviour
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
+    
+    //UI
+    private DisplayAmmoCount displayAmmoCount;
+    private PauseMenu pauseMenu;
 
     
     //Fields
@@ -26,34 +30,19 @@ public class PlayerWeapon : MonoBehaviour
     //[SerializeField] private bool isMultishot = false;
     public bool isUnlocked = false;
 
+    //Ammo counts
     private float nextFireTime = 0f;
     private int currTotalAmmo;
     private int currAmmoReserve;
     private int currClip;
     private bool reloading = false;
 
-    private DisplayAmmoCount displayAmmoCount;
-    
 
-    public int GetWepId()
-    {
-        return wepId;
-    }
-
-    public int GetCurrClip()
-    {
-        return currClip;
-    }
-
-    public int GetCurrAmmoReserve()
-    {
-        return currAmmoReserve;
-    }
-    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
-        
+        pauseMenu = PauseMenu.Instance;
+
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsList = inventory.GetWeaponsList();
         displayAmmoCount = GetComponent<DisplayAmmoCount>();
@@ -105,6 +94,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Update()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         if (wepId == 0)
         {
             SingleClickShooting();

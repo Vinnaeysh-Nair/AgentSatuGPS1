@@ -9,6 +9,7 @@ public class DisplayAmmoCount : MonoBehaviour
     
     public void SetAmmoCount(int wepId, int clip, int reserve)
     {
+        //If pistol, display "infinity symbol"
         if (wepId == 0)
         {
             clipCountText.text = "\u221E";

@@ -2,9 +2,25 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    private float timeScaleBeforePause;
-    private bool gameIsPaused = false;
+    #region Singleton
+    public static PauseMenu Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
+    #endregion 
     
+    private Canvas pauseMenuCanvas;
+    
+    private float timeScaleBeforePause;
+    public bool gameIsPaused = false;
+
+
+    void Start()
+    {
+        pauseMenuCanvas = GetComponent<Canvas>();
+        pauseMenuCanvas.enabled = false;
+    }
     
     // Update is called once per frame
     void Update()
@@ -28,11 +44,14 @@ public class PauseMenu : MonoBehaviour
         
         Time.timeScale = 0f;
         gameIsPaused = true;
+        pauseMenuCanvas.enabled = true;
     }
 
     private void Unpause()
     {
         Time.timeScale = timeScaleBeforePause;
+        
         gameIsPaused = false;
+        pauseMenuCanvas.enabled = false;
     }
 }
