@@ -15,7 +15,6 @@ public class PlayerHpSystem : MonoBehaviour
     void Start()
     {
         currHp = hpCountPlayer;
-        healthBar.SetBarAmount(1f);
     }
     
     public void TakeDamage(int dmg)
