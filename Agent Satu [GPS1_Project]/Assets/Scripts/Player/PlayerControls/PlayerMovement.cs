@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool crouch = false;
     private bool dodgeroll = false;
-
-    private Vector2 playerPos;
+    
+    [SerializeField]private Vector2 playerPos;
     
     //Getters
     public float GetSpeed()
@@ -25,12 +25,11 @@ public class PlayerMovement : MonoBehaviour
         return playerPos;
     }
     
- 
-
     void Awake()
     {
         controller = GetComponent<PlayerController>();
     }
+
     void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -62,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove, jump, crouch, dodgeroll);
         jump = false;
         dodgeroll = false;
-        
+
         playerPos = transform.position;
     }
 }
