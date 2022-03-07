@@ -1,8 +1,6 @@
-using System;
-using System.Numerics;
+
 using UnityEngine;
-using UnityEngine.U2D.IK;
-using Vector2 = UnityEngine.Vector2;
+
 
 public class HandPlacement : MonoBehaviour
 {
@@ -38,11 +36,18 @@ public class HandPlacement : MonoBehaviour
     private void FixedUpdate()
     {
         if (!startPlacing) return;
-        //PlaceHands();
+        PlaceHands();
     }
 
     private void PlaceHands()
     {
+        if (Vector2.Distance(leftHandIKTarget.position, leftHandPlacement.position) > 0f)
+        {
+            
+            startPlacing = false;
+        }
+        
+
         leftHandIKTarget.position = leftHandPlacement.position;
         rightHandIKTarget.position = rightHandPlacement.position;
     }
