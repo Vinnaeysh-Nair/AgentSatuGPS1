@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     //Components
-    public GameObject followPoint;
+    public Transform followPoint;
     public PlayerController controller;
 
     //Fields
@@ -24,7 +24,7 @@ public class FollowPlayer : MonoBehaviour
     private void Follow()
     {
         wasCrouching = false;
-        transform.position = followPoint.transform.position;
+        transform.position = followPoint.position;
     }
     
     

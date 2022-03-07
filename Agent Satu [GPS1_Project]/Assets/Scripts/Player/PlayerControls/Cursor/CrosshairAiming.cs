@@ -1,11 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D.IK;
 
 public class CrosshairAiming : MonoBehaviour
 {
     //Components;
     private Camera cam;
-    public Transform pivotTransform;
+    [SerializeField] private Transform pivotTransform;
     
     //UI
     private PauseMenu pauseMenu;
@@ -26,6 +26,7 @@ public class CrosshairAiming : MonoBehaviour
 
     void Start()
     {
+        pivotTransform = transform.parent.GetComponent<Transform>();
         pauseMenu = PauseMenu.Instance;
     }
     

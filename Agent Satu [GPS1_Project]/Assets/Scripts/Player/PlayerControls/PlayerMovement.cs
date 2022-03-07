@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch = false;
     private bool dodgeroll = false;
     
-    [SerializeField]private Vector2 playerPos;
+    private Vector2 playerPos;
     
     //Getters
     public float GetSpeed()
