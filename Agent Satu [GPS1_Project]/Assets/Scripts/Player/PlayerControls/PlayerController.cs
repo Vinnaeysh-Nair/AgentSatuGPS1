@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     //Components    
     //public PlayerAnimationController animCon;
     public CrosshairAiming aim;
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     
     //Detector components
     private BoxCollider2D upperBodyPlatformDetector;
@@ -73,9 +73,9 @@ public class PlayerController : MonoBehaviour
         return playerIsCrouching;
     }
     
-    void Awake()
+    void Awake()    
     {
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         
         //Set to customized gravity
         rb.gravityScale = gravity;
