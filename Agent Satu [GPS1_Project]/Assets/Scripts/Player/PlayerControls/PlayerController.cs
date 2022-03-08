@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     //Components    
     //public PlayerAnimationController animCon;
     public CrosshairAiming aim;
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
     
     //Detector components
     private BoxCollider2D upperBodyPlatformDetector;
