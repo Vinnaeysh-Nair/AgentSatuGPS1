@@ -6,6 +6,7 @@ public class Enemy_Agro : MonoBehaviour
     //Components
     private Enemy_Flipped enemflip;
     private Transform playerBody;
+    private OverallHp overallHp;
 
 
     //Fields
@@ -15,9 +16,10 @@ public class Enemy_Agro : MonoBehaviour
     [Header("Detection speeds")] 
     [SerializeField] private float detectionSpeed;
     [SerializeField] private float loseDetectionSpeed;
-    
-    private bool detected;
+
+    private bool detected = false;
     private bool detectionStatusChanging = false;
+
 
     private Vector2 playerPos;
     private Vector2 enemyPos;
@@ -32,18 +34,23 @@ public class Enemy_Agro : MonoBehaviour
         return playerPos;
     }
 
+
+
     void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         enemflip = GetComponent<Enemy_Flipped>();
+        overallHp = GetComponent<OverallHp>();
     }
 
     void FixedUpdate()
     {
+        if (overallHp.GetOverallHp() == 0) return;
+        
         playerPos = playerBody.position;
         enemyPos = transform.position;
         UpdateDetection();
-  
+
         
         if (detected)
         {
@@ -55,17 +62,21 @@ public class Enemy_Agro : MonoBehaviour
     private void UpdateDetection()
     {
         float distToPlayer = Vector2.Distance(enemyPos, playerPos);
+        
 
         if (detectionStatusChanging) return;
         if (distToPlayer < AgroRange)
         {
             StartCoroutine(SetDetectedStatus(true, detectionSpeed));
+
         }
         else
         {
             StartCoroutine(SetDetectedStatus(false, loseDetectionSpeed));
+
         }
     }
+
 
     private IEnumerator SetDetectedStatus(bool status, float speed)
     {

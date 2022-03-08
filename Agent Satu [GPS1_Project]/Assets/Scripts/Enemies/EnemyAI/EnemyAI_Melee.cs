@@ -7,6 +7,7 @@ public class EnemyAI_Melee : MonoBehaviour
     private Transform playerBody;
     private Rigidbody2D rb;
 
+
     
     //Fields
     [SerializeField] private float YRangeToStopChasing;
@@ -23,7 +24,7 @@ public class EnemyAI_Melee : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (enemyAgro.GetDetected())
+        if (enemyAgro.GetDetected()) 
         {
             playerPos = enemyAgro.GetPlayerPos();
             enemyPos = transform.position;

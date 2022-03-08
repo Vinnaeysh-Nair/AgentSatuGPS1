@@ -3,11 +3,16 @@ using UnityEngine;
 public class Enemy_Flipped : MonoBehaviour
 {
     private Transform playerBody;
-    public bool isFacingRight = false;
+    [SerializeField] private bool isFacingRight = false;
 
     void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
+
+        if (isFacingRight)
+        {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
     }
     
     public void LookAtPlayer()

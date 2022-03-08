@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using System;
-using Cinemachine;
+
 
 
 public class PlayerWeapon : MonoBehaviour
 {
     //Components
     public GameObject bullet;
-    [SerializeField] private Transform firePointContainer;
     private Transform[] firePoints;
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
@@ -55,11 +53,11 @@ public class PlayerWeapon : MonoBehaviour
     void Start()
     {
         //Get firepoints
-        int size = firePointContainer.childCount;
+        int size = transform.childCount;
         firePoints = new Transform[size];
         for (int i = 0; i < size; i++)
         {
-            firePoints[i] = firePointContainer.GetChild(i).transform;
+            firePoints[i] = transform.GetChild(i).transform;
         }
         
         //If pistol, ignore setting up ammo
