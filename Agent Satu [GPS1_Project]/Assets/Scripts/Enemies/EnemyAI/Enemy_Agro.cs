@@ -7,7 +7,7 @@ public class Enemy_Agro : MonoBehaviour
     private Enemy_Flipped enemflip;
     private Transform playerBody;
     //by jake
-    public EnemyWeapon_Guns enemWeapon;
+    //public EnemyWeapon_Guns enemWeapon;
     //[SerializeField] bool enemyType = false; //To check if player is idle or chasing type, currently not used yet
     //private GameObject gameObject;
 
@@ -52,7 +52,6 @@ public class Enemy_Agro : MonoBehaviour
         if (detected)
         {
             enemflip.LookAtPlayer();
-            enemWeapon.StartShooting();
         }
     }
 

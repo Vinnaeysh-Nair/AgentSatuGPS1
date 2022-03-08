@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     
     void Awake()    
     {
-        //rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         
         //Set to customized gravity
         rb.gravityScale = gravity;
