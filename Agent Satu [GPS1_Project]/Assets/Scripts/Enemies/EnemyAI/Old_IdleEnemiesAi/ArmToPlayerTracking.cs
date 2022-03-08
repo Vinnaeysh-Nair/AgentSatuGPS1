@@ -24,10 +24,10 @@ public class ArmToPlayerTracking : MonoBehaviour
     {
         //isFacingRight = enemyFlipped.detectFacingDirection();
         playerPosition = playerMovement.GetPlayerPos();
-        PointToMouse();
+        PointToPlayer();
     }
 
-    private void PointToMouse()
+    private void PointToPlayer()
     {
         Vector2 lookDir = (Vector2)pivotTransform.position - playerPosition;
         float angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
