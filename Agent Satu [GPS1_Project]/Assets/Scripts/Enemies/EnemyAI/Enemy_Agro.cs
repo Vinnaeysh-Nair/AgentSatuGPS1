@@ -6,10 +6,6 @@ public class Enemy_Agro : MonoBehaviour
     //Components
     private Enemy_Flipped enemflip;
     private Transform playerBody;
-    //by jake
-    //public EnemyWeapon_Guns enemWeapon;
-    //[SerializeField] bool enemyType = false; //To check if player is idle or chasing type, currently not used yet
-    //private GameObject gameObject;
 
     //Fields
     [Header("Aggro Settings")] 
@@ -21,6 +17,7 @@ public class Enemy_Agro : MonoBehaviour
     
     private bool detected;
     private bool detectionStatusChanging = false;
+    private bool inRange = false;
 
     private Vector2 playerPos;
     private Vector2 enemyPos;
@@ -28,6 +25,11 @@ public class Enemy_Agro : MonoBehaviour
     public bool GetDetected()
     {
         return detected;
+    }
+
+    public bool GetInRange()
+    {
+        return inRange;
     }
 
     public Vector2 GetPlayerPos()
@@ -39,7 +41,6 @@ public class Enemy_Agro : MonoBehaviour
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         enemflip = GetComponent<Enemy_Flipped>();
-        /*enemWeapon = gameObject.GetComponent<EnemyWeapon_Guns>();*/
     }
 
     void FixedUpdate()
@@ -59,14 +60,20 @@ public class Enemy_Agro : MonoBehaviour
     private void UpdateDetection()
     {
         float distToPlayer = Vector2.Distance(enemyPos, playerPos);
-
-        if (detectionStatusChanging) return;
+        
         if (distToPlayer < AgroRange)
         {
+            inRange = true;
+            
+            if (detectionStatusChanging) return;
             StartCoroutine(SetDetectedStatus(true, detectionSpeed));
+            
         }
         else
         {
+            inRange = false;
+            
+            if (detectionStatusChanging) return;
             StartCoroutine(SetDetectedStatus(false, loseDetectionSpeed));
         }
     }

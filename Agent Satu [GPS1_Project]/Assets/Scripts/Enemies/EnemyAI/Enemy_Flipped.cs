@@ -5,6 +5,10 @@ public class Enemy_Flipped : MonoBehaviour
     private Transform playerBody;
     [SerializeField] private bool isFacingRight = false;
 
+    public bool GetIsFacingRight()
+    {
+        return isFacingRight;
+    }
     void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();

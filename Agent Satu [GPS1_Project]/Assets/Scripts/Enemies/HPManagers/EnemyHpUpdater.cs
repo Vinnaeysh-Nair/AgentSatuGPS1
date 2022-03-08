@@ -87,10 +87,16 @@ public class EnemyHpUpdater : MonoBehaviour
 
     private void Die(Vector2 flingDirection)
     {
+        //Disable unwanted components
         Transform mainContainer = transform.parent.parent;
         if (mainContainer.TryGetComponent(out EnemyAI_Melee enemyAI))
         {
             enemyAI.enabled = false;
+        }
+
+        if (mainContainer.TryGetComponent(out Enemy_Agro enemyAgro))
+        {
+            enemyAgro.enabled = false;
         }
 
         if (mainContainer.TryGetComponent(out Collider2D collider))

@@ -1,28 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmToPlayerTracking : MonoBehaviour
 {
-    public Transform pivotTransform;
-    public float followAngleOffset;
-    [SerializeField] bool isFacingRight = false;
-    private Vector2 playerPosition;
-
     //reference to other scripts
+    [SerializeField] private Transform pivotTransform;
+    [SerializeField] private Enemy_Flipped enemyFlipped;
+    [SerializeField] private Enemy_Agro enemyAgro;
     private PlayerMovement playerMovement;
-    //private Enemy_Flipped enemyFlipped;
 
-    void Awake()
+    
+    [SerializeField] private float followAngleOffset;
+    //[SerializeField] private bool isFacingRight = false;
+    private Vector2 playerPosition;
+    
+    void Start()
     {
         playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
-        //enemyFlipped = GetComponent<Enemy_Flipped>();
     }
 
     //track player's Vector x and y
     void Update()
     {
-        //isFacingRight = enemyFlipped.detectFacingDirection();
+        if (!enemyAgro.GetInRange()) return;
+
         playerPosition = playerMovement.GetPlayerPos();
         PointToPlayer();
     }
@@ -32,23 +32,36 @@ public class ArmToPlayerTracking : MonoBehaviour
         Vector2 lookDir = (Vector2)pivotTransform.position - playerPosition;
         float angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
-        //If pointing to left side, invert the pivot's x rotation and angleTowards
-        //to accomodate sprite rotations
-        if (isFacingRight)
+        
+        if (angleTowards > 90f || angleTowards < -90f)
         {
-            if (angleTowards > 90f || angleTowards < -90f)
-            {
-                //Inverted rotation
-                pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
-            }
+            //Inverted rotation
+            pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
         }
         else
         {
-            if (!(angleTowards > 90f || angleTowards < -90f))
-            {
-                //Normal rotation
-                pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
-            }
+            //Normal rotation
+            pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
         }
     }
+    
+    //jake ver
+    //If pointing to left side, invert the pivot's x rotation and angleTowards
+    //to accomodate sprite rotations
+    // if (isFacingRight)
+    // {
+    //     if (angleTowards > 90f || angleTowards < -90f)
+    //     {
+    //         //Inverted rotation
+    //         pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
+    //     }
+    // }
+    // else
+    // {
+    //     if (!(angleTowards > 90f || angleTowards < -90f))
+    //     {
+    //         //Normal rotation
+    //         pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
+    //     }
+    // }
 }
