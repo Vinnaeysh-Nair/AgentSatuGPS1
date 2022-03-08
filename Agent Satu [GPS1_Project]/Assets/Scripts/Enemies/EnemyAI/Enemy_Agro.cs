@@ -1,58 +1,86 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Agro : MonoBehaviour
 {
-    Enemy_Fliped enemflip;
-    [SerializeField] Transform player;
-    [SerializeField] private float AgroRange;
-    [SerializeField] private float speed;
-    Rigidbody2D rb;
+    //Components
+    private Enemy_Flipped enemflip;
+    private Transform playerBody;
 
-    // Start is called before the first frame update
-    void Start()
+
+    //Fields
+    [Header("Aggro Settings")] 
+    [SerializeField] private float AgroRange;
+
+    [Header("Detection speeds")] 
+    [SerializeField] private float detectionSpeed;
+    [SerializeField] private float loseDetectionSpeed;
+    
+    private bool detected;
+    private bool detectionStatusChanging = false;
+
+    private Vector2 playerPos;
+    private Vector2 enemyPos;
+
+    public bool GetDetected()
     {
-        rb = GetComponent<Rigidbody2D>();
-        enemflip = GetComponent<Enemy_Fliped>();
+        return detected;
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector2 GetPlayerPos()
     {
-        enemflip.LookAtPlayer();
+        return playerPos;
+    }
 
-        //Distance to player
-        float DistToPlayer = Vector2.Distance(transform.position, player.position);
+    void Start()
+    {
+        playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
+        enemflip = GetComponent<Enemy_Flipped>();
+    }
 
-        if (DistToPlayer < AgroRange)
+    void FixedUpdate()
+    {
+        playerPos = playerBody.position;
+        enemyPos = transform.position;
+        UpdateDetection();
+  
+        
+        if (detected)
         {
-            ChasePlayer();
+            enemflip.LookAtPlayer();
+        }
+    }
+
+
+    private void UpdateDetection()
+    {
+        float distToPlayer = Vector2.Distance(enemyPos, playerPos);
+
+        if (detectionStatusChanging) return;
+        if (distToPlayer < AgroRange)
+        {
+            StartCoroutine(SetDetectedStatus(true, detectionSpeed));
         }
         else
         {
-            BackToIdle();
+            StartCoroutine(SetDetectedStatus(false, loseDetectionSpeed));
         }
     }
 
-    private void ChasePlayer()
+    private IEnumerator SetDetectedStatus(bool status, float speed)
     {
-        if (transform.position.x <= player.position.x)
-        {
-            //enemy is to the left so move right
-            rb.velocity = new Vector2(speed, 0);
-            //AttackPlayer();
-        }
-        else if (transform.position.x > player.position.x)
-        {
-            //enemy is to the left so move right
-            rb.velocity = new Vector2(-speed, 0);
-            //AttackPlayer();
-        }
+        if (detected == status) yield break;
+        
+        
+        detectionStatusChanging = true;
+
+        yield return new WaitForSeconds(speed);
+        detected = status;
+        detectionStatusChanging = false;
     }
 
-    private void BackToIdle()
+    public void DetectedFromDamage()
     {
-        rb.velocity = new Vector2(0, 0);
+        StartCoroutine(SetDetectedStatus(true, detectionSpeed));
     }
 }
