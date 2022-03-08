@@ -6,7 +6,10 @@ public class Enemy_Agro : MonoBehaviour
     //Components
     private Enemy_Flipped enemflip;
     private Transform playerBody;
-
+    //by jake
+    public EnemyWeapon_Guns enemWeapon;
+    //[SerializeField] bool enemyType = false; //To check if player is idle or chasing type, currently not used yet
+    //private GameObject gameObject;
 
     //Fields
     [Header("Aggro Settings")] 
@@ -36,6 +39,7 @@ public class Enemy_Agro : MonoBehaviour
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         enemflip = GetComponent<Enemy_Flipped>();
+        /*enemWeapon = gameObject.GetComponent<EnemyWeapon_Guns>();*/
     }
 
     void FixedUpdate()
@@ -48,6 +52,7 @@ public class Enemy_Agro : MonoBehaviour
         if (detected)
         {
             enemflip.LookAtPlayer();
+            enemWeapon.StartShooting();
         }
     }
 
