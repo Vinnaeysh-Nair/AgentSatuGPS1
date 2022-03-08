@@ -7,19 +7,14 @@ public class ZoneToTriggerDialogue : MonoBehaviour
     [SerializeField] bool inTalkingZone = false;
     public GameObject DialogueBox;
     public Collider2D talkingArea;
-    public DialogueLocation dialogueLocation;
-    private Vector3 tempPos;
 
     void Start()
     {
         DialogueBox.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        tempPos = dialogueLocation.DialoguePosition();
-        //Debug.Log(tempPos);
         if(inTalkingZone)
         {
             if (Input.GetKey("p"))
@@ -46,8 +41,6 @@ public class ZoneToTriggerDialogue : MonoBehaviour
     void TriggeringDialogue()
     {
         DialogueBox.SetActive(true);
-        //Instantiate(DialogueBox, tempPos, Quaternion.identity);
-        //, new Vector3(), Quaternion.identity
     }
 
     void DisableDialogue()
