@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class PlayerWeapon : MonoBehaviour
     private int currClip;
     private bool reloading = false;
 
+    private Coroutine reloadRoutine = null;
+  
 
     void Awake()
     {
@@ -92,7 +95,22 @@ public class PlayerWeapon : MonoBehaviour
         {
             currAmmoReserve += diff;
         }
+       
     }
+
+    void OnDisable()
+    {
+        if (reloadRoutine != null)
+        {
+            reloadRoutine = null;
+
+            if (reloadRoutine != null)
+            {
+                print("still have");
+            }
+        }
+    }
+    
 
     void Update()
     {
@@ -103,7 +121,8 @@ public class PlayerWeapon : MonoBehaviour
             SingleClickShooting();
             return;
         }
-        
+
+      
         
         //Below are guns that need to check for reloading
         
@@ -112,8 +131,16 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (Input.GetButtonDown("Reload") || ClipEmpty())
             {
-                StartCoroutine(Reload());
-                return;
+                if (reloadRoutine == null)
+                {
+                    reloadRoutine = StartCoroutine(Reload());
+
+                    if (reloadRoutine == null)
+                    {
+                        print("stil;l nul");
+                    }
+                    return;
+                }
             }
         }
         
@@ -202,10 +229,17 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    void Reload2()
+    {
+        float reloadFinishTime = Time.time + reloadTime;
+        
+    }
+
     private IEnumerator Reload()
     {
         if (!reloading)
         {
+            print("reloading..");
             reloading = true;
 
             yield return new WaitForSeconds(reloadTime);
@@ -228,6 +262,7 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    //For pickup items
     public void ReplenishAmmo(int replenishAmount)
     {
         currTotalAmmo += replenishAmount;

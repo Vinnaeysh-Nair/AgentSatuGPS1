@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -48,9 +47,9 @@ public class PlayerController : MonoBehaviour
     private bool canWallJump = false;
     private bool canWallJumpLeft = false;
     private bool canWallJumpRight = false;
-    private float wallJumpDelay = .08f;
     private bool jumpedToLeft = false;
     private bool jumpedToRight = false;
+
     
 
     
@@ -192,13 +191,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        
         //Apply velocity
         horizontalMove = Mathf.Lerp(rb.velocity.x, horizontalMove, horizontalLerp);
         verticalMove = Mathf.Lerp(rb.velocity.y, verticalMove, verticalLerp);
         
         rb.velocity = new Vector2(horizontalMove, verticalMove);
- 
+        
         
         
         //Flip player according to mouse position
@@ -339,10 +337,12 @@ public class PlayerController : MonoBehaviour
         }
         
         //Reset player ability to walljump
-        StartCoroutine(SetCanWallJumpToFalse());
-        
+        canWallJump = false;
+
         return new Vector2(wallJumpDir, vMoveDir);
     }
+
+    
     
     //Other functions
     private void Flip()
@@ -376,12 +376,7 @@ public class PlayerController : MonoBehaviour
         EnableUpperBodyHitDetector(true);
         EnableLowerBodyHitDetector(true);
     }
-    private IEnumerator SetCanWallJumpToFalse()
-    {
-        yield return new WaitForSeconds(wallJumpDelay);
-        
-        canWallJump = false;
-    }
+ 
     
     private IEnumerator SetDroppedFromStairToFalse()
     {
