@@ -1,10 +1,6 @@
-using System;
 using UnityEngine;
 using System.Collections;
-using System.Numerics;
-using Unity.VisualScripting;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
+//using Vector2 = UnityEngine.Vector2;
 
 public class BulletBehaviour : MonoBehaviour
 {

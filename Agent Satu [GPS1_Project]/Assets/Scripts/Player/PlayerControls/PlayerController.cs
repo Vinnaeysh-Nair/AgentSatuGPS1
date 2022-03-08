@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //[Range (0, 1)] [SerializeField] private float crouchSlowMultiplier = 0.5f;
-    
     //Components    
     //public PlayerAnimationController animCon;
     public CrosshairAiming aim;

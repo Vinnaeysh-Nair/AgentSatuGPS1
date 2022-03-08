@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 //Updates limb and overall hp, attached to all limbs (auto - by FindLimbs script).
 public class EnemyHpUpdater : MonoBehaviour
 {
@@ -7,10 +8,13 @@ public class EnemyHpUpdater : MonoBehaviour
     //Components
     private TagManager tagManager;
     private SpawnPickups spawnPickups;
+    private Enemy_Agro enemyAgro;
     
     private Dismemberment dismemberment;
     private Ragdoll ragdoll;
-    [SerializeField] private OverallHp overallHp;
+    
+    
+    private OverallHp overallHp;
     private LimbHp limbHp;
     
 
@@ -25,6 +29,7 @@ public class EnemyHpUpdater : MonoBehaviour
 
         Transform grandparent = transform.parent.parent;
         spawnPickups = grandparent.GetComponent<SpawnPickups>();
+        enemyAgro = grandparent.GetComponent<Enemy_Agro>();
         
         //Get Hp components
         overallHp = grandparent.GetComponent<OverallHp>();
@@ -63,6 +68,8 @@ public class EnemyHpUpdater : MonoBehaviour
 
     public void TakeOverallDamage(int dmg, Vector2 flingDirection)
     {
+        enemyAgro.DetectedFromDamage();
+        
         //Overall Hp decerement
         int currOverallHp = overallHp.GetOverallHp();
         
@@ -80,9 +87,15 @@ public class EnemyHpUpdater : MonoBehaviour
 
     private void Die(Vector2 flingDirection)
     {
-        if (transform.parent.parent.TryGetComponent(out EnemyAI_Melee enemyAI))
+        Transform mainContainer = transform.parent.parent;
+        if (mainContainer.TryGetComponent(out EnemyAI_Melee enemyAI))
         {
             enemyAI.enabled = false;
+        }
+
+        if (mainContainer.TryGetComponent(out Collider2D collider))
+        {
+            collider.enabled = false;
         }
         
         overallHp.SetOverallHp(0);
