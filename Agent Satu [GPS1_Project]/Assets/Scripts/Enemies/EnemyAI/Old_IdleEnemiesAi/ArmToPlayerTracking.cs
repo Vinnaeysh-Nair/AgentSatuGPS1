@@ -15,10 +15,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     private Vector2 playerPosition;
 
 
-    void OnDisable()
-    {
-        overallHp.OnDeath -= OverallHp_OnDeath;
-    }
+ 
     
     void Start()
     {
@@ -39,6 +36,7 @@ public class ArmToPlayerTracking : MonoBehaviour
 
     void OverallHp_OnDeath(object sender, System.EventArgs e)
     {
+        overallHp.OnDeath -= OverallHp_OnDeath;
         enabled = false;
     }
     

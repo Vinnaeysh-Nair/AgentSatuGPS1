@@ -54,7 +54,11 @@ public class Dismemberment : MonoBehaviour
         {
             joint.enabled = false;
         }
-
+        if (detachedLimb.TryGetComponent(out ArmToPlayerTracking tracking))
+        {
+            tracking.enabled = false;
+        }
+        detachedLimb.GetComponent<Dismemberment>().enabled = false;
         detachedLimb.GetComponent<LimbHp>().enabled = false;
         
         
