@@ -21,7 +21,6 @@ public class EnemyAI_Ranged : MonoBehaviour
             if (isBurst)
             {
                 enemyGun.StartBurstShooting();
-                
             }
             else
             {
