@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -14,7 +13,7 @@ public class PlayerWeapon : MonoBehaviour
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
-    
+
     //UI
     private DisplayAmmoCount displayAmmoCount;
     private PauseMenu pauseMenu;
@@ -40,9 +39,12 @@ public class PlayerWeapon : MonoBehaviour
     private int currClip;
     private bool reloading = false;
 
-    private Coroutine reloadRoutine = null;
-  
 
+    public bool GetReloading()
+    {
+        return reloading;
+    }
+    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
@@ -55,6 +57,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
+        //wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
+        
         //Get firepoints
         int size = transform.childCount;
         firePoints = new Transform[size];
@@ -79,7 +83,8 @@ public class PlayerWeapon : MonoBehaviour
             currAmmoReserve = 0;
         }
     }
-    
+
+
     private void OnEnable()
     {
         displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
@@ -95,23 +100,9 @@ public class PlayerWeapon : MonoBehaviour
         {
             currAmmoReserve += diff;
         }
-       
     }
 
-    void OnDisable()
-    {
-        if (reloadRoutine != null)
-        {
-            reloadRoutine = null;
-
-            if (reloadRoutine != null)
-            {
-                print("still have");
-            }
-        }
-    }
     
-
     void Update()
     {
         if (pauseMenu.gameIsPaused) return;
@@ -131,16 +122,8 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (Input.GetButtonDown("Reload") || ClipEmpty())
             {
-                if (reloadRoutine == null)
-                {
-                    reloadRoutine = StartCoroutine(Reload());
-
-                    if (reloadRoutine == null)
-                    {
-                        print("stil;l nul");
-                    }
-                    return;
-                }
+                StartCoroutine(Reload());
+                return;
             }
         }
         
@@ -231,17 +214,29 @@ public class PlayerWeapon : MonoBehaviour
 
     void Reload2()
     {
-        float reloadFinishTime = Time.time + reloadTime;
-        
+        if (!reloading)
+        {
+            reloading = true;
+            
+            float reloadFinishTime = Time.time + reloadTime;
+            while (Time.time < reloadFinishTime)
+            {
+                print(reloadFinishTime - Time.time);
+            }
+
+            reloading = false;
+        }
+
     }
 
     private IEnumerator Reload()
     {
         if (!reloading)
         {
-            print("reloading..");
             reloading = true;
-
+            print("reloading..");
+            
+            
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve
@@ -253,7 +248,7 @@ public class PlayerWeapon : MonoBehaviour
             }
             else
             {
-                currClip += reloadAmount;   
+                currClip += reloadAmount;
                 currAmmoReserve -= reloadAmount;
             }
 

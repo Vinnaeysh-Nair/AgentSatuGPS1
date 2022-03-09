@@ -6,6 +6,7 @@ public class WeaponSwitching : MonoBehaviour
     public int selectedWeapon = 0;
     private PlayerWeapon[] playerWeapons;
     public event EventHandler OnWeaponChange;
+
     
     void Start()
     {
@@ -13,11 +14,13 @@ public class WeaponSwitching : MonoBehaviour
         StartingWeapon();
     }
 
+
     
     void Update()
     {
         int prevSelectedWeapon = selectedWeapon;
-        
+
+        if (playerWeapons[selectedWeapon].GetReloading()) return;
 
         //Scroll wheel to change weapon
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
