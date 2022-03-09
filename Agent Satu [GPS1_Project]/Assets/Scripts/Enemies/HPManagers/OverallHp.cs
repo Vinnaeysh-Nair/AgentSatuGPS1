@@ -6,7 +6,6 @@ using System;
 public class OverallHp : EnemyHp
 {    
     //Components
-    private SetupOverallHp setupOverallHp;
     private Ragdoll ragdoll;
     private SpawnPickups spawnPickups;
 
@@ -25,11 +24,7 @@ public class OverallHp : EnemyHp
     public event EventHandler OnDeath;
 
     
-    void Awake()
-    {
-        setupOverallHp = SetupOverallHp.setupOverallInstance;
-    }
-    
+
     void Start()
     {
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();

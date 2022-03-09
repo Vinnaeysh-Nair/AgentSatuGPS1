@@ -29,7 +29,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int clipSize;
     //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
-    //[SerializeField] private bool isMultishot = false;
     public bool isUnlocked = false;
 
     //Ammo counts
@@ -82,7 +81,6 @@ public class PlayerWeapon : MonoBehaviour
         }
         
         displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
-
     }
 
 
@@ -212,31 +210,13 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    void Reload2()
-    {
-        if (!reloading)
-        {
-            reloading = true;
-            
-            float reloadFinishTime = Time.time + reloadTime;
-            while (Time.time < reloadFinishTime)
-            {
-                print(reloadFinishTime - Time.time);
-            }
-
-            reloading = false;
-        }
-
-    }
+  
 
     private IEnumerator Reload()
     {
         if (!reloading)
         {
             reloading = true;
-            print("reloading..");
-            
-            
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve

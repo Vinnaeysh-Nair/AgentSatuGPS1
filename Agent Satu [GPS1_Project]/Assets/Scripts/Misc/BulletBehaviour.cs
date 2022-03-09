@@ -41,8 +41,6 @@ public class BulletBehaviour : MonoBehaviour
     }
     
     
-
-
     //Each time spawned from pool
     void OnEnable()
     {
@@ -57,11 +55,13 @@ public class BulletBehaviour : MonoBehaviour
         //Disable bullet after a duration
         StartCoroutine(SetBulletInactive(gameObject));
     }
+    
   
     void FixedUpdate()
     {
         prevVelocity = rb.velocity;
     }
+    
 
     //When hitting anything
     private void OnCollisionEnter2D(Collision2D hitInfo)
@@ -82,7 +82,7 @@ public class BulletBehaviour : MonoBehaviour
         }
         
         
-        //If hit anything
+        //If hit anything other than limbs
         SpawnBulletImpactEffect();
         gameObject.SetActive(false);
         if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
@@ -100,16 +100,17 @@ public class BulletBehaviour : MonoBehaviour
             Vector2 bulletDirection = CheckBulletDirection(rb);
             
             
+            
             //Limb Hp damage
             LimbHp limbHp = hitObject.GetComponent<LimbHp>();
             limbHp.TakeLimbDamage(bulletDamage, bulletDirection);
 
             
-            //If limb already dismembered, skip
-            if (limbHp.GetHp() == 0) return;
-            
             //Overall Hp damage
-            Transform mainContainer = hitObject.transform.parent.parent;
+            Transform limbContainer = hitObject.transform.parent;
+            if (limbContainer == null) return;                      //if not inside a limb container, meaning it's a pooled object
+            
+            Transform mainContainer = limbContainer.parent;
             OverallHp overallHp = mainContainer.GetComponent<OverallHp>();
             overallHp.TakeOverallDamage(bulletDamage, bulletDirection);
         }
@@ -135,17 +136,6 @@ public class BulletBehaviour : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void EnemyTakeDamage(EnemyHpUpdater enemyHpUpdater)
-    {
-        if (enemyHpUpdater == null) return;
-            
-            
-        Vector2 bulletDirection = CheckBulletDirection(rb);
-            
-        enemyHpUpdater.TakeLimbDamage(bulletDamage, bulletDirection);
-        enemyHpUpdater.TakeOverallDamage(bulletDamage, bulletDirection);
-    }
-
     private void SpawnBulletImpactEffect()
     {
         //Instantiate(impactEffect, transform.position, transform.rotation);
@@ -156,9 +146,11 @@ public class BulletBehaviour : MonoBehaviour
     //Determine force to push collided enemy's limbs
     private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)
     {
-        float flingX = bulletRb.velocity.x * forceDampening;
-        float flingY = bulletRb.velocity.y * forceDampening;
-
+        Vector2 bulletVelocity = bulletRb.velocity;
+        
+        float flingX = bulletVelocity.x * forceDampening;
+        float flingY = bulletVelocity.y * forceDampening;
+        
         return new Vector2(flingX, flingY);
     }
     
