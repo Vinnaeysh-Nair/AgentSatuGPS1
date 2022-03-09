@@ -91,13 +91,27 @@ public class BulletBehaviour : MonoBehaviour
         }
         
         
+        //If hit limbs
         //Enemy take damage
         if (!hitRegistered)
         {
             hitRegistered = true;
             
-            EnemyHpUpdater enemyHpUpdater = hitObject.GetComponent<EnemyHpUpdater>();
-            EnemyTakeDamage(enemyHpUpdater);
+            Vector2 bulletDirection = CheckBulletDirection(rb);
+            
+            
+            //Limb Hp damage
+            LimbHp limbHp = hitObject.GetComponent<LimbHp>();
+            limbHp.TakeLimbDamage(bulletDamage, bulletDirection);
+
+            
+            //If limb already dismembered, skip
+            if (limbHp.GetHp() == 0) return;
+            
+            //Overall Hp damage
+            Transform mainContainer = hitObject.transform.parent.parent;
+            OverallHp overallHp = mainContainer.GetComponent<OverallHp>();
+            overallHp.TakeOverallDamage(bulletDamage, bulletDirection);
         }
     }
 

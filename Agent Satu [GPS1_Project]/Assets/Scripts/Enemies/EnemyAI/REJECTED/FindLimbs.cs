@@ -19,7 +19,7 @@ public class FindLimbs : MonoBehaviour
             if (obj.CompareTag(tagManager.tagSO.limbOthersTag) || obj.CompareTag(tagManager.tagSO.limbLegTag) || obj.CompareTag(tagManager.tagSO.limbHeadTag))
             {
                 obj.AddComponent<Dismemberment>();
-                obj.AddComponent<EnemyHpUpdater>();
+                //obj.AddComponent<EnemyHpUpdater>();
             }
         }
     }

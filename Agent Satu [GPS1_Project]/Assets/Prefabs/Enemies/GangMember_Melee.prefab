@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 391544068629675108}
   - component: {fileID: 391544068629675107}
   - component: {fileID: 391544068629675033}
+  - component: {fileID: 1336473933}
   m_Layer: 11
   m_Name: GangMember_Melee_Right hand
   m_TagString: Limb - Others
@@ -141,7 +142,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.37, y: 1.6}
-  m_ConnectedAnchor: {x: 1.0999959, y: 1.275}
+  m_ConnectedAnchor: {x: 1.0999966, y: 1.275}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -162,7 +163,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &1336473933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544068629675105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &391544068688530905
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757555027399a754a970d245372706eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialOverallHp: 3
 --- !u!114 &7558288832672663456
 MonoBehaviour:
@@ -324,6 +340,7 @@ GameObject:
   - component: {fileID: 391544068925879345}
   - component: {fileID: 391544068925879344}
   - component: {fileID: 391544068925879342}
+  - component: {fileID: 1043885582}
   m_Layer: 11
   m_Name: GangMember_Melee_Body
   m_TagString: Limb - Others
@@ -447,7 +464,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &1043885582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544068925879343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &391544069647403200
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +493,7 @@ GameObject:
   - component: {fileID: 391544069647403203}
   - component: {fileID: 391544069647403202}
   - component: {fileID: 391544069647403207}
+  - component: {fileID: 1101275962}
   m_Layer: 11
   m_Name: GangMember_Melee_Right leg
   m_TagString: Limb - Leg
@@ -588,7 +620,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.06, y: 1.81}
-  m_ConnectedAnchor: {x: 0.4199986, y: -1.6149998}
+  m_ConnectedAnchor: {x: 0.41999817, y: -1.6150004}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -609,7 +641,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &1101275962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544069647403200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &391544069740302359
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +670,7 @@ GameObject:
   - component: {fileID: 391544069740302362}
   - component: {fileID: 391544069740302361}
   - component: {fileID: 391544069740302358}
+  - component: {fileID: 135078606}
   m_Layer: 11
   m_Name: GangMember_Melee_Left hand
   m_TagString: Limb - Others
@@ -751,7 +798,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.6, y: 1.37}
-  m_ConnectedAnchor: {x: -0.48000276, y: 1.2550002}
+  m_ConnectedAnchor: {x: -0.48000574, y: 1.2550002}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -772,7 +819,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &135078606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544069740302359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &391544070219452953
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +848,7 @@ GameObject:
   - component: {fileID: 391544070219452956}
   - component: {fileID: 391544070219452955}
   - component: {fileID: 391544070219452945}
+  - component: {fileID: 145321363}
   m_Layer: 11
   m_Name: GangMember_Melee_Head
   m_TagString: Limb - Head
@@ -934,7 +996,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 2
+--- !u!114 &145321363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544070219452953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &391544070258531304
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1025,7 @@ GameObject:
   - component: {fileID: 391544070258531307}
   - component: {fileID: 391544070258531306}
   - component: {fileID: 391544070258531311}
+  - component: {fileID: 1823129632}
   m_Layer: 11
   m_Name: GangMember_Melee_Left Leg
   m_TagString: Limb - Leg
@@ -1075,7 +1152,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.04, y: 1.82}
-  m_ConnectedAnchor: {x: -0.60000134, y: -1.6049993}
+  m_ConnectedAnchor: {x: -0.6000018, y: -1.6049999}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1096,7 +1173,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &1823129632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391544070258531304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &6093170343711462978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1198,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6093170343711462981}
   - component: {fileID: 6093170343711462983}
-  - component: {fileID: 6093170343711462980}
   m_Layer: 0
   m_Name: GangMember_Melee_Limbs
   m_TagString: Untagged
@@ -1149,18 +1239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdolledLimbGravity: 5
---- !u!114 &6093170343711462980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093170343711462978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bfd422f2ebbd447960bcf9a8bd46a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1617186450934678192
 PrefabInstance:
   m_ObjectHideFlags: 0

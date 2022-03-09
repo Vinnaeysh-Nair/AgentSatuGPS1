@@ -7,15 +7,25 @@ public class ArmToPlayerTracking : MonoBehaviour
     [SerializeField] private Enemy_Flipped enemyFlipped;
     [SerializeField] private Enemy_Agro enemyAgro;
     private PlayerMovement playerMovement;
+    private OverallHp overallHp;
 
     
     [SerializeField] private float followAngleOffset;
     //[SerializeField] private bool isFacingRight = false;
     private Vector2 playerPosition;
+
+
+    void OnDisable()
+    {
+        overallHp.OnDeath -= OverallHp_OnDeath;
+    }
     
     void Start()
     {
         playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
+
+        overallHp = transform.parent.parent.GetComponent<OverallHp>();
+        overallHp.OnDeath += OverallHp_OnDeath;
     }
 
     //track player's Vector x and y
@@ -27,6 +37,11 @@ public class ArmToPlayerTracking : MonoBehaviour
         PointToPlayer();
     }
 
+    void OverallHp_OnDeath(object sender, System.EventArgs e)
+    {
+        enabled = false;
+    }
+    
     private void PointToPlayer()
     {
         Vector2 lookDir = (Vector2)pivotTransform.position - playerPosition;

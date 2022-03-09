@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 
 //Updates limb and overall hp, attached to all limbs (auto - by FindLimbs script).
@@ -16,7 +17,8 @@ public class EnemyHpUpdater : MonoBehaviour
     
     private OverallHp overallHp;
     private LimbHp limbHp;
-    
+
+  
 
     //Fields
     [SerializeField] private int currLimbHp;
@@ -35,7 +37,7 @@ public class EnemyHpUpdater : MonoBehaviour
         overallHp = grandparent.GetComponent<OverallHp>();
         limbHp = GetComponent<LimbHp>();
         
-        currLimbHp = limbHp.GetInitialHp();
+        //currLimbHp = limbHp.GetInitialHp();
     }
 
     
@@ -87,11 +89,26 @@ public class EnemyHpUpdater : MonoBehaviour
 
     private void Die(Vector2 flingDirection)
     {
-        //Disable unwanted components
+        //OnDeath?.Invoke(this, EventArgs.Empty);
+        DisableComponents();
+
+        
+        overallHp.SetOverallHp(0);
+        ragdoll.ActivateRagdoll(flingDirection);
+        spawnPickups.enabled = true;
+    }
+
+    private void DisableComponents()
+    {
         Transform mainContainer = transform.parent.parent;
-        if (mainContainer.TryGetComponent(out EnemyAI_Melee enemyAI))
+        if (mainContainer.TryGetComponent(out EnemyAI_Melee enemyAIMelee))
         {
-            enemyAI.enabled = false;
+            enemyAIMelee.enabled = false;
+        }
+
+        if (mainContainer.TryGetComponent(out EnemyAI_Ranged enemyAIRanged))
+        {
+            enemyAIRanged.enabled = false;
         }
 
         if (mainContainer.TryGetComponent(out Enemy_Agro enemyAgro))
@@ -103,9 +120,5 @@ public class EnemyHpUpdater : MonoBehaviour
         {
             collider.enabled = false;
         }
-        
-        overallHp.SetOverallHp(0);
-        ragdoll.ActivateRagdoll(flingDirection);
-        spawnPickups.enabled = true;
     }
 }

@@ -6,6 +6,7 @@ public class Enemy_Agro : MonoBehaviour
     //Components
     private Enemy_Flipped enemflip;
     private Transform playerBody;
+    private OverallHp overallHp;
 
     //Fields
     [Header("Aggro Settings")] 
@@ -37,12 +38,20 @@ public class Enemy_Agro : MonoBehaviour
         return playerPos;
     }
 
+    void OnDisable()
+    {
+        overallHp.OnDamaged -= OverallHp_OnDamaged;
+    }
+    
     void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         enemflip = GetComponent<Enemy_Flipped>();
+        
+        overallHp = GetComponent<OverallHp>();
+        overallHp.OnDamaged += OverallHp_OnDamaged;
     }
-
+    
     void FixedUpdate()
     {
         playerPos = playerBody.position;
@@ -55,8 +64,12 @@ public class Enemy_Agro : MonoBehaviour
             enemflip.LookAtPlayer();
         }
     }
-
-
+    
+    private void OverallHp_OnDamaged(object sender, System.EventArgs e)
+    {
+        DetectedFromDamage();
+    }
+    
     private void UpdateDetection()
     {
         float distToPlayer = Vector2.Distance(enemyPos, playerPos);
