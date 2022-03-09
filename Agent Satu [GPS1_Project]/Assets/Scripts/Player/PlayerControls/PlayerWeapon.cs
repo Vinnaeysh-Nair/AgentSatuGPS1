@@ -58,6 +58,7 @@ public class PlayerWeapon : MonoBehaviour
     void Start()
     {
         //wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
         
         //Get firepoints
         int size = transform.childCount;
