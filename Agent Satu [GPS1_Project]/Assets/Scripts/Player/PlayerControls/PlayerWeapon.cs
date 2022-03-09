@@ -57,9 +57,6 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        //wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
-        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
-        
         //Get firepoints
         int size = transform.childCount;
         firePoints = new Transform[size];
@@ -83,6 +80,9 @@ public class PlayerWeapon : MonoBehaviour
             currClip = currTotalAmmo;
             currAmmoReserve = 0;
         }
+        
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+
     }
 
 
@@ -193,8 +193,7 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         UpdateAmmoDisplay();
-
-        //Instantiate(bullet, firePoint.position, firePoint.rotation);
+        
         //animCon.OnShooting();
 
         //IEnumerator allows delay after a task
