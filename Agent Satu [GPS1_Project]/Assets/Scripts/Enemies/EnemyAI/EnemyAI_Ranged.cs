@@ -8,6 +8,7 @@ public class EnemyAI_Ranged : MonoBehaviour
     
     //Fields
     [SerializeField] private bool isBurst;
+    private bool shooting = false;
 
     void Start()
     {
@@ -20,12 +21,12 @@ public class EnemyAI_Ranged : MonoBehaviour
             if (isBurst)
             {
                 enemyGun.StartBurstShooting();
+                
             }
             else
             {
                 enemyGun.StartShooting();
             }
-            
         }
     }
 }

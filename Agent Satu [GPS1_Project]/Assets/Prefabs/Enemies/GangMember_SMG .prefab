@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4828549864624000622
 Transform:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757555027399a754a970d245372706eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialOverallHp: 3
 --- !u!114 &-3382552866385394874
 MonoBehaviour:
@@ -199,6 +200,42 @@ PrefabInstance:
       propertyPath: enemyFlipped
       value: 
       objectReference: {fileID: -3382552866385394874}
+    - target: {fileID: 8185991674714724941, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.48000097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991674714724941, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 1.2550002
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991675248425072, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 1.1000013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991675248425072, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 1.275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991675577062068, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.5999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991675577062068, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -1.6049999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991676233395778, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.3000021
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991676250030753, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.42000055
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185991676250030753, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -1.6149998
+      objectReference: {fileID: 0}
     - target: {fileID: 8990562849257836213, guid: 8a39a7f01d5a81d47a485cfa61511b48, type: 3}
       propertyPath: m_RootOrder
       value: 0
