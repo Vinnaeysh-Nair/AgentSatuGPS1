@@ -14,7 +14,6 @@ public class WeaponSwitching : MonoBehaviour
         StartingWeapon();
     }
 
-
     
     void Update()
     {

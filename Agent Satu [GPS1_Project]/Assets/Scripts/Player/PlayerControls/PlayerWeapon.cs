@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     //Components
-    public GameObject bullet;
+    [SerializeField] private Transform bullet;
+    [SerializeField] private Transform firePointContainer;
     private Transform[] firePoints;
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
@@ -57,11 +58,11 @@ public class PlayerWeapon : MonoBehaviour
     void Start()
     {
         //Get firepoints
-        int size = transform.childCount;
+        int size = firePointContainer.childCount;
         firePoints = new Transform[size];
         for (int i = 0; i < size; i++)
         {
-            firePoints[i] = transform.GetChild(i).transform;
+            firePoints[i] = firePointContainer.GetChild(i).transform;
         }
         
         //If pistol, ignore setting up ammo
