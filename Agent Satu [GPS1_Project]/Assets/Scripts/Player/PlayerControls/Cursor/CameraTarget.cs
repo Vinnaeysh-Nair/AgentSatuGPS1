@@ -13,7 +13,7 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private float thresholdYDown;
     
 
-    void Awake()
+    void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         aim = transform.Find("/Player/PlayerBody/Pivots + Arms/LeftPivot/LeftArm").GetComponent<CrosshairAiming>();
