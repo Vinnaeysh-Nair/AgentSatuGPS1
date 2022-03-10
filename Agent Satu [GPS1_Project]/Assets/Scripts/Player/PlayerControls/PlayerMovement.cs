@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool crouch = false;
     private bool dodgeroll = false;
-    
+
+    public event EventHandler OnInteract; 
+
     private Vector2 playerPos;
     
     //Getters
@@ -53,6 +56,11 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetButtonUp("Crouch"))
         {
             crouch = false;
+        }
+
+        if (Input.GetButtonDown("Interact"))
+        {
+            OnInteract?.Invoke(this, EventArgs.Empty);
         }
     }
 
