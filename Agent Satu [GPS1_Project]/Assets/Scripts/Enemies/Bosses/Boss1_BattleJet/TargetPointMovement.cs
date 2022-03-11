@@ -25,7 +25,7 @@ public class TargetPointMovement : MonoBehaviour
     
     private int maxAttackNumbers = 3;
 
-    [SerializeField] private float stopTime = 0f;
+    private float stopTime = 0f;
 
     
     [Header("Move Speeds")]
