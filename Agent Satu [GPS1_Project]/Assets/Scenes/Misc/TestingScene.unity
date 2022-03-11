@@ -1333,6 +1333,10 @@ PrefabInstance:
       propertyPath: sceneLoader
       value: 
       objectReference: {fileID: 1439629520252418125}
+    - target: {fileID: 157309846575679637, guid: 78bd8f487e3d8ac48a874621aa886d44, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.010161616
+      objectReference: {fileID: 0}
     - target: {fileID: 416916835940858385, guid: 78bd8f487e3d8ac48a874621aa886d44, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1388,6 +1392,10 @@ PrefabInstance:
     - target: {fileID: 1513550819866780274, guid: 78bd8f487e3d8ac48a874621aa886d44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708527462068299021, guid: 78bd8f487e3d8ac48a874621aa886d44, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.011261103
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78bd8f487e3d8ac48a874621aa886d44, type: 3}
@@ -1569,13 +1577,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: attackCounter
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: playerFollowSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: playerFollowOffset.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: playerFollowSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: playerFollowOffset.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173508, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_Name
       value: 'Boss: BattleJet'
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173508, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_RootOrder
@@ -1583,11 +1611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.53
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.91
+      value: 4.23
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.z
