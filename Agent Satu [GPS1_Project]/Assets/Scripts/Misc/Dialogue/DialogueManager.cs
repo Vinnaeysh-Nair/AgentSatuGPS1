@@ -33,8 +33,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        string tempSentence = dialogueLine.Dequeue();
-        Debug.Log(tempSentence);
+        //string tempSentence = dialogueLine.Dequeue();
+        //Debug.Log(tempSentence);
+        Debug.Log(dialogueLine.Dequeue());
     }
 
     void EndDialogue()
