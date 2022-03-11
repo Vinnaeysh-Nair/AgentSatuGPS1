@@ -13,6 +13,9 @@ public class HandPlacement : MonoBehaviour
     [Header("Positions for each guns")]
     [SerializeField] private HandPositions[] positionsArray;
 
+    private Transform currLeftHandPos;
+    private Transform currRightHandPos;
+
     
 
     [System.Serializable]
@@ -26,16 +29,36 @@ public class HandPlacement : MonoBehaviour
     void Start()
     {
         wepSwitch = GetComponent<WeaponSwitching>();
+        wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
+        
+        InitialPos();
+    }
+
+    void OnDestroy()
+    {
+        wepSwitch.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
     }
 
     
     private void Update()
     {
+        leftHandIKTarget.position = currLeftHandPos.position;
+        rightHandIKTarget.position = currRightHandPos.position;
+    }
+
+    private void WeaponSwitching_OnWeaponChange(object sender, System.EventArgs e)
+    {
         HandPositions currPositions = positionsArray[wepSwitch.selectedWeapon];
-        Vector2 currLeftHandPos = currPositions.leftHandPos.position;
-        Vector2 currRightHandPos = currPositions.rightHandPos.position;
+
+        currLeftHandPos = currPositions.leftHandPos;
+        currRightHandPos = currPositions.rightHandPos;
+    }
+
+    void InitialPos()
+    {
+        HandPositions currPositions = positionsArray[0];
         
-        leftHandIKTarget.position = currLeftHandPos;
-        rightHandIKTarget.position = currRightHandPos;
+        currLeftHandPos = currPositions.leftHandPos;
+        currRightHandPos = currPositions.rightHandPos;
     }
 }
