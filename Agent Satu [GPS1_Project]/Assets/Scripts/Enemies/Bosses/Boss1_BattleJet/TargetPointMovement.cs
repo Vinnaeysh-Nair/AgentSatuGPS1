@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 
 public class TargetPointMovement : MonoBehaviour
 {
@@ -23,6 +21,7 @@ public class TargetPointMovement : MonoBehaviour
     [Header("General")]
     [SerializeField] private int attackCounter = 1;
     [SerializeField] private float timeToStartBattle = 3f;
+    [SerializeField] private float idleBufferTime = 5f;
     
     private int maxAttackNumbers = 3;
 
@@ -174,7 +173,7 @@ public class TargetPointMovement : MonoBehaviour
             
             if (!isChangingAttack)
             {
-                StartCoroutine(StartNextAttack(3f));
+                StartCoroutine(StartNextAttack(idleBufferTime));
             }
         }
     } 
@@ -208,7 +207,7 @@ public class TargetPointMovement : MonoBehaviour
                 
             if (!isChangingAttack)
             {
-                StartCoroutine(StartNextAttack(3f));
+                StartCoroutine(StartNextAttack(idleBufferTime));
             }
         }
     }

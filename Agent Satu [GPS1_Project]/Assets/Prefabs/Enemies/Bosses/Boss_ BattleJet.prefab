@@ -518,10 +518,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 1215250032327237701}
-  inPatternMoveSpeed: 3
   idlePoint: {fileID: 1215250032491790626}
-  getInPositionMoveSpeed: 2
   inPosition: 0
+  attackCounter: 1
+  timeToStartBattle: 1
+  idleBufferTime: 5
+  stopTime: 0
+  goToPositionMoveSpeed: 1
+  inPatternMoveSpeed: 3
+  atk1ShotsPerBurst: 15
+  atk1FireRate: 12
+  atk1TimeUntilNextBurst: 3
+  playerFollowOffset: {x: 0, y: 3, z: 0}
+  playerFollowSpeed: 5
+  timeTillAttack2: 3
+  atk2ShotsPerBurst: 16
+  atk2FireRate: 6
+  timeToNextPattern: 3
   patterns:
   - patternPoints:
     - {fileID: 1215250032266253283}
@@ -529,6 +542,7 @@ MonoBehaviour:
   - patternPoints:
     - {fileID: 1215250031969904020}
     - {fileID: 1215250032266253283}
+  timeTillAttack1: 5
 --- !u!1 &1215250032266253282
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,10 +756,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 1215250032505516255}
-  inPatternMoveSpeed: 3
   idlePoint: {fileID: 1215250032491790626}
-  getInPositionMoveSpeed: 2
   inPosition: 0
+  attackCounter: 1
+  timeToStartBattle: 1
+  idleBufferTime: 5
+  stopTime: 0
+  goToPositionMoveSpeed: 1
+  inPatternMoveSpeed: 3
+  atk1ShotsPerBurst: 15
+  atk1FireRate: 12
+  atk1TimeUntilNextBurst: 3
+  playerFollowOffset: {x: 0, y: 3, z: 0}
+  playerFollowSpeed: 5
+  timeTillAttack2: 3
+  atk2ShotsPerBurst: 16
+  atk2FireRate: 6
+  timeToNextPattern: 3
   patterns:
   - patternPoints:
     - {fileID: 1215250032266253283}
@@ -753,6 +780,7 @@ MonoBehaviour:
   - patternPoints:
     - {fileID: 1215250031969904020}
     - {fileID: 1215250032266253283}
+  timeTillAttack1: 5
 --- !u!1 &1215250032327237706
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,9 +879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc457b5913e0cce40937f74d7cf50e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPointMovement: {fileID: 1215250032188643092}
   bullet: {fileID: 863672036732972301, guid: 71b91407327f8744a9d2be5c186c59c6, type: 3}
   firePoint: {fileID: 1215250032288679702}
-  firerate: 12
+  canShoot: 1
+  canBurstShoot: 1
 --- !u!1 &1215250032491790625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,9 +1066,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc457b5913e0cce40937f74d7cf50e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPointMovement: {fileID: 1215250032310391501}
   bullet: {fileID: 863672036732972301, guid: 71b91407327f8744a9d2be5c186c59c6, type: 3}
   firePoint: {fileID: 1215250032851998967}
-  firerate: 12
+  canShoot: 1
+  canBurstShoot: 1
 --- !u!1 &1215250032628721891
 GameObject:
   m_ObjectHideFlags: 0
