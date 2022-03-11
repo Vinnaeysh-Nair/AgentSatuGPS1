@@ -53,7 +53,7 @@ public class TargetPointMovement : MonoBehaviour
 
     [Space]
     [Header("[Attack 2]")]
-    [SerializeField] private int atk2ShotsPerBurst;
+    //[SerializeField] private int atk2ShotsPerBurst;
     [SerializeField] private float atk2FireRate;
 
     [SerializeField] private float timeToNextPattern = 3f;
@@ -72,6 +72,7 @@ public class TargetPointMovement : MonoBehaviour
     struct Patterns
     {
         public Transform[] patternPoints;
+        public int atk2ShotsPerBurst;
     }
 
 
@@ -255,7 +256,7 @@ public class TargetPointMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, endPoint.position) > 0f)
         {
             Move(endPoint, inPatternMoveSpeed);
-            gun.Shoot(atk2ShotsPerBurst, atk2FireRate);
+            gun.Shoot(patterns[nextPattern].atk2ShotsPerBurst, atk2FireRate);
         }
         else
         {

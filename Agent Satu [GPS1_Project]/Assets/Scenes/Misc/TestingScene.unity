@@ -315,28 +315,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &70795780 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-  m_PrefabInstance: {fileID: 1215250032347456508}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 583c1649c9ec25246858af1a65c36933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &123083540 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-  m_PrefabInstance: {fileID: 1215250032347456508}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 583c1649c9ec25246858af1a65c36933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &156096058 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8132323332346488338, guid: 07921217bedef9d4abdf246da937f3da, type: 3}
@@ -1599,133 +1577,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: shootDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1FireRate
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2FireRate
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: attackCounter
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillAttack1
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillAttack2
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1ShotsPerBurst
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2ShotsPerBurst
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: playerFollowSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeToStartBattle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillNextAttack
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: playerFollowOffset.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1TimeUntilNextBurst
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2TimeUntilNextBurst
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: shootDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1FireRate
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2FireRate
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: attackCounter
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillAttack1
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillAttack2
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1ShotsPerBurst
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2ShotsPerBurst
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: playerFollowSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeToStartBattle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: timeTillNextAttack
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: playerFollowOffset.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk1TimeUntilNextBurst
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: atk2TimeUntilNextBurst
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032327237701, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: targetPointMovement
-      value: 
-      objectReference: {fileID: 123083540}
-    - target: {fileID: 1215250032505516255, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: targetPointMovement
-      value: 
-      objectReference: {fileID: 70795780}
     - target: {fileID: 1215250032645173508, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_Name
       value: 'Boss: BattleJet'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1215250032645173508, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_RootOrder
@@ -1733,11 +1587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.53
+      value: 11.05
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.23
+      value: 4.16
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173509, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_LocalPosition.z
