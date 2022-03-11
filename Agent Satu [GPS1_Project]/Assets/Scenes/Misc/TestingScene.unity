@@ -1600,8 +1600,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: shootDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1FireRate
-      value: 1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2FireRate
@@ -1612,20 +1616,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeTillAttack1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillAttack2
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1ShotsPerBurst
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2ShotsPerBurst
-      value: 6
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: playerFollowSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeToStartBattle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillNextAttack
@@ -1637,15 +1649,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1TimeUntilNextBurst
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032188643092, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2TimeUntilNextBurst
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: shootDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1FireRate
-      value: 1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2FireRate
@@ -1656,20 +1672,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeTillAttack1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillAttack2
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1ShotsPerBurst
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2ShotsPerBurst
-      value: 6
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: playerFollowSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeToStartBattle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillNextAttack
@@ -1681,7 +1705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1TimeUntilNextBurst
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1215250032310391501, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk2TimeUntilNextBurst

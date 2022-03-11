@@ -13,7 +13,7 @@ public class SynchGunMovements : MonoBehaviour
 
     public bool BothPointsInPosition()
     {
-        if (leftPoint.inPosition && rightPoint.inPosition)
+        if (leftPoint.GetInPosition() && rightPoint.GetInPosition())
         {
             return true;
         }

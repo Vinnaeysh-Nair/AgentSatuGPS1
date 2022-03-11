@@ -1,48 +1,34 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class BattleJetGun : MonoBehaviour
 {
     [SerializeField] private TargetPointMovement targetPointMovement;
     [SerializeField] private Transform bullet;
     [SerializeField] private Transform firePoint;
-    //[SerializeField] private float firerate;
     private float nextFireTime = 0f;
 
     private int firedShots = 0;
-    [SerializeField]private bool canShoot = true;
+    [SerializeField] private bool canShoot = true;
+    [SerializeField] private bool canBurstShoot = true;
+    private bool firedAllShots = false;
     
     private ObjectPooler pooler;
-   
+
+    public event EventHandler OnFiredAllShots;
+
+  
     void OnDestroy()
     {
-        targetPointMovement.OnReachingTarget -= TargetPointMovement_OnReachingTarget;
+        targetPointMovement.OnReachingIdle -= TargetPointMovement_OnReachingIdle;
+       
     }
     void Start()
     {
         pooler = ObjectPooler.objPoolerInstance;
-        targetPointMovement.OnReachingTarget += TargetPointMovement_OnReachingTarget;
-    }
-    
-    
-    public void BurstShoot(int shotsPerBurst, float firerate, float timeUntilNextBurst)
-    {
-        if (Time.time > nextFireTime)
-        {
-            if (!canShoot) return;
-            print("shooting");
-            
-            pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
-            nextFireTime = Time.time + (1 / firerate);
-
-            firedShots++;
-
-            if (firedShots == shotsPerBurst)
-            {
-                canShoot = false;
-                StartCoroutine(SetCanShootToFalse(timeUntilNextBurst));
-            }
-        }
+        targetPointMovement.OnReachingIdle += TargetPointMovement_OnReachingIdle;
+        
     }
     
     public void Shoot(int shotsPerBurst, float firerate)
@@ -50,7 +36,7 @@ public class BattleJetGun : MonoBehaviour
         if (Time.time > nextFireTime)
         {
             if (!canShoot) return;
-            print("shooting");
+
             pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             nextFireTime = Time.time + (1 / firerate);
 
@@ -62,16 +48,41 @@ public class BattleJetGun : MonoBehaviour
             }
         }
     }
+    
+    public void BurstShoot(int shotsPerBurst, float firerate, float timeUntilNextBurst)
+    {
+        if (Time.time > nextFireTime)
+        {
+            if (!canBurstShoot) return;
 
-    private IEnumerator SetCanShootToFalse(float timeUntilNextBurst)
+            pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
+            nextFireTime = Time.time + (1 / firerate);
+
+            firedShots++;
+            
+            if (firedShots == shotsPerBurst)
+            {
+                canBurstShoot = false;
+                OnFiredAllShots?.Invoke(this, EventArgs.Empty);
+                
+                StartCoroutine(SetCanBurstShootToTrue(timeUntilNextBurst));
+            }
+        }
+    }
+    
+    
+    
+    private IEnumerator SetCanBurstShootToTrue(float timeUntilNextBurst)
     {
         yield return new WaitForSeconds(timeUntilNextBurst);
         
         firedShots = 0;
-        canShoot = true;
+        canBurstShoot = true;
+        firedAllShots = false;
     }
 
-    private void TargetPointMovement_OnReachingTarget(object sender, System.EventArgs e)
+    
+    private void TargetPointMovement_OnReachingIdle(object sender, System.EventArgs e)
     {
         firedShots = 0;
         canShoot = true;

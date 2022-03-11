@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 
 public class TargetPointMovement : MonoBehaviour
@@ -11,34 +12,39 @@ public class TargetPointMovement : MonoBehaviour
     
     [SerializeField] private BattleJetGun gun;
     [SerializeField] private Transform idlePoint;
-    
+   
     private Transform startPoint;
     private Transform endPoint;
     private Transform playerPos;
     
     //Fields
-    public bool inPosition;
+    [SerializeField] private bool inPosition;       //remove later
     
     [Header("General")]
     [SerializeField] private int attackCounter = 1;
-    private int maxAttackNumbers = 3;
+    [SerializeField] private float timeToStartBattle = 3f;
     
+    private int maxAttackNumbers = 3;
+
+    [SerializeField] private float stopTime = 0f;
+
     
     [Header("Move Speeds")]
-    [SerializeField] private float getInPositionMoveSpeed = 1f;
+    [SerializeField] private float goToPositionMoveSpeed = 1f;
     [SerializeField] private float inPatternMoveSpeed = 1f;
     private int nextPattern = 0;
     
     private bool idling = false;
     private bool isChangingAttack = false;
     
+    
     [Header("[Attack 1]")]
     [SerializeField] private int atk1ShotsPerBurst;
     [SerializeField] private float atk1FireRate;
     [SerializeField] private float atk1TimeUntilNextBurst;
-    [SerializeField] private float shootDelay = 1f;
     private float nextFireTime = 0f;
     private bool atk1CanShoot = false;
+    private bool atk1Started = false;
     
     [SerializeField] private Vector3 playerFollowOffset;
     [SerializeField] private float playerFollowSpeed;
@@ -46,17 +52,21 @@ public class TargetPointMovement : MonoBehaviour
     [SerializeField] private float timeTillAttack2;
 
 
+    [Space]
     [Header("[Attack 2]")]
     [SerializeField] private int atk2ShotsPerBurst;
     [SerializeField] private float atk2FireRate;
-    
+
+    [SerializeField] private float timeToNextPattern = 3f;
     [SerializeField] private Patterns[] patterns;
     
+    
+    [Space]
     [Header("[Attack 3]")]
     [SerializeField] private float timeTillAttack1;
 
-    public event EventHandler OnReachingTarget;
-  
+    
+    public event EventHandler OnReachingIdle;
     
     
     [Serializable]
@@ -65,32 +75,46 @@ public class TargetPointMovement : MonoBehaviour
         public Transform[] patternPoints;
     }
 
-    
 
-    
-    
+    public bool GetInPosition()
+    {
+        return inPosition;
+    }
+
+
+    private void BattleJetGun_OnFiredAllShots(object sender, System.EventArgs e)
+    {
+        atk1CanShoot = false;
+    }
+
+    private void OnDestroy()
+    {
+        gun.OnFiredAllShots -= BattleJetGun_OnFiredAllShots;
+    }
+
     void Start()
     {
         playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
         synch = transform.parent.GetComponent<SynchGunMovements>();
         
         playerPos = playerMovement.transform;
+        gun.OnFiredAllShots += BattleJetGun_OnFiredAllShots;
         
-
+        
         //Wait time before starting battle
         startPoint = idlePoint;
         idling = true;
         StartCoroutine(StartBattle());
     }
     
-    void FixedUpdate()
+    void Update()
     {
         if (idling)
         {
             Idle();
             return;
         }
-
+        
 
         switch (attackCounter)
         {
@@ -107,11 +131,12 @@ public class TargetPointMovement : MonoBehaviour
 
     private IEnumerator StartBattle()
     {
-        yield return new WaitForSeconds(3f);    //put editable timer afterwards
+        yield return new WaitForSeconds(timeToStartBattle);    //put editable timer afterwards
         
         idling = false;
         inPosition = false;
-        
+
+      
         //Attack 2 initial pos
         startPoint = patterns[0].patternPoints[0];
         endPoint = patterns[0].patternPoints[1];
@@ -121,83 +146,81 @@ public class TargetPointMovement : MonoBehaviour
     //Track playerPos and shoot with delay
     private void Attack1()
     {
+        if (stopTime == 0f)
+        {
+            stopTime = Time.time + timeTillAttack2;
+        }
+        
+        
         //Track player constantly
-        if (Vector2.Distance(transform.position, playerPos.position + playerFollowOffset) > 0f)
+        if (Vector2.Distance(transform.position, playerPos.position + playerFollowOffset) > 0.1f)   //small value to offset inaccuracy
         {
             Move(playerPos, playerFollowSpeed, playerFollowOffset);
-            atk1CanShoot = true;
         }
         else
         {
-           // nextFireTime = Time.time + shootDelay;
-           //gun.Shoot(atk1ShotsPerBurst, atk1FireRate, atk1TimeUntilNextBurst);
+            atk1CanShoot = true;
         }
 
-
-        
-       
-
-        if (!isChangingAttack)
+        if (atk1CanShoot)
         {
-            //StartCoroutine(StartNextAttack(timeTillAttack2));
+            gun.BurstShoot(atk1ShotsPerBurst, atk1FireRate, atk1TimeUntilNextBurst);
         }
-    }
 
-    
+
+        if (Time.time > stopTime && !idling)
+        {
+            idling = true;
+            
+            if (!isChangingAttack)
+            {
+                StartCoroutine(StartNextAttack(3f));
+            }
+        }
+    } 
+
+    //Preset targets to shoot at, cycles through an array of them
     private void Attack2()
     {
         if (!inPosition)
         {
-            GetInPosition();
+            GoToPosition();
             return;
         }
         
         if (!synch.BothPointsInPosition()) return;
-        print("attack2");
         DoPattern();
     }
 
+    
+    //Missiles that follow player, can be shot down
     private void Attack3()
     {
-        print("attack3");
-
-        if (!isChangingAttack)
+        if (stopTime == 0f)
         {
-            StartCoroutine(StartNextAttack(timeTillAttack1));
-        }
-    }
-    
-    private void ChangeAttack()
-    {
-        attackCounter++;
-        if (attackCounter > maxAttackNumbers)
-        {
-            attackCounter = 1;
-        }
-    }
-
-    private IEnumerator StartNextAttack(float timeTillNextAttack)
-    {
-        isChangingAttack = true;
-        
-        yield return new WaitForSeconds(timeTillNextAttack);
-
-        if (atk1CanShoot)
-        {
-            atk1CanShoot = false;
+            stopTime = Time.time + timeTillAttack1;
         }
         
-        ChangeAttack();
-        isChangingAttack = false;
+        
+        if (Time.time > stopTime && !idling)
+        {
+            idling = true;
+                
+            if (!isChangingAttack)
+            {
+                StartCoroutine(StartNextAttack(3f));
+            }
+        }
     }
 
-    
+
+    //For Attack 2
     private IEnumerator StartNewPattern()
     {
-        yield return new WaitForSeconds(3f);    //put editable timer afterwards
+        yield return new WaitForSeconds(timeToNextPattern);    //put editable timer afterwards
         
         idling = false;
-        
+       
         inPosition = false;
         nextPattern++;
         if (nextPattern > patterns.Length - 1)
@@ -215,12 +238,12 @@ public class TargetPointMovement : MonoBehaviour
     }
 
 
-    //For Attack 2
-    private void GetInPosition()
+    
+    private void GoToPosition()
     {
         if (Vector2.Distance(transform.position, startPoint.position) > 0f)
         {
-            Move(startPoint, getInPositionMoveSpeed);
+            Move(startPoint, goToPositionMoveSpeed);
         }
         else
         {
@@ -247,21 +270,50 @@ public class TargetPointMovement : MonoBehaviour
 
     private void Idle()
     {
-        print("idling");
         if (Vector2.Distance(transform.position, idlePoint.position) > 0f)
         {
-             Move(idlePoint, inPatternMoveSpeed);
-             OnReachingTarget?.Invoke(this, EventArgs.Empty);
+            Move(idlePoint, inPatternMoveSpeed);
+            OnReachingIdle?.Invoke(this, EventArgs.Empty);
         }
     }
+    
+    
+    private void ChangeAttack()
+    {
+        attackCounter++;
+        if (attackCounter > maxAttackNumbers)
+        {
+            attackCounter = 1;      //reset
+        }
 
+        stopTime = 0f;
+    }
+
+    private IEnumerator StartNextAttack(float timeTillNextAttack)
+    {
+        isChangingAttack = true;
+        yield return new WaitForSeconds(timeTillNextAttack);
+
+       
+        idling = false;
+        inPosition = false;
+        if (atk1CanShoot)
+        {
+            atk1CanShoot = false;
+        }
+        
+        ChangeAttack();
+        isChangingAttack = false;
+    }
+    
+    
     void Move(Transform target, float moveSpeed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
 
     void Move(Transform target, float moveSpeed, Vector3 followOffSet)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position + followOffSet, moveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position + followOffSet, moveSpeed * Time.deltaTime);
     }
 }
