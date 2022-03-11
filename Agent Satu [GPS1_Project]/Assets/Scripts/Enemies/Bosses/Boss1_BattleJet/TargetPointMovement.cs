@@ -43,8 +43,7 @@ public class TargetPointMovement : MonoBehaviour
     [SerializeField] private float atk1TimeUntilNextBurst;
     private float nextFireTime = 0f;
     private bool atk1CanShoot = false;
-    private bool atk1Started = false;
-    
+
     [SerializeField] private Vector3 playerFollowOffset;
     [SerializeField] private float playerFollowSpeed;
     
