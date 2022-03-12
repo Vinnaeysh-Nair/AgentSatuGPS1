@@ -45,6 +45,7 @@ public class BattleJetGun : MonoBehaviour
             if (firedShots == shotsPerBurst)
             {
                 canShoot = false;
+                OnFiredAllShots?.Invoke(this, EventArgs.Empty);
             }
         }
     }

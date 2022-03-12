@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
+
 public class TargetPointMovement : MonoBehaviour
 {
     //Components
@@ -16,25 +17,33 @@ public class TargetPointMovement : MonoBehaviour
     private Transform playerPos;
     
     //Fields
-    [SerializeField] private bool inPosition;       //remove later
-    
+    private bool inPosition;       
+
     [Header("General")]
+    [SerializeField] private bool isMiniJet = false;
+    [TextArea] [SerializeField] private string note;
+    
+    [Space][Space]
     [SerializeField] private int attackCounter = 1;
     [SerializeField] private float timeToStartBattle = 3f;
-    [SerializeField] private float idleBufferTime = 5f;
+    [SerializeField] private float atkChangeBufferTime = 5f;
     
-    private int maxAttackNumbers = 3;
-
-    private float stopTime = 0f;
-
-    
-    [Header("Move Speeds")]
-    [SerializeField] private float goToPositionMoveSpeed = 1f;
-    [SerializeField] private float inPatternMoveSpeed = 1f;
     private int nextPattern = 0;
     
     private bool idling = false;
     private bool isChangingAttack = false;
+    
+    private int maxAttackNumbers = 3;
+
+    private float stopTime = 0f;
+    private bool firedAllShots = false;
+
+    
+    [Header("Move Speeds")]
+    [SerializeField] private float goToPositionMoveSpeed = 1f;
+    [SerializeField] private float goToIdleMoveSpeed = 1f;
+    
+
     
     
     [Header("[Attack 1]")]
@@ -44,21 +53,21 @@ public class TargetPointMovement : MonoBehaviour
     private float nextFireTime = 0f;
     private bool atk1CanShoot = false;
 
+    
     [SerializeField] private Vector3 playerFollowOffset;
     [SerializeField] private float playerFollowSpeed;
     
     [SerializeField] private float timeTillAttack2;
 
 
-    [Space]
-    [Header("[Attack 2]")]
-    //[SerializeField] private int atk2ShotsPerBurst;
+    [Space] [Header("[Attack 2]")]
     [SerializeField] private float atk2FireRate;
 
-    [SerializeField] private float timeToNextPattern = 3f;
+    [SerializeField] private float nextPatternBufferTime = 3f;
     [SerializeField] private Patterns[] patterns;
-    
-    
+    private int nextPatternPoint = 0;  
+
+
     [Space]
     [Header("[Attack 3]")]
     [SerializeField] private float timeTillAttack1;
@@ -72,18 +81,24 @@ public class TargetPointMovement : MonoBehaviour
     {
         public Transform[] patternPoints;
         public int atk2ShotsPerBurst;
+        public float atk2InPatternMoveSpeed;
+        
+        [Header("[If unchecked, goes to idle immediately after reaching endPoint]")]
+        public bool keepShootingAfterReachingEndPoint;
+        [Header("[Number of Fired Shots takes priority, if time ran out but still have shots, keeps firing]")]
+        public float timeStayingAtEndPoint;
     }
 
 
     public bool GetInPosition()
     {
-        return inPosition;
+        return inPosition;  
     }
 
 
-    private void BattleJetGun_OnFiredAllShots(object sender, System.EventArgs e)
+    private void BattleJetGun_OnFiredAllShots(object sender, EventArgs e)
     {
-        atk1CanShoot = false;
+        firedAllShots = true;
     }
 
     private void OnDestroy()
@@ -98,6 +113,13 @@ public class TargetPointMovement : MonoBehaviour
         
         playerPos = playerMovement.transform;
         gun.OnFiredAllShots += BattleJetGun_OnFiredAllShots;
+
+        
+        //Additional Settings for Mini Jet, only use Attack 2
+        if (isMiniJet)
+        {
+            attackCounter = 2;
+        }
         
         
         //Wait time before starting battle
@@ -137,8 +159,7 @@ public class TargetPointMovement : MonoBehaviour
 
       
         //Attack 2 initial pos
-        startPoint = patterns[0].patternPoints[0];
-        endPoint = patterns[0].patternPoints[1];
+        AssignPatternPoints(patterns[0]);
     }
     
     
@@ -159,9 +180,10 @@ public class TargetPointMovement : MonoBehaviour
         else
         {
             atk1CanShoot = true;
+            firedAllShots = false;
         }
 
-        if (atk1CanShoot)
+        if (atk1CanShoot && !firedAllShots)
         {
             gun.BurstShoot(atk1ShotsPerBurst, atk1FireRate, atk1TimeUntilNextBurst);
         }
@@ -173,7 +195,7 @@ public class TargetPointMovement : MonoBehaviour
             
             if (!isChangingAttack)
             {
-                StartCoroutine(StartNextAttack(idleBufferTime));
+                StartCoroutine(StartNextAttack(atkChangeBufferTime));
             }
         }
     } 
@@ -207,7 +229,7 @@ public class TargetPointMovement : MonoBehaviour
                 
             if (!isChangingAttack)
             {
-                StartCoroutine(StartNextAttack(idleBufferTime));
+                StartCoroutine(StartNextAttack(atkChangeBufferTime));
             }
         }
     }
@@ -216,24 +238,33 @@ public class TargetPointMovement : MonoBehaviour
     //For Attack 2
     private IEnumerator StartNewPattern()
     {
-        yield return new WaitForSeconds(timeToNextPattern);    //put editable timer afterwards
+        yield return new WaitForSeconds(nextPatternBufferTime);    //put editable timer afterwards
+
+        stopTime = 0f;
         
         idling = false;
-       
         inPosition = false;
+        firedAllShots = false;
+
+        nextPatternPoint = 0;
         nextPattern++;
         if (nextPattern > patterns.Length - 1)
         {
             //Reset
             nextPattern = 0;
-            startPoint = patterns[0].patternPoints[0];
-            endPoint = patterns[0].patternPoints[1];
-            ChangeAttack();
+            
+            //update movement points
+            AssignPatternPoints(patterns[0]);
+            
+            
+            if (!isMiniJet)
+            {
+                ChangeAttack();
+            }
         }
         
         //update movement points
-        startPoint = patterns[nextPattern].patternPoints[0];
-        endPoint = patterns[nextPattern].patternPoints[1];
+        AssignPatternPoints(patterns[nextPattern]);
     }
 
 
@@ -252,18 +283,84 @@ public class TargetPointMovement : MonoBehaviour
     
     private void DoPattern()
     {
+        Patterns currPattern = patterns[nextPattern];
+        
+        
+        //Movement and attack
         if (Vector2.Distance(transform.position, endPoint.position) > 0f)
         {
-            Move(endPoint, inPatternMoveSpeed);
-            gun.Shoot(patterns[nextPattern].atk2ShotsPerBurst, atk2FireRate);
+            Move(endPoint, currPattern.atk2InPatternMoveSpeed);
+            gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+        }
+        //If reached end point
+        else
+        {
+            //If havent finished all pattern points yet, increment, skip idle
+            if (nextPatternPoint + 1 < currPattern.patternPoints.Length)
+            {
+                nextPatternPoint++;
+
+                startPoint = endPoint;  
+                endPoint = currPattern.patternPoints[nextPatternPoint];
+                return;
+            }
+            
+            //If want to keep shooting, dont go idle first
+            if (currPattern.keepShootingAfterReachingEndPoint)
+            {
+                gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+            }
+            else
+            {
+                if (!idling)
+                {
+                    idling = true;
+                    StartCoroutine(StartNewPattern());
+                }
+            }
+            
+            //Duration it stays shooting after reaching endPoint
+            if (stopTime == 0f)
+            {
+                stopTime = Time.time + currPattern.timeStayingAtEndPoint;
+            }
+            
+            //If havent reached duration yet, keep shooting
+            if (Time.time < stopTime) return;
+            
+            
+            //If fired all shots, idle
+            if (firedAllShots)
+            {
+                if (!idling)
+                {
+                    idling = true;
+                    StartCoroutine(StartNewPattern());
+                }
+            }
+        }
+    }
+
+    private bool IsSinglePatternPoint(Patterns pattern)
+    {
+        if (pattern.patternPoints.Length == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void AssignPatternPoints(Patterns pattern)
+    {
+        if (IsSinglePatternPoint(pattern))
+        {
+            startPoint = idlePoint;
+            endPoint = pattern.patternPoints[0];
         }
         else
         {
-            if (!idling)
-            {
-                idling = true;
-                StartCoroutine(StartNewPattern());
-            }
+            startPoint = pattern.patternPoints[0];
+            endPoint = pattern.patternPoints[1];
         }
     }
 
@@ -271,7 +368,7 @@ public class TargetPointMovement : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, idlePoint.position) > 0f)
         {
-            Move(idlePoint, inPatternMoveSpeed);
+            Move(idlePoint, goToIdleMoveSpeed);
             OnReachingIdle?.Invoke(this, EventArgs.Empty);
         }
     }
