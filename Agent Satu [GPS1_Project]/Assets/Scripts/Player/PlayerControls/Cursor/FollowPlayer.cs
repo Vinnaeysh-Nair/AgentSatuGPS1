@@ -1,16 +1,23 @@
+using System.Net.Sockets;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
     //Components
-    public GameObject followPoint;
-    public PlayerController controller;
+    //public Transform followPoint;
+    [SerializeField] private PlayerController controller;
 
     //Fields
     //[SerializeField] [Range(0f, 1f)] private float offsetY;   (offset crouch height if needed)
     private bool wasCrouching;
+    private Transform followTarget;
+    [SerializeField] private Vector2 followOffset;
     [SerializeField] private float crouchHeight;
-    
+
+    void Start()
+    {
+        followTarget = transform.parent;
+    }
     void Update()
     {
         Follow();
@@ -24,19 +31,19 @@ public class FollowPlayer : MonoBehaviour
     private void Follow()
     {
         wasCrouching = false;
-        transform.position = followPoint.transform.position;
+        transform.position = (Vector2) followTarget.position + followOffset;
     }
     
     
     //When player crouches, lower position
     private void AdjustPos()
     {
-        Vector2 prevPivotPos = transform.position;
+        Vector2 posBeforeCrouch = transform.position;
         
         if (!wasCrouching)
         {
             wasCrouching = true;
-            transform.position = new Vector2(prevPivotPos.x, prevPivotPos.y - crouchHeight);
+            transform.position = new Vector2(posBeforeCrouch.x, posBeforeCrouch.y + crouchHeight);
         }
     }
 }

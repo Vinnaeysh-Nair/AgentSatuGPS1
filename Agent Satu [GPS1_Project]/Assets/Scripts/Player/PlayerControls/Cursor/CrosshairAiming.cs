@@ -4,7 +4,7 @@ public class CrosshairAiming : MonoBehaviour
 {
     //Components;
     private Camera cam;
-    public Transform pivotTransform;
+    private Transform pivotTransform;
     
     //UI
     private PauseMenu pauseMenu;
@@ -25,6 +25,7 @@ public class CrosshairAiming : MonoBehaviour
 
     void Start()
     {
+        pivotTransform = GetComponent<Transform>();
         pauseMenu = PauseMenu.Instance;
     }
     

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2494058855502580425}
   - component: {fileID: 2494058855502580424}
   - component: {fileID: 2494058855502580423}
+  - component: {fileID: 5911151374939611761}
   m_Layer: 11
   m_Name: GangMember_Pistol_Body
   m_TagString: Limb - Others
@@ -167,7 +168,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &5911151374939611761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494058855502580427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &3185642991094995070
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +197,7 @@ GameObject:
   - component: {fileID: 4000941676733670498}
   - component: {fileID: 4000941676733670493}
   - component: {fileID: 3868448490785129182}
+  - component: {fileID: 8954072236696282871}
   m_Layer: 11
   m_Name: GangMember_Pistol_Head
   m_TagString: Limb - Head
@@ -308,7 +324,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.88}
-  m_ConnectedAnchor: {x: 0.29999852, y: 1.6850013}
+  m_ConnectedAnchor: {x: 0.29999924, y: 1.6850011}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -329,7 +345,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 2
+--- !u!114 &8954072236696282871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185642991094995070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &3234197849521909222
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +460,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 2374340452112123156, guid: e2fcffcc0b84b374584bd96413f53d8c, type: 3}
   fireRate: 0.4
-  isBurst: 0
-  testShooting: 0
   burstInterval: 5
   bulletPerBurst: 0
 --- !u!1 &4175787601534745782
@@ -448,6 +476,7 @@ GameObject:
   - component: {fileID: 4175787601534745780}
   - component: {fileID: 4175787601534745783}
   - component: {fileID: 2163855790120691327}
+  - component: {fileID: 5497551607622597487}
   m_Layer: 11
   m_Name: GangMember_Pistol__Left Leg
   m_TagString: Limb - Leg
@@ -574,7 +603,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.04, y: 1.82}
-  m_ConnectedAnchor: {x: -0.6000006, y: -1.6049993}
+  m_ConnectedAnchor: {x: -0.5999994, y: -1.6049995}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -595,7 +624,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &5497551607622597487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175787601534745782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &5172793838394070511
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +654,7 @@ GameObject:
   - component: {fileID: 1542060712560729806}
   - component: {fileID: 1933891877893511010}
   - component: {fileID: 1933891877893511009}
+  - component: {fileID: 666498418177704179}
   m_Layer: 11
   m_Name: GangMember_Pistol_Left hand
   m_TagString: Limb - Others
@@ -738,7 +782,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.6, y: 1.37}
-  m_ConnectedAnchor: {x: -0.48000097, y: 1.2550002}
+  m_ConnectedAnchor: {x: -0.4799999, y: 1.255}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -760,8 +804,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivotTransform: {fileID: 7455705363521675314}
+  enemyFlipped: {fileID: 0}
+  enemyAgro: {fileID: 0}
   followAngleOffset: 0
-  facingLeft: 1
 --- !u!114 &1933891877893511009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +819,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &666498418177704179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172793838394070511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &5400484566994339486
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +848,7 @@ GameObject:
   - component: {fileID: 3753589248569156367}
   - component: {fileID: 3753589248569156366}
   - component: {fileID: 3753589248569156360}
+  - component: {fileID: 5017440562518401204}
   m_Layer: 11
   m_Name: GangMember_Pistol__Right leg
   m_TagString: Limb - Leg
@@ -915,7 +975,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.06, y: 1.81}
-  m_ConnectedAnchor: {x: 0.41999817, y: -1.6149998}
+  m_ConnectedAnchor: {x: 0.4199986, y: -1.6149997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -936,7 +996,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &5017440562518401204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400484566994339486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3
 --- !u!1 &7470977560133974160
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +1020,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7470977560133974383}
-  - component: {fileID: 7470977560133974382}
   - component: {fileID: 7470977560133974381}
   m_Layer: 0
   m_Name: GangMember_Pistol_Limbs
@@ -976,18 +1049,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7470977560133974382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7470977560133974160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bfd422f2ebbd447960bcf9a8bd46a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7470977560133974381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1076,7 @@ GameObject:
   - component: {fileID: 557896975730157340}
   - component: {fileID: 557896975730157343}
   - component: {fileID: 557896975730157339}
+  - component: {fileID: 6086771828670813532}
   m_Layer: 11
   m_Name: GangMember_Pistol_Right hand
   m_TagString: Limb - Others
@@ -1141,7 +1203,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.37, y: 1.6}
-  m_ConnectedAnchor: {x: 1.099999, y: 1.275}
+  m_ConnectedAnchor: {x: 1.0999984, y: 1.2749997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1162,4 +1224,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e239b9f21e20d64dad3de92d85ec776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 0
   initialLimbHp: 3
+--- !u!114 &6086771828670813532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7699080123842070443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8684150e10f5549be847b8177810fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismemberedLimbGravity: 3

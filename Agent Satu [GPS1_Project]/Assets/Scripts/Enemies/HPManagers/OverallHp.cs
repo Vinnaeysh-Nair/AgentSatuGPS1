@@ -1,29 +1,40 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 //Attached to all gameObjects tagged with "Enemy" (auto - by SetupOverallHp script).
 public class OverallHp : EnemyHp
 {    
     //Components
-    private SetupOverallHp setupOverallHp;
+    private Ragdoll ragdoll;
+    private SpawnPickups spawnPickups;
 
-
+    private List<LimbHp> limbHps;
+    
     //Fields
+    [Header("Edit: ")]
     [SerializeField] private int initialOverallHp;
+    
+
+    
     private int legDismemberedCount = 0;
     private bool isHeadDismembered = false;
 
+    public event EventHandler OnDamaged;
+    public event EventHandler OnDeath;
+
     
-    void Awake()
-    {
-        setupOverallHp = SetupOverallHp.setupOverallInstance;
-    }
-    
+
     void Start()
     {
-        //CopyInitialHp();
-        hp = initialOverallHp;
+        ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
+        spawnPickups = GetComponent<SpawnPickups>();
+
+
+        base.currHp = initialOverallHp;
     }
+
+
     
     //Getter
     public int GetOverallHp()
@@ -57,16 +68,48 @@ public class OverallHp : EnemyHp
         this.isHeadDismembered = true;
     }
     
-    //Get overall hp based on enemy type name in the EnemyType list
-    private void CopyInitialHp()
+    public void TakeOverallDamage(int dmg, Vector2 flingDirection)
     {
-        List<SetupOverallHp.EnemyType> typeList = setupOverallHp.enemyTypesList;
-        for (int i = 0; i < typeList.Count; i++)
+        //Stop decrementing starting at 0
+        if (currHp <= 0) return;
+        currHp -= dmg;
+        
+        //Die
+        if (currHp <= 0)
         {
-            if (typeList[i].GetEnemyTypeName() == transform.name)
-            {
-                initialOverallHp = typeList[i].GetInitialHp();
-            }
+            Die(flingDirection);
         }
+        
+        //Trigger detection when damaged
+        OnDamaged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Die(Vector2 flingDirection)
+    {
+        //Disable unwanted components
+        if (transform.TryGetComponent(out EnemyAI_Melee enemyAIMelee))
+        {
+            enemyAIMelee.enabled = false;
+        }
+
+        if (transform.TryGetComponent(out EnemyAI_Ranged enemyAIRanged))
+        {
+            enemyAIRanged.enabled = false;
+        }
+
+        if (transform.TryGetComponent(out Enemy_Agro enemyAgro))
+        {
+            enemyAgro.enabled = false;
+        }
+
+        if (transform.TryGetComponent(out Collider2D collider))
+        {
+            collider.enabled = false;
+        }
+        
+        ragdoll.ActivateRagdoll(flingDirection);
+        spawnPickups.enabled = true;
+        
+        OnDeath?.Invoke(this, EventArgs.Empty);
     }
 }

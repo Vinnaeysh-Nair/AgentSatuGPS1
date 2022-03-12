@@ -46,16 +46,7 @@ public class Dismemberment : MonoBehaviour
         }
         
         //Disable unwanted components
-        if (detachedLimb.TryGetComponent(out SpriteSkin spriteSkin))    
-        {
-            spriteSkin.enabled = false;
-        }
-        if (detachedLimb.TryGetComponent(out HingeJoint2D joint))
-        {
-            joint.enabled = false;
-        }
-
-        detachedLimb.GetComponent<LimbHp>().enabled = false;
+        DisableComponents(detachedLimb);
         
         
         //Setup rigidbody
@@ -70,5 +61,23 @@ public class Dismemberment : MonoBehaviour
         
         //Disable original limb
         limb.SetActive(false);
+    }
+
+    private void DisableComponents(GameObject detachedLimb)
+    {
+        if (detachedLimb.TryGetComponent(out SpriteSkin spriteSkin))    
+        {
+            spriteSkin.enabled = false;
+        }
+        if (detachedLimb.TryGetComponent(out HingeJoint2D joint))
+        {
+            joint.enabled = false;
+        }
+        if (detachedLimb.TryGetComponent(out ArmToPlayerTracking tracking))
+        {
+            tracking.enabled = false;
+        }
+        detachedLimb.GetComponent<Dismemberment>().enabled = false;
+        detachedLimb.GetComponent<LimbHp>().enabled = false;
     }
 }

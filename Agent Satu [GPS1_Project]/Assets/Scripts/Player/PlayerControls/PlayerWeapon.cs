@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using System;
+
 
 
 public class PlayerWeapon : MonoBehaviour
 {
     //Components
-    public GameObject bullet;
-    public Transform[] firePoints;
+    [SerializeField] private Transform bullet;
+    [SerializeField] private Transform firePointContainer;
+    private Transform[] firePoints;
     private ObjectPooler pooler;
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
-    
+
     //UI
     private DisplayAmmoCount displayAmmoCount;
     private PauseMenu pauseMenu;
@@ -29,7 +30,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int clipSize;
     //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
-    //[SerializeField] private bool isMultishot = false;
     public bool isUnlocked = false;
 
     //Ammo counts
@@ -40,6 +40,11 @@ public class PlayerWeapon : MonoBehaviour
     private bool reloading = false;
 
 
+    public bool GetReloading()
+    {
+        return reloading;
+    }
+    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
@@ -53,11 +58,11 @@ public class PlayerWeapon : MonoBehaviour
     void Start()
     {
         //Get firepoints
-        int size = transform.childCount;
+        int size = firePointContainer.childCount;
         firePoints = new Transform[size];
         for (int i = 0; i < size; i++)
         {
-            firePoints[i] = transform.GetChild(i).transform;
+            firePoints[i] = firePointContainer.GetChild(i).transform;
         }
         
         //If pistol, ignore setting up ammo
@@ -75,8 +80,11 @@ public class PlayerWeapon : MonoBehaviour
             currClip = currTotalAmmo;
             currAmmoReserve = 0;
         }
+        
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
     }
-    
+
+
     private void OnEnable()
     {
         displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
@@ -94,6 +102,7 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    
     void Update()
     {
         if (pauseMenu.gameIsPaused) return;
@@ -103,7 +112,8 @@ public class PlayerWeapon : MonoBehaviour
             SingleClickShooting();
             return;
         }
-        
+
+      
         
         //Below are guns that need to check for reloading
         
@@ -182,8 +192,7 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         UpdateAmmoDisplay();
-
-        //Instantiate(bullet, firePoint.position, firePoint.rotation);
+        
         //animCon.OnShooting();
 
         //IEnumerator allows delay after a task
@@ -202,12 +211,13 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+  
+
     private IEnumerator Reload()
     {
         if (!reloading)
         {
             reloading = true;
-
             yield return new WaitForSeconds(reloadTime);
 
             //Check if reloadAmount exceeds reserve
@@ -219,7 +229,7 @@ public class PlayerWeapon : MonoBehaviour
             }
             else
             {
-                currClip += reloadAmount;   
+                currClip += reloadAmount;
                 currAmmoReserve -= reloadAmount;
             }
 
@@ -228,6 +238,7 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    //For pickup items
     public void ReplenishAmmo(int replenishAmount)
     {
         currTotalAmmo += replenishAmount;

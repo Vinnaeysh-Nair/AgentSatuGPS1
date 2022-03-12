@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class WeaponSwitching : MonoBehaviour
 {
     public int selectedWeapon = 0;
     private PlayerWeapon[] playerWeapons;
+    public event EventHandler OnWeaponChange;
+
     
     void Start()
     {
@@ -15,7 +18,8 @@ public class WeaponSwitching : MonoBehaviour
     void Update()
     {
         int prevSelectedWeapon = selectedWeapon;
-        
+
+        if (playerWeapons[selectedWeapon].GetReloading()) return;
 
         //Scroll wheel to change weapon
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -26,7 +30,11 @@ public class WeaponSwitching : MonoBehaviour
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
             else
+            {
                 selectedWeapon++;
+                WeaponIsSwitched();
+            }
+                
             
         }
         
@@ -38,7 +46,11 @@ public class WeaponSwitching : MonoBehaviour
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
             else
+            {
                 selectedWeapon--;
+                WeaponIsSwitched();
+            }
+                
             
         }
         
@@ -52,6 +64,7 @@ public class WeaponSwitching : MonoBehaviour
 
                 if (!IsSpecificWeaponUnlocked(i - 1)) return;
                 selectedWeapon = i-1;
+                WeaponIsSwitched();
             }
         }
         
@@ -124,5 +137,10 @@ public class WeaponSwitching : MonoBehaviour
         { 
             playerWeapons[i] = transform.GetChild(i).GetComponent<PlayerWeapon>();
         }
+    }
+
+    private void WeaponIsSwitched()
+    {
+        OnWeaponChange?.Invoke(this, EventArgs.Empty);
     }
 }

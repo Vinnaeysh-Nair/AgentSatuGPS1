@@ -11,10 +11,10 @@ public class EnemyWeapon_Guns : MonoBehaviour
 
     //Fields
     [SerializeField] private float fireRate = 1f;
-    [SerializeField] private bool isBurst = false;  //for testing, can remove later
-    [SerializeField] private bool testShooting = false; //for testing, can remove later
+    // [SerializeField] private bool isBurst = false;  //for testing, can remove later
+    // [SerializeField] private bool testShooting = false; //for testing, can remove later
     
-    [Header("For burst weapons(tick isBurst for stats below to apply)")]
+    [Header("For burst weapons(only applies for StartBurstingShooting())")]
     [SerializeField] private float burstInterval = 5f;
     [SerializeField] private int bulletPerBurst;
 
@@ -41,19 +41,19 @@ public class EnemyWeapon_Guns : MonoBehaviour
     }
 
     //For testing
-    void Update()
-    {
-        // if (!testShooting) return;
-        // if (isBurst)
-        // {
-        //     StartBurstShooting();
-        // }
-        // else
-        // {
-        //     StartShooting();
-        // }
-    }
-    
+    // void Update()
+    // {
+    //     if (!testShooting) return;
+    //     if (isBurst)
+    //     {
+    //         StartBurstShooting();
+    //     }
+    //     else
+    //     {
+    //         StartShooting();
+    //     }
+    // }
+    //
     
     //Call from enemy AI script, when player is detected
     //For single shot firing pattern (eg. pistol)

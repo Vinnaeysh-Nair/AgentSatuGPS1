@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Attached to CameraTargetPos object
 public class CameraTarget : MonoBehaviour
 {
     //Components
-    private CrosshairAiming aim;
+    [SerializeField] private CrosshairAiming aim;
     private Transform playerBody;
 
     //Field
@@ -16,7 +17,7 @@ public class CameraTarget : MonoBehaviour
     void Awake()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
-        aim = transform.Find("/Player/PlayerBody/Pivots + Arms/LeftPivot/LeftArm").GetComponent<CrosshairAiming>();
+        aim = transform.Find("/Player/PlayerBody/WeaponPivot").GetComponent<CrosshairAiming>();
     }
     void FixedUpdate()
     {

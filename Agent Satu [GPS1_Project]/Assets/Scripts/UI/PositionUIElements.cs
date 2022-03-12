@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PositionUIElements : MonoBehaviour
 {
-
     public UIElement[] elements;
     private Camera cam;
     
@@ -20,6 +19,7 @@ public class PositionUIElements : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        GetComponent<Canvas>().enabled = true;
         
         foreach (UIElement element in elements)
         {

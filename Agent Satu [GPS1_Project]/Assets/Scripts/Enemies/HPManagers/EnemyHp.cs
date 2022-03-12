@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class EnemyHp : MonoBehaviour
 {
-   protected int hp;
+   [Header("For view only: ")]
+   [SerializeField] protected int currHp;
    
-   public int GetInitialHp()
+   
+   public int GetHp()
    {
-      return hp;
+      return currHp;
    }
 }

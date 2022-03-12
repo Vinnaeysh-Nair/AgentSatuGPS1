@@ -3,11 +3,11 @@ using UnityEngine;
 public class FollowMouse : MonoBehaviour
 {
     //Components
-    public GameObject crosshairSprite;
-    public CrosshairAiming aim;
+    [SerializeField] private CrosshairAiming aim;
 
+    
     void FixedUpdate()
     {
-        crosshairSprite.transform.position = aim.GetMousePos();
+       transform.position = aim.GetMousePos();
     }
 }
