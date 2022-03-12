@@ -8,30 +8,41 @@ public class DialogueAndLines : MonoBehaviour
 
     private bool canTalk = true;
     private float timer = 1.0f;
-    //private int dialogueCount = 0;
+    private int dialogueCount = 0;
+    
+    void Start()
+    {
+        //Debug.Log(dialogueCount);
+    }
+
     void Update()
     {
         if (gameObject.activeSelf)
         {
             if (canTalk && Input.GetKey("e"))
             {
-                TriggerDialogue();
-                canTalk = false;
+                if (dialogueCount == 0)
+                {
+                    TriggerDialogue();
+                    canTalk = false;
+                    dialogueCount++;
+                }
+                else if (dialogueCount >= 1)
+                {
+                    TriggerNextDialogue();
+                    canTalk = false;
+                    dialogueCount++;
+                }
             }
-
             timer -= Time.deltaTime;
             if (timer <= 0.0f)
             {
-                timer = 1.0f;
                 canTalk = true;
-                //dialogue++;
+                timer = 1.0f;
             }
         }
-
-        //if (!(gameObject.activeSelf))
-        //{
-        //    dialogue = 0;
-        //}
+        else
+            dialogueCount = 0;
     }
 
     public void TriggerDialogue()
@@ -39,8 +50,8 @@ public class DialogueAndLines : MonoBehaviour
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
-    //public void TriggerNextDialogue()
-    //{
-    //    FindObjectOfType<DialogueManager>().DisplayNextSentence(Dialogue);
-    //}
+    public void TriggerNextDialogue()
+    {
+        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+    }
 }

@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    private Queue<string> dialogueLine;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
 
+    private Queue<string> dialogueLine;
 
     void Start()
     {
         dialogueLine = new Queue<string>();
+        //nameText = GameObject.Find("Name").GetComponent<Text>;
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Starting conversation with " + dialogue.name);
+        nameText.text = dialogue.name;
+        //Debug.Log("Talking to " + dialogue.name);
 
         dialogueLine.Clear();
 
@@ -33,9 +38,11 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        //string tempSentence = dialogueLine.Dequeue();
+        string tempSentence = dialogueLine.Dequeue();
         //Debug.Log(tempSentence);
-        Debug.Log(dialogueLine.Dequeue());
+        
+        dialogueText.text = tempSentence;
+        //dialogueText.text = dialogueLine.Dequeue();
     }
 
     void EndDialogue()
