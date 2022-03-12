@@ -40,9 +40,12 @@ public class DialogueAndLines : MonoBehaviour
                 canTalk = true;
                 timer = 1.0f;
             }
+            return;
         }
-        else
-            dialogueCount = 0;
+        else if(!(gameObject.activeSelf))
+        { 
+            dialogueCount = 0; 
+        }
     }
 
     public void TriggerDialogue()

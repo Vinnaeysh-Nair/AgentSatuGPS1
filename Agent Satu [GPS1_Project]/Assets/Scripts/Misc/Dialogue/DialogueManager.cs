@@ -7,12 +7,14 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public GameObject dialogueBox;
 
     private Queue<string> dialogueLine;
 
     void Start()
     {
         dialogueLine = new Queue<string>();
+        //dialogueBox = GameObject.Find("DialogueBox");
         //nameText = GameObject.Find("Name").GetComponent<Text>;
     }
 
@@ -32,7 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (dialogueLine.Count == 0)
+        if (dialogueLine.Count <= 0)
         {
             EndDialogue();
             return;
@@ -47,6 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        dialogueBox.SetActive(false);
         Debug.Log("End of conversation");
     }
 }
