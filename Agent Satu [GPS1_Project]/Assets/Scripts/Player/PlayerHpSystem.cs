@@ -1,16 +1,16 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class PlayerHpSystem : MonoBehaviour
 {
     //Components
-    public SceneLoader sceneLoader;
+    [SerializeField] private SceneLoader sceneLoader;
+    [SerializeField] private BarChange healthBar;
     
     //Fields
-    public int hpCountPlayer = 5;
+    [SerializeField] private int hpCountPlayer = 5;
     private int currHp;
-  
+
     
     void Start()
     {
@@ -21,21 +21,25 @@ public class PlayerHpSystem : MonoBehaviour
     {
         currHp -= dmg;
         
-        //Might be used to scale healthbar
-        float percentage =(float) currHp / hpCountPlayer;
-        
-        if (currHp <= 0)
-        {
-            //Debug.Log("ded");
-            //Add lose scene
-            sceneLoader.LoadLoseScene();
-        }
+        //Scale healthbar
+        healthBar.SetBarAmount(ConvertToPercentage());
 
+        if (currHp > 0) return;
+        sceneLoader.LoadLoseScene();
     }
 
     public void ReplenishHealth(int amount)
     {
         if (currHp == hpCountPlayer) return;
         currHp += amount;
+        
+        //Scale healthbar
+        healthBar.SetBarAmount(ConvertToPercentage());
+    }
+
+    private float ConvertToPercentage()
+    {
+        float percentage = (float) currHp / hpCountPlayer;
+        return percentage;
     }
 }

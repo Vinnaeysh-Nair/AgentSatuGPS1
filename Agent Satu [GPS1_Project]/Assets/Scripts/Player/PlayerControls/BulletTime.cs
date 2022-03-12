@@ -8,6 +8,8 @@ public class BulletTime : MonoBehaviour
     //Components
     [Header("Components")]
     [SerializeField] private GameObject bulletTimeScreenEffect;
+    [SerializeField] private BarChange bulletTimeBar;
+    private PauseMenu pauseMenu;
     
     //Fields
     [Header("Settings")]
@@ -21,9 +23,17 @@ public class BulletTime : MonoBehaviour
     [SerializeField] private float abilityGauge = 1f;
     private bool activated = false;
 
+
+    void Start()
+    {
+        pauseMenu = PauseMenu.Instance;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         if (abilityGauge <= 0)
         {
             StartCoroutine(DeactivateBulletTime());
@@ -60,6 +70,7 @@ public class BulletTime : MonoBehaviour
         }
         abilityGauge = Mathf.Clamp(abilityGauge, 0f, 1f);
         
+        bulletTimeBar.SetBarAmount(abilityGauge);
     }
     
     private void ActivateBulletTime()

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 662758565863285036}
   - component: {fileID: 2985635001454431170}
   - component: {fileID: 8229458475122848716}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Bullet_SMG (Enemy)
-  m_TagString: Bullet - Enemy
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -140,3 +140,4 @@ MonoBehaviour:
   impactEffect: {fileID: 8407740060906985168, guid: 147030fe6c941354db713692c8dd6c59, type: 3}
   forceDampening: 0.27
   bulletDamage: 1
+  maxDeflectionTimes: 3

@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 
 public class PlayerWeapon : MonoBehaviour
@@ -14,6 +13,12 @@ public class PlayerWeapon : MonoBehaviour
     //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
+    
+    //UI
+    private DisplayAmmoCount displayAmmoCount;
+    private PauseMenu pauseMenu;
+    
+    
 
     
     //Fields
@@ -27,19 +32,22 @@ public class PlayerWeapon : MonoBehaviour
     //[SerializeField] private bool isMultishot = false;
     public bool isUnlocked = false;
 
+    //Ammo counts
     private float nextFireTime = 0f;
     private int currTotalAmmo;
     private int currAmmoReserve;
     private int currClip;
     private bool reloading = false;
-    
+
 
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
-        
+        pauseMenu = PauseMenu.Instance;
+
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsList = inventory.GetWeaponsList();
+        displayAmmoCount = GetComponent<DisplayAmmoCount>();
     }
 
     void Start()
@@ -71,6 +79,8 @@ public class PlayerWeapon : MonoBehaviour
     
     private void OnEnable()
     {
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        
         if (wepId == 0) return;
 
         //If theres a change in totalAmmo, update the reserve
@@ -86,6 +96,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Update()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         if (wepId == 0)
         {
             SingleClickShooting();
@@ -168,6 +180,9 @@ public class PlayerWeapon : MonoBehaviour
             GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             StartCoroutine(SetBulletInactive(shotBullet));
         }
+
+        UpdateAmmoDisplay();
+
         //Instantiate(bullet, firePoint.position, firePoint.rotation);
         //animCon.OnShooting();
 
@@ -207,6 +222,8 @@ public class PlayerWeapon : MonoBehaviour
                 currClip += reloadAmount;   
                 currAmmoReserve -= reloadAmount;
             }
+
+            UpdateAmmoDisplay();
             reloading = false;
         }
     }
@@ -215,6 +232,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         currTotalAmmo += replenishAmount;
         currAmmoReserve += replenishAmount;
+
+        UpdateAmmoDisplay();
+    }
+
+    private void UpdateAmmoDisplay()
+    {
+        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
     }
     
     //Become inactive after a duration after being fired. 
@@ -222,10 +246,5 @@ public class PlayerWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         shotBullet.SetActive(false);
-    }
-
-    private void PrintAmmo()
-    {
-        Debug.Log(currClip + "/" + currAmmoReserve);
     }
 }

@@ -6,6 +6,9 @@ public class CrosshairAiming : MonoBehaviour
     private Camera cam;
     public Transform pivotTransform;
     
+    //UI
+    private PauseMenu pauseMenu;
+    
     //Fields
     private Vector2 mousePos;
     public float followAngleOffset;
@@ -19,10 +22,17 @@ public class CrosshairAiming : MonoBehaviour
     {
         cam = Camera.main;
     }
+
+    void Start()
+    {
+        pauseMenu = PauseMenu.Instance;
+    }
     
     //Fix camera not following after a certain distance from spawn position
     void Update()
     {
+        if (pauseMenu.gameIsPaused) return;
+        
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         PointToMouse();
     }

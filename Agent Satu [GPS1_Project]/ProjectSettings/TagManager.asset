@@ -10,8 +10,9 @@ TagManager:
   - Limb - Others
   - Limb - Leg
   - Limb - Head
-  - Bullet - Player
-  - Bullet - Enemy
+  - Limb - GunHand
+  - Stair
+  - Wall - Deflect
   layers:
   - Default
   - TransparentFX
@@ -23,11 +24,11 @@ TagManager:
   - HitDetector
   - PlatformDetector
   - PickupItems
-  - Bullet
+  - 
   - Enemy
-  - 
-  - 
-  - 
+  - EnemyDetectionRange
+  - Bullet - Enemy
+  - Bullet - Player
   - 
   - 
   - 

@@ -21,7 +21,6 @@ public class FindLimbs : MonoBehaviour
                 obj.AddComponent<Dismemberment>();
                 obj.AddComponent<EnemyHpUpdater>();
             }
-            
         }
     }
 }
