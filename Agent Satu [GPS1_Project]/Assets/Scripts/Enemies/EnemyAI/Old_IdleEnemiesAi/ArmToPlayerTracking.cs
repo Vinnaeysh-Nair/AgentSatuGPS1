@@ -4,10 +4,12 @@ public class ArmToPlayerTracking : MonoBehaviour
 {
     //reference to other scripts
     [SerializeField] private Transform pivotTransform;
-    [SerializeField] private Enemy_Flipped enemyFlipped;
+    [SerializeField] private OverallHp overallHp;
     [SerializeField] private Enemy_Agro enemyAgro;
     private PlayerMovement playerMovement;
-    private OverallHp overallHp;
+    
+    //[SerializeField] private Enemy_Flipped enemyFlipped;
+
 
     
     [SerializeField] private float followAngleOffset;
@@ -20,8 +22,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     void Start()
     {
         playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
-
-        overallHp = transform.parent.parent.GetComponent<OverallHp>();
+        
         overallHp.OnDeath += OverallHp_OnDeath;
     }
 
