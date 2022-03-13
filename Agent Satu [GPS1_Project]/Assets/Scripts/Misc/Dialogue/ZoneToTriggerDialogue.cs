@@ -17,7 +17,7 @@ public class ZoneToTriggerDialogue : MonoBehaviour
     {
         if(inTalkingZone)
         {
-            if (Input.GetKey("e"))
+            if (Input.GetKeyDown("e"))
                 TriggeringDialogue();
         }
         else

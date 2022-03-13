@@ -6,13 +6,12 @@ public class DialogueAndLines : MonoBehaviour
 {
     public Dialogue dialogue;
 
-    private bool canTalk = true;
+    //private bool canTalk = true;
     private float timer = 0.5f;
     private bool firstConversation = true;
     
     void Start()
     {
-        
         //Debug.Log(dialogueCount);
     }
 
@@ -24,20 +23,22 @@ public class DialogueAndLines : MonoBehaviour
             {
                 TriggerDialogue();
                 firstConversation = false;
+                TriggerNextDialogue();
             }
-            
-            if (canTalk && Input.GetKey("e"))
+
+            //canTalk &&
+            if (Input.GetKeyDown("e"))
             {
                 TriggerNextDialogue();
-                canTalk = false;
+                //canTalk = false;
             }
         }
-        timer -= Time.deltaTime;
-        if (timer <= 0.0f)
-        {
-            canTalk = true;
-            timer = 0.5f;
-        }
+        //timer -= Time.deltaTime;
+        //if (canTalk == false && timer <= 0.0f)
+        //{
+        //    canTalk = true;
+        //    timer = 0.5f;
+        //}
     }
 
     public void TriggerDialogue()
@@ -53,5 +54,6 @@ public class DialogueAndLines : MonoBehaviour
     void OnDisable ()
     {
         firstConversation = true;
+        //canTalk = true;
     }
 }
