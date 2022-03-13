@@ -772,6 +772,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 42, y: 42}
   m_EdgeRadius: 0
+--- !u!4 &319831939 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 744702339298511556, guid: 6b3c8d8697a7f4d4796debd181c20f78, type: 3}
+  m_PrefabInstance: {fileID: 844308912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &337264609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1734,6 +1739,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1569413717625699711, guid: 7f3bb09446d2fdb46acb5b375eaa1c75, type: 3}
   m_PrefabInstance: {fileID: 779856888}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &813937663 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 744702338594432541, guid: 6b3c8d8697a7f4d4796debd181c20f78, type: 3}
+  m_PrefabInstance: {fileID: 844308912}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &844308912
 PrefabInstance:
@@ -5930,6 +5940,14 @@ PrefabInstance:
       propertyPath: thresholdY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8001061146907057673, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+      propertyPath: leftBarrier
+      value: 
+      objectReference: {fileID: 813937663}
+    - target: {fileID: 8001061146907057673, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+      propertyPath: rightBarrier
+      value: 
+      objectReference: {fileID: 319831939}
     - target: {fileID: 8001061146907057673, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
       propertyPath: thresholdYUp
       value: 10

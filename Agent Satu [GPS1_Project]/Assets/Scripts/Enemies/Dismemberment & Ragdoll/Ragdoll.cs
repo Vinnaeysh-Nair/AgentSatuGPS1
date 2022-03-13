@@ -1,5 +1,5 @@
-using Cinemachine;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 
 //Attached to each enemy types (manual).
@@ -45,11 +45,11 @@ public class Ragdoll : MonoBehaviour
 
     private void RagdollEffect(Transform limbToRagdoll, Vector2 flingDirection)
     {
-        ////Disable unwanted components
-        // if (limbToRagdoll.TryGetComponent(out SpriteSkin spriteSkin))
-        // {
-        //     spriteSkin.enabled = false;
-        // }
+        //Disable unwanted components
+        if (limbToRagdoll.TryGetComponent(out SpriteSkin spriteSkin))
+        {
+            spriteSkin.enabled = false;
+        }
         
 
         
