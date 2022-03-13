@@ -7,7 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public GameObject dialogueBox;
+    //public GameObject dialogueBox;
 
     private Queue<string> dialogueLine;
 
@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueLine.Enqueue(sentence);
         }
-        DisplayNextSentence();
+        //DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
@@ -49,7 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        dialogueBox.SetActive(false);
+        //dialogueBox.SetActive(false);
         Debug.Log("End of conversation");
     }
 }
