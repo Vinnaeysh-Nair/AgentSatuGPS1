@@ -46,12 +46,8 @@ public class Ragdoll : MonoBehaviour
     private void RagdollEffect(Transform limbToRagdoll, Vector2 flingDirection)
     {
         //Disable unwanted components
-        if (limbToRagdoll.TryGetComponent(out SpriteSkin spriteSkin))
-        {
-            spriteSkin.enabled = false;
-        }
+        limbToRagdoll.GetComponent<SpriteSkin>().enabled = false;
         
-
         
         //Setup rigidbody
         Rigidbody2D ragdolledLimbRb = limbToRagdoll.GetComponent<Rigidbody2D>();
