@@ -6,6 +6,8 @@ using UnityEngine.U2D.Animation;
 public class Ragdoll : MonoBehaviour
 {
     //Components
+    [SerializeField] private Transform[] wepToDetachArray;
+    [SerializeField] private float detachedWepGravity;
     private TagManager tagManager;
     
     //Fields
@@ -46,12 +48,8 @@ public class Ragdoll : MonoBehaviour
     private void RagdollEffect(Transform limbToRagdoll, Vector2 flingDirection)
     {
         //Disable unwanted components
-        if (limbToRagdoll.TryGetComponent(out SpriteSkin spriteSkin))
-        {
-            spriteSkin.enabled = false;
-        }
+        limbToRagdoll.GetComponent<SpriteSkin>().enabled = false;
         
-
         
         //Setup rigidbody
         Rigidbody2D ragdolledLimbRb = limbToRagdoll.GetComponent<Rigidbody2D>();
@@ -61,5 +59,20 @@ public class Ragdoll : MonoBehaviour
         
         //Fling according to bullet direction
         ragdolledLimbRb.AddForce(flingDirection, ForceMode2D.Impulse);
+        DetachWeapon();
+    }
+    
+    private void DetachWeapon()
+    {
+        foreach (Transform wep in wepToDetachArray)
+        {
+            //unparent
+            wep.transform.parent = null;
+            
+            //physics settings
+            Rigidbody2D wepRb = wep.GetComponent<Rigidbody2D>();
+            wepRb.isKinematic = false;
+            wepRb.gravityScale = detachedWepGravity;
+        }
     }
 }
