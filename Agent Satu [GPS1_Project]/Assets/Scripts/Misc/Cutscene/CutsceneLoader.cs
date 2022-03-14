@@ -71,7 +71,7 @@ public class CutsceneLoader : MonoBehaviour
             LoadCutScene();
         }
 
-        if (Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact") && !IsAllCutscenesFinished())
         {
             NextSection();
         }
@@ -113,12 +113,7 @@ public class CutsceneLoader : MonoBehaviour
 
     public void NextSection()
     {
-        if (IsAllCutscenesFinished())
-        {
-            print("no more cutscene 1");
-            return;
-        }
-        
+
         //Display sections and panels if amount doesnt exceed
         if (IsAllSectionsFinished())
         {
@@ -131,11 +126,10 @@ public class CutsceneLoader : MonoBehaviour
             //All panels finished, change to level scene
             else
             {
-                currCutscene++;
                 if (IsAllCutscenesFinished())
                 {
-                    print("no more cutscene");
-                    return;
+                    //do something after all cutscene finished
+                    print("no more cutscene #1");
                 }
           
                 
@@ -153,7 +147,7 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsAllCutscenesFinished()
     {
-        if (currCutscene > cutscenesArray.Length - 1)
+        if (currCutscene >= cutscenesArray.Length - 1)
         {
             return true;
         }
@@ -184,12 +178,12 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsWithinPanelAmount()
     {
-        if (currPanel < cutscenesArray[currCutscene].panels.Length - 1)
+        if (currPanel >= cutscenesArray[currCutscene].panels.Length - 1)
         {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
    

@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CutsceneSO", menuName = "ScriptableObjects/CutsceneSO")]
 public class CutsceneSO : ScriptableObject
 {
-    public int savedCutsceneIndex = 0;
     private int lastLevelIndex;
 
     [Header("Load cutscene based on level")]
