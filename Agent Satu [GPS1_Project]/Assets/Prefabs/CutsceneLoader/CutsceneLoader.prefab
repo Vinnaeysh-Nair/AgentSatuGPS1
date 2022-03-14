@@ -679,6 +679,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 0}
   cutsceneSo: {fileID: 11400000, guid: bee767ca70775d742a1107eb14fd89a2, type: 2}
+  currCutscene: 0
+  currPanel: 0
+  currSection: 0
   cutscenesArray:
   - cutsceneTransform: {fileID: 7247924111611372559}
     levelToLoadSceneName: 
@@ -699,9 +702,6 @@ MonoBehaviour:
     - panelTransform: {fileID: 2115795158}
       sections:
       - {fileID: 1000589518}
-  currCutscene: 0
-  currPanel: 0
-  currSection: 0
 --- !u!1 &7578600435587516189
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class CutsceneLoader : MonoBehaviour
     
     public void LoadCutScene()       //remove later
     {
-        SceneManager.LoadScene("TestCutscene");
+        SceneManager.LoadScene("Cutscene Scene");
     }
 
 

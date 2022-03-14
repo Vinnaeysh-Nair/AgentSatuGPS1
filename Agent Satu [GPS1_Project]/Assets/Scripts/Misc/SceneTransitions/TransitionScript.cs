@@ -12,7 +12,7 @@ public class TransitionScript : MonoBehaviour
     [Space]
     [Header("Cutscenes")]
     [SerializeField] private bool willTransitionToCutscene;
-    private int cutsceneSceneIndex = 5;
+    private int cutsceneSceneIndex = 1;
     
     // void Update()
     // {

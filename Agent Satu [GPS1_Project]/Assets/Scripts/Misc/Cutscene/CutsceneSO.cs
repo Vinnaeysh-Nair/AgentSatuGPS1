@@ -11,6 +11,7 @@ public class CutsceneSO : ScriptableObject
     [System.Serializable]
     public class CutsceneToLoad
     {
+        public string levelNameBeforeCutscene;
         public int levelIndexBeforeCutscene = 0;
         public int cutsceneIndexToLoad;
     };
