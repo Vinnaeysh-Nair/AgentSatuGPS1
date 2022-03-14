@@ -5,13 +5,15 @@ public class CutsceneLoader : MonoBehaviour
 {
     [SerializeField] private TransitionScript transition;
     [SerializeField] private CutsceneSO cutsceneSo;
-
     
-    [SerializeField] private Cutscene[] cutscenesArray;
-
+    [Header("For debugging: ")]
     [SerializeField] private int currCutscene = 0;
     [SerializeField] private int currPanel = 0;
     [SerializeField] private int currSection = 0;
+    
+    [SerializeField] private Cutscene[] cutscenesArray;
+
+
 
     
     
