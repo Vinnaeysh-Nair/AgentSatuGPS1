@@ -4,21 +4,44 @@ using UnityEngine.SceneManagement;
 
 public class TransitionScript : MonoBehaviour
 {
-    public KeyCode transitionButton;
-    public Animator transition;
-    public float transitionTime = 1f;
+    [Header("General")]
+    //public KeyCode transitionButton;
+    [SerializeField] private Animator transition;
+    [SerializeField] private float transitionTime = 1f;
+    
+    [Space]
+    [Header("Cutscenes")]
+    [SerializeField] private bool willTransitionToCutscene;
+    private int cutsceneSceneIndex = 5;
+    
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown(transitionButton))
+    //     {
+    //         LoadNextLevel();
+    //     }
+    // }
 
-    void Update()
+
+    private void LoadNextLevel()
     {
-        if (Input.GetKeyDown(transitionButton))
+        int sceneIndexToLoad = 0;
+        if (willTransitionToCutscene)
         {
-            LoadNextLevel();
+            sceneIndexToLoad = cutsceneSceneIndex;
         }
+        else
+        {
+            sceneIndexToLoad = SceneManager.GetActiveScene().buildIndex + 1;
+        }
+        
+        StartCoroutine(LoadLevel(sceneIndexToLoad));
     }
 
-    public void LoadNextLevel()
+
+    public void LoadNextLevel(int index)
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(LoadLevel(index));
     }
 
     IEnumerator LoadLevel(int levelIndex)
@@ -29,10 +52,11 @@ public class TransitionScript : MonoBehaviour
 
         SceneManager.LoadScene(levelIndex);
     }
+    
 
     void OnTriggerEnter2D(Collider2D entranceCollider)
     {
-        if (entranceCollider.gameObject.tag == "Player")
+        if (entranceCollider.CompareTag("Player"))
         {
             LoadNextLevel();
         }
