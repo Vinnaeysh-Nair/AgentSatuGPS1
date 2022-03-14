@@ -6,18 +6,43 @@ public class CutsceneLoader : MonoBehaviour
     public KeyCode reloadSceneKey;
 
     [SerializeField] private Panel[] panels;
+
+    private int currPanel = 0;
+    private int currSection = 0;
     
-    public class Panel
+    [System.Serializable]
+    private class Panel
     {
-        public Transform panel;
+        public Transform panelTransform;
         public Transform[] sections;
     }
 
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(reloadSceneKey))
+        foreach (Panel panel in panels)
         {
-            SceneManager.LoadScene("TestCutscene");
+            panel.panelTransform.gameObject.SetActive(false);
         }
+
+        for (int i = 0; i < panels.Length; i++)
+        {
+            GameObject panelObj = panels[i].panelTransform.gameObject;
+            
+            if (i > 0)
+            {
+                panelObj.SetActive(false);
+            }
+        }
+    }
+    
+    
+    public void LoadCutScene()
+    {
+        SceneManager.LoadScene("TestCutscene");
+    }
+
+    public void NextSection()
+    {
+        panels[currPanel]
     }
 }
