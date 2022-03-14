@@ -44,7 +44,7 @@ public class CutsceneLoader : MonoBehaviour
         {
             if (cutsceneSo.GetLastLevelIndex() == cutsceneToLoad.levelIndexBeforeCutscene)
             {
-                print("Last level Index was: " + cutsceneSo.GetLastLevelIndex() + ". Loading: Cutscene " + cutsceneToLoad.cutsceneIndexToLoad);
+                print("Last level Index was: " + cutsceneSo.GetLastLevelIndex() + ". Loading: Cutscene " + cutsceneToLoad.cutsceneIndexToLoad);     //remove later
                 currCutscene = cutsceneToLoad.cutsceneIndexToLoad;
             }
         }
@@ -66,7 +66,7 @@ public class CutsceneLoader : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("y"))
+        if (Input.GetKeyDown("y"))      //remove later
         {
             LoadCutScene();
         }
@@ -78,7 +78,7 @@ public class CutsceneLoader : MonoBehaviour
     }
     
     
-    public void LoadCutScene()
+    public void LoadCutScene()       //remove later
     {
         SceneManager.LoadScene("TestCutscene");
     }
@@ -129,7 +129,7 @@ public class CutsceneLoader : MonoBehaviour
                 if (IsAllCutscenesFinished())
                 {
                     //do something after all cutscene finished
-                    print("no more cutscene #1");
+                    print("no more cutscene");
                 }
           
                 
@@ -168,7 +168,7 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsAllSectionsFinished()
     {
-        if (currSection > GetCurrPanel().sections.Length - 1)
+        if (currSection >= GetCurrPanel().sections.Length)
         {
             return true;
         }
