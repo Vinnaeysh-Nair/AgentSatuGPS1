@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Components    
-    //public PlayerAnimationController animCon;
-    public CrosshairAiming aim;
+    [SerializeField] private PlayerAnimationController animCon;
+    [SerializeField] private CrosshairAiming aim;
     private Rigidbody2D rb;
     
     //Detector components
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
         }
             
         //animCon.OnCrouchReleasing();
-        //animCon.OnRunning();
+        animCon.OnRunning(Mathf.Abs(rb.velocity.x));
 
         return defaultSpeed;
     }

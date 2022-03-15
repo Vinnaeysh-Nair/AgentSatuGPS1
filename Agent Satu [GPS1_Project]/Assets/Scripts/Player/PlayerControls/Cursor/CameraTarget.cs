@@ -8,7 +8,7 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private Transform leftBarrier;
     [SerializeField] private Transform rightBarrier;
     
-    private CrosshairAiming aim;
+    [SerializeField] private CrosshairAiming aim;
     private Transform playerBody;
     
 
@@ -28,7 +28,7 @@ public class CameraTarget : MonoBehaviour
     void Start()
     {
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
-        aim = transform.Find("/Player/PlayerBody/WeaponPivot").GetComponent<CrosshairAiming>();
+       
 
         //Get barriers' sizes
         leftBarrierX = leftBarrier.position.x + leftBarrier.GetComponent<BoxCollider2D>().bounds.extents.x/2;
