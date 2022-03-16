@@ -213,10 +213,6 @@ public class PlayerController : MonoBehaviour
         {
             Flip();
         }
-        
-        
-        
-        
     }
 
 
@@ -235,12 +231,11 @@ public class PlayerController : MonoBehaviour
             EnableUpperBodyHitDetector(true);
                 
             wasCrouching = false;
-            animCon.OnCrouchReleasing();
         }
-        animCon.OnMoving(Mathf.Abs(rb.velocity.x));
-       
-        //animCon.OnCrouchReleasing(playerIsCrouching);
-        
+            
+        //animCon.OnCrouchReleasing();
+        //animCon.OnRunning(Mathf.Abs(rb.velocity.x));
+
         return defaultSpeed;
     }
 
@@ -257,13 +252,16 @@ public class PlayerController : MonoBehaviour
         EnableUpperBodyHitDetector(false);
             
         ceilingCheck = Physics2D.OverlapBox(new Vector2(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .005f), new Vector2(.5f, lowerBodyPlatformDetector.bounds.size.y), 0f, platformLayerMask);
-        animCon.OnCrouching();
-        
-        // if (horizontalMoveDir > 0f || horizontalMoveDir < 0f)
-        // {
-        //     
-        // }
-
+            
+  
+        if (horizontalMoveDir > 0f || horizontalMoveDir < 0f)
+        {
+            //animCon.OnCrouching();
+        }
+        else
+        {
+            //crouch walking animation
+        }
 
         return crouchMoveSpeed;
     }
@@ -275,8 +273,6 @@ public class PlayerController : MonoBehaviour
         //Apply cooldown to dodgeroll
         if (Time.time > nextDodgerollTime)
         {
-            animCon.OnDodgerolling();
-            
             //Disable collisions
             EnableUpperBodyHitDetector(false);
             EnableLowerBodyHitDetector(false);
@@ -296,7 +292,6 @@ public class PlayerController : MonoBehaviour
             vMove = dodgerollVertical;
                             
             //Add animation
-            
                         
             nextDodgerollTime = Time.time + cooldownTime;
         }
