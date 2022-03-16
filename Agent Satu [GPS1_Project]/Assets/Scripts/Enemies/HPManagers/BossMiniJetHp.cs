@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BossMiniJetHp : EnemyHp
 {
+    [Header("Ref:")] 
+    [SerializeField] private BarChangePivot healthBar;
 
     [Header("Edit: ")]
     [SerializeField] private int initialHp;
@@ -11,8 +13,8 @@ public class BossMiniJetHp : EnemyHp
     [SerializeField] [Range(0f, 1f)] private float summonThreshold;
 
     public delegate void OnReachingThreshold();
-
     public static event OnReachingThreshold onReachingThresholdDelegate;
+
 
     void Start()
     {
@@ -36,7 +38,9 @@ public class BossMiniJetHp : EnemyHp
         currHp -= dmg;
         
         float percentage = (float) currHp / initialHp;
-        
+        healthBar.SetFillAmount(percentage);
+        print(percentage);
+            
         if (currHp == 0)
         {
             print("ded");

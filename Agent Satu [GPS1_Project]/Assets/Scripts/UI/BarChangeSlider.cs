@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class BarChange : MonoBehaviour
+public class BarChangeSlider : MonoBehaviour
 {
     private Slider bar;
-    //private Slider bulletTimeBar;
 
     void Start()
     {

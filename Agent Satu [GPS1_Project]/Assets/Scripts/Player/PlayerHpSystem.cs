@@ -5,7 +5,7 @@ public class PlayerHpSystem : MonoBehaviour
 {
     //Components
     [SerializeField] private SceneLoader sceneLoader;
-    [SerializeField] private BarChange healthBar;
+    [SerializeField] private BarChangeSlider healthBar;
     
     //Fields
     [SerializeField] private int hpCountPlayer = 5;

@@ -8,7 +8,7 @@ public class BulletTime : MonoBehaviour
     //Components
     [Header("Components")]
     [SerializeField] private GameObject bulletTimeScreenEffect;
-    [SerializeField] private BarChange bulletTimeBar;
+    [SerializeField] private BarChangeSlider bulletTimeBar;
     private PauseMenu pauseMenu;
     
     //Fields
