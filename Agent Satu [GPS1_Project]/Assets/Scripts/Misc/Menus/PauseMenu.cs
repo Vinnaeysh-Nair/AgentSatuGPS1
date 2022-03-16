@@ -10,12 +10,19 @@ public class PauseMenu : MonoBehaviour
     {
         Instance = this;
     }
-    #endregion 
+    #endregion
+
+    [SerializeField] private GameObject pauseMain;
+    [SerializeField] private GameObject options;
+    
     
     private Canvas pauseMenuCanvas;
     
     private float timeScaleBeforePause;
+    
+    [HideInInspector]
     public bool gameIsPaused = false;
+
 
 
     void Start()
@@ -55,6 +62,12 @@ public class PauseMenu : MonoBehaviour
         
         gameIsPaused = false;
         pauseMenuCanvas.enabled = false;
+
+        if (!pauseMain.activeSelf)
+        {
+            pauseMain.SetActive(true);
+            options.SetActive(false);
+        }
     }
 
     public void LoadMainMenu()
@@ -64,9 +77,15 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    public void SettingsMenu()
+    public void OpenOptions()
     {
-        //pauseMenuCanvas.enabled = false;
-        print("not yet implemented");
+        pauseMain.SetActive(false);
+       options.SetActive(true);
+    }
+
+    public void BackToPauseMenu()
+    {
+        pauseMain.SetActive(true);
+        options.SetActive(false);
     }
 }

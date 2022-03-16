@@ -17,7 +17,7 @@ public class FollowPlayer : MonoBehaviour
     {
         followTarget = transform.parent;
     }
-    void Update()
+    void FixedUpdate()
     {
         Follow();
         if (controller.GetPlayerIsCrouching() && controller.GetGrounded() || controller.PlayerIsDodgerolling)

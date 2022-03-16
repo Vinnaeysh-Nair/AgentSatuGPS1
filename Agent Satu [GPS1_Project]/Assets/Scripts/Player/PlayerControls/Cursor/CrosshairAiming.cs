@@ -30,7 +30,7 @@ public class CrosshairAiming : MonoBehaviour
     }
     
     //Fix camera not following after a certain distance from spawn position
-    void Update()
+    void FixedUpdate()
     {
         if (pauseMenu.gameIsPaused) return;
         
