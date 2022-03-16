@@ -20,10 +20,14 @@ public class OverallHp : EnemyHp
     private int legDismemberedCount = 0;
     private bool isHeadDismembered = false;
 
-    public event EventHandler OnDamaged;
-    public event EventHandler OnDeath;
 
-    
+    public delegate void OnDeath();
+    public event OnDeath onDeathDelegate;
+
+    public delegate void OnDamaged();
+    public event OnDamaged onDamagedDelegate;
+
+
 
     void Start()
     {
@@ -81,7 +85,12 @@ public class OverallHp : EnemyHp
         }
         
         //Trigger detection when damaged
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+        //OnDamaged?.Invoke(this, EventArgs.Empty);
+
+        if (onDamagedDelegate != null)
+        {
+            onDamagedDelegate.Invoke();
+        }
     }
 
     public void Die(Vector2 flingDirection)
@@ -110,6 +119,9 @@ public class OverallHp : EnemyHp
         ragdoll.ActivateRagdoll(flingDirection);
         spawnPickups.enabled = true;
         
-        OnDeath?.Invoke(this, EventArgs.Empty);
+        if (onDeathDelegate != null)
+        {
+            onDeathDelegate.Invoke();
+        }
     }
 }

@@ -23,7 +23,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     {
         playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
         
-        overallHp.OnDeath += OverallHp_OnDeath;
+        overallHp.onDeathDelegate += OverallHp_OnDeath;
     }
 
     //track player's Vector x and y
@@ -35,9 +35,9 @@ public class ArmToPlayerTracking : MonoBehaviour
         PointToPlayer();
     }
 
-    void OverallHp_OnDeath(object sender, System.EventArgs e)
+    void OverallHp_OnDeath()
     {
-        overallHp.OnDeath -= OverallHp_OnDeath;
+        overallHp.onDeathDelegate -= OverallHp_OnDeath;
         enabled = false;
     }
     

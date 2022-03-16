@@ -23,6 +23,10 @@ public class Enemy_Agro : MonoBehaviour
     private Vector2 playerPos;
     private Vector2 enemyPos;
 
+    public delegate void OnTest();
+
+    public static event OnTest ontTextDelefate ;
+
     public bool GetDetected()
     {
         return detected;
@@ -38,9 +42,9 @@ public class Enemy_Agro : MonoBehaviour
         return playerPos;
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
-        overallHp.OnDamaged -= OverallHp_OnDamaged;
+        overallHp.onDamagedDelegate -= OverallHp_OnDamaged;
     }
     
     void Start()
@@ -49,7 +53,7 @@ public class Enemy_Agro : MonoBehaviour
         enemflip = GetComponent<Enemy_Flipped>();
         
         overallHp = GetComponent<OverallHp>();
-        overallHp.OnDamaged += OverallHp_OnDamaged;
+        overallHp.onDamagedDelegate += OverallHp_OnDamaged;
     }
     
     void FixedUpdate()
@@ -65,7 +69,7 @@ public class Enemy_Agro : MonoBehaviour
         }
     }
     
-    private void OverallHp_OnDamaged(object sender, System.EventArgs e)
+    private void OverallHp_OnDamaged()
     {
         DetectedFromDamage();
     }
