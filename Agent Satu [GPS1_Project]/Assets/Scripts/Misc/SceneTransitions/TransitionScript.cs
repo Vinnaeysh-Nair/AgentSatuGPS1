@@ -8,11 +8,11 @@ public class TransitionScript : MonoBehaviour
     //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
-    
+
     [Space]
     [Header("Cutscenes")]
     [SerializeField] private bool willTransitionToCutscene;
-    private int cutsceneSceneIndex = 1;
+    private int cutsceneSceneIndex = 5;
     
     // void Update()
     // {
@@ -22,6 +22,7 @@ public class TransitionScript : MonoBehaviour
     //     }
     // }
 
+    
 
     private void LoadNextLevel()
     {

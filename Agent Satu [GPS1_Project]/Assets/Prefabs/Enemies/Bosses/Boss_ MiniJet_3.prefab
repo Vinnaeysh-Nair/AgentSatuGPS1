@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 1173564339083954733}
   - component: {fileID: 1833976907120966237}
   - component: {fileID: 7622801106036560}
+  - component: {fileID: 639991022}
   m_Layer: 11
   m_Name: Body
   m_TagString: Enemy
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHp: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 639991022}
   initialHp: 20
   summonThreshold: 0
 --- !u!114 &7622801106036560
@@ -287,6 +288,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointToGo: {fileID: 7622802065811526}
   moveSpeed: 1
+--- !u!114 &639991022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341321121313032332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d67adae122184d43a44c4858569f10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillPivot: {fileID: 689340441140117764}
 --- !u!1 &2341321121394135797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,8 +1641,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8880341601745561726, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
+--- !u!4 &689340441140117764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8880341603684503836, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
+  m_PrefabInstance: {fileID: 8263059517068742680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &689340442438924391 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8880341601745561727, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}

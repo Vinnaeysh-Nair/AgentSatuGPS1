@@ -771,6 +771,7 @@ GameObject:
   - component: {fileID: 2960432921978284300}
   - component: {fileID: 1174853071}
   - component: {fileID: 1174853072}
+  - component: {fileID: 93472223}
   m_Layer: 11
   m_Name: Body
   m_TagString: Enemy
@@ -901,9 +902,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHp: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 93472223}
   initialHp: 10
   summonThreshold: 0.5
+--- !u!114 &93472223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334306901209062682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d67adae122184d43a44c4858569f10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillPivot: {fileID: 257499500578146549}
 --- !u!1 &2334306901217292105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2334306901551515322
 Transform:
   m_ObjectHideFlags: 0
@@ -1627,10 +1641,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8880341601745561726, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
 --- !u!224 &257499498708414870 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8880341601745561727, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
+  m_PrefabInstance: {fileID: 8696342909377698281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &257499500578146549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8880341603684503836, guid: 1b1f4da5391b58749b7fe5e68b19744e, type: 3}
   m_PrefabInstance: {fileID: 8696342909377698281}
   m_PrefabAsset: {fileID: 0}

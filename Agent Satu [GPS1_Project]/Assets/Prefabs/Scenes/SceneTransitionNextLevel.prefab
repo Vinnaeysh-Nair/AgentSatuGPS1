@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4495569230947641529}
   - component: {fileID: 4495569230947641530}
   - component: {fileID: 4495569230947641531}
-  - component: {fileID: 4495569230947641528}
+  - component: {fileID: 676973062}
   m_Layer: 0
   m_Name: ExitPoint_TransitionControl
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4495569230947641526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -165.5, y: -228.8, z: 0.6890458}
+  m_LocalPosition: {x: -308.4, y: -243.89, z: 0.6890458}
   m_LocalScale: {x: 4.0815, y: 4.0815, z: 4.0815}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,7 +201,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4495569230947641528
+--- !u!114 &676973062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +225,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4495569231162917790}
-  - component: {fileID: 4495569231162917761}
   m_Layer: 0
   m_Name: SceneTransitionNextLevel
   m_TagString: Untagged
@@ -250,21 +249,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4495569231162917761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495569231162917791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f9bb21da66b1a448aceece607751bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transition: {fileID: 4495569231901491824}
-  transitionTime: 1
-  willTransitionToCutscene: 0
 --- !u!1 &4495569231901491825
 GameObject:
   m_ObjectHideFlags: 0

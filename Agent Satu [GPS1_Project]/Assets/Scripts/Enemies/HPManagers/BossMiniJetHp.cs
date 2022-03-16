@@ -12,8 +12,13 @@ public class BossMiniJetHp : EnemyHp
     [Header("Ignore if this is jet to be summoned")]
     [SerializeField] [Range(0f, 1f)] private float summonThreshold;
 
+    [SerializeField] private static int killedBossesCount = 0;
+
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
+
+    public delegate void OnLevelComplete();
+    public static event OnLevelComplete onLevelCompleteDelegate;
 
 
     void Start()
@@ -39,11 +44,21 @@ public class BossMiniJetHp : EnemyHp
         
         float percentage = (float) currHp / initialHp;
         healthBar.SetFillAmount(percentage);
-        print(percentage);
+
             
         if (currHp == 0)
         {
-            print("ded");
+            //Death logic
+           // print("ded");
+           killedBossesCount++;
+
+           if (killedBossesCount == 3)
+           {
+               if (onLevelCompleteDelegate != null)
+               {
+                  onLevelCompleteDelegate.Invoke();
+               }
+           }
         }
         
         if (percentage <= summonThreshold)
