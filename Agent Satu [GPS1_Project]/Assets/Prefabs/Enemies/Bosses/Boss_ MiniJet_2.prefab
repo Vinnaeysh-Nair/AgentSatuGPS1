@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306900270602662}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivots + Guns
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,9 +42,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306900534164414}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MovementPoints
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,9 +80,9 @@ GameObject:
   - component: {fileID: 2334306900537155748}
   - component: {fileID: 2334306900537155754}
   - component: {fileID: 2334306900537155755}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right TargetPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 2334306900625446906}
+  flyIntoScene: {fileID: 1174853071}
   idlePoint: {fileID: 2334306901310109341}
   isMiniJet: 1
   note: If isMiniJet is checked, only Attack 2 takes effects, ignore settings for
@@ -222,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2334306900551885916}
   - component: {fileID: 2334306900551885923}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,9 +306,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306900574285993}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Firepoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,9 +339,9 @@ GameObject:
   - component: {fileID: 2334306900625446900}
   - component: {fileID: 2334306900625446907}
   - component: {fileID: 2334306900625446906}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightGun
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,9 +442,9 @@ GameObject:
   - component: {fileID: 2334306900675716467}
   - component: {fileID: 2334306900675716465}
   - component: {fileID: 2334306900675716466}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left TargetPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,12 +529,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 2334306901395081056}
+  flyIntoScene: {fileID: 1174853071}
   idlePoint: {fileID: 2334306901310109341}
   isMiniJet: 1
   note: If isMiniJet is checked, only Attack 2 takes effects, ignore settings for
     other Attacks.
   attackCounter: 2
-  timeToStartBattle: 1
+  timeToStartBattle: 3
   atkChangeBufferTime: 5
   goToPositionMoveSpeed: 3
   goToIdleMoveSpeed: 3
@@ -549,7 +551,7 @@ MonoBehaviour:
   - patternPoints:
     - {fileID: 2334306900551885916}
     atk2ShotsPerBurst: 60
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     keepShootingAfterReachingEndPoint: 1
     timeStayingAtEndPoint: 1
   - patternPoints:
@@ -583,7 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2334306900859507243}
   - component: {fileID: 2334306900859507242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,9 +670,9 @@ GameObject:
   - component: {fileID: 2334306900865212281}
   - component: {fileID: 2334306900865212287}
   - component: {fileID: 2334306900865212280}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftPivot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -766,9 +768,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2334306901209062681}
   - component: {fileID: 2334306901209062680}
-  m_Layer: 0
+  - component: {fileID: 2960432921978284300}
+  - component: {fileID: 1174853071}
+  - component: {fileID: 1174853072}
+  m_Layer: 11
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -842,6 +847,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &2960432921978284300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334306901209062682}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1174853071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334306901209062682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4265d1ce9cd7a9641a473afe60c94ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointToGo: {fileID: 9212320902297977679}
+  moveSpeed: 2
+--- !u!114 &1174853072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334306901209062682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e6ce7e50f4ede45b21f60c4695a0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHp: 0
+  initialHp: 10
+  summonThreshold: 0.5
 --- !u!1 &2334306901217292105
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,9 +911,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306901217292104}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Firepoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -883,7 +943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2334306901310109341}
   - component: {fileID: 2334306901310109340}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: IdlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,9 +1028,9 @@ GameObject:
   - component: {fileID: 2334306901395081058}
   - component: {fileID: 2334306901395081057}
   - component: {fileID: 2334306901395081056}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftGun
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1071,9 +1131,9 @@ GameObject:
   - component: {fileID: 2334306901535072099}
   - component: {fileID: 2334306901535072098}
   - component: {fileID: 2334306901535072097}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightPivot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1168,13 +1228,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306901551515322}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boss_ MiniJet_2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2334306901551515322
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,6 +1248,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2334306901209062681}
+  - {fileID: 9212320902297977679}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1201,9 +1262,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2334306901615609084}
   - component: {fileID: 2334306901615608963}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TargetPoints
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1246,9 +1307,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334306901913888471}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shooting Pattern Points
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1280,7 +1341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5153651277154107949}
   - component: {fileID: 356328950622404315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1364,7 +1425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6584261450928729317}
   - component: {fileID: 3056832178835542835}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,3 +1499,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7446673186804939953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9212320902297977679}
+  m_Layer: 11
+  m_Name: PointToGo
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9212320902297977679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446673186804939953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.11, y: 8.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2334306901551515322}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

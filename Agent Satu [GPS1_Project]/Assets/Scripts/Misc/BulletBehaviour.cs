@@ -30,6 +30,11 @@ public class BulletBehaviour : MonoBehaviour
     {
         return prevVelocity;
     }
+
+    public int GetBulletDmg()
+    {
+        return bulletDamage;
+    }
     
     void Awake()
     {

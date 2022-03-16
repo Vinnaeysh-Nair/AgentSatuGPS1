@@ -10,6 +10,7 @@ public class TargetPointMovement : MonoBehaviour
     private PlayerMovement playerMovement;
     
     [SerializeField] private BattleJetGun gun;
+    [SerializeField] private FlyIntoScene flyIntoScene;
     [SerializeField] private Transform idlePoint;
    
     private Transform startPoint;
@@ -22,11 +23,13 @@ public class TargetPointMovement : MonoBehaviour
     [Header("General")]
     [SerializeField] private bool isMiniJet = false;
     [TextArea] [SerializeField] private string note;
-    
+
     [Space][Space]
     [SerializeField] private int attackCounter = 1;
     [SerializeField] private float timeToStartBattle = 3f;
     [SerializeField] private float atkChangeBufferTime = 5f;
+
+    private bool startFight = false;
     
     private int nextPattern = 0;
     
@@ -74,7 +77,8 @@ public class TargetPointMovement : MonoBehaviour
 
     
     public event EventHandler OnReachingIdle;
-    
+
+   
     
     [Serializable]
     struct Patterns
@@ -101,9 +105,11 @@ public class TargetPointMovement : MonoBehaviour
         firedAllShots = true;
     }
 
-    private void OnDestroy()
+   
+
+    void OnDisable()
     {
-        gun.OnFiredAllShots -= BattleJetGun_OnFiredAllShots;
+         gun.OnFiredAllShots -= BattleJetGun_OnFiredAllShots;
     }
 
     void Start()
@@ -113,6 +119,8 @@ public class TargetPointMovement : MonoBehaviour
         
         playerPos = playerMovement.transform;
         gun.OnFiredAllShots += BattleJetGun_OnFiredAllShots;
+
+        flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingTarget;
 
         
         //Additional Settings for Mini Jet, only use Attack 2
@@ -125,11 +133,28 @@ public class TargetPointMovement : MonoBehaviour
         //Wait time before starting battle
         startPoint = idlePoint;
         idling = true;
-        StartCoroutine(StartBattle());
+        
+        //Attack 2 initial pos
+        AssignPatternPoints(patterns[0]);
+        
     }
-    
+
+    void FlyIntoScene_OnReachingTarget()
+    {
+        flyIntoScene.onReachingPointDelegate -= FlyIntoScene_OnReachingTarget;
+        
+        startFight = true;
+        idling = false;
+        inPosition = false;
+        
+        timeToStartBattle = Time.time + timeToStartBattle;
+    }
     void Update()
     {
+        if (!startFight) return;
+
+        if (Time.time <= timeToStartBattle) return;
+        
         if (idling)
         {
             Idle();
@@ -155,11 +180,7 @@ public class TargetPointMovement : MonoBehaviour
         yield return new WaitForSeconds(timeToStartBattle);    //put editable timer afterwards
         
         idling = false;
-        inPosition = false;
-
-      
-        //Attack 2 initial pos
-        AssignPatternPoints(patterns[0]);
+        inPosition = false;print("started");
     }
     
     
@@ -173,7 +194,7 @@ public class TargetPointMovement : MonoBehaviour
         
         
         //Track player constantly
-        if (Vector2.Distance(transform.position, playerPos.position + playerFollowOffset) > 0.1f)   //small value to offset inaccuracy
+        if (Vector2.Distance(transform.position, playerPos.position + playerFollowOffset) > 0.01f)   //small value to offset inaccuracy
         {
             Move(playerPos, playerFollowSpeed, playerFollowOffset);
         }
@@ -271,7 +292,7 @@ public class TargetPointMovement : MonoBehaviour
     
     private void GoToPosition()
     {
-        if (Vector2.Distance(transform.position, startPoint.position) > 0f)
+        if (Vector2.Distance(transform.position, startPoint.position) > 0.01f)
         {
             Move(startPoint, goToPositionMoveSpeed);
         }
@@ -287,7 +308,7 @@ public class TargetPointMovement : MonoBehaviour
         
         
         //Movement and attack
-        if (Vector2.Distance(transform.position, endPoint.position) > 0f)
+        if (Vector2.Distance(transform.position, endPoint.position) > 0.01f)
         {
             Move(endPoint, currPattern.atk2InPatternMoveSpeed);
             gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
@@ -366,7 +387,7 @@ public class TargetPointMovement : MonoBehaviour
 
     private void Idle()
     {
-        if (Vector2.Distance(transform.position, idlePoint.position) > 0f)
+        if (Vector2.Distance(transform.position, idlePoint.position) > 0.01f)
         {
             Move(idlePoint, goToIdleMoveSpeed);
             OnReachingIdle?.Invoke(this, EventArgs.Empty);

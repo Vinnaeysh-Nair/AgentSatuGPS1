@@ -6,7 +6,7 @@ public class EnemyHp : MonoBehaviour
    [SerializeField] protected int currHp;
    
    
-   public int GetHp()
+   public int GetCurrHp()
    {
       return currHp;
    }
