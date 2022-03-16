@@ -1,16 +1,15 @@
-using System.Net.Sockets;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
     //Components
-    //public Transform followPoint;
     [SerializeField] private PlayerController controller;
-
+    private Transform followTarget;
+    
+    
     //Fields
     //[SerializeField] [Range(0f, 1f)] private float offsetY;   (offset crouch height if needed)
     private bool wasCrouching;
-    private Transform followTarget;
     [SerializeField] private Vector2 followOffset;
     [SerializeField] private float crouchHeight;
 
@@ -21,7 +20,7 @@ public class FollowPlayer : MonoBehaviour
     void Update()
     {
         Follow();
-        if (controller.GetPlayerIsCrouching() && controller.GetGrounded())
+        if (controller.GetPlayerIsCrouching() && controller.GetGrounded() || controller.PlayerIsDodgerolling)
         {
             AdjustPos();
         }

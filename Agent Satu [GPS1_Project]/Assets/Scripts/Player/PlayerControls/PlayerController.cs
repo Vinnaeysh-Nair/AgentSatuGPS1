@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,18 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimationController animCon;
     [SerializeField] private CrosshairAiming aim;
     private Rigidbody2D rb;
-    
+
     //Detector components
     private BoxCollider2D upperBodyPlatformDetector;
     private BoxCollider2D lowerBodyPlatformDetector;
     private BoxCollider2D upperBodyHitDetector;
     private BoxCollider2D lowerBodyHitDetector;
 
-    
+
     //Fields
     //General movement fields
-    [Header("General Movement")]
-    [SerializeField] private float horizontalMoveSpeed = 20f;
+    [Header("General Movement")] [SerializeField]
+    private float horizontalMoveSpeed = 20f;
+
     [SerializeField] private float jumpForce = 30f;
     [SerializeField] private float gravity = 9f;
     [SerializeField] [Range(0f, 1f)] private float horizontalLerp = .3f;
@@ -30,17 +33,16 @@ public class PlayerController : MonoBehaviour
     private bool playerIsCrouching = false;
 
     //Dodgeroll fields
-    [Header("Dodgeroll")]
-    [SerializeField] private float dodgerollHorizontal = 50f;
+    [Header("Dodgeroll")] [SerializeField] private float dodgerollHorizontal = 50f;
     [SerializeField] private float dodgerollVertical = 10f;
     [SerializeField] private float cooldownTime = 2f;
     [SerializeField] private float immunityTime = .5f;
     private float nextDodgerollTime = 0f;
+    private bool playerIsDodgerolling = false;
 
 
     //Walljump fields
-    [Header("Wall Jump")]
-    [SerializeField] private float xWallJumpForce;
+    [Header("Wall Jump")] [SerializeField] private float xWallJumpForce;
     [SerializeField] private float yWallJumpForce;
     [SerializeField] private float leftOrRightJumpCooldownTime = .3f;
     [SerializeField] [Range(0f, 1f)] private float wallJumpGravityReduction = .2f;
@@ -50,15 +52,15 @@ public class PlayerController : MonoBehaviour
     private bool jumpedToLeft = false;
     private bool jumpedToRight = false;
 
-    
 
-    
+
+
     //Groundcheck and Ceiling check fields
     [SerializeField] private LayerMask platformLayerMask;
     private Collider2D ceilingCheck;
 
-   private bool droppedFromStair = false;
-    
+    private bool droppedFromStair = false;
+
     //Getter
     public bool GetGrounded()
     {
@@ -69,7 +71,19 @@ public class PlayerController : MonoBehaviour
     {
         return playerIsCrouching;
     }
+
     
+    public bool PlayerIsDodgerolling
+    {
+        get => playerIsDodgerolling;
+        set => playerIsDodgerolling = value;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerAnimationController.onCrouchEndDelegate -= SetPlayerIsDodgeRollingToFalse;
+    }
+
     void Awake()    
     {
         rb = GetComponent<Rigidbody2D>();
@@ -88,6 +102,13 @@ public class PlayerController : MonoBehaviour
         upperBodyHitDetector = hitDetectors[0];
         lowerBodyHitDetector = hitDetectors[1];
     }
+
+    
+    private void Start()
+    {
+        PlayerAnimationController.onCrouchEndDelegate += SetPlayerIsDodgeRollingToFalse;
+    }
+    
 
     //To detect if touching anything on platformLayerMask
     void Update()
@@ -197,7 +218,7 @@ public class PlayerController : MonoBehaviour
         
         rb.velocity = new Vector2(horizontalMove, verticalMove);
         
-        
+        animCon.OnMoving(Mathf.Abs(rb.velocity.x));
         
         //Flip player according to mouse position
         Vector2 mousePos = aim.GetMousePos();
@@ -230,12 +251,10 @@ public class PlayerController : MonoBehaviour
             EnableUpperBodyPlatformDetector(true);
             EnableUpperBodyHitDetector(true);
                 
+            animCon.OnCrouchReleasing();
             wasCrouching = false;
         }
-            
-        //animCon.OnCrouchReleasing();
-        //animCon.OnRunning(Mathf.Abs(rb.velocity.x));
-
+        
         return defaultSpeed;
     }
 
@@ -252,17 +271,10 @@ public class PlayerController : MonoBehaviour
         EnableUpperBodyHitDetector(false);
             
         ceilingCheck = Physics2D.OverlapBox(new Vector2(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .005f), new Vector2(.5f, lowerBodyPlatformDetector.bounds.size.y), 0f, platformLayerMask);
-            
-  
-        if (horizontalMoveDir > 0f || horizontalMoveDir < 0f)
-        {
-            //animCon.OnCrouching();
-        }
-        else
-        {
-            //crouch walking animation
-        }
+        
+        animCon.OnCrouching();
 
+        
         return crouchMoveSpeed;
     }
 
@@ -273,6 +285,10 @@ public class PlayerController : MonoBehaviour
         //Apply cooldown to dodgeroll
         if (Time.time > nextDodgerollTime)
         {
+            playerIsDodgerolling = true;
+            animCon.OnDodgerolling();
+            
+            
             //Disable collisions
             EnableUpperBodyHitDetector(false);
             EnableLowerBodyHitDetector(false);
@@ -291,7 +307,7 @@ public class PlayerController : MonoBehaviour
             }
             vMove = dodgerollVertical;
                             
-            //Add animation
+            
                         
             nextDodgerollTime = Time.time + cooldownTime;
         }
@@ -360,6 +376,12 @@ public class PlayerController : MonoBehaviour
     private void EnableLowerBodyHitDetector(bool status)
     {
         lowerBodyHitDetector.enabled = status;
+    }
+    
+    //Reset dodgeroll
+    private void SetPlayerIsDodgeRollingToFalse()
+    {
+        playerIsDodgerolling = false;
     }
     
     
