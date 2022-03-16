@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyWeapon_Guns : MonoBehaviour
 {
     //Components
+    [SerializeField] private Transform firePointContainer;
     public GameObject bullet;
     private ObjectPooler pooler;
     private PauseMenu pauseMenu;
@@ -17,7 +18,8 @@ public class EnemyWeapon_Guns : MonoBehaviour
     [Header("For burst weapons(only applies for StartBurstingShooting())")]
     [SerializeField] private float burstInterval = 5f;
     [SerializeField] private int bulletPerBurst;
-
+    
+    
     private Transform[] firePoints;
     private float nextFireTime = 0f;
     private bool canStartBurstShooting = true;
@@ -32,11 +34,11 @@ public class EnemyWeapon_Guns : MonoBehaviour
     
     void Start()
     {
-        int size = transform.childCount;
+        int size = firePointContainer.childCount;
         firePoints = new Transform[size];
         for (int i = 0; i < size; i++)
         {
-            firePoints[i] = transform.GetChild(i);
+            firePoints[i] = firePointContainer.GetChild(i);
         }
     }
 

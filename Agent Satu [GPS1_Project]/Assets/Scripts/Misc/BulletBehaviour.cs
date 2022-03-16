@@ -85,6 +85,8 @@ public class BulletBehaviour : MonoBehaviour
         //If hit anything other than limbs
         SpawnBulletImpactEffect();
         gameObject.SetActive(false);
+        
+        
         if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
         {
             return;
