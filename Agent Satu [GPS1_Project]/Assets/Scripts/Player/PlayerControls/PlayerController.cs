@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
         }
             
         //animCon.OnCrouchReleasing();
-        animCon.OnRunning(Mathf.Abs(rb.velocity.x));
+        //animCon.OnRunning(Mathf.Abs(rb.velocity.x));
 
         return defaultSpeed;
     }
