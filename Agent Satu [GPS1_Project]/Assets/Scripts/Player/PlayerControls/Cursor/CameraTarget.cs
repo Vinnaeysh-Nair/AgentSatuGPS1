@@ -8,8 +8,8 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private Transform leftBarrier;
     [SerializeField] private Transform rightBarrier;
     
-    private CrosshairAiming aim;
-    private Transform playerBody;
+    [SerializeField] private CrosshairAiming aim;
+    [SerializeField] private Transform playerBody;
     
 
     //Fields
