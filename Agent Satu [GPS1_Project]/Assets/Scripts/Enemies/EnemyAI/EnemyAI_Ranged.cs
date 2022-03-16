@@ -8,8 +8,7 @@ public class EnemyAI_Ranged : MonoBehaviour
     
     //Fields
     [SerializeField] private bool isBurst;
-    private bool shooting = false;
-
+ 
     void Start()
     {
         enemyAgro = GetComponent<Enemy_Agro>();

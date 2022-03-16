@@ -21,9 +21,7 @@ public class CameraTarget : MonoBehaviour
     private float leftBarrierX;
     private float rightBarrierX;
 
-    private bool outOfBounds = false;
-
-
+    
     
     void Start()
     {

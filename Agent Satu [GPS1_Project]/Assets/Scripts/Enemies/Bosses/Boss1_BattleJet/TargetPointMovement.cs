@@ -53,7 +53,6 @@ public class TargetPointMovement : MonoBehaviour
     [SerializeField] private int atk1ShotsPerBurst;
     [SerializeField] private float atk1FireRate;
     [SerializeField] private float atk1TimeUntilNextBurst;
-    private float nextFireTime = 0f;
     private bool atk1CanShoot = false;
 
     
@@ -175,13 +174,13 @@ public class TargetPointMovement : MonoBehaviour
 
  
 
-    private IEnumerator StartBattle()
-    {
-        yield return new WaitForSeconds(timeToStartBattle);    //put editable timer afterwards
-        
-        idling = false;
-        inPosition = false;print("started");
-    }
+    // private IEnumerator StartBattle()
+    // {
+    //     yield return new WaitForSeconds(timeToStartBattle);    //put editable timer afterwards
+    //     
+    //     idling = false;
+    //     inPosition = false;print("started");
+    // }
     
     
     //Track playerPos and shoot with delay

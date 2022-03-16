@@ -12,8 +12,7 @@ public class BattleJetGun : MonoBehaviour
     private int firedShots = 0;
     [SerializeField] private bool canShoot = true;
     [SerializeField] private bool canBurstShoot = true;
-    private bool firedAllShots = false;
-    
+   
     private ObjectPooler pooler;
 
     public event EventHandler OnFiredAllShots;
@@ -79,7 +78,6 @@ public class BattleJetGun : MonoBehaviour
         
         firedShots = 0;
         canBurstShoot = true;
-        firedAllShots = false;
     }
 
     

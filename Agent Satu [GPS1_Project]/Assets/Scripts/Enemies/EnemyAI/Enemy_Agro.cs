@@ -23,9 +23,6 @@ public class Enemy_Agro : MonoBehaviour
     private Vector2 playerPos;
     private Vector2 enemyPos;
 
-    public delegate void OnTest();
-
-    public static event OnTest ontTextDelefate ;
 
     public bool GetDetected()
     {
