@@ -1,4 +1,7 @@
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class EnemyAI_Melee : MonoBehaviour
 {
@@ -8,10 +11,24 @@ public class EnemyAI_Melee : MonoBehaviour
     private Rigidbody2D rb;
 
 
+    [SerializeField] private Animator anim;
+    private PlayerHpSystem _playerHpSystem;
+
     
     //Fields
+    [Header("Movement")]
     [SerializeField] private float YRangeToStopChasing;
     [SerializeField] private float movementSpeed;
+
+
+    [Header("Attack")] 
+    [SerializeField] private int damageToPlayer = 1;
+    [SerializeField] private float attackAreaOffset;
+    [SerializeField] private float attackAreaSize;
+    [SerializeField] [Range(0f, 3f)] private float startAtkDistX = 0f;
+    
+    [SerializeField] private LayerMask playerHitLayer;
+  
 
     private float ignoreOffset = .5f;
     private Vector2 playerPos;
@@ -34,11 +51,15 @@ public class EnemyAI_Melee : MonoBehaviour
         {
             StopChasing();
         }
+
+        Vector2 normalizedVelocity = rb.velocity.normalized;
+        anim.SetFloat("Speed", Mathf.Abs(normalizedVelocity.x));
     }
     
     private void Move()
     {
         ChasePlayer();
+        anim.SetBool("IsAttacking", false);
         
         //If player higher than enemy for a specific range, stop chasing
         float distY = Mathf.Abs(playerPos.y - enemyPos.y);
@@ -49,9 +70,10 @@ public class EnemyAI_Melee : MonoBehaviour
             
         //If reached player's X-pos, stop chasing
         float distX = Mathf.Abs(playerPos.x - enemyPos.x) ;
-        if (distX <= ignoreOffset)                                  //to offset inaccuracy caused by gameObjects' center points
+        if (distX <= ignoreOffset + startAtkDistX)                                  //to offset inaccuracy caused by gameObjects' center points
         {
             StopChasing();
+            anim.SetBool("IsAttacking", true);
         }
     }
     
@@ -74,5 +96,27 @@ public class EnemyAI_Melee : MonoBehaviour
     private void StopChasing()
     {
         rb.velocity = new Vector2(0f, 0f);
+    }
+
+    public void DamagePlayer()
+    {
+        Collider2D hitPlayer = Physics2D.OverlapCircle(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize, playerHitLayer);
+
+        if (hitPlayer != null)
+        {
+            Transform playerRoot = hitPlayer.transform.root;
+            
+            if (_playerHpSystem == null)
+            {
+                //Locate PlayerBody to get hp system script
+                _playerHpSystem = playerRoot.GetChild(0).GetComponent<PlayerHpSystem>();
+            }
+            _playerHpSystem.TakeDamage(damageToPlayer);
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize);
     }
 }
