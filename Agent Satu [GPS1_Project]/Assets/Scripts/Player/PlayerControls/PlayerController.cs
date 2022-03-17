@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -76,7 +74,6 @@ public class PlayerController : MonoBehaviour
     public bool PlayerIsDodgerolling
     {
         get => playerIsDodgerolling;
-        set => playerIsDodgerolling = value;
     }
 
     private void OnDestroy()
@@ -131,6 +128,7 @@ public class PlayerController : MonoBehaviour
         
         //When touching ground
         grounded = true;
+        animCon.OnJumpEnd();
     }
     
     
@@ -176,7 +174,7 @@ public class PlayerController : MonoBehaviour
             grounded = false;
             verticalMove = jumpForce;
             
-            //animCon.OnJumping();
+            animCon.OnJumping();
         } 
         else if (jump && canWallJump)
         {
@@ -184,11 +182,15 @@ public class PlayerController : MonoBehaviour
             
             horizontalMove = xWallJumpForce * wallJumpMovement.x;
             verticalMove = yWallJumpForce * wallJumpMovement.y;
+            
+            animCon.OnJumping();
         }
         //Crouch
         else if (crouch && grounded)
         {
             horizontalMove = Crouch(horizontalMoveDir);
+            
+            animCon.OnCrouching();
         }
         //Dodgeroll
         else if (dodgeroll && grounded)
@@ -218,7 +220,7 @@ public class PlayerController : MonoBehaviour
         
         rb.velocity = new Vector2(horizontalMove, verticalMove);
         
-        animCon.OnMoving(Mathf.Abs(rb.velocity.x));
+        animCon.OnMoving();
         
         //Flip player according to mouse position
         Vector2 mousePos = aim.GetMousePos();
@@ -272,8 +274,6 @@ public class PlayerController : MonoBehaviour
             
         ceilingCheck = Physics2D.OverlapBox(new Vector2(lowerBodyPlatformDetector.bounds.center.x, lowerBodyPlatformDetector.bounds.center.y + (2 * lowerBodyPlatformDetector.bounds.extents.y) + .005f), new Vector2(.5f, lowerBodyPlatformDetector.bounds.size.y), 0f, platformLayerMask);
         
-        animCon.OnCrouching();
-
         
         return crouchMoveSpeed;
     }
@@ -318,6 +318,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 WallJump()
     {
+        animCon.OnJumping();
+        
         //Reduce gravity, reset after a timer
         rb.gravityScale *= (1 - wallJumpGravityReduction);
         StartCoroutine(ResetGravityScale());

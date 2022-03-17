@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerController controller;
 
     //General movement fields
-    private float horizontalMove;
+    public static float horizontalMove;
     private bool jump = false;
     private bool crouch = false;
     private bool dodgeroll = false;
@@ -17,14 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public static event OnInteract onInteractDelegate;
     
     private Vector2 playerPos;
-    
+
+
+
     //Getters
-    public float GetSpeed()
-    {
-        //used for running anim
-        return horizontalMove;
-    }
-    
     public Vector2 GetPlayerPos()
     {
         return playerPos;

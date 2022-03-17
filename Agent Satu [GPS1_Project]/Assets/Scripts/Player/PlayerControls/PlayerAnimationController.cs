@@ -7,9 +7,9 @@ public class PlayerAnimationController : MonoBehaviour
     public delegate void OnCrouchEnd();
     public static OnCrouchEnd onCrouchEndDelegate;
 
-    public void OnMoving(float speed)
+    public void OnMoving()
     {
-        anim.SetFloat("Speed", speed);
+        anim.SetFloat("Speed", Mathf.Abs(PlayerMovement.horizontalMove));
     }
 
     public void OnCrouching()
@@ -38,17 +38,14 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
+
     public void OnJumping()
     {
-        anim.SetTrigger("IsJumping");
+        anim.SetBool("IsJumping", true);
     }
-    // public void OnJumping()
-    // {
-    //     anim.SetBool("IsJumping", true);
-    // }
-    //
-    // public void OnJumpEnd()
-    // {
-    //     anim.SetBool("IsJumping", false);
-    // }
+    
+    public void OnJumpEnd()
+    {
+        anim.SetBool("IsJumping", false);
+    }
 }
