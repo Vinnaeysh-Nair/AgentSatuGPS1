@@ -12,7 +12,7 @@ public class BossMiniJetHp : EnemyHp
     [Header("Ignore if this is jet to be summoned")]
     [SerializeField] [Range(0f, 1f)] private float summonThreshold;
 
-    [SerializeField] private static int killedBossesCount = 0;
+    private static int killedBossesCount = 0;
 
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
@@ -49,11 +49,13 @@ public class BossMiniJetHp : EnemyHp
         if (currHp == 0)
         {
             //Death logic
-           // print("ded");
-           killedBossesCount++;
-
+            killedBossesCount++;
+       
+            //print("ded");
            if (killedBossesCount == 3)
            {
+               //reset static value
+               killedBossesCount = 0;
                if (onLevelCompleteDelegate != null)
                {
                   onLevelCompleteDelegate.Invoke();

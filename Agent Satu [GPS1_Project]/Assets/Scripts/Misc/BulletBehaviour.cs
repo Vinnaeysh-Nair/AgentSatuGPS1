@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 //using Vector2 = UnityEngine.Vector2;
@@ -39,13 +40,14 @@ public class BulletBehaviour : MonoBehaviour
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
-        
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
+
+        
         rb = GetComponent<Rigidbody2D>();
     }
-    
-    
+
+
     //Each time spawned from pool
     void OnEnable()
     {

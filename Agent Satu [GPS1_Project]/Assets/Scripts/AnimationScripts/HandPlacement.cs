@@ -3,8 +3,6 @@ using UnityEngine;
 public class HandPlacement : MonoBehaviour
 {
     //Components
-    [SerializeField] private bool isPlayer = false;
-    
     [Header("RigLayer Targets")]
     [SerializeField] private Transform leftHandIKTarget;
     [SerializeField] private Transform rightHandIKTarget;
@@ -30,21 +28,23 @@ public class HandPlacement : MonoBehaviour
 
     void Start()
     {
-        if (isPlayer)
+        wepSwitch = GetComponent<WeaponSwitching>();
+
+        //If have weapon switching, means its the player
+        if (wepSwitch != null)
         {
-            wepSwitch = GetComponent<WeaponSwitching>();
-            wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
+            wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         }
         
+       
         InitialPos();
     }
 
     void OnDestroy()
     {
-        if (isPlayer)
-        {        
-            wepSwitch.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
-            
+        if (wepSwitch != null)
+        {
+            wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
         }
     }
 
@@ -55,7 +55,7 @@ public class HandPlacement : MonoBehaviour
         rightHandIKTarget.position = currRightHandPos.position;
     }
 
-    private void WeaponSwitching_OnWeaponChange(object sender, System.EventArgs e)
+    private void WeaponSwitching_OnWeaponChange()
     {
         HandPositions currPositions = positionsArray[wepSwitch.selectedWeapon];
 

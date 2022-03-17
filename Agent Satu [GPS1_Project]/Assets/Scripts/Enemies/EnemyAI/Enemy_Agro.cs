@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -39,19 +40,21 @@ public class Enemy_Agro : MonoBehaviour
         return playerPos;
     }
 
-    void OnDestroy()
-    {
-        overallHp.onDamagedDelegate -= OverallHp_OnDamaged;
-    }
     
     void Start()
     {
+       // playerBody = PlayerMain.Instance.transform;
+
         playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
         enemflip = GetComponent<Enemy_Flipped>();
         
         overallHp = GetComponent<OverallHp>();
+        
+       
         overallHp.onDamagedDelegate += OverallHp_OnDamaged;
+        overallHp.onDeathDelegate += OverallHp_OnDeath;
     }
+
     
     void FixedUpdate()
     {
@@ -69,6 +72,12 @@ public class Enemy_Agro : MonoBehaviour
     private void OverallHp_OnDamaged()
     {
         DetectedFromDamage();
+    }
+
+    private void OverallHp_OnDeath()
+    {
+        overallHp.onDamagedDelegate -= OverallHp_OnDamaged;
+        overallHp.onDeathDelegate -= OverallHp_OnDeath;
     }
     
     private void UpdateDetection()

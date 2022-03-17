@@ -3,7 +3,7 @@ using UnityEngine;
 public class SummonJet : MonoBehaviour
 {
     [SerializeField] private GameObject[] jetsToSummon;
-  
+
     void Start()
     {
         BossMiniJetHp.onReachingThresholdDelegate += BossMiniJetHp_OnReachingThreshold;
@@ -12,9 +12,16 @@ public class SummonJet : MonoBehaviour
     private void BossMiniJetHp_OnReachingThreshold()
     {
         BossMiniJetHp.onReachingThresholdDelegate -= BossMiniJetHp_OnReachingThreshold;
-        foreach (GameObject gO in jetsToSummon)
+        foreach (GameObject jets in jetsToSummon)
         {
-            gO.SetActive(true);
+            if (jets == null)
+            {
+                print("Jet doesn't exist.");
+            }
+            else
+            {
+                jets.gameObject.SetActive(true);
+            }
         }
     }
 }

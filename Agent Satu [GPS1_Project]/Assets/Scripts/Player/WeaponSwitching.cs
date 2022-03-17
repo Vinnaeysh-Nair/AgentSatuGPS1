@@ -5,8 +5,10 @@ public class WeaponSwitching : MonoBehaviour
 {
     public int selectedWeapon = 0;
     private PlayerWeapon[] playerWeapons;
-    public event EventHandler OnWeaponChange;
+    //public event EventHandler OnWeaponChange;
 
+    public delegate void OnWeaponChange();
+    public event OnWeaponChange onWeaponChangeDelegate;
     
     void Start()
     {
@@ -34,8 +36,6 @@ public class WeaponSwitching : MonoBehaviour
                 selectedWeapon++;
                 WeaponIsSwitched();
             }
-                
-            
         }
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -50,8 +50,6 @@ public class WeaponSwitching : MonoBehaviour
                 selectedWeapon--;
                 WeaponIsSwitched();
             }
-                
-            
         }
         
         //Changing through num keys
@@ -141,6 +139,10 @@ public class WeaponSwitching : MonoBehaviour
 
     private void WeaponIsSwitched()
     {
-        OnWeaponChange?.Invoke(this, EventArgs.Empty);
+        //OnWeaponChange?.Invoke(this, EventArgs.Empty);
+        if (onWeaponChangeDelegate != null)
+        {
+            onWeaponChangeDelegate.Invoke();
+        }
     }
 }

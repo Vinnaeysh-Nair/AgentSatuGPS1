@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -21,10 +22,15 @@ public class CrosshairSwitching : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeCrosshair();
         
-        wepSwitch.OnWeaponChange += WeaponSwitching_OnWeaponChange;
+        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
     }
 
-    private void WeaponSwitching_OnWeaponChange(object sender, System.EventArgs e)
+    private void OnDestroy()
+    {
+        wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
+    }
+
+    private void WeaponSwitching_OnWeaponChange()
     {
         ChangeCrosshair();
     }

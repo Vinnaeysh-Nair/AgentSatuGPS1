@@ -5,13 +5,12 @@ public class OpenDoor : MonoBehaviour
     [SerializeField] private Transform buttonInactive;
     [SerializeField] private Transform doorClosed;
 
-    private PlayerMovement playerMovement;
+
     private bool canOpen = false;
 
     void Start()
     {
-        playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
-        playerMovement.OnInteract += PlayerMovement_OnInteract;
+        PlayerMovement.onInteractDelegate += PlayerMovement_OnInteract;
     }
 
 
@@ -31,13 +30,13 @@ public class OpenDoor : MonoBehaviour
         }
     }
 
-    private void PlayerMovement_OnInteract(object sender, System.EventArgs e)
+    private void PlayerMovement_OnInteract()
     {
         if (canOpen)
         {
             ChangeButtonVisual();
             ActivateDoor();
-            playerMovement.OnInteract -= PlayerMovement_OnInteract;
+            PlayerMovement.onInteractDelegate  -= PlayerMovement_OnInteract;
         }
     }
 

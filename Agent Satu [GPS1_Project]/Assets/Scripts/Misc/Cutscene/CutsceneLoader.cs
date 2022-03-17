@@ -50,7 +50,8 @@ public class CutsceneLoader : MonoBehaviour
                 currCutscene = cutsceneToLoad.cutsceneIndexToLoad;
             }
         }
-       
+
+        //currCutscene = 1;
         
         //Disable all Cutscenes except Cutscene to be played
         for (int i = 0; i < cutscenesArray.Length; i++)
@@ -73,10 +74,15 @@ public class CutsceneLoader : MonoBehaviour
             LoadCutScene();
         }
 
-        if (Input.GetButtonDown("Interact") && !IsAllCutscenesFinished())
+        if (Input.GetButtonDown("ProceedCutscene") && !IsAllCutscenesFinished())
         {
             NextSection();
         }
+    }
+
+    public void LoadWinScene()
+    {
+        SceneManager.LoadScene("Win Scene");
     }
     
     
@@ -149,7 +155,7 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsAllCutscenesFinished()
     {
-        if (currCutscene >= cutscenesArray.Length - 1)
+        if (currCutscene > cutscenesArray.Length - 1)
         {
             return true;
         }
@@ -170,7 +176,7 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsAllSectionsFinished()
     {
-        if (currSection >= GetCurrPanel().sections.Length)
+        if (currSection > GetCurrPanel().sections.Length - 1)
         {
             return true;
         }
@@ -180,12 +186,12 @@ public class CutsceneLoader : MonoBehaviour
 
     private bool IsWithinPanelAmount()
     {
-        if (currPanel >= cutscenesArray[currCutscene].panels.Length - 1)
+        if (currPanel < cutscenesArray[currCutscene].panels.Length - 1)
         {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
    
