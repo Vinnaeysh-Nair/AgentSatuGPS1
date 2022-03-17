@@ -98,6 +98,7 @@ public class EnemyAI_Melee : MonoBehaviour
         rb.velocity = new Vector2(0f, 0f);
     }
 
+    //Used in Animation timeline
     public void DamagePlayer()
     {
         Collider2D hitPlayer = Physics2D.OverlapCircle(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize, playerHitLayer);
@@ -113,10 +114,5 @@ public class EnemyAI_Melee : MonoBehaviour
             }
             _playerHpSystem.TakeDamage(damageToPlayer);
         }
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize);
     }
 }
