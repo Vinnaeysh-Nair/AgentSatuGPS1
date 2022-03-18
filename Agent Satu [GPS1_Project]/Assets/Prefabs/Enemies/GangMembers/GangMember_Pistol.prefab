@@ -200,7 +200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172692498994997813}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7059234, w: 0.7082882}
+  m_LocalRotation: {x: 0, y: 0, z: 0.705923, w: 0.7082886}
   m_LocalPosition: {x: 2.851181, y: 3.5878441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -268,7 +268,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096569986563150452}
-  m_LocalRotation: {x: 0, y: 0, z: 0.02736685, w: 0.9996255}
+  m_LocalRotation: {x: 0, y: 0, z: 0.027366696, w: 0.9996255}
   m_LocalPosition: {x: 1.7974312, y: -0.00000035407828, z: 0}
   m_LocalScale: {x: 0.99999964, y: 0.99999964, z: 1}
   m_ConstrainProportionsScale: 0
@@ -362,7 +362,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4658288765644381811}
-  m_LocalRotation: {x: 0, y: 0, z: 0.26868123, w: 0.96322924}
+  m_LocalRotation: {x: 0, y: 0, z: 0.26868466, w: 0.9632282}
   m_LocalPosition: {x: 0.916705, y: -0.00000017246015, z: 0}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
@@ -427,7 +427,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6017436422688874068}
-  m_LocalRotation: {x: 0, y: 0, z: 0.99731666, w: 0.07320844}
+  m_LocalRotation: {x: 0, y: 0, z: 0.99731654, w: 0.07320996}
   m_LocalPosition: {x: -0.09563614, y: -0.3331732, z: 0}
   m_LocalScale: {x: 0.99999964, y: 0.99999964, z: 1}
   m_ConstrainProportionsScale: 0
@@ -459,7 +459,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247632974842662550}
-  m_LocalRotation: {x: 0, y: 0, z: 0.95608425, w: 0.29309198}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9560841, w: 0.29309258}
   m_LocalPosition: {x: 0.022738228, y: 0.3554148, z: 0}
   m_LocalScale: {x: 0.99999964, y: 0.99999964, z: 1}
   m_ConstrainProportionsScale: 0
@@ -491,7 +491,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129485784325031290}
-  m_LocalRotation: {x: 0, y: 0, z: 0.5743006, w: 0.8186445}
+  m_LocalRotation: {x: 0, y: 0, z: 0.57430136, w: 0.81864405}
   m_LocalPosition: {x: 0.87963367, y: -0.0000004352261, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -763,7 +763,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159150442280927752}
-  m_LocalRotation: {x: -0, y: -0, z: 0.017305734, w: 0.9998503}
+  m_LocalRotation: {x: -0, y: -0, z: 0.01730597, w: 0.9998503}
   m_LocalPosition: {x: 0.86, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 8159150442385932751}
   - component: {fileID: 8159150442385932750}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Limbs
+  m_Name: GangMember_Ranged_Limbs
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 8159150442428905241}
   - component: {fileID: 8159150442428905246}
   m_Layer: 11
-  m_Name: GangMember_Pistol__Left Leg
+  m_Name: GangMember_Ranged_Left Leg
   m_TagString: Limb - Leg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,8 +933,8 @@ MonoBehaviour:
   - {fileID: 8538035620463491203}
   - {fileID: 6681500276920546315}
   m_Bounds:
-    m_Center: {x: 0.011433661, y: 0.020762086, z: 0}
-    m_Extent: {x: 0.63591516, y: 1.048559, z: 0}
+    m_Center: {x: 0.011432052, y: 0.020763516, z: 0}
+    m_Extent: {x: 0.63591504, y: 1.0485587, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -990,7 +990,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.39, y: 0.84}
-  m_ConnectedAnchor: {x: -0.22000122, y: -0.93499947}
+  m_ConnectedAnchor: {x: -0.21999873, y: -0.935}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 8159150442580327656}
   - component: {fileID: 8159150442580327657}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Left hand
+  m_Name: GangMember_Ranged_Left hand
   m_TagString: Limb - Others
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1133,8 +1133,8 @@ MonoBehaviour:
   - {fileID: 6504840503765690260}
   - {fileID: 8009706568571512314}
   m_Bounds:
-    m_Center: {x: 0.097257555, y: 0.04544884, z: 0}
-    m_Extent: {x: 0.7566612, y: 0.57035995, z: 0}
+    m_Center: {x: 0.09725672, y: 0.045449436, z: 0}
+    m_Extent: {x: 0.7566615, y: 0.57035965, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1190,7 +1190,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.33, y: 0.57}
-  m_ConnectedAnchor: {x: -0.66000366, y: 0.5149994}
+  m_ConnectedAnchor: {x: -0.6599998, y: 0.5149997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1434,7 +1434,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159150442833067873}
-  m_LocalRotation: {x: -0, y: -0, z: -0.084394194, w: 0.9964324}
+  m_LocalRotation: {x: -0, y: -0, z: -0.08439574, w: 0.99643236}
   m_LocalPosition: {x: 0.55, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1465,7 +1465,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159150442890488082}
-  m_LocalRotation: {x: -0, y: -0, z: 0.052685395, w: 0.9986112}
+  m_LocalRotation: {x: -0, y: -0, z: 0.052686144, w: 0.9986112}
   m_LocalPosition: {x: 0.73, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1489,7 +1489,7 @@ GameObject:
   - component: {fileID: 8159150442947106540}
   - component: {fileID: 8159150442947106541}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Chest
+  m_Name: GangMember_Ranged_Chest
   m_TagString: Limb - Others
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,8 +1579,8 @@ MonoBehaviour:
   - {fileID: 4336434248679886150}
   - {fileID: 2085842517031504699}
   m_Bounds:
-    m_Center: {x: 0.028890193, y: -0.008553028, z: 0}
-    m_Extent: {x: 0.5420703, y: 1.1100988, z: 0}
+    m_Center: {x: 0.028890014, y: -0.008553028, z: 0}
+    m_Extent: {x: 0.54207087, y: 1.1100996, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1665,7 +1665,7 @@ GameObject:
   - component: {fileID: 8159150443081770086}
   - component: {fileID: 8159150443081770087}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Right Leg
+  m_Name: GangMember_Ranged_Right Leg
   m_TagString: Limb - Leg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1756,8 +1756,8 @@ MonoBehaviour:
   - {fileID: 2075055401160121616}
   - {fileID: 1164789466364171585}
   m_Bounds:
-    m_Center: {x: 0.076388925, y: -0.035951734, z: 0}
-    m_Extent: {x: 0.47497338, y: 1.0656585, z: 0}
+    m_Center: {x: 0.07638177, y: -0.035951853, z: 0}
+    m_Extent: {x: 0.47497106, y: 1.0656589, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1813,7 +1813,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.11, y: 0.86}
-  m_ConnectedAnchor: {x: 0.1499939, y: -0.9699993}
+  m_ConnectedAnchor: {x: 0.15000093, y: -0.97000015}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2087,7 +2087,7 @@ GameObject:
   - component: {fileID: 8159150443364514755}
   - component: {fileID: 8159150443364514752}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Head
+  m_Name: GangMember_Ranged_Head
   m_TagString: Limb - Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2177,8 +2177,8 @@ MonoBehaviour:
   - {fileID: 2085842517031504699}
   - {fileID: 4336434248679886150}
   m_Bounds:
-    m_Center: {x: 0.17074499, y: 0.014218867, z: 0}
-    m_Extent: {x: 0.47028425, y: 0.5832457, z: 0}
+    m_Center: {x: 0.17073801, y: 0.014217973, z: 0}
+    m_Extent: {x: 0.47028422, y: 0.5832455, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2234,7 +2234,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.3, y: -0.52}
-  m_ConnectedAnchor: {x: -0.05000305, y: 0.8499985}
+  m_ConnectedAnchor: {x: -0.049999427, y: 0.8499998}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2383,7 +2383,7 @@ GameObject:
   - component: {fileID: 8159150443563332139}
   - component: {fileID: 8159150443563332136}
   m_Layer: 11
-  m_Name: GangMember_Pistol_Right hand
+  m_Name: GangMember_Ranged_Right hand
   m_TagString: Limb - Others
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2473,8 +2473,8 @@ MonoBehaviour:
   - {fileID: 155008899912223262}
   - {fileID: 9168396031077263028}
   m_Bounds:
-    m_Center: {x: 0.02000463, y: -0.012166262, z: 0}
-    m_Extent: {x: 0.6378621, y: 0.87565035, z: 0}
+    m_Center: {x: 0.020008504, y: -0.012166023, z: 0}
+    m_Extent: {x: 0.63785994, y: 0.87565064, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2530,7 +2530,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.09, y: 0.58}
-  m_ConnectedAnchor: {x: 0.30999756, y: 0.30999947}
+  m_ConnectedAnchor: {x: 0.3100003, y: 0.31}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
