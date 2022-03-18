@@ -94,13 +94,13 @@ public class BulletTime : MonoBehaviour
     
     private void DepleteGauge()
     {
-        if (abilityGauge <= 0) return;
+        if (abilityGauge <= 0f) return;
         abilityGauge -= usage * Time.unscaledDeltaTime;
     }
     
     private void RefillGauge()
     {
-        if (abilityGauge > 1) return;
+        if (abilityGauge > 1f) return;
         abilityGauge += usage * Time.unscaledDeltaTime;
     }
 
