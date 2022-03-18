@@ -139,7 +139,6 @@ public class WeaponSwitching : MonoBehaviour
 
     private void WeaponIsSwitched()
     {
-        //OnWeaponChange?.Invoke(this, EventArgs.Empty);
         if (onWeaponChangeDelegate != null)
         {
             onWeaponChangeDelegate.Invoke();
