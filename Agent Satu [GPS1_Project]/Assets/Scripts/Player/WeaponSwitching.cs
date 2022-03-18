@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -34,8 +33,8 @@ public class WeaponSwitching : MonoBehaviour
             else
             {
                 selectedWeapon++;
-                WeaponIsSwitched();
             }
+            WeaponIsSwitched();
         }
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -48,8 +47,8 @@ public class WeaponSwitching : MonoBehaviour
             else
             {
                 selectedWeapon--;
-                WeaponIsSwitched();
             }
+            WeaponIsSwitched();
         }
         
         //Changing through num keys

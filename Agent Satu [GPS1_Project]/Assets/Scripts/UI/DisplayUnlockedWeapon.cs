@@ -7,51 +7,41 @@ public class DisplayUnlockedWeapon : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI  newWeaponText;
     [SerializeField] [Range(0f, 5f)] private float timeBeforeDisabled = 3f;
-    [SerializeField] private WeaponImage[] weaponImages;
+    [SerializeField] private Image[] weaponImages;
   
-
-
-    public static DisplayUnlockedWeapon Instance;
+    
+ 
     #region Singleton
+    public static DisplayUnlockedWeapon Instance;
     void Awake()
     {
         Instance = this;
     }
     #endregion
 
-    [System.Serializable]
-
-    public class WeaponImage
-    {
-        public Image image;
-        public int id;
-    }
-
-   
+    
     public void DisplayWeapon(int id)
     {
         newWeaponText.enabled = true;
         
         int index = id - 1;
-        foreach (WeaponImage wepImage in weaponImages)
+        for (int i = 0; i < weaponImages.Length; i++)
         {
-            if (wepImage.id == index)
+            if (i == index)
             {
-              
-                
-                WeaponImage foundImage = weaponImages[index];
-                foundImage.image.enabled = true;
+                Image foundImage = weaponImages[index];
+                foundImage.enabled = true;
 
                 StartCoroutine(StopDisplaying(foundImage));
             }
         }
     }
 
-    private IEnumerator StopDisplaying(WeaponImage wepImage)
+    private IEnumerator StopDisplaying(Image wepImage)
     {
         yield return new WaitForSeconds(timeBeforeDisabled);
         
         newWeaponText.enabled = false;
-        wepImage.image.enabled = false;
+        wepImage.enabled = false;
     }
 }

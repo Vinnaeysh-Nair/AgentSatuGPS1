@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,7 +13,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Transform firePointContainer;
     private Transform[] firePoints;
     private ObjectPooler pooler;
-    //public PlayerAnimationController animCon;
     private PlayerInventory inventory;
     private List<PlayerInventory.Weapons> weaponsList;
 
@@ -28,7 +29,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float reloadTime = 1f;
     [SerializeField] private int clipSize;
-    //[SerializeField] private float shootStanceDelay = 1f;
     [SerializeField] private bool isContinuousShooting = false;
     public bool isUnlocked = false;
 
@@ -39,12 +39,36 @@ public class PlayerWeapon : MonoBehaviour
     private int currClip;
     private bool reloading = false;
 
+    public delegate void OnAmmoUpdate();
+    public event OnAmmoUpdate onAmmoUpdateDelegate;
+
+    public int WepId
+    {
+        get => wepId;
+    }
+
+    public int CurrClip
+    {
+        get => currClip;
+    }
+
+    public int CurrReserve
+    {
+        get => currAmmoReserve;
+    }
+
 
     public bool GetReloading()
     {
         return reloading;
     }
-    
+
+    private void OnDestroy()
+    {
+        WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
+        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+    }
+
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
@@ -52,11 +76,17 @@ public class PlayerWeapon : MonoBehaviour
 
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsList = inventory.GetWeaponsList();
-        displayAmmoCount = GetComponent<DisplayAmmoCount>();
     }
+
 
     void Start()
     {
+        WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
+        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+        
+        
+        displayAmmoCount = DisplayAmmoCount.Instance;
+        
         //Get firepoints
         int size = firePointContainer.childCount;
         firePoints = new Transform[size];
@@ -66,28 +96,29 @@ public class PlayerWeapon : MonoBehaviour
         }
         
         //If pistol, ignore setting up ammo
-        if (wepId == 0) return;
-        
-        //Initial setup
-        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
-        if (currTotalAmmo >= clipSize)
+        if (wepId != 0)
         {
-            currClip = clipSize;
-            currAmmoReserve = currTotalAmmo - clipSize;
-        }
-        else
-        {
-            currClip = currTotalAmmo;
-            currAmmoReserve = 0;
+            //Initial setup
+            currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+            if (currTotalAmmo >= clipSize)
+            {
+                currClip = clipSize;
+                currAmmoReserve = currTotalAmmo - clipSize;
+            }
+            else
+            {
+                currClip = currTotalAmmo;
+                currAmmoReserve = 0;
+            } 
         }
         
-        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        UpdateAmmoDisplay();
     }
 
 
     private void OnEnable()
     {
-        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        UpdateAmmoDisplay();
         
         if (wepId == 0) return;
 
@@ -238,6 +269,14 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    private void UpdateAmmoDisplay()
+    {
+        if (onAmmoUpdateDelegate != null)
+        {
+            onAmmoUpdateDelegate.Invoke();
+        }
+    }
+
     //For pickup items
     public void ReplenishAmmo(int replenishAmount)
     {
@@ -247,9 +286,10 @@ public class PlayerWeapon : MonoBehaviour
         UpdateAmmoDisplay();
     }
 
-    private void UpdateAmmoDisplay()
+   
+    private void WeaponSwitching_OnWeaponChange()
     {
-        displayAmmoCount.SetAmmoCount(wepId, currClip, currAmmoReserve);
+        UpdateAmmoDisplay();
     }
     
     //Become inactive after a duration after being fired. 
