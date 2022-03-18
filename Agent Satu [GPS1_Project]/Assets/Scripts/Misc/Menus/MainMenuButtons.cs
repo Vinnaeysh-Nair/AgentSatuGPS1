@@ -10,7 +10,7 @@ public class MainMenuButtons : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     public void PlayGame()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadSceneAsync(sceneToLoad);
     }
 
     public void OpenOptions()

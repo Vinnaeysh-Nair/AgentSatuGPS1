@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy_Flipped : MonoBehaviour
@@ -11,8 +12,8 @@ public class Enemy_Flipped : MonoBehaviour
     }
     void Start()
     {
-        playerBody = transform.Find("/Player/PlayerBody").GetComponent<Transform>();
-
+        playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+        
         if (isFacingRight)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);

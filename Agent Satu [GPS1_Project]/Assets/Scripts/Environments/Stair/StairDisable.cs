@@ -1,27 +1,29 @@
 using UnityEngine;
 
-public class StairDisable : MonoBehaviour
+public class StairDisable : Stair
 {
-    private EdgeCollider2D stairCollider;
-    private BoxCollider2D[] platformDetectors;
+    private EdgeCollider2D _stairCollider;
 
     private bool canDisable = false;
     public bool disabledAtStart = false;
 
     void Awake()
     {
-        stairCollider = GetComponentInParent<EdgeCollider2D>();
-        platformDetectors = transform.Find("/Player/PlayerBody/Detectors/PlatformDetectors").GetComponentsInChildren<BoxCollider2D>();
+        //Different way of getting stairCollider from Stair base class
+        _stairCollider = GetComponent<EdgeCollider2D>();
+        
+        Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+        platformDetectors = playerBody.Find("Detectors/PlatformDetectors").GetComponentsInChildren<BoxCollider2D>();
 
-        //No collision at the start
         if (disabledAtStart)
         {
             foreach (BoxCollider2D detectors in platformDetectors)
             {
-                Physics2D.IgnoreCollision(detectors, stairCollider);
+                Physics2D.IgnoreCollision(detectors, _stairCollider);
             }
         }
     }
+
     
     void Update()
     {
@@ -56,7 +58,7 @@ public class StairDisable : MonoBehaviour
     {
         foreach (BoxCollider2D detectors in platformDetectors)
         {
-            Physics2D.IgnoreCollision(detectors, stairCollider);
+            Physics2D.IgnoreCollision(detectors, _stairCollider);
         }
     }
 }

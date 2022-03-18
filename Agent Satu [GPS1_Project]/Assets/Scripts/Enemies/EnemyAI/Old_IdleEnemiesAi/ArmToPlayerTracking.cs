@@ -21,7 +21,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     
     void Start()
     {
-        playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
+        playerMovement  = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
         
         overallHp.onDeathDelegate += OverallHp_OnDeath;
     }

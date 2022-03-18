@@ -28,8 +28,12 @@ public class Pickups : MonoBehaviour
 
     void Start()
     {
-        playerInventory = transform.Find("/Player/PlayerBody/WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
-        playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
+        Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+
+        playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
+       // playerInventory = transform.Find("/Player/PlayerBody/WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
+        playerHp = playerBody.GetComponent<PlayerHpSystem>();
+        //playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
         
         _displayUnlockedWeapon = DisplayUnlockedWeapon.Instance;
         

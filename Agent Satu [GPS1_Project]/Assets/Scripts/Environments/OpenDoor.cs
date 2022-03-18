@@ -8,6 +8,9 @@ public class OpenDoor : MonoBehaviour
 
     private bool canOpen = false;
 
+    public delegate void OnAbleToInteract(bool canInteract, Transform buttonTransform);
+    public static event OnAbleToInteract onAbleToInteractDelegate;
+    
     void Start()
     {
         PlayerMovement.onInteractDelegate += PlayerMovement_OnInteract;
@@ -19,6 +22,12 @@ public class OpenDoor : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             canOpen = true;
+            
+            if (onAbleToInteractDelegate != null)
+            {
+                //Collider2D buttonCollider = GetComponent<Collider2D>();
+                onAbleToInteractDelegate.Invoke(canOpen, transform);
+            }
         }
     }
 
@@ -27,6 +36,12 @@ public class OpenDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canOpen = false;
+            
+            if (onAbleToInteractDelegate != null)
+            {
+               // Collider2D buttonCollider = GetComponent<Collider2D>();
+                onAbleToInteractDelegate.Invoke(canOpen, transform);
+            }
         }
     }
 

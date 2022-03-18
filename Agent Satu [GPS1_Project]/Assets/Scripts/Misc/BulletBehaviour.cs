@@ -41,8 +41,9 @@ public class BulletBehaviour : MonoBehaviour
     {
         pooler = ObjectPooler.objPoolerInstance;
         tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
-
+        //playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
+        GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
+        playerHp = playerBody.GetComponent<PlayerHpSystem>();
         
         rb = GetComponent<Rigidbody2D>();
     }
