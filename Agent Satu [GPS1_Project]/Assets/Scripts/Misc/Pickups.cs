@@ -9,6 +9,8 @@ public class Pickups : MonoBehaviour
     private PlayerHpSystem playerHp;
     private List<PlayerInventory.Weapons> weaponsList;
 
+    private DisplayUnlockedWeapon _displayUnlockedWeapon;
+
     //Fields
     public int pickupId;
     
@@ -28,6 +30,9 @@ public class Pickups : MonoBehaviour
     {
         playerInventory = transform.Find("/Player/PlayerBody/WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
         playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
+        
+        _displayUnlockedWeapon = DisplayUnlockedWeapon.Instance;
+        
 
         int size = playerInventory.transform.childCount;
         playerWeapons = new PlayerWeapon[size];
@@ -86,5 +91,6 @@ public class Pickups : MonoBehaviour
     {
         if (playerWeapons[wepId].isUnlocked) return;
         playerWeapons[wepId].isUnlocked = true;
+        _displayUnlockedWeapon.DisplayWeapon(wepId);
     }
 }

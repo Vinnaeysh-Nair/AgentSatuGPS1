@@ -67,6 +67,9 @@ public class Dismemberment : MonoBehaviour
     {
         //SpriteSkin
         detachedLimb.GetComponent<SpriteSkin>().enabled = false;
+
+        //HingeJoing2D
+       // detachedLimb.GetComponent<HingeJoint2D>().enabled = false;
         
         //Ranged enemy tracking logic
         if (detachedLimb.TryGetComponent(out ArmToPlayerTracking tracking))
