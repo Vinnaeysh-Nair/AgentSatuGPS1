@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickups : MonoBehaviour
 {
     //Components
-    private PlayerInventory playerInventory;
-    private PlayerHpSystem playerHp;
-    private List<PlayerInventory.Weapons> weaponsList;
+    private PlayerInventory _playerInventory;
+    private PlayerHpSystem _playerHp;
+    //private List<PlayerInventory.Weapons> _weaponsList;
+    private PlayerInventory.Weapons[] _weaponsArray;
 
     private DisplayUnlockedWeapon _displayUnlockedWeapon;
 
@@ -16,8 +15,8 @@ public class Pickups : MonoBehaviour
     
     [Header("Applicable to both ammo and health")]
     public int replenishAmount;
-    private bool collected = false;
-    private PlayerWeapon[] playerWeapons;
+    private bool _collected = false;
+    private PlayerWeapon[] _playerWeapons;
 
 
     //Text
@@ -30,22 +29,20 @@ public class Pickups : MonoBehaviour
     {
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
 
-        playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
-       // playerInventory = transform.Find("/Player/PlayerBody/WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
-        playerHp = playerBody.GetComponent<PlayerHpSystem>();
-        //playerHp = transform.Find("/Player/PlayerBody").GetComponent<PlayerHpSystem>();
-        
+        _playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
+        _playerHp = playerBody.GetComponent<PlayerHpSystem>();
+   
         _displayUnlockedWeapon = DisplayUnlockedWeapon.Instance;
         
 
-        int size = playerInventory.transform.childCount;
-        playerWeapons = new PlayerWeapon[size];
+        int size = _playerInventory.transform.childCount;
+        _playerWeapons = new PlayerWeapon[size];
         for (int i = 0; i < size; i++)
         {
-            playerWeapons[i] = playerInventory.transform.GetChild(i).GetComponent<PlayerWeapon>();
+            _playerWeapons[i] = _playerInventory.transform.GetChild(i).GetComponent<PlayerWeapon>();
         }
         
-        weaponsList = playerInventory.GetWeaponsList();
+        _weaponsArray = _playerInventory.GetWeaponsArray();
     }
     
 
@@ -53,12 +50,12 @@ public class Pickups : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            if (collected) return;
+            if (_collected) return;
             
-            collected = true;
+            _collected = true;
             TriggerEffect();
             gameObject.SetActive(false);
-            collected = false;
+            _collected = false;
         }
     }
 
@@ -66,7 +63,7 @@ public class Pickups : MonoBehaviour
     {
         if (pickupId == 0)
         {
-            playerHp.ReplenishHealth(replenishAmount);
+            _playerHp.ReplenishHealth(replenishAmount);
         }
         else
         {
@@ -76,7 +73,7 @@ public class Pickups : MonoBehaviour
 
     private void TriggerReplenishAmmo()
     {
-        GameObject activeWeapon = playerInventory.transform.GetChild(pickupId).gameObject;
+        GameObject activeWeapon = _playerInventory.transform.GetChild(pickupId).gameObject;
         
         if (activeWeapon.gameObject.activeInHierarchy)
         {
@@ -87,14 +84,20 @@ public class Pickups : MonoBehaviour
         UnlockWeapon(pickupId);
         
         //Update inventory
-        int currTotal = weaponsList[pickupId - 1].GetTotalAmmo();
-        weaponsList[pickupId - 1].SetTotalAmmo(currTotal + replenishAmount);   
+        int currTotal = _weaponsArray[pickupId].TotalAmmo;
+        _weaponsArray[pickupId].TotalAmmo = currTotal + replenishAmount;   
     }
 
     private void UnlockWeapon(int wepId)
     {
-        if (playerWeapons[wepId].isUnlocked) return;
-        playerWeapons[wepId].isUnlocked = true;
+        if (_playerWeapons[wepId].isUnlocked) return;
+        
+        _playerWeapons[wepId].isUnlocked = true;
+        
+        //Update inventory
+        _playerInventory.GetWeapon(wepId).IsUnlocked = true;  
+    
+        
         _displayUnlockedWeapon.DisplayWeapon(wepId);
     }
 }

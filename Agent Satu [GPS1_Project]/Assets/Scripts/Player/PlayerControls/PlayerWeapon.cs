@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -14,10 +13,10 @@ public class PlayerWeapon : MonoBehaviour
     private Transform[] firePoints;
     private ObjectPooler pooler;
     private PlayerInventory inventory;
-    private List<PlayerInventory.Weapons> weaponsList;
+    //private List<PlayerInventory.Weapons> weaponsList;
+    private PlayerInventory.Weapons[] weaponsArray;
 
     //UI
-    private DisplayAmmoCount displayAmmoCount;
     private PauseMenu pauseMenu;
     
     
@@ -68,15 +67,20 @@ public class PlayerWeapon : MonoBehaviour
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
     }
-
+    
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
         pauseMenu = PauseMenu.Instance;
 
         inventory = GetComponentInParent<PlayerInventory>();
-        weaponsList = inventory.GetWeaponsList();
+        weaponsArray = inventory.GetWeaponsArray();
+        
+        
+        //get unlocked status from inventory
+        isUnlocked = weaponsArray[wepId].IsUnlocked;
     }
+
 
 
     void Start()
@@ -84,8 +88,6 @@ public class PlayerWeapon : MonoBehaviour
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
-        
-        displayAmmoCount = DisplayAmmoCount.Instance;
         
         //Get firepoints
         int size = firePointContainer.childCount;
@@ -99,7 +101,7 @@ public class PlayerWeapon : MonoBehaviour
         if (wepId != 0)
         {
             //Initial setup
-            currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+            currTotalAmmo = weaponsArray[wepId].TotalAmmo;
             if (currTotalAmmo >= clipSize)
             {
                 currClip = clipSize;
@@ -120,11 +122,12 @@ public class PlayerWeapon : MonoBehaviour
     {
         UpdateAmmoDisplay();
         
+        
         if (wepId == 0) return;
 
         //If theres a change in totalAmmo, update the reserve
         int prevTotalAmmo = currTotalAmmo;
-        currTotalAmmo = weaponsList[wepId - 1].GetTotalAmmo();
+        currTotalAmmo = weaponsArray[wepId].TotalAmmo;
 
         int diff = currTotalAmmo - prevTotalAmmo;
         if (diff > 0)
@@ -238,7 +241,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             currClip--;
             currTotalAmmo--;
-            weaponsList[wepId - 1].SetTotalAmmo(currTotalAmmo);
+            weaponsArray[wepId].TotalAmmo = currTotalAmmo;
         }
     }
 
