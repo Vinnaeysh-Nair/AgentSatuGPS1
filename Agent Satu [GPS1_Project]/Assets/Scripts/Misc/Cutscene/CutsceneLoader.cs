@@ -16,6 +16,8 @@ public class CutsceneLoader : MonoBehaviour
     [SerializeField] private int currLine = -1;
     [SerializeField] private int prevLine;
 
+    private Line lineToSetInactive;
+    
     [SerializeField] private Cutscene[] cutscenesArray;
     [SerializeField] private Dialogue[] dialoguesArray;
 
@@ -78,8 +80,6 @@ public class CutsceneLoader : MonoBehaviour
         public int levelToLoadIndex;
     
         public Line[] lines;
-    
-        //public Conversation conversation;
     }
     
     [System.Serializable]
@@ -87,6 +87,12 @@ public class CutsceneLoader : MonoBehaviour
     {
         public GameObject line;
         public bool staysInScene = false;
+
+        
+        // [Header("-1 to stay permanently")]
+        // public int inSceneLength = 0;
+        // public int currLength;
+
     }
     
 
@@ -238,6 +244,7 @@ public class CutsceneLoader : MonoBehaviour
             {
                 previousLine.line.SetActive(false);
             }
+           
             
             Line thisLine = dialoguesArray[currDialogue].lines[currLine];
             thisLine.line.SetActive(true);
@@ -290,7 +297,7 @@ public class CutsceneLoader : MonoBehaviour
                 }
           
                 
-               //If coming back to Cutscene, update SO
+                //If coming back to Cutscene, update SO
                 if (cutscenesArray[currCutscene].loadsBackToCutscene)
                 {
                     cutsceneSo.loadId = cutscenesArray[currCutscene].nextLoadId;
