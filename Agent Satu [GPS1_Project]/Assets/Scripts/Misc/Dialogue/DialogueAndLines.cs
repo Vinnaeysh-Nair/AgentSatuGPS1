@@ -7,7 +7,7 @@ public class DialogueAndLines : MonoBehaviour
     public Dialogue dialogue;
 
     //private bool canTalk = true;
-    private float timer = 0.5f;
+    //private float timer = 0.5f;
     private bool firstConversation = true;
     
     void Start()
