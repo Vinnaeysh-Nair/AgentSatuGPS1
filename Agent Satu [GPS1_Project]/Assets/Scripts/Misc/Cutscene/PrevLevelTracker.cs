@@ -10,6 +10,6 @@ public class PrevLevelTracker : MonoBehaviour
     private void Start()
     {
         currLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        cutsceneSo.SetLastLevelIndex(currLevelIndex);
+       // cutsceneSo.SetLastLevelIndex(currLevelIndex);
     }
 }

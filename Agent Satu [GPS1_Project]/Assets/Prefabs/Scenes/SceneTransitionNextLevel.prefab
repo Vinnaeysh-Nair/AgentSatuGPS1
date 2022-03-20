@@ -215,7 +215,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 4495569231901491824}
   transitionTime: 1
-  willTransitionToCutscene: 0
+  cutsceneSo: {fileID: 11400000, guid: bee767ca70775d742a1107eb14fd89a2, type: 2}
+  willTransitionToCutsceneOrDialogue: 1
+  cutsceneOrDialogue: 1
+  loadId: 0
+  cutsceneSceneIndex: 8
 --- !u!1 &4495569231162917791
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +314,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &4495569231901491826
 MonoBehaviour:

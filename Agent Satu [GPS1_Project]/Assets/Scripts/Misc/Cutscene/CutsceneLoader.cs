@@ -7,17 +7,21 @@ public class CutsceneLoader : MonoBehaviour
     [SerializeField] private CutsceneSO cutsceneSo;
     
     [Header("For debugging: ")]
-    [SerializeField] private int currCutscene = 0;
-    [SerializeField] private int currPanel = 0;
-    [SerializeField] private int currSection = 0;
+    [SerializeField] private int currCutscene;
+    [SerializeField] private int currPanel;
+    [SerializeField] private int currSection;
     
+    
+    [SerializeField] private int currDialogue;
+    [SerializeField] private int currLine = -1;
+    [SerializeField] private int prevLine;
+
     [SerializeField] private Cutscene[] cutscenesArray;
+    [SerializeField] private Dialogue[] dialoguesArray;
 
+    [SerializeField] private bool cutsceneOrDialogue = false;
 
-
-    
-    
-    
+        
     [System.Serializable]
     private class Panel
     {
@@ -29,9 +33,19 @@ public class CutsceneLoader : MonoBehaviour
     [System.Serializable]
     struct Cutscene
     {
+        public int loadId;
         public Transform cutsceneTransform;
+
+        [Header("Cutscene scene")]
+        public bool loadsBackToCutscene;
+
+        [Header("True for Cutscene; False for Dialogue")]
+        public bool cutsceneOrDialogue;
         
-        [Header("Info for next level to load")]
+        [Header("Applicable to both Cutscene and Dialogue")]
+        public int nextLoadId;
+        
+        [Header("Info for next level to load(ignore if loading back to cutscene)")]
         [SerializeField] private string levelToLoadSceneName;
         public int levelToLoadIndex;
         
@@ -39,30 +53,106 @@ public class CutsceneLoader : MonoBehaviour
         [Header("Panels")]
         public  Panel[] panels;
     };
- 
+
+   
+
+
+    
+    [System.Serializable]
+    public struct Dialogue
+    {
+        public int loadId;
+        public Transform dialogueTransform;
+        
+        [Header("Cutscene scene")]
+        public bool loadsBackToCutscene;
+
+        [Header("True for Cutscene; False for Dialogue")]
+        public bool cutsceneOrDialogue;
+        
+        [Header("Applicable to both Cutscene and Dialogue")]
+        public int nextLoadId;
+        
+        [Header("Info for next level to load")]
+        [SerializeField] private string levelToLoadSceneName;
+        public int levelToLoadIndex;
+    
+        public Line[] lines;
+    
+        //public Conversation conversation;
+    }
+    
+    [System.Serializable]
+    public class Line
+    {
+        public GameObject line;
+        public bool staysInScene = false;
+    }
+    
+
+    
+    
     void Start()
     {
-        foreach (CutsceneSO.CutsceneToLoad cutsceneToLoad in cutsceneSo.cutsceneToLoad)
+        //cutsceneSo.loadCutsceneOrDialogue = false;
+       // cutsceneSo.loadId = 0;
+        
+        
+        
+        cutsceneOrDialogue = cutsceneSo.loadCutsceneOrDialogue;
+
+        
+        //Disable all
+        foreach (Cutscene cutscene in cutscenesArray)
         {
-            if (cutsceneSo.GetLastLevelIndex() == cutsceneToLoad.levelIndexBeforeCutscene)
-            {
-                print("Last level Index was: " + cutsceneSo.GetLastLevelIndex() + ". Loading: Cutscene " + cutsceneToLoad.cutsceneIndexToLoad);     //remove later
-                currCutscene = cutsceneToLoad.cutsceneIndexToLoad;
-            }
+            cutscene.cutsceneTransform.gameObject.SetActive(false);
         }
 
-        //currCutscene = 1;
-        
-        //Disable all Cutscenes except Cutscene to be played
-        for (int i = 0; i < cutscenesArray.Length; i++)
+        foreach (Dialogue dialogue in dialoguesArray)
         {
-            Cutscene thisCutscene = cutscenesArray[i];
-            OpenFirstPanel(thisCutscene);
-
-            if (i != currCutscene)
+            dialogue.dialogueTransform.gameObject.SetActive(false);
+        }
+        
+        
+        // True to open cutscene; false to open dialogue
+        if (cutsceneOrDialogue)
+        { 
+            //Get index of cutscene to load
+            currCutscene = -1;
+            for (int i = 0; i < cutscenesArray.Length; i++)
             {
-                thisCutscene.cutsceneTransform.gameObject.SetActive(false);
+                if (cutsceneSo.loadId == cutscenesArray[i].loadId)
+                {
+                    currCutscene = i;
+                }
             }
+
+            if (currCutscene == -1)
+            {
+                print("no cutscene");
+                return;
+            }
+            OpenFirstPanel(cutscenesArray[currCutscene]);
+        }
+        else
+        {
+            //Get index of dialogue to load
+            currDialogue = -1;
+            for (int i = 0; i < dialoguesArray.Length; i++)
+            {
+                if (cutsceneSo.loadId == dialoguesArray[i].loadId)
+                {
+                    currDialogue = i;
+                }
+            }
+
+            if (currDialogue == -1)
+            {
+                print("no dialogue");
+                return;
+            }
+        
+            OpenFirstLine(dialoguesArray[currDialogue]);
         }
     }
 
@@ -74,9 +164,19 @@ public class CutsceneLoader : MonoBehaviour
             LoadCutScene();
         }
 
-        if (Input.GetButtonDown("ProceedCutscene") && !IsAllCutscenesFinished())
+        
+       
+        if (Input.GetButtonDown("ProceedCutscene"))
         {
-            NextSection();
+            if(cutsceneOrDialogue)
+            {
+                if (IsAllCutscenesFinished()) return;
+                NextSection();
+            }
+            else
+            {
+                 NextLine();
+            }
         }
     }
 
@@ -95,6 +195,8 @@ public class CutsceneLoader : MonoBehaviour
     //Disable all Panels except first Panel
     private void OpenFirstPanel(Cutscene thisCutscene)
     {
+        thisCutscene.cutsceneTransform.gameObject.SetActive(true);
+        
         for (int j = 0; j < thisCutscene.panels.Length; j++)
         {
             Panel thisPanel = thisCutscene.panels[j];
@@ -118,6 +220,54 @@ public class CutsceneLoader : MonoBehaviour
         }
     }
     
+    private void OpenFirstLine(Dialogue thisDialogue)
+    {
+        thisDialogue.dialogueTransform.gameObject.SetActive(true);
+        thisDialogue.lines[currLine].line.SetActive(true);
+    }
+    
+    private void NextLine()
+    {
+        print("asdf");
+        
+        if (!IsAllLinesFinished())
+        {
+            prevLine = currLine;
+            currLine++;
+            
+            Line previousLine = dialoguesArray[currDialogue].lines[prevLine];
+            if (!previousLine.staysInScene)
+            {
+                previousLine.line.SetActive(false);
+            }
+            
+            Line thisLine = dialoguesArray[currDialogue].lines[currLine];
+            thisLine.line.SetActive(true);
+        }
+        else
+        {
+            currLine = 0;
+            
+            if (dialoguesArray[currDialogue].loadsBackToCutscene)
+            {
+                cutsceneSo.loadId = dialoguesArray[currDialogue].nextLoadId;
+                cutsceneSo.loadCutsceneOrDialogue = dialoguesArray[currDialogue].cutsceneOrDialogue;
+                    
+                transition.LoadNextLevel(SceneManager.GetActiveScene().buildIndex);
+
+                return;
+            }
+            
+            transition.LoadNextLevel(dialoguesArray[currDialogue].levelToLoadIndex);
+            print("All lines finished");
+        }
+    }
+    
+    private bool IsAllLinesFinished()
+    {
+        return currLine == dialoguesArray[currDialogue].lines.Length - 1;
+    }
+
 
     public void NextSection()
     {
@@ -134,6 +284,7 @@ public class CutsceneLoader : MonoBehaviour
             //All panels finished, change to level scene
             else
             {
+                //If all sections loaded, load next level
                 if (IsAllCutscenesFinished())
                 {
                     //do something after all cutscene finished
@@ -141,7 +292,17 @@ public class CutsceneLoader : MonoBehaviour
                 }
           
                 
-                //If all sections loaded, load next panel
+               //If coming back to Cutscene, update SO
+                if (cutscenesArray[currCutscene].loadsBackToCutscene)
+                {
+                    cutsceneSo.loadId = cutscenesArray[currCutscene].nextLoadId;
+                    cutsceneSo.loadCutsceneOrDialogue = cutscenesArray[currCutscene].cutsceneOrDialogue;
+                    
+                    transition.LoadNextLevel(SceneManager.GetActiveScene().buildIndex);
+
+                    return;
+                }
+                
                 transition.LoadNextLevel(cutscenesArray[currCutscene].levelToLoadIndex);
                 
                 return;

@@ -8,12 +8,23 @@ public class TransitionScript : MonoBehaviour
     //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
+    public static int lastLevelIndex;
 
-    [Space]
-    [Header("Cutscenes")]
-    [SerializeField] private bool willTransitionToCutscene;
+    [Space] [Header("Cutscenes & dialogue")] 
+    [SerializeField] private CutsceneSO cutsceneSo;
+    [SerializeField] private bool willTransitionToCutsceneOrDialogue;
+
+    [Header("True for Cutscene; False for Dialogue")]
+    [SerializeField] private bool cutsceneOrDialogue;
+
+    
+    [Header("Id for cutscene or dialogue to load")]
+    [SerializeField] private int loadId;
+
+    
     [SerializeField] private int cutsceneSceneIndex = 8;
 
+    private bool playerEntered = false;
 
     public delegate void OnChangeLevel();
     public static event OnChangeLevel onChangeLevelDelegate;
@@ -27,7 +38,27 @@ public class TransitionScript : MonoBehaviour
     //     }
     // }
 
-    
+    void Start()
+    {
+        //If already cutscene dont overwrite
+        lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        if (lastLevelIndex != cutsceneSceneIndex)
+        {
+            cutsceneSo.loadId = loadId;
+            
+            if (willTransitionToCutsceneOrDialogue)
+            {
+                if (cutsceneOrDialogue)
+                {
+                    cutsceneSo.loadCutsceneOrDialogue = true;
+                }
+                else
+                {
+                    cutsceneSo.loadCutsceneOrDialogue = false;
+                }
+            }
+        }
+    }
 
     //Used in levels
     private void LoadNextLevel()
@@ -39,7 +70,7 @@ public class TransitionScript : MonoBehaviour
         
         
         int sceneIndexToLoad = 0;
-        if (willTransitionToCutscene)
+        if (willTransitionToCutsceneOrDialogue)
         {
             sceneIndexToLoad = cutsceneSceneIndex;
         }
@@ -72,6 +103,9 @@ public class TransitionScript : MonoBehaviour
     {
         if (entranceCollider.CompareTag("Player"))
         {
+            if (playerEntered) return;
+            playerEntered = true;
+            
             LoadNextLevel();
         }
     }
