@@ -1523,7 +1523,7 @@ MonoBehaviour:
   - name: SMG
     weaponId: 1
     totalAmmo: 60
-    isUnlocked: 0
+    isUnlocked: 1
   - name: Rifle
     weaponId: 2
     totalAmmo: 40
@@ -3186,6 +3186,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5842552307125927281}
     m_Modifications:
+    - target: {fileID: -2907029969845245863, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cc99bb6354f84fa40ba0b9751663b9f7, type: 3}
     - target: {fileID: 148950092, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
       propertyPath: clipCountText
       value: 
@@ -3291,11 +3295,20 @@ PrefabInstance:
       value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 8425298623599484005, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
+      propertyPath: AdSource
+      value: 
+      objectReference: {fileID: 485489336782410023}
+    - target: {fileID: 8425298623599484005, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
       propertyPath: isUnlocked
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
+--- !u!82 &485489336782410023 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -2907029969845245863, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
+  m_PrefabInstance: {fileID: 5842552307041073534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1788801607482738690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5316485940913009020, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
