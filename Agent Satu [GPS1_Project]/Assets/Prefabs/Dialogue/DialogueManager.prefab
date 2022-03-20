@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -170,8 +170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 519, y: -117}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 422.63416, y: -118}
+  m_SizeDelta: {x: 403.5767, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1596086968299887974
 CanvasRenderer:
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 72, y: 11}
   m_SizeDelta: {x: -0.0053100586, y: -0.008483887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7046767290320491326
@@ -363,14 +363,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9843137, g: 1, b: 0.6, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -498,12 +498,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - name: James bond
+  - speakerId: 0
+    name: James bond
     sentences:
     - bond james bond
     - 007
     - yommama
-  - name: Grace
+  - speakerId: 1
+    name: Grace
     sentences:
     - hi
   dialogueManager: {fileID: 7046767290710108125}
@@ -657,3 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 50436439294764290}
   dialogueText: {fileID: 7046767290320491327}
+  textColors:
+  - speakerId: 0
+    textColor: {r: 0, g: 0, b: 0, a: 1}
+  - speakerId: 1
+    textColor: {r: 0.6, g: 0, b: 1, a: 1}
