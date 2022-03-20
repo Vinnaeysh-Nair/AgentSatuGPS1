@@ -28,7 +28,7 @@ public class ObjectPooler : MonoBehaviour
 
     //Fields
     private const int smallPoolSize = 5;
-    private const int bigPoolSize = 50;
+    private const int bigPoolSize = 100;
     private TagManager tagManager;
     
     
