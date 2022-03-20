@@ -8,7 +8,7 @@ public class InteractPopup : MonoBehaviour
     [SerializeField] private Sprite[] popups;
 
     private Sprite worldInteractPopUp;
-    private Sprite speechInteractPopUp;
+    //private Sprite speechInteractPopUp;
 
 
     private void OnDestroy()
@@ -20,11 +20,12 @@ public class InteractPopup : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         OpenDoor.onAbleToInteractDelegate += OpenDoor_OnAbleToInteract;
-
+    
         //Swap sprite logics implement later
         worldInteractPopUp = popups[0];
-        speechInteractPopUp = popups[1];
+       // speechInteractPopUp = popups[1];
     }
+
 
     private void OpenDoor_OnAbleToInteract(bool canOpen, Transform buttonTransform)
     {
