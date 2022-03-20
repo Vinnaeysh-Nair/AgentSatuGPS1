@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZoneToTriggerDialogue : MonoBehaviour
@@ -28,13 +26,13 @@ public class ZoneToTriggerDialogue : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D talkingArea)
     {
-        if (talkingArea.gameObject.tag == "Player")
+        if (talkingArea.CompareTag("Player"))
             inTalkingZone = true;
     }
 
     void OnTriggerExit2D(Collider2D talkingArea)
     {
-        if (talkingArea.gameObject.tag == "Player")
+        if (talkingArea.CompareTag("Player"))
             inTalkingZone = false;
     }
 

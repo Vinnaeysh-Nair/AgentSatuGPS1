@@ -1,80 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class DialogueAndLines : MonoBehaviour
 {
     public Dialogue[] dialogue;
-    private int currDialogue = 0;
-    private int currSentence;
+
+    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private int currDialogue = 0;
+    
+    [SerializeField] private int currSentence;
 
     //private bool canTalk = true;
     //private float timer = 0.5f;
     private bool firstConversation = true;
     
-    void Start()
-    {
-        //Debug.Log(dialogueCount);
-    }
+
 
     void Update()
     {
         if (gameObject.activeSelf)
         {
-            if (firstConversation)
-            {
-                TriggerDialogue();
-                firstConversation = false;
-                TriggerNextDialogue();
-            }
-
-            //canTalk &&
             if (Input.GetKeyDown("e"))
             {
-                if (!IsALLDialoguesFinished())
+                if (!IsAllDialoguesFinished())
                 {
+                    DisplayNextDialogue();
+                    
+                    
                     if (IsAllSentencesFinished())
                     {
+                        
                         currSentence = 0;
+                        currDialogue++;
+                        
+                        DisplayNextDialogue();
+                        TriggerNextSentence();
                     }
-                    TriggerNextDialogue();
+                    else
+                    {
+                        TriggerNextSentence();
+                        currSentence++;
+                        
+                        print("no more sentece");
+                    }
                 }
                 else
                 {
-                    print("no more");
+                    print("mo more dialogue");
                 }
-  
-                //canTalk = false;
+                
             }
         }
-        //timer -= Time.deltaTime;
-        //if (canTalk == false && timer <= 0.0f)
-        //{
-        //    canTalk = true;
-        //    timer = 0.5f;
-        //}
     }
 
-    public void TriggerDialogue()
+    public void DisplayNextDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue[currDialogue]);
-        currDialogue++;
+        dialogueManager.StartDialogue(dialogue[currDialogue]);
     }
 
-    public void TriggerNextDialogue()
+
+    public void TriggerNextSentence()
     {
-        FindObjectOfType<DialogueManager>().DisplayNextSentence();
-        currDialogue++;
+        dialogueManager.DisplayNextSentence(dialogue[currDialogue].sentences[currSentence]);
     }
 
     private bool IsAllSentencesFinished()
     {
-        return currSentence > dialogue[currDialogue].sentences.Length - 1;
+        return currSentence >= dialogue[currDialogue].sentences.Length;
     }
 
-    private bool IsALLDialoguesFinished()
+    private bool IsAllDialoguesFinished()
     {
-        return currDialogue > dialogue.Length - 1;
+        return currDialogue >=  dialogue.Length;
     }
 
     void OnDisable ()
