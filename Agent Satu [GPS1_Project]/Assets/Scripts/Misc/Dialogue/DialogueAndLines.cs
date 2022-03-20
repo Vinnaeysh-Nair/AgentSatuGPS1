@@ -6,19 +6,54 @@ public class DialogueAndLines : MonoBehaviour
 {
     public Dialogue dialogue;
 
-    /*void Update()
-    { 
+    //private bool canTalk = true;
+    private float timer = 0.5f;
+    private bool firstConversation = true;
+    
+    void Start()
+    {
+        //Debug.Log(dialogueCount);
+    }
+
+    void Update()
+    {
         if (gameObject.activeSelf)
         {
-            //Debug.Log("game object is active");
-
-            if(Input.GetKey("p"))
+            if (firstConversation)
+            {
                 TriggerDialogue();
+                firstConversation = false;
+                TriggerNextDialogue();
+            }
+
+            //canTalk &&
+            if (Input.GetKeyDown("e"))
+            {
+                TriggerNextDialogue();
+                //canTalk = false;
+            }
         }
-    }*/
+        //timer -= Time.deltaTime;
+        //if (canTalk == false && timer <= 0.0f)
+        //{
+        //    canTalk = true;
+        //    timer = 0.5f;
+        //}
+    }
 
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+    }
+
+    public void TriggerNextDialogue()
+    {
+        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+    }
+
+    void OnDisable ()
+    {
+        firstConversation = true;
+        //canTalk = true;
     }
 }
