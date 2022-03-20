@@ -5980,6 +5980,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
+      propertyPath: loadId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: cutsceneSceneIndex
       value: 8
       objectReference: {fileID: 0}
@@ -7507,7 +7511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1849548562
 Transform:
   m_ObjectHideFlags: 0
@@ -8362,7 +8366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2141427850
 Transform:
   m_ObjectHideFlags: 0
@@ -8392,7 +8396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 424907493}
   transitionTime: 1
-  cutsceneSo: {fileID: 0}
+  cutsceneSo: {fileID: 11400000, guid: bee767ca70775d742a1107eb14fd89a2, type: 2}
   willTransitionToCutsceneOrDialogue: 0
   cutsceneOrDialogue: 0
   loadId: 0

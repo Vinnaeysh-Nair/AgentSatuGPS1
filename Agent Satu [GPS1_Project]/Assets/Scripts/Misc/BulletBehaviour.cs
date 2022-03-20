@@ -167,7 +167,7 @@ public class BulletBehaviour : MonoBehaviour
     //Become inactive after a duration after being fired. 
     private IEnumerator SetBulletInactive(GameObject shotBullet)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(10f);
         shotBullet.SetActive(false);
     }
 }
