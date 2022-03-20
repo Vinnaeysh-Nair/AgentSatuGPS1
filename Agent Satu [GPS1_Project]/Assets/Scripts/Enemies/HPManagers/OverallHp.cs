@@ -27,10 +27,13 @@ public class OverallHp : EnemyHp
     public delegate void OnDamaged();
     public event OnDamaged onDamagedDelegate;
 
+    private AudioSource AD;
+    [SerializeField] AudioClip DieSound;
 
 
     void Start()
     {
+        AD = GetComponent<AudioSource>();
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
         spawnPickups = GetComponent<SpawnPickups>();
 
@@ -81,6 +84,7 @@ public class OverallHp : EnemyHp
         //Die
         if (currHp <= 0)
         {
+            AD.PlayOneShot(DieSound);
             Die(flingDirection);
         }
         

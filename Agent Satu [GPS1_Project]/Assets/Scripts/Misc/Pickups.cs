@@ -25,6 +25,11 @@ public class Pickups : MonoBehaviour
     [TextArea(3,7)] [SerializeField] private string notes;
 
 
+    //SoundForCollectibles
+    //SoundSettings
+    [SerializeField] private AudioClip PickUpSound;
+
+
     void Start()
     {
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
@@ -51,9 +56,8 @@ public class Pickups : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             if (_collected) return;
-            
             _collected = true;
-            TriggerEffect();
+            AudioSource.PlayClipAtPoint(PickUpSound, transform.position);
             gameObject.SetActive(false);
             _collected = false;
         }
@@ -63,6 +67,7 @@ public class Pickups : MonoBehaviour
     {
         if (pickupId == 0)
         {
+            TriggerEffect();
             _playerHp.ReplenishHealth(replenishAmount);
         }
         else

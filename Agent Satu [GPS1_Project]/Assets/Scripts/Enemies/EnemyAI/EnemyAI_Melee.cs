@@ -27,8 +27,11 @@ public class EnemyAI_Melee : MonoBehaviour
     [SerializeField] private float attackAreaSize;
     [SerializeField] [Range(0f, 3f)] private float startAtkDistX = 0f;
     
+
     [SerializeField] private LayerMask playerHitLayer;
-  
+
+    [SerializeField] private AudioClip MeleeSound;
+     private AudioSource AD;
 
     private float ignoreOffset = .5f;
     private Vector2 playerPos;
@@ -36,6 +39,7 @@ public class EnemyAI_Melee : MonoBehaviour
 
     void Start()
     {
+        AD = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         enemyAgro = GetComponent<Enemy_Agro>();
     }
@@ -105,6 +109,7 @@ public class EnemyAI_Melee : MonoBehaviour
 
         if (hitPlayer != null)
         {
+            AD.PlayOneShot(MeleeSound);
             Transform playerRoot = hitPlayer.transform.root;
             
             if (_playerHpSystem == null)
