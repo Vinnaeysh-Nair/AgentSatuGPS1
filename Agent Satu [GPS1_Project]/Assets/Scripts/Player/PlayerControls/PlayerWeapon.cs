@@ -143,11 +143,18 @@ public class PlayerWeapon : MonoBehaviour
         
         if (wepId == 0)
         {
-            SingleClickShooting();
+            if (isContinuousShooting)
+            {
+                ContinuousShooting();
+            }
+            else
+            {
+                SingleClickShooting();
+            }
             return;
         }
-
-      
+        
+        
         
         //Below are guns that need to check for reloading
         
