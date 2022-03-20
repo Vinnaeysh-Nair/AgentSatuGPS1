@@ -228,8 +228,6 @@ public class CutsceneLoader : MonoBehaviour
     
     private void NextLine()
     {
-        print("asdf");
-        
         if (!IsAllLinesFinished())
         {
             prevLine = currLine;

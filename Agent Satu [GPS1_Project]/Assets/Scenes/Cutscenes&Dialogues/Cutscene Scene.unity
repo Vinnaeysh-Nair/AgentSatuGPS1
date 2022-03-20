@@ -281,22 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: cutsceneSo
-      value: 
-      objectReference: {fileID: 11400000, guid: bee767ca70775d742a1107eb14fd89a2, type: 2}
-    - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: cutsceneSceneIndex
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495569230947641528, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: startOnLoad
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495569231162917761, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: willTransitionToCutscene
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4495569231162917790, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -344,10 +328,6 @@ PrefabInstance:
     - target: {fileID: 4495569231162917791, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: m_Name
       value: SceneTransitionNextLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495569231901491829, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
@@ -430,30 +410,6 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 1196343531}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: cutscenesArray.Array.data[0].nextLoadId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: cutscenesArray.Array.data[1].nextLoadId
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: dialoguesArray.Array.data[0].nextLoadId
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: cutscenesArray.Array.data[0].cutsceneOrDialogue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: dialoguesArray.Array.data[0].cutsceneOrDialogue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: dialoguesArray.Array.data[0].loadsBackToCutscene
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7578600435504314856, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: m_RootOrder
       value: 2

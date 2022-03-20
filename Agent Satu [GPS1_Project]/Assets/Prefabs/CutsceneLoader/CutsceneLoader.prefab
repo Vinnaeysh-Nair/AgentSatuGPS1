@@ -1550,8 +1550,8 @@ MonoBehaviour:
   - loadId: 0
     cutsceneTransform: {fileID: 7247924111611372559}
     loadsBackToCutscene: 1
-    nextLoadId: 0
-    cutsceneOrDialogue: 0
+    cutsceneOrDialogue: 1
+    nextLoadId: 1
     levelToLoadSceneName: Level 1-1
     levelToLoadIndex: 8
     panels:
@@ -1566,8 +1566,8 @@ MonoBehaviour:
   - loadId: 1
     cutsceneTransform: {fileID: 1383575938}
     loadsBackToCutscene: 1
-    nextLoadId: 3
     cutsceneOrDialogue: 0
+    nextLoadId: 0
     levelToLoadSceneName: Level 2-1
     levelToLoadIndex: 3
     panels:
@@ -1577,6 +1577,9 @@ MonoBehaviour:
   dialoguesArray:
   - loadId: 0
     dialogueTransform: {fileID: 1640147014}
+    loadsBackToCutscene: 1
+    cutsceneOrDialogue: 1
+    nextLoadId: 0
     levelToLoadSceneName: 
     levelToLoadIndex: 8
     lines:
