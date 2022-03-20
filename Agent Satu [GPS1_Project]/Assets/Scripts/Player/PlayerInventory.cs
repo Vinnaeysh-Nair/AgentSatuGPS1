@@ -68,14 +68,14 @@ public class PlayerInventory : MonoBehaviour
     {
         TransitionScript.onChangeLevelDelegate += TransitionScript_OnChangeLevelDelegate;
         
-       // RetrieveGunState();
+        RetrieveGunState();
     }
 
     
     
     private void SaveGunState()
     {
-        print("saving");
+       // print("saving");
         
         Weapons[] savedWepArr = playerSaveSo.savedWepState;
         ChangeGunState(weaponsArray, savedWepArr);
@@ -83,7 +83,7 @@ public class PlayerInventory : MonoBehaviour
     
     private void RetrieveGunState()
     {
-        print("retrieving");
+      //  print("retrieving");
         
         Weapons[] savedWepArr = playerSaveSo.savedWepState;
         ChangeGunState(savedWepArr, weaponsArray);
@@ -108,7 +108,7 @@ public class PlayerInventory : MonoBehaviour
     
     private void TransitionScript_OnChangeLevelDelegate()
     {
-       // SaveGunState();
+        SaveGunState();
     }
 
 
