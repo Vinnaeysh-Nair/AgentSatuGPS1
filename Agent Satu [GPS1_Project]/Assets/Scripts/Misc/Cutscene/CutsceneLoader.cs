@@ -45,7 +45,7 @@ public class CutsceneLoader : MonoBehaviour
         [Header("Applicable to both Cutscene and Dialogue")]
         public int nextLoadId;
         
-        [Header("Info for next level to load(ignore if loading back to cutscene)")]
+        [Header("Info for next level to load (ignore if loading back to cutscene)")]
         [SerializeField] private string levelToLoadSceneName;
         public int levelToLoadIndex;
         
@@ -73,7 +73,7 @@ public class CutsceneLoader : MonoBehaviour
         [Header("Applicable to both Cutscene and Dialogue")]
         public int nextLoadId;
         
-        [Header("Info for next level to load")]
+        [Header("Info for next level to load (ignore if loading back to cutscene)")]
         [SerializeField] private string levelToLoadSceneName;
         public int levelToLoadIndex;
     

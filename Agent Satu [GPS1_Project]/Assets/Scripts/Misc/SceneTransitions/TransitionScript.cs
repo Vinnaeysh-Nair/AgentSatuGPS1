@@ -109,4 +109,9 @@ public class TransitionScript : MonoBehaviour
             LoadNextLevel();
         }
     }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadSceneAsync("Main Menu");
+    }
 }
