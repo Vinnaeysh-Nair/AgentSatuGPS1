@@ -295,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5548005482036673849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.28, y: 1.52, z: 0}
+  m_LocalPosition: {x: -9.8, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7825961293519713105}
   m_Layer: 11
-  m_Name: Boss_ MiniJet_1
+  m_Name: Boss_ MiniJet_1 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +690,6 @@ GameObject:
   - component: {fileID: 7825961293730638067}
   - component: {fileID: 8954854951309986037}
   - component: {fileID: 8954854951309986038}
-  - component: {fileID: 8954854951309985994}
   - component: {fileID: 8954854951309985993}
   - component: {fileID: 7825961293730638068}
   m_Layer: 11
@@ -812,21 +811,6 @@ MonoBehaviour:
   healthBar: {fileID: 7825961293730638068}
   initialHp: 150
   summonThreshold: 0.5
---- !u!114 &8954854951309985994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7825961293730638065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d84e016a1bcde47b3b8266845bd717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jetsToSummon:
-  - {fileID: 7825961293519713104, guid: ceb091917286e80489b53295b38278fb, type: 3}
-  - {fileID: 7825961293519713104, guid: f4376c1870417ad4e802845c9aa6c0bf, type: 3}
 --- !u!114 &8954854951309985993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825961293951739855}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.2, y: 0.07, z: 0}
+  m_LocalPosition: {x: 9.55, y: 0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1123,7 +1107,7 @@ MonoBehaviour:
   isMiniJet: 1
   note: If isMiniJet is checked, only Attack 2 takes effects, ignore settings for
     other Attacks.
-  attackCounter: 1
+  attackCounter: 2
   timeToStartBattle: 1
   atkChangeBufferTime: 5
   goToPositionMoveSpeed: 3
@@ -1135,42 +1119,28 @@ MonoBehaviour:
   playerFollowSpeed: 5
   timeTillAttack2: 10
   atk2FireRate: 12
-  nextPatternBufferTime: 3
+  nextPatternBufferTime: 5
   patterns:
   - patternPoints:
     - {fileID: 7825961293951739840}
-    atk2ShotsPerBurst: 60
-    atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 1
-    timeStayingAtEndPoint: 1
-  - patternPoints:
     - {fileID: 7825961294181765559}
     - {fileID: 7825961293951739840}
-    atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 5
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 0
-    timeStayingAtEndPoint: 0
-  - patternPoints:
-    - {fileID: 7825961293951739840}
-    - {fileID: 7825961294181765559}
-    atk2ShotsPerBurst: 50
+    atk2ShotsPerBurst: 12
     atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 0
-    timeStayingAtEndPoint: 0
-  - patternPoints:
-    - {fileID: 7825961293951739840}
-    atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
+    isBurst: 1
+    timePerBurst: 1
     keepShootingAfterReachingEndPoint: 1
-    timeStayingAtEndPoint: 1
+    timeStayingAtEndPoint: 0
+  - patternPoints:
+    - {fileID: 1702791053178689806}
+    - {fileID: 7825961293951739840}
+    - {fileID: 1702791053178689806}
+    atk2ShotsPerBurst: 12
+    atk2InPatternMoveSpeed: 3
+    isBurst: 1
+    timePerBurst: 1
+    keepShootingAfterReachingEndPoint: 1
+    timeStayingAtEndPoint: 0
   timeTillAttack1: 5
 --- !u!1 &7825961294169851201
 GameObject:
@@ -1228,7 +1198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7825961294181765558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.53, y: 0.15, z: 0}
+  m_LocalPosition: {x: -9.48, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1390,7 +1360,7 @@ MonoBehaviour:
   isMiniJet: 1
   note: If isMiniJet is checked, only Attack 2 takes effects, ignore settings for
     other Attacks.
-  attackCounter: 1
+  attackCounter: 2
   timeToStartBattle: 1
   atkChangeBufferTime: 5
   goToPositionMoveSpeed: 3
@@ -1402,42 +1372,28 @@ MonoBehaviour:
   playerFollowSpeed: 5
   timeTillAttack2: 10
   atk2FireRate: 12
-  nextPatternBufferTime: 3
+  nextPatternBufferTime: 5
   patterns:
   - patternPoints:
     - {fileID: 7825961294181765559}
-    atk2ShotsPerBurst: 60
-    atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 1
-    timeStayingAtEndPoint: 1
-  - patternPoints:
-    - {fileID: 7825961294181765559}
-    - {fileID: 7825961293951739840}
-    atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 6
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 0
-    timeStayingAtEndPoint: 0
-  - patternPoints:
     - {fileID: 7825961293951739840}
     - {fileID: 7825961294181765559}
-    atk2ShotsPerBurst: 50
+    atk2ShotsPerBurst: 12
     atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
-    keepShootingAfterReachingEndPoint: 0
+    isBurst: 1
+    timePerBurst: 1
+    keepShootingAfterReachingEndPoint: 1
     timeStayingAtEndPoint: 0
   - patternPoints:
+    - {fileID: 827267186313148358}
     - {fileID: 7825961294181765559}
-    atk2ShotsPerBurst: 50
+    - {fileID: 827267186313148358}
+    atk2ShotsPerBurst: 12
     atk2InPatternMoveSpeed: 3
-    isBurst: 0
-    timePerBurst: 0
+    isBurst: 1
+    timePerBurst: 1
     keepShootingAfterReachingEndPoint: 1
-    timeStayingAtEndPoint: 1
+    timeStayingAtEndPoint: 0
   timeTillAttack1: 5
 --- !u!1 &7825961294402759756
 GameObject:

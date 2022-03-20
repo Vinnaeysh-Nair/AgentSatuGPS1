@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
+
 public class BattleJetGun : MonoBehaviour
 {
     [SerializeField] private TargetPointMovement targetPointMovement;
@@ -36,6 +37,7 @@ public class BattleJetGun : MonoBehaviour
         {
             if (!canShoot) return;
 
+           
             pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
             nextFireTime = Time.time + (1 / firerate);
 

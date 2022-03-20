@@ -21,6 +21,7 @@ public class TargetPointMovement : MonoBehaviour
     private bool inPosition;       
 
     [Header("General")]
+    [Header("If isMiniJet checked, only one attack forever")]
     [SerializeField] private bool isMiniJet = false;
     [TextArea] [SerializeField] private string note;
 
@@ -85,6 +86,10 @@ public class TargetPointMovement : MonoBehaviour
         public Transform[] patternPoints;
         public int atk2ShotsPerBurst;
         public float atk2InPatternMoveSpeed;
+        public bool isBurst;
+        
+        [Header("Ignore if isBurst unchecked")]
+        public float timePerBurst;
         
         [Header("[If unchecked, goes to idle immediately after reaching endPoint]")]
         public bool keepShootingAfterReachingEndPoint;
@@ -121,12 +126,6 @@ public class TargetPointMovement : MonoBehaviour
 
         flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingTarget;
 
-        
-        //Additional Settings for Mini Jet, only use Attack 2
-        if (isMiniJet)
-        {
-            attackCounter = 2;
-        }
         
         
         //Wait time before starting battle
@@ -208,6 +207,8 @@ public class TargetPointMovement : MonoBehaviour
             gun.BurstShoot(atk1ShotsPerBurst, atk1FireRate, atk1TimeUntilNextBurst);
         }
 
+        //Mini jet only 1 attack
+        if (isMiniJet) return;
 
         if (Time.time > stopTime && !idling)
         {
@@ -242,6 +243,8 @@ public class TargetPointMovement : MonoBehaviour
             stopTime = Time.time + timeTillAttack1;
         }
         
+        //Mini jet only 1 attack
+        if (isMiniJet) return;
         
         if (Time.time > stopTime && !idling)
         {
@@ -276,7 +279,7 @@ public class TargetPointMovement : MonoBehaviour
             //update movement points
             AssignPatternPoints(patterns[0]);
             
-            
+            //Mini jet only 1 attack
             if (!isMiniJet)
             {
                 ChangeAttack();
@@ -310,7 +313,15 @@ public class TargetPointMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, endPoint.position) > 0.01f)
         {
             Move(endPoint, currPattern.atk2InPatternMoveSpeed);
-            gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+            
+            if (currPattern.isBurst)
+            {
+                gun.BurstShoot(currPattern.atk2ShotsPerBurst, atk2FireRate, currPattern.timePerBurst);
+            }
+            else
+            {
+                gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+            }
         }
         //If reached end point
         else
@@ -328,7 +339,14 @@ public class TargetPointMovement : MonoBehaviour
             //If want to keep shooting, dont go idle first
             if (currPattern.keepShootingAfterReachingEndPoint)
             {
-                gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+                if (currPattern.isBurst)
+                {
+                    gun.BurstShoot(currPattern.atk2ShotsPerBurst, atk2FireRate, currPattern.timePerBurst);
+                }
+                else
+                {
+                    gun.Shoot(currPattern.atk2ShotsPerBurst, atk2FireRate);
+                }
             }
             else
             {
@@ -338,6 +356,8 @@ public class TargetPointMovement : MonoBehaviour
                     StartCoroutine(StartNewPattern());
                 }
             }
+            
+         
             
             //Duration it stays shooting after reaching endPoint
             if (stopTime == 0f)

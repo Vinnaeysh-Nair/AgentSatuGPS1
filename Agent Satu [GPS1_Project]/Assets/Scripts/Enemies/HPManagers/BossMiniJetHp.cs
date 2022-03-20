@@ -45,6 +45,14 @@ public class BossMiniJetHp : EnemyHp
         float percentage = (float) currHp / initialHp;
         healthBar.SetFillAmount(percentage);
 
+        
+        if (percentage <= summonThreshold)
+        {
+            if (onReachingThresholdDelegate != null)
+            {
+                onReachingThresholdDelegate.Invoke();
+            }
+        }
             
         if (currHp == 0)
         {
@@ -61,14 +69,8 @@ public class BossMiniJetHp : EnemyHp
                   onLevelCompleteDelegate.Invoke();
                }
            }
-        }
-        
-        if (percentage <= summonThreshold)
-        {
-            if (onReachingThresholdDelegate != null)
-            {
-                onReachingThresholdDelegate.Invoke();
-            }
+           
+           gameObject.SetActive(false);
         }
     }
 }
