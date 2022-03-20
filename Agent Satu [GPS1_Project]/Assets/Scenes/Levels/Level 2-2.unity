@@ -587,7 +587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &367846074
 Transform:
   m_ObjectHideFlags: 0
@@ -617,7 +617,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 671123692}
   transitionTime: 1
-  willTransitionToCutscene: 0
+  cutsceneSo: {fileID: 0}
+  willTransitionToCutsceneOrDialogue: 0
+  cutsceneOrDialogue: 0
+  loadId: 0
   cutsceneSceneIndex: 8
 --- !u!61 &367846076
 BoxCollider2D:
