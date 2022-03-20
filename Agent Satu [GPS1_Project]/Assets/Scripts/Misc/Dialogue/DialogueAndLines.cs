@@ -28,7 +28,7 @@ public class DialogueAndLines : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            if (Input.GetButtonDown("ProceedInteraction"))
+            if (Input.GetButtonDown("Interact"))
             {
                 if (!IsAllDialoguesFinished())
                 {
@@ -38,6 +38,7 @@ public class DialogueAndLines : MonoBehaviour
                     {
                        
                         currSentence = 0;
+                      
 
                       //  prevDialogue = currDialogue;
                         currDialogue++;
@@ -80,7 +81,7 @@ public class DialogueAndLines : MonoBehaviour
 
     private bool IsAllSentencesFinished()
     {
-        if (currSentence < dialogue[currDialogue].sentences.Length)
+        if (currSentence < dialogue[currDialogue].sentences.Length-1)
         {
             return false;
         }
