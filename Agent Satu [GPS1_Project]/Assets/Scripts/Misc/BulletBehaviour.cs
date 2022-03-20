@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using System.Collections;
-//using Vector2 = UnityEngine.Vector2;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class BulletBehaviour : MonoBehaviour
     [Header("General")]
     [SerializeField] private float bulletSpeed = 40f;
     [SerializeField] private GameObject impactEffect;
+   // [SerializeField] private GameObject bleedEffect;
     
     [Header("Force on enemy when dismembering and ragdolling")]
     [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
@@ -123,6 +122,12 @@ public class BulletBehaviour : MonoBehaviour
             Transform mainContainer = limbContainer.parent;
             OverallHp overallHp = mainContainer.GetComponent<OverallHp>();
             overallHp.TakeOverallDamage(bulletDamage, bulletDirection);
+
+            // Vector3 bleedDir = hitInfo.contacts[0].normal;
+            // Quaternion bleedRot = Quaternion.Euler(bleedDir);
+            // GameObject spawnedBlood = Instantiate(bleedEffect, hitInfo.transform.position, hitInfo.transform.rotation);
+            // spawnedBlood.transform.rotation = bleedRot;
+            // spawnedBlood.transform.parent = hitInfo.gameObject.transform;
         }
     }
 
