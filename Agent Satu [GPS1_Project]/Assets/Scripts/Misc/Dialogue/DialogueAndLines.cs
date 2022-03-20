@@ -75,7 +75,7 @@ public class DialogueAndLines : MonoBehaviour
 
     public void TriggerNextSentence()
     {
-        dialogueManager.DisplayNextSentence(dialogue[currDialogue].sentences[currSentence]);
+        dialogueManager.DisplayNextSentence(dialogue[currDialogue], currSentence);
     }
 
     private bool IsAllSentencesFinished()
