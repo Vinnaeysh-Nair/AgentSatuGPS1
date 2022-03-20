@@ -6,12 +6,17 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("Array elements corresponds to order of gun in the PlayerInventory object (Pistol is excluded)")]
     [SerializeField] private Weapons[] weaponsArray;
+
+
+    public delegate void OnSaveFinished();
+
+    public static event OnSaveFinished onSaveFinsihedDelegate;
   
     [System.Serializable]
     public class Weapons
     {
-        [Header("Id put (Element number + 1), Total ammo free to change in anyway")] 
         public string name;
+
         
         [SerializeField] private int weaponId;
         [SerializeField] private int totalAmmo;
@@ -20,8 +25,6 @@ public class PlayerInventory : MonoBehaviour
         //Getter
         public int WeaponId { get; set; }
         
-    
-
         public bool IsUnlocked
         {
             get => isUnlocked;
@@ -63,30 +66,31 @@ public class PlayerInventory : MonoBehaviour
     //     }
     // }
 
+    void Awake()
+    {
+        RetrieveGunState();
+    }
+
  
     void Start()
     {
         TransitionScript.onChangeLevelDelegate += TransitionScript_OnChangeLevelDelegate;
-        
-        RetrieveGunState();
     }
 
     
     
     private void SaveGunState()
     {
-       // print("saving");
+        print("saving");
         
-        Weapons[] savedWepArr = playerSaveSo.savedWepState;
-        ChangeGunState(weaponsArray, savedWepArr);
+        ChangeGunState(weaponsArray, playerSaveSo.savedWepState);
     }
     
     private void RetrieveGunState()
     {
-      //  print("retrieving");
-        
-        Weapons[] savedWepArr = playerSaveSo.savedWepState;
-        ChangeGunState(savedWepArr, weaponsArray);
+        print("retrieving");
+   
+        ChangeGunState(playerSaveSo.savedWepState, weaponsArray);
     }
 
     
@@ -95,13 +99,19 @@ public class PlayerInventory : MonoBehaviour
         int size = weaponsArray.Length;
         for (int i = 0; i < size; i++)
         {
-            Weapons tempDest = destination[i];
             Weapons tempSource = source[i];
+            Weapons tempDest = destination[i];
+           
             
             tempDest.name = tempSource.name;
             tempDest.WeaponId = tempSource.WeaponId;
             tempDest.TotalAmmo = tempSource.TotalAmmo;
             tempDest.IsUnlocked = tempSource.IsUnlocked;
+        }
+
+        if (onSaveFinsihedDelegate != null)
+        {
+            onSaveFinsihedDelegate.Invoke();
         }
     }
     

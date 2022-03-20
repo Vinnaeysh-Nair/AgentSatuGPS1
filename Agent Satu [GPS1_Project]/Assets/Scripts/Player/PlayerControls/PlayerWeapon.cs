@@ -76,17 +76,19 @@ public class PlayerWeapon : MonoBehaviour
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsArray = inventory.GetWeaponsArray();
         
-        
-        //get unlocked status from inventory
-        isUnlocked = weaponsArray[wepId].IsUnlocked;
+        isUnlocked =  weaponsArray[wepId].IsUnlocked;
     }
 
+    
 
 
     void Start()
     {
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+        
+        //get unlocked status from inventory
+      
         
         
         //Get firepoints

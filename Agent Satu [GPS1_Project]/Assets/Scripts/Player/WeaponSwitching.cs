@@ -6,8 +6,12 @@ public class WeaponSwitching : MonoBehaviour
     private PlayerWeapon[] playerWeapons;
     //public event EventHandler OnWeaponChange;
 
+    private bool canChange = false;
+
     public delegate void OnWeaponChange();
     public event OnWeaponChange onWeaponChangeDelegate;
+
+
     
     void Start()
     {
@@ -15,7 +19,7 @@ public class WeaponSwitching : MonoBehaviour
         StartingWeapon();
     }
 
-    
+
     void Update()
     {
         int prevSelectedWeapon = selectedWeapon;
