@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 public class DialogueAndLines : MonoBehaviour
@@ -10,27 +9,37 @@ public class DialogueAndLines : MonoBehaviour
     
     [SerializeField] private int currSentence;
 
-    //private bool canTalk = true;
-    //private float timer = 0.5f;
-    private bool firstConversation = true;
-    
+    public delegate void OnFinishDialogue();
 
+    public static event OnFinishDialogue onFinishDialogueDelegate;
+
+    //private int prevDialogue;     //loop back to first dialogue
+
+
+    void Start()
+    {
+        DisplayNextDialogue();
+        TriggerNextSentence();
+
+        currSentence++;
+    }
 
     void Update()
     {
         if (gameObject.activeSelf)
         {
-            if (Input.GetKeyDown("e"))
+            if (Input.GetButtonDown("ProceedInteraction"))
             {
                 if (!IsAllDialoguesFinished())
                 {
                     DisplayNextDialogue();
                     
-                    
                     if (IsAllSentencesFinished())
                     {
-                        
+                       
                         currSentence = 0;
+
+                      //  prevDialogue = currDialogue;
                         currDialogue++;
                         
                         DisplayNextDialogue();
@@ -40,13 +49,18 @@ public class DialogueAndLines : MonoBehaviour
                     {
                         TriggerNextSentence();
                         currSentence++;
-                        
                         print("no more sentece");
                     }
                 }
                 else
                 {
+                   // currDialogue = prevDialogue;
                     print("mo more dialogue");
+
+                    // if (onFinishDialogueDelegate != null)
+                    // {
+                    //     onFinishDialogueDelegate.Invoke();       //trigger boss start after dialogue, not implementing yet
+                    // }
                 }
                 
             }
@@ -66,17 +80,21 @@ public class DialogueAndLines : MonoBehaviour
 
     private bool IsAllSentencesFinished()
     {
-        return currSentence >= dialogue[currDialogue].sentences.Length;
+        if (currSentence < dialogue[currDialogue].sentences.Length)
+        {
+            return false;
+        }
+        return true;
     }
 
     private bool IsAllDialoguesFinished()
     {
-        return currDialogue >=  dialogue.Length;
+        if (currDialogue < dialogue.Length - 1)
+        {
+            return false;
+        }
+        
+        return true;
     }
-
-    void OnDisable ()
-    {
-        firstConversation = true;
-        //canTalk = true;
-    }
+    
 }

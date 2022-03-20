@@ -6,21 +6,12 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
  
-    //private Queue<string> dialogueLine;
-
-    void Start()
-    {
-      
-
-    }
-
+    
     public void StartDialogue(Dialogue dialogue)
     {
         nameText.text = dialogue.name;
     }
-
-   
-
+    
     public void DisplayNextSentence(string sentence)
     {
         dialogueText.text = sentence;
@@ -31,5 +22,4 @@ public class DialogueManager : MonoBehaviour
         //dialogueBox.SetActive(false);
         Debug.Log("End of conversation");
     }
-    
 }

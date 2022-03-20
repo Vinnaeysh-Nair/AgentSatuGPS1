@@ -4,8 +4,8 @@ public class ZoneToTriggerDialogue : MonoBehaviour
 {
     [SerializeField] bool inTalkingZone = false;
     public GameObject DialogueBox;
-    public Collider2D talkingArea;
-
+    
+    
     void Start()
     {
         DialogueBox.SetActive(false);
@@ -27,13 +27,17 @@ public class ZoneToTriggerDialogue : MonoBehaviour
     void OnTriggerEnter2D(Collider2D talkingArea)
     {
         if (talkingArea.CompareTag("Player"))
+        {
             inTalkingZone = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D talkingArea)
     {
         if (talkingArea.CompareTag("Player"))
+        {
             inTalkingZone = false;
+        }
     }
 
     void TriggeringDialogue()

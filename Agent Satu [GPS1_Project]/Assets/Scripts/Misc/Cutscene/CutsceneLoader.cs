@@ -166,7 +166,7 @@ public class CutsceneLoader : MonoBehaviour
 
         
        
-        if (Input.GetButtonDown("ProceedCutscene"))
+        if (Input.GetButtonDown("ProceedInteraction"))
         {
             if(cutsceneOrDialogue)
             {
