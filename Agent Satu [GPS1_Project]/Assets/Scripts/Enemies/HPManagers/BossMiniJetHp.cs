@@ -59,7 +59,7 @@ public class BossMiniJetHp : EnemyHp
             //Death logic
             killedBossesCount++;
        
-            print("ded" + killedBossesCount);
+            //print("ded" + killedBossesCount);
            if (killedBossesCount == 3)
            {
                //reset static value
