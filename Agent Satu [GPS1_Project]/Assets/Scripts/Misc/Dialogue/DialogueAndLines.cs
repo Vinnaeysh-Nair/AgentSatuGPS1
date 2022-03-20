@@ -1,24 +1,100 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueAndLines : MonoBehaviour
 {
-    public Dialogue dialogue;
+    public Dialogue[] dialogue;
 
-    /*void Update()
-    { 
+    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private int currDialogue = 0;
+    
+    [SerializeField] private int currSentence;
+
+    public delegate void OnFinishDialogue();
+
+    public static event OnFinishDialogue onFinishDialogueDelegate;
+
+    //private int prevDialogue;     //loop back to first dialogue
+
+
+    void Start()
+    {
+        DisplayNextDialogue();
+        TriggerNextSentence();
+
+        currSentence++;
+    }
+
+    void Update()
+    {
         if (gameObject.activeSelf)
         {
-            //Debug.Log("game object is active");
+            if (Input.GetButtonDown("ProceedInteraction"))
+            {
+                if (!IsAllDialoguesFinished())
+                {
+                    DisplayNextDialogue();
+                    
+                    if (IsAllSentencesFinished())
+                    {
+                       
+                        currSentence = 0;
 
-            if(Input.GetKey("p"))
-                TriggerDialogue();
+                      //  prevDialogue = currDialogue;
+                        currDialogue++;
+                        
+                        DisplayNextDialogue();
+                        TriggerNextSentence();
+                    }
+                    else
+                    {
+                        TriggerNextSentence();
+                        currSentence++;
+                        print("no more sentece");
+                    }
+                }
+                else
+                {
+                   // currDialogue = prevDialogue;
+                    print("mo more dialogue");
+
+                    // if (onFinishDialogueDelegate != null)
+                    // {
+                    //     onFinishDialogueDelegate.Invoke();       //trigger boss start after dialogue, not implementing yet
+                    // }
+                }
+                
+            }
         }
-    }*/
-
-    public void TriggerDialogue()
-    {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+
+    public void DisplayNextDialogue()
+    {
+        dialogueManager.StartDialogue(dialogue[currDialogue]);
+    }
+
+
+    public void TriggerNextSentence()
+    {
+        dialogueManager.DisplayNextSentence(dialogue[currDialogue].sentences[currSentence]);
+    }
+
+    private bool IsAllSentencesFinished()
+    {
+        if (currSentence < dialogue[currDialogue].sentences.Length)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private bool IsAllDialoguesFinished()
+    {
+        if (currDialogue < dialogue.Length - 1)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
 }

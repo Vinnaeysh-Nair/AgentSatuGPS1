@@ -1,44 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    private Queue<string> dialogueLine;
-
-
-    void Start()
-    {
-        dialogueLine = new Queue<string>();
-    }
-
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
+ 
+    
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Starting conversation with " + dialogue.name);
-
-        dialogueLine.Clear();
-
-        foreach (string sentence in dialogue.sentences)
-        {
-            dialogueLine.Enqueue(sentence);
-        }
-        DisplayNextSentence();
+        nameText.text = dialogue.name;
     }
-
-    public void DisplayNextSentence()
+    
+    public void DisplayNextSentence(string sentence)
     {
-        if (dialogueLine.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
-
-        string tempSentence = dialogueLine.Dequeue();
-        Debug.Log(tempSentence);
+        dialogueText.text = sentence;
     }
 
     void EndDialogue()
     {
+        //dialogueBox.SetActive(false);
         Debug.Log("End of conversation");
     }
 }
