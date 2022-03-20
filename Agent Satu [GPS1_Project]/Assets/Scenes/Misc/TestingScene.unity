@@ -307,6 +307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &221768454 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8001061146973421561, guid: 8c5a72d08feb8a24289a6ff5abc3bb2a, type: 3}
+  m_PrefabInstance: {fileID: 6641797898652534684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &288441220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5113091587445573465, guid: b2c916a8a4edf1745b29274851b0c708, type: 3}
@@ -1064,6 +1069,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5834289674853391068, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 221768454}
     - target: {fileID: 5834289675064706657, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.0013427734
@@ -1118,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834289675166888607, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de62d37eba61c594686cce408379f2ab, type: 3}
