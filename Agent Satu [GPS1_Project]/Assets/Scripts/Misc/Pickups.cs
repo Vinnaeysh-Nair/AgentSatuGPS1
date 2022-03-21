@@ -17,6 +17,12 @@ public class Pickups : MonoBehaviour
     public int replenishAmount;
     private bool _collected = false;
     private PlayerWeapon[] _playerWeapons;
+    
+    //Audio
+    [Header("Audio")]
+    [SerializeField] private AudioClip pickupSound;
+    private AudioSource audSrc;
+    
 
 
     //Text
@@ -27,6 +33,9 @@ public class Pickups : MonoBehaviour
 
     void Start()
     {
+        audSrc = GetComponent<AudioSource>();
+        
+        
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
 
         _playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
@@ -51,10 +60,13 @@ public class Pickups : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             if (_collected) return;
-            
             _collected = true;
+            
             TriggerEffect();
             gameObject.SetActive(false);
+            
+            
+            
             _collected = false;
         }
     }
@@ -69,6 +81,7 @@ public class Pickups : MonoBehaviour
         {
             TriggerReplenishAmmo();
         }
+      
     }
 
     private void TriggerReplenishAmmo()

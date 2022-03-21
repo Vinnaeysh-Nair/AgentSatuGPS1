@@ -14,6 +14,11 @@ public class OverallHp : EnemyHp
     //Fields
     [Header("Edit: ")]
     [SerializeField] private int initialOverallHp;
+
+    [Header("Audop")] 
+    [SerializeField] private AudioClip deathSfx;
+
+    private AudioSource audSrc;
     
 
     
@@ -33,6 +38,8 @@ public class OverallHp : EnemyHp
     {
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
         spawnPickups = GetComponent<SpawnPickups>();
+
+        audSrc = GetComponent<AudioSource>();
 
 
         base.currHp = initialOverallHp;
@@ -82,6 +89,7 @@ public class OverallHp : EnemyHp
         if (currHp <= 0)
         {
             Die(flingDirection);
+            audSrc.PlayOneShot(deathSfx);
         }
         
         //Trigger detection when damaged

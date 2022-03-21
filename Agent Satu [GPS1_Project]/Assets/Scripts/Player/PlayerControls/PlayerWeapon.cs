@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +8,13 @@ public class PlayerWeapon : MonoBehaviour
     //Components
     [SerializeField] private Transform bullet;
     [SerializeField] private Transform firePointContainer;
+
+    [Header("Audio")] 
+    [SerializeField] private AudioClip audClip;
+    private AudioSource audsrc;
+
+
+    
     private Transform[] firePoints;
     private ObjectPooler pooler;
     private PlayerInventory inventory;
@@ -88,8 +93,8 @@ public class PlayerWeapon : MonoBehaviour
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
         //get unlocked status from inventory
-      
-        
+
+        audsrc = GetComponent<AudioSource>();
         
         //Get firepoints
         int size = firePointContainer.childCount;
@@ -226,6 +231,8 @@ public class PlayerWeapon : MonoBehaviour
     
     private void Shoot()
     {
+        audsrc.PlayOneShot(audClip);
+        
         DecreaseAmmo();
 
         foreach (Transform firePoint in firePoints)
