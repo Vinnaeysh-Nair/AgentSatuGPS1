@@ -107,6 +107,7 @@ public class EnemyAI_Melee : MonoBehaviour
         {
             Transform playerRoot = hitPlayer.transform.root;
             
+            //If no ref already
             if (_playerHpSystem == null)
             {
                 //Locate PlayerBody to get hp system script
