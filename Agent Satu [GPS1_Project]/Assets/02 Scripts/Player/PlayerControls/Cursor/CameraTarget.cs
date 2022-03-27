@@ -9,7 +9,7 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private Transform rightBarrier;
     
     //Ref
-    [SerializeField]private Transform playerBody;
+    private Transform playerBody;
     private CrosshairAiming aim;
     
     
@@ -19,16 +19,18 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private float thresholdX;
     [SerializeField] private float thresholdYUp;
     [SerializeField] private float thresholdYDown;
-    
+
     private float leftBarrierX;
     private float rightBarrierX;
 
-   
+    private Transform followPlayer;
     
     void Start()
     { 
         playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
         aim = playerBody.Find("WeaponPivot").GetComponent<CrosshairAiming>();
+
+        followPlayer = transform.parent;
 
         //Get barriers' sizes
         leftBarrierX = leftBarrier.position.x + leftBarrier.GetComponent<BoxCollider2D>().bounds.extents.x/2;
@@ -39,9 +41,11 @@ public class CameraTarget : MonoBehaviour
     {
         Vector2 playerPos = playerBody.position;
         
+        //Follow player, allow thresholdYDown to be relative to playerPos
+        followPlayer.position = playerPos;
+        
         //Find middle point of player and cursor
         Vector2 targetPos =  (playerPos + aim.GetMousePos())/2;
-        
         
         //Limit by threshold amount
         targetPos.x = Mathf.Clamp(targetPos.x, -thresholdX + playerPos.x, thresholdX + playerPos.x);
@@ -50,6 +54,7 @@ public class CameraTarget : MonoBehaviour
         transform.position = targetPos;
         KeepCameraInBounds();
     }
+
 
     private void KeepCameraInBounds()
     {
