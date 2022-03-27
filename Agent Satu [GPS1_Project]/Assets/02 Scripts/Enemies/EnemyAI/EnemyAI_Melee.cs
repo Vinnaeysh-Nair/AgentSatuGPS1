@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -12,7 +11,9 @@ public class EnemyAI_Melee : MonoBehaviour
 
 
     [SerializeField] private Animator anim;
+    
     private PlayerHpSystem _playerHpSystem;
+    private Enemy_Flipped _enemyFlipped;
 
     
     //Fields
@@ -38,6 +39,7 @@ public class EnemyAI_Melee : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         enemyAgro = GetComponent<Enemy_Agro>();
+        _enemyFlipped = GetComponent<Enemy_Flipped>();
     }
     void FixedUpdate()
     {
@@ -83,13 +85,11 @@ public class EnemyAI_Melee : MonoBehaviour
         if (transform.position.x < playerPos.x)
         {
             rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
-            //AttackPlayer();
         }
         //enemy is to the left so move right
         else if (transform.position.x > playerPos.x)
         {
             rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
-            //AttackPlayer();
         }
     }
 
@@ -101,8 +101,17 @@ public class EnemyAI_Melee : MonoBehaviour
     //Used in Animation timeline
     public void DamagePlayer()
     {
-        Collider2D hitPlayer = Physics2D.OverlapCircle(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize, playerHitLayer);
+        Collider2D hitPlayer;
 
+        if (!_enemyFlipped.GetIsFacingRight())
+        {
+            hitPlayer = Physics2D.OverlapCircle(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize, playerHitLayer);
+        }
+        else
+        {
+            hitPlayer = Physics2D.OverlapCircle(transform.position - new Vector3(-attackAreaOffset, 0f, 0f ), attackAreaSize, playerHitLayer);
+        }
+        
         if (hitPlayer != null)
         {
             Transform playerRoot = hitPlayer.transform.root;
@@ -116,4 +125,10 @@ public class EnemyAI_Melee : MonoBehaviour
             _playerHpSystem.TakeDamage(damageToPlayer);
         }
     }
+
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawSphere(transform.position - new Vector3(attackAreaOffset, 0f, 0f ), attackAreaSize);
+    //     Gizmos.DrawSphere(transform.position - new Vector3(-attackAreaOffset, 0f, 0f ), attackAreaSize);
+    // }
 }
