@@ -30,7 +30,13 @@ public class BossMiniJetHp : EnemyHp
     {
         if (col.CompareTag("Bullet"))
         {
-            int dmg = col.GetComponent<BulletBehaviour>().GetBulletDmg();
+            BulletBehaviour bullet = col.GetComponent<BulletBehaviour>();
+           
+            //Visual
+            bullet.SpawnBulletImpactEffect();
+            
+            //Damage
+            int dmg = bullet.GetBulletDmg();
             TakeDamage(dmg);
             
             col.gameObject.SetActive(false);

@@ -6,9 +6,12 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     //Components
+    [Header("Ref: ")]
     [SerializeField] private Transform bullet;
     [SerializeField] private Transform firePointContainer;
-
+    [SerializeField] private Transform muzzleFlash;
+    
+    
     [Header("Audio")] 
     [SerializeField] private AudioClip audClip;
     private AudioSource audsrc;
@@ -18,14 +21,11 @@ public class PlayerWeapon : MonoBehaviour
     private Transform[] firePoints;
     private ObjectPooler pooler;
     private PlayerInventory inventory;
-    //private List<PlayerInventory.Weapons> weaponsList;
     private PlayerInventory.Weapons[] weaponsArray;
 
+    
     //UI
     private PauseMenu pauseMenu;
-    
-    
-
     
     //Fields
     [Header("Settings")]
@@ -128,6 +128,11 @@ public class PlayerWeapon : MonoBehaviour
     private void OnEnable()
     {
         UpdateAmmoDisplay();
+
+        if (muzzleFlash.gameObject.activeSelf)
+        {
+            muzzleFlash.gameObject.SetActive(false);
+        }
         
         
         if (wepId == 0) return;
@@ -192,6 +197,8 @@ public class PlayerWeapon : MonoBehaviour
         {
             SingleClickShooting();
         }
+        
+  
     }
     
     private bool ClipEmpty()
@@ -231,7 +238,13 @@ public class PlayerWeapon : MonoBehaviour
     
     private void Shoot()
     {
+        //Audio
         audsrc.PlayOneShot(audClip);
+        
+        //Muzzle flash
+        muzzleFlash.gameObject.SetActive(true);
+        StartCoroutine(SetMuzzleFlashInactive());
+        
         
         DecreaseAmmo();
 
@@ -316,5 +329,11 @@ public class PlayerWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         shotBullet.SetActive(false);
+    }
+
+    private IEnumerator SetMuzzleFlashInactive()
+    {
+        yield return new WaitForSeconds(.5f);
+        muzzleFlash.gameObject.SetActive(false);
     }
 }

@@ -4,8 +4,12 @@ using System.Collections;
 public class EnemyWeapon_Guns : MonoBehaviour
 {
     //Components
+    [Header("Ref:")]
     [SerializeField] private Transform firePointContainer;
+    [SerializeField] private Transform muzzleFlash;
     public GameObject bullet;
+    
+    
     private ObjectPooler pooler;
     private PauseMenu pauseMenu;
     
@@ -99,9 +103,19 @@ public class EnemyWeapon_Guns : MonoBehaviour
     
     private void Shoot(GameObject bullet, Transform[] firePoints)
     {
+        muzzleFlash.gameObject.SetActive(true);
+        StartCoroutine(SetMuzzleFlashInactive());
+
+        
         foreach (Transform firePoint in firePoints)
         {
             pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
         }
+    }
+
+    private IEnumerator SetMuzzleFlashInactive()
+    {
+        yield return new WaitForSeconds(.5f);
+        muzzleFlash.gameObject.SetActive(false);
     }
 }

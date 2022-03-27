@@ -22,8 +22,11 @@ public class WallDeflect : MonoBehaviour
        Vector2 inDirection = bulletVelocity;
        float speed = inDirection.magnitude;
        Vector2 newDirection = Vector2.Reflect(inDirection.normalized, contactPoint.normal); 
-          
+       
        //Apply velocity
        bulletRb.velocity = newDirection * speed;
+       
+       //Change rotation
+       bulletRb.transform.right = newDirection;
    }
  }

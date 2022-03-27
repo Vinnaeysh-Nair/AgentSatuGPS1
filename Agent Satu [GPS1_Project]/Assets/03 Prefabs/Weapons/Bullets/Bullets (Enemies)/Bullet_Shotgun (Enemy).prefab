@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 863672036732972301}
   - component: {fileID: 8398019822097913933}
-  - component: {fileID: 662758565863285036}
+  - component: {fileID: 6938422434243764296}
   - component: {fileID: 2985635001454431170}
   - component: {fileID: 8229458475122848716}
   m_Layer: 13
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2374340452112123156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.793, y: -2.063, z: 0}
-  m_LocalScale: {x: 0.23858316, y: 0.23858316, z: 0.23858316}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.29803923, g: 0.85882354, b: 0.23921569, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 10f1eeeb07eba524dacdcfae12ca83c9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,8 +87,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &662758565863285036
-CircleCollider2D:
+--- !u!70 &6938422434243764296
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: 0.02, y: 0}
+  m_Size: {x: 0.4, y: 0.05}
+  m_Direction: 1
 --- !u!50 &2985635001454431170
 Rigidbody2D:
   serializedVersion: 4
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 20
   impactEffect: {fileID: 8407740060906985168, guid: 147030fe6c941354db713692c8dd6c59, type: 3}
+  bloodEffect: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
   forceDampening: 0.27
   bulletDamage: 1
   maxDeflectionTimes: 3

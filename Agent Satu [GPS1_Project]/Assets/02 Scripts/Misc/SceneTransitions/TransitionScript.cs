@@ -8,7 +8,8 @@ public class TransitionScript : MonoBehaviour
     //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
-    public static int lastLevelIndex;
+    
+    private static int lastLevelIndex;
 
     [Space] [Header("Cutscenes & dialogue")] 
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;

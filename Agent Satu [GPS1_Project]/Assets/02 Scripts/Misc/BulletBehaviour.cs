@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class BulletBehaviour : MonoBehaviour
     [Header("General")]
     [SerializeField] private float bulletSpeed = 40f;
     [SerializeField] private GameObject impactEffect;
-   // [SerializeField] private GameObject bleedEffect;
+    [SerializeField] private GameObject bloodEffect;
     
     [Header("Force on enemy when dismembering and ragdolling")]
     [SerializeField] [Range(0f, 1f)] private float forceDampening = 1f;
@@ -88,14 +89,15 @@ public class BulletBehaviour : MonoBehaviour
             return;
         }
         
+
+       
         
-        //If hit anything other than limbs
-        SpawnBulletImpactEffect();
-        gameObject.SetActive(false);
-        
-        
+        //If hit environment
         if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
         {
+            SpawnBulletImpactEffect();
+            gameObject.SetActive(false);
+            
             return;
         }
         
@@ -106,9 +108,10 @@ public class BulletBehaviour : MonoBehaviour
         {
             hitRegistered = true;
             
+            SpawnBloodSplatterEffect();
+            
+            
             Vector2 bulletDirection = CheckBulletDirection(rb);
-            
-            
             
             //Limb Hp damage
             LimbHp limbHp = hitObject.GetComponent<LimbHp>();
@@ -122,12 +125,6 @@ public class BulletBehaviour : MonoBehaviour
             Transform mainContainer = limbContainer.parent;
             OverallHp overallHp = mainContainer.GetComponent<OverallHp>();
             overallHp.TakeOverallDamage(bulletDamage, bulletDirection);
-
-            // Vector3 bleedDir = hitInfo.contacts[0].normal;
-            // Quaternion bleedRot = Quaternion.Euler(bleedDir);
-            // GameObject spawnedBlood = Instantiate(bleedEffect, hitInfo.transform.position, hitInfo.transform.rotation);
-            // spawnedBlood.transform.rotation = bleedRot;
-            // spawnedBlood.transform.parent = hitInfo.gameObject.transform;
         }
     }
 
@@ -139,6 +136,9 @@ public class BulletBehaviour : MonoBehaviour
         if (!hitRegistered)
         {
             hitRegistered = true;
+            
+            SpawnBloodSplatterEffect();
+            
             PlayerTakeDamage();
         }
     }
@@ -146,17 +146,23 @@ public class BulletBehaviour : MonoBehaviour
     private void PlayerTakeDamage()
     {
         playerHp.TakeDamage(bulletDamage);
-                
-        SpawnBulletImpactEffect();
         gameObject.SetActive(false);
     }
 
-    private void SpawnBulletImpactEffect()
+    public void SpawnBulletImpactEffect()
     {
-        //Instantiate(impactEffect, transform.position, transform.rotation);
-        pooler.SpawnFromPool(impactEffect.name, transform.position, transform.rotation);
+        Transform t = transform;
+        pooler.SpawnFromPool(impactEffect.name, t.position, t.rotation);
     }
-    
+
+    private void SpawnBloodSplatterEffect()
+    {
+        Vector3 currRot = transform.eulerAngles;
+        Vector3 newRot = new Vector3(0f, currRot.y - 90f, 0f);
+
+        GameObject fx = Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        fx.transform.eulerAngles = newRot;
+    }
 
     //Determine force to push collided enemy's limbs
     private Vector2 CheckBulletDirection(Rigidbody2D bulletRb)

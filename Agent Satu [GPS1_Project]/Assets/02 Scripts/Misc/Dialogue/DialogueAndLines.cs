@@ -9,9 +9,9 @@ public class DialogueAndLines : MonoBehaviour
     
     [SerializeField] private int currSentence;
 
-    public delegate void OnFinishDialogue();
+  //  public delegate void OnFinishDialogue();
 
-    public static event OnFinishDialogue onFinishDialogueDelegate;
+   // public static event OnFinishDialogue onFinishDialogueDelegate;
 
     //private int prevDialogue;     //loop back to first dialogue
 
@@ -50,13 +50,13 @@ public class DialogueAndLines : MonoBehaviour
                     {
                         TriggerNextSentence();
                         currSentence++;
-                        print("no more sentece");
+                       // print("no more sentece");
                     }
                 }
                 else
                 {
                    // currDialogue = prevDialogue;
-                    print("mo more dialogue");
+                   // print("mo more dialogue");
 
                     // if (onFinishDialogueDelegate != null)
                     // {
