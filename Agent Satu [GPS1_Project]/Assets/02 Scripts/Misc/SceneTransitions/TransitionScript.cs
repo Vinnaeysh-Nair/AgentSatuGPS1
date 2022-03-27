@@ -11,7 +11,7 @@ public class TransitionScript : MonoBehaviour
     public static int lastLevelIndex;
 
     [Space] [Header("Cutscenes & dialogue")] 
-    [SerializeField] private CutsceneSO cutsceneSo;
+    [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
     [SerializeField] private bool willTransitionToCutsceneOrDialogue;
 
     [Header("True for Cutscene; False for Dialogue")]
@@ -44,17 +44,17 @@ public class TransitionScript : MonoBehaviour
         lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
         if (lastLevelIndex != cutsceneSceneIndex)
         {
-            cutsceneSo.loadId = loadId;
+            cutsceneDialogueSo.loadId = loadId;
             
             if (willTransitionToCutsceneOrDialogue)
             {
                 if (cutsceneOrDialogue)
                 {
-                    cutsceneSo.loadCutsceneOrDialogue = true;
+                    cutsceneDialogueSo.loadCutsceneOrDialogue = true;
                 }
                 else
                 {
-                    cutsceneSo.loadCutsceneOrDialogue = false;
+                    cutsceneDialogueSo.loadCutsceneOrDialogue = false;
                 }
             }
         }

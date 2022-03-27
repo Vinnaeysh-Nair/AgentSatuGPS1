@@ -6,7 +6,6 @@ public class FlyIntoScene : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     
     public delegate void OnReachingPoint();
-
     public event OnReachingPoint onReachingPointDelegate;
 
     private bool startedShooting = false;

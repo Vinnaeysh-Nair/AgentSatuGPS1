@@ -39,6 +39,9 @@ public class BossMiniJetHp : EnemyHp
 
     private void TakeDamage(int dmg)
     {
+        if (currHp <= 0) return;
+        
+        
         currHp -= dmg;
         
         float percentage = (float) currHp / initialHp;

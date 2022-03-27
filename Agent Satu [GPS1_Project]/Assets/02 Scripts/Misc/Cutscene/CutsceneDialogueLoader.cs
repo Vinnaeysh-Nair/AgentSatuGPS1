@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CutsceneLoader : MonoBehaviour
+public class CutsceneDialogueLoader : MonoBehaviour
 {
     [SerializeField] private TransitionScript transition;
-    [SerializeField] private CutsceneSO cutsceneSo;
-    
+    [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
+
     [Header("For debugging: ")]
     [SerializeField] private int currCutscene;
     [SerializeField] private int currPanel;
@@ -87,12 +87,6 @@ public class CutsceneLoader : MonoBehaviour
     {
         public GameObject line;
         public bool staysInScene = false;
-
-        
-        // [Header("-1 to stay permanently")]
-        // public int inSceneLength = 0;
-        // public int currLength;
-
     }
     
 
@@ -100,12 +94,7 @@ public class CutsceneLoader : MonoBehaviour
     
     void Start()
     {
-        //cutsceneSo.loadCutsceneOrDialogue = false;
-       // cutsceneSo.loadId = 0;
-        
-        
-        
-        cutsceneOrDialogue = cutsceneSo.loadCutsceneOrDialogue;
+        cutsceneOrDialogue = cutsceneDialogueSo.loadCutsceneOrDialogue;
 
         
         //Disable all
@@ -127,7 +116,7 @@ public class CutsceneLoader : MonoBehaviour
             currCutscene = -1;
             for (int i = 0; i < cutscenesArray.Length; i++)
             {
-                if (cutsceneSo.loadId == cutscenesArray[i].loadId)
+                if (cutsceneDialogueSo.loadId == cutscenesArray[i].loadId)
                 {
                     currCutscene = i;
                 }
@@ -146,7 +135,7 @@ public class CutsceneLoader : MonoBehaviour
             currDialogue = -1;
             for (int i = 0; i < dialoguesArray.Length; i++)
             {
-                if (cutsceneSo.loadId == dialoguesArray[i].loadId)
+                if (cutsceneDialogueSo.loadId == dialoguesArray[i].loadId)
                 {
                     currDialogue = i;
                 }
@@ -255,8 +244,8 @@ public class CutsceneLoader : MonoBehaviour
             
             if (dialoguesArray[currDialogue].loadsBackToCutscene)
             {
-                cutsceneSo.loadId = dialoguesArray[currDialogue].nextLoadId;
-                cutsceneSo.loadCutsceneOrDialogue = dialoguesArray[currDialogue].cutsceneOrDialogue;
+                cutsceneDialogueSo.loadId = dialoguesArray[currDialogue].nextLoadId;
+                cutsceneDialogueSo.loadCutsceneOrDialogue = dialoguesArray[currDialogue].cutsceneOrDialogue;
                     
                 transition.LoadNextLevel(SceneManager.GetActiveScene().buildIndex);
 
@@ -300,8 +289,8 @@ public class CutsceneLoader : MonoBehaviour
                 //If coming back to Cutscene, update SO
                 if (cutscenesArray[currCutscene].loadsBackToCutscene)
                 {
-                    cutsceneSo.loadId = cutscenesArray[currCutscene].nextLoadId;
-                    cutsceneSo.loadCutsceneOrDialogue = cutscenesArray[currCutscene].cutsceneOrDialogue;
+                    cutsceneDialogueSo.loadId = cutscenesArray[currCutscene].nextLoadId;
+                    cutsceneDialogueSo.loadCutsceneOrDialogue = cutscenesArray[currCutscene].cutsceneOrDialogue;
                     
                     transition.LoadNextLevel(SceneManager.GetActiveScene().buildIndex);
 
