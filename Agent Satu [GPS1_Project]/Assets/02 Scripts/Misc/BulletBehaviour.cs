@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -135,7 +134,7 @@ public class BulletBehaviour : MonoBehaviour
         if (!hitRegistered)
         {
             hitRegistered = true;
-            
+
             SpawnBloodSplatterEffect();
             
             PlayerTakeDamage();
