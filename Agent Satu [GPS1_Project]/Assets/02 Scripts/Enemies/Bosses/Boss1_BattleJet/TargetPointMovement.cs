@@ -118,7 +118,7 @@ public class TargetPointMovement : MonoBehaviour
 
     void Start()
     {
-        playerMovement = transform.Find("/Player/PlayerBody").GetComponent<PlayerMovement>();
+        playerMovement = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
         synch = transform.parent.GetComponent<SynchGunMovements>();
         
         playerPos = playerMovement.transform;
@@ -134,7 +134,6 @@ public class TargetPointMovement : MonoBehaviour
         
         //Attack 2 initial pos
         AssignPatternPoints(patterns[0]);
-        
     }
 
     void FlyIntoScene_OnReachingTarget()
@@ -171,15 +170,6 @@ public class TargetPointMovement : MonoBehaviour
         }
     }
 
- 
-
-    // private IEnumerator StartBattle()
-    // {
-    //     yield return new WaitForSeconds(timeToStartBattle);    //put editable timer afterwards
-    //     
-    //     idling = false;
-    //     inPosition = false;print("started");
-    // }
     
     
     //Track playerPos and shoot with delay

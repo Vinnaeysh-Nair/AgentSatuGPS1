@@ -39,7 +39,6 @@ public class BossMiniJetHp : EnemyHp
 
     private void TakeDamage(int dmg)
     {
-        if (currHp <= 0) return;
         currHp -= dmg;
         
         float percentage = (float) currHp / initialHp;
@@ -53,24 +52,23 @@ public class BossMiniJetHp : EnemyHp
                 onReachingThresholdDelegate.Invoke();
             }
         }
-            
-        if (currHp == 0)
-        {
-            //Death logic
-            killedBossesCount++;
+
+        if (currHp > 0) return;
+        
+        //Death logic
+        killedBossesCount++;
        
-            //print("ded" + killedBossesCount);
-           if (killedBossesCount == 3)
-           {
-               //reset static value
-               killedBossesCount = 0;
-               if (onLevelCompleteDelegate != null)
-               {
-                  onLevelCompleteDelegate.Invoke();
-               }
-           }
-           
-           gameObject.SetActive(false);
+        //print("ded" + killedBossesCount);
+        if (killedBossesCount == 3)
+        {
+            //reset static value
+            killedBossesCount = 0;
+            if (onLevelCompleteDelegate != null)
+            {
+                onLevelCompleteDelegate.Invoke();
+            }
         }
+           
+        gameObject.SetActive(false);
     }
 }
