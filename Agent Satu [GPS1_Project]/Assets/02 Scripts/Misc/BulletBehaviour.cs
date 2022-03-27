@@ -89,15 +89,14 @@ public class BulletBehaviour : MonoBehaviour
             return;
         }
         
-
-       
+        
+        gameObject.SetActive(false);
+        
         
         //If hit environment
         if (!hitObject.CompareTag(tagManager.tagSO.limbLegTag) && !hitObject.CompareTag(tagManager.tagSO.limbOthersTag) && !hitObject.CompareTag(tagManager.tagSO.limbHeadTag))
         {
             SpawnBulletImpactEffect();
-            gameObject.SetActive(false);
-            
             return;
         }
         
