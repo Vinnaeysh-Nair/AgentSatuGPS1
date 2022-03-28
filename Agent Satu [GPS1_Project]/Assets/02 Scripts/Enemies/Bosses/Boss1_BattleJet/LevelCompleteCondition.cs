@@ -7,18 +7,18 @@ public class LevelCompleteCondition : MonoBehaviour
 
     private void OnDestroy()
     {
-        BossMiniJetHp.onLevelCompleteDelegate -= ActivateExitPoint;
+        EnemyHp.onLevelCompleteDelegate -= ActivateExitPoint;
     }
 
 
     void Start()
     {
-        BossMiniJetHp.onLevelCompleteDelegate += ActivateExitPoint;
+        EnemyHp.onLevelCompleteDelegate += ActivateExitPoint;
     }
 
     private void ActivateExitPoint()
     {
         exitPoint.gameObject.SetActive(true);
-        BossMiniJetHp.onLevelCompleteDelegate -= ActivateExitPoint;
+        EnemyHp.onLevelCompleteDelegate -= ActivateExitPoint;
     }
 }

@@ -17,8 +17,6 @@ public class BossMiniJetHp : EnemyHp
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
 
-    public delegate void OnLevelComplete();
-    public static event OnLevelComplete onLevelCompleteDelegate;
 
 
     void Start()
@@ -72,10 +70,7 @@ public class BossMiniJetHp : EnemyHp
         {
             //reset static value
             killedBossesCount = 0;
-            if (onLevelCompleteDelegate != null)
-            {
-                onLevelCompleteDelegate.Invoke();
-            }
+            CompleteLevel();
         }
            
         gameObject.SetActive(false);

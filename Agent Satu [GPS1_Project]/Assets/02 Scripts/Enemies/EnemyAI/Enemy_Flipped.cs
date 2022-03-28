@@ -39,10 +39,4 @@ public class Enemy_Flipped : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
-
-    //by jake
-    //public bool detectfacingdirection()
-    //{
-    //    return isfacingright;
-    //}
 }
