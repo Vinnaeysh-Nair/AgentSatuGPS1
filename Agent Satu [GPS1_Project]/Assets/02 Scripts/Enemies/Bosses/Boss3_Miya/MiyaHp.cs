@@ -1,9 +1,15 @@
 using UnityEngine;
-
+using System;
 public class MiyaHp : BossHp
 {
     [Header("Ignore pivot version")]
     [SerializeField] private BarChangeSlider hpBar;
+
+    [SerializeField] private float[] atk4HpThresholds;
+    private int atk4ThresholdCounter = 0; 
+
+    public static event Action OnReachingThreshold;
+    
     void Start()
     {
         currHp = initialHp;
@@ -29,9 +35,25 @@ public class MiyaHp : BossHp
         float percentage = (float) currHp / initialHp;
         hpBar.SetBarAmount(percentage);
 
+        if (percentage <= atk4HpThresholds[atk4ThresholdCounter])
+        {
+            if (OnReachingThreshold != null)
+            {
+                OnReachingThreshold.Invoke();
+            }
+
+            if(atk4ThresholdCounter < atk4HpThresholds.Length - 1)
+                atk4ThresholdCounter++;
+        }
+        
         if (currHp > 0) return;
         CompleteLevel();
         
         gameObject.SetActive(false);
+    }
+    
+    public float HpPercent
+    {
+        get => (float) currHp / initialHp;
     }
 }

@@ -6,7 +6,9 @@ public class MiyaPatterns : MonoBehaviour
     [Header("Ref:")] 
     [SerializeField] private Collider2D[] platforms;
     [SerializeField] private BoxCollider2D atk3DetectionBox;
+    [SerializeField] private Transform[] atk1movementPoints;
 
+    [SerializeField] private MiyaHp miyaHp;
     [SerializeField] private Animator miyaAnim;
     [SerializeField] private Animator atk4BlindAnim;
 
@@ -38,7 +40,11 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private float timeBetweenJumps = 3f;
     
     private float nextJumpTime = 0f;
-    
+
+    [Header("Attack 1")]
+    [SerializeField] private int nextMovementPoint = 0;
+    [SerializeField] private float standStillDuration = 5f;
+    private bool isStandingStill = false;
 
     [Header("Attack 2")] 
     [SerializeField] private int damageToPlayer = 1;
@@ -56,11 +62,11 @@ public class MiyaPatterns : MonoBehaviour
     [Header("Attack 4")] 
     [SerializeField] private float atk4Radius;
     [SerializeField] private Vector2 atk4Offset;
-    
-    
+
     void OnDestroy()
     {
         MiyaAtk3Detection.OnPlayerEnter -= MiyaAtk3_OnPlayerEnter;
+        MiyaHp.OnReachingThreshold -= MiyaHp_OnReachingThreshold;
     }
     
     void Start()
@@ -74,6 +80,7 @@ public class MiyaPatterns : MonoBehaviour
         enemyFlipped = GetComponent<Enemy_Flipped>();
 
         MiyaAtk3Detection.OnPlayerEnter += MiyaAtk3_OnPlayerEnter;
+        MiyaHp.OnReachingThreshold += MiyaHp_OnReachingThreshold;
 
         atk3DetectionBox.enabled = false;
         atk4BlindAnim.gameObject.SetActive(false);
@@ -95,8 +102,6 @@ public class MiyaPatterns : MonoBehaviour
         
         //if hp == 50%, 75%, 20%, trigger atk4
         
-        
-        
         switch (attackCounter)
         {
             case 1: 
@@ -108,30 +113,48 @@ public class MiyaPatterns : MonoBehaviour
             case 3:
                 Attack3();
                 break;
-            case 4:
-                Attack4();
-                break;
         }
     }
     
     //shoot Assault Rifle
     private void Attack1()
     {
-        print("pewpew");
-        
-
-        if (IsAttackDurationEnded())
+        Vector2 targetPos = atk1movementPoints[nextMovementPoint].position;
+        if (!ReachedTarget(targetPos, false))
         {
-            ChangeAttack();
+            if (isStandingStill) return;
+            
+            MoveToTarget(targetPos);
+            
+            float diff = targetPos.y - transform.position.y ;
+            if (diff > yDistToStartJumping)
+            {
+                if (Time.time > nextJumpTime)
+                {
+                    Jump();
+                    nextJumpTime = Time.time + timeBetweenJumps;
+                }
+            }
         }
+        else
+        {
+            NextMovementPoint();
+            isStandingStill = true;
+            Invoke(nameof(SetIsStandingStillToFalse), standStillDuration);
+        }
+
+        // if (IsAttackDurationEnded())
+        // {
+        //     ChangeAttack();
+        // }
     }
     
     //melee
     private void Attack2()
     {
-        if (!ReachedTarget(playerPos))
+        if (!ReachedTarget(playerPos, true))
         {
-             MoveToTarget(playerPos);
+            MoveToTarget(playerPos);
             
             float diff = playerPos.y - transform.position.y ;
             if (diff > yDistToStartJumping)
@@ -170,7 +193,7 @@ public class MiyaPatterns : MonoBehaviour
        }
        else
        {
-         // MoveToTarget(playerPos);
+          MoveToTarget(playerPos);
        }
         
         if (IsAttackDurationEnded())
@@ -191,6 +214,7 @@ public class MiyaPatterns : MonoBehaviour
 
     private void CalcAttackEndTime()
     {
+        stopTime = 0f;
         if (Time.time > stopTime)
         {
             stopTime = Time.time + attackDuration[attackCounter - 1];
@@ -200,7 +224,7 @@ public class MiyaPatterns : MonoBehaviour
     private void ChangeAttack()
     {
         attackCounter++;
-        if (attackCounter > 4)
+        if (attackCounter > 3)
         {
             attackCounter = 1;
         }
@@ -212,6 +236,7 @@ public class MiyaPatterns : MonoBehaviour
         }
         else
         {
+            //places the gun in its original position
             if (enemyFlipped.GetIsFacingRight())
             {
                 trackingAI.transform.eulerAngles = new Vector3(0f, 180f, 0f);
@@ -220,8 +245,7 @@ public class MiyaPatterns : MonoBehaviour
             {
                 trackingAI.transform.eulerAngles = new Vector3(0f, 0f, 0);
             }
-           // trackingAI.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            
+  
             trackingAI.enabled = false;
             shootingAI.enabled = false;
         }
@@ -260,9 +284,19 @@ public class MiyaPatterns : MonoBehaviour
         rb.AddForce(new Vector2(rb.velocity.x, jumpForce) * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
     
-    private bool ReachedTarget(Vector2 targetPos)
+    private bool ReachedTarget(Vector2 targetPos, bool targetIsPlayer)
     {
-        if (Vector2.Distance(targetPos, transform.position) > xDistToStartAttack)
+        float compDist = 0f;
+        if (targetIsPlayer)
+        {
+            compDist = xDistToStartAttack;
+        }
+        else
+        {
+            compDist = .8f;
+        }
+        
+        if (Vector2.Distance(targetPos, transform.position) > compDist)
         {
             return false;
         }
@@ -289,6 +323,23 @@ public class MiyaPatterns : MonoBehaviour
         {
             Physics2D.IgnoreCollision(platform, col, status);
         }
+    }
+
+    private void NextMovementPoint()
+    {
+        rb.velocity = new Vector2(0f, 0f);
+        nextMovementPoint++;
+        // if (nextMovementPoint > atk1movementPoints.Length - 1)
+        // {
+        //     nextMovementPoint = 0;
+        //     ChangeAttack();
+        // }
+        ChangeAttack();
+    }
+
+    private void SetIsStandingStillToFalse()
+    {
+        isStandingStill = false;
     }
 
     public void Attack2DamagePlayer()
@@ -344,6 +395,11 @@ public class MiyaPatterns : MonoBehaviour
     private void MiyaAtk3_OnPlayerEnter()
     {
         Atk3Slash();
+    }
+
+    private void MiyaHp_OnReachingThreshold()
+    {
+        Attack4();
     }
 
     public void BlindPlayer()
