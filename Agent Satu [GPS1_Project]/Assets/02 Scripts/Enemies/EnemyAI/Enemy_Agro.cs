@@ -47,10 +47,12 @@ public class Enemy_Agro : MonoBehaviour
         enemflip = GetComponent<Enemy_Flipped>();
         
         overallHp = GetComponent<OverallHp>();
-        
-       
-        overallHp.onDamagedDelegate += OverallHp_OnDamaged;
-        overallHp.onDeathDelegate += OverallHp_OnDeath;
+
+        if (overallHp != null)
+        {
+            overallHp.onDamagedDelegate += OverallHp_OnDamaged;
+            overallHp.onDeathDelegate += OverallHp_OnDeath;
+        }
     }
 
     

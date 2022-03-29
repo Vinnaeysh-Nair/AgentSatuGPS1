@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class LevelCompleteCondition : MonoBehaviour
@@ -7,18 +6,18 @@ public class LevelCompleteCondition : MonoBehaviour
 
     private void OnDestroy()
     {
-        EnemyHp.onLevelCompleteDelegate -= ActivateExitPoint;
+        BossHp.onLevelCompleteDelegate -= ActivateExitPoint;
     }
 
 
     void Start()
     {
-        EnemyHp.onLevelCompleteDelegate += ActivateExitPoint;
+        BossHp.onLevelCompleteDelegate += ActivateExitPoint;
     }
 
     private void ActivateExitPoint()
     {
         exitPoint.gameObject.SetActive(true);
-        EnemyHp.onLevelCompleteDelegate -= ActivateExitPoint;
+        BossHp.onLevelCompleteDelegate -= ActivateExitPoint;
     }
 }

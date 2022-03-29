@@ -1,13 +1,7 @@
 using UnityEngine;
 
-public class BossMiniJetHp : EnemyHp
+public class BossMiniJetHp : BossHp
 {
-    [Header("Ref:")] 
-    [SerializeField] private BarChangePivot healthBar;
-
-    [Header("Edit: ")]
-    [SerializeField] private int initialHp;
-    
     
     [Header("Ignore if this is jet to be summoned")]
     [SerializeField] [Range(0f, 1f)] private float summonThreshold;
@@ -16,8 +10,7 @@ public class BossMiniJetHp : EnemyHp
 
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
-
-
+    
 
     void Start()
     {
@@ -41,7 +34,7 @@ public class BossMiniJetHp : EnemyHp
         }
     }
 
-    private void TakeDamage(int dmg)
+    private new void TakeDamage(int dmg)
     {
         if (currHp <= 0) return;
         

@@ -6,14 +6,11 @@ public class ArmToPlayerTracking : MonoBehaviour
     [SerializeField] private Transform pivotTransform;
     [SerializeField] private OverallHp overallHp;
     [SerializeField] private Enemy_Agro enemyAgro;
+   
     private PlayerMovement playerMovement;
     
-    //[SerializeField] private Enemy_Flipped enemyFlipped;
-
-
     
     [SerializeField] private float followAngleOffset;
-    //[SerializeField] private bool isFacingRight = false;
     private Vector2 playerPosition;
 
 
@@ -23,7 +20,8 @@ public class ArmToPlayerTracking : MonoBehaviour
     {
         playerMovement  = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
         
-        overallHp.onDeathDelegate += OverallHp_OnDeath;
+        if(overallHp != null)
+            overallHp.onDeathDelegate += OverallHp_OnDeath;
     }
 
     //track player's Vector x and y
@@ -43,7 +41,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     
     private void PointToPlayer()
     {
-        Vector2 lookDir = (Vector2)pivotTransform.position - playerPosition;
+        Vector2 lookDir = (Vector2) pivotTransform.position - playerPosition;
         float angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
         
@@ -58,24 +56,4 @@ public class ArmToPlayerTracking : MonoBehaviour
             pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
         }
     }
-    
-    //jake ver
-    //If pointing to left side, invert the pivot's x rotation and angleTowards
-    //to accomodate sprite rotations
-    // if (isFacingRight)
-    // {
-    //     if (angleTowards > 90f || angleTowards < -90f)
-    //     {
-    //         //Inverted rotation
-    //         pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
-    //     }
-    // }
-    // else
-    // {
-    //     if (!(angleTowards > 90f || angleTowards < -90f))
-    //     {
-    //         //Normal rotation
-    //         pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
-    //     }
-    // }
 }
