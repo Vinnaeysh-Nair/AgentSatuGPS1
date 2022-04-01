@@ -7,6 +7,7 @@ public class CameraTarget : MonoBehaviour
     [Header("Scene Boundaries")]
     [SerializeField] private Transform leftBarrier;
     [SerializeField] private Transform rightBarrier;
+    [SerializeField] private Transform downBarrier;
     
     //Ref
     private Transform playerBody;
@@ -19,10 +20,14 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private float thresholdX;
     [SerializeField] private float thresholdYUp;
     [SerializeField] private float thresholdYDown;
+    [SerializeField] private float downBarrierCameraOffsetY;
 
     private float leftBarrierX;
     private float rightBarrierX;
+    
+    private float downBarrierY;
 
+    
     private Transform followPlayer;
     
     void Start()
@@ -35,6 +40,7 @@ public class CameraTarget : MonoBehaviour
         //Get barriers' sizes
         leftBarrierX = leftBarrier.position.x + leftBarrier.GetComponent<BoxCollider2D>().bounds.extents.x/2;
         rightBarrierX = rightBarrier.position.x - rightBarrier.GetComponent<BoxCollider2D>().bounds.extents.x/2;
+        downBarrierY = downBarrier.position.y - downBarrier.GetComponent<BoxCollider2D>().bounds.extents.y / 2 + downBarrierCameraOffsetY;
     }
     
     void FixedUpdate()
@@ -59,13 +65,22 @@ public class CameraTarget : MonoBehaviour
     private void KeepCameraInBounds()
     {
         Vector2 currPos = transform.position;
+        Vector2 newPos = new Vector2(currPos.x, currPos.y);
+        
         if (currPos.x <= leftBarrierX)
         {
-            transform.position = new Vector2(leftBarrierX + .1f, currPos.y);
+            newPos.x = leftBarrierX + .1f;
         }
         else if (currPos.x >= rightBarrierX)
         {
-            transform.position = new Vector2(rightBarrierX - .1f, currPos.y);
+            newPos.x = rightBarrierX - .1f;
         }
+        
+        if (currPos.y <= downBarrierY)
+        {
+           newPos.y = downBarrierY + .1f;
+        }
+
+        transform.position = newPos;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -51,13 +52,18 @@ public class PlayerController : MonoBehaviour
     private bool jumpedToRight = false;
 
 
-
-
+    
     //Groundcheck and Ceiling check fields
     [SerializeField] private LayerMask platformLayerMask;
     private Collider2D ceilingCheck;
 
     private bool droppedFromStair = false;
+    
+    
+    //Fx
+    public static event Action OnRunning;
+    public static event Action OnDodgerolling;
+    
 
     //Getter
     public bool GetGrounded()
@@ -246,6 +252,16 @@ public class PlayerController : MonoBehaviour
         
         
         float defaultSpeed = horizontalMoveDir * horizontalMoveSpeed;
+
+        //Only spawn dust particles when speed > 0
+        if (Math.Abs(defaultSpeed) > 0f && grounded)
+        {
+            if (OnRunning != null)
+            {
+                OnRunning.Invoke();
+            }
+        }
+ 
                 
         //After crouching, re-enable upper body collider
         if (wasCrouching)
@@ -287,7 +303,11 @@ public class PlayerController : MonoBehaviour
         {
             playerIsDodgerolling = true;
             animCon.OnDodgerolling();
-            
+
+            if (OnDodgerolling != null)
+            {
+                OnDodgerolling.Invoke();
+            }
             
             //Disable collisions
             EnableUpperBodyHitDetector(false);
@@ -308,7 +328,6 @@ public class PlayerController : MonoBehaviour
             vMove = dodgerollVertical;
                             
             
-                        
             nextDodgerollTime = Time.time + cooldownTime;
         }
 

@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class TransitionScript : MonoBehaviour
 {
+    //If is Lose Scene, dont override the lastLevelIndex
+    [Header("If current scene is Lose Scene")]
+    [SerializeField] private bool isLoseScene = false;
+    private static int lastLevelIndex;
+    
     [Header("General")]
     //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
     
-    private static int lastLevelIndex;
-
     [Space] [Header("Cutscenes & dialogue")] 
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
     [SerializeField] private bool willTransitionToCutsceneOrDialogue;
@@ -41,6 +44,8 @@ public class TransitionScript : MonoBehaviour
 
     void Start()
     {
+        if (isLoseScene) return;
+            
         //If already cutscene dont overwrite
         lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
         if (lastLevelIndex != cutsceneSceneIndex)
@@ -110,9 +115,16 @@ public class TransitionScript : MonoBehaviour
             LoadNextLevel();
         }
     }
+    
+    //Use in Lose Scene
+    public void Restart()
+    {
+        StartCoroutine(LoadLevel(lastLevelIndex));
+    }
 
+    //Used in Win/Lose Scenes
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadSceneAsync("Main Menu");
+        StartCoroutine(LoadLevel(0));
     }
 }
