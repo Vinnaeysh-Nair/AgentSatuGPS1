@@ -11,6 +11,10 @@ public class OpenDoor : MonoBehaviour
     public delegate void OnAbleToInteract(bool canInteract, Transform buttonTransform);
     public static event OnAbleToInteract onAbleToInteractDelegate;
     
+    void OnDestroy(){
+         PlayerMovement.onInteractDelegate -= PlayerMovement_OnInteract;
+    }
+    
     void Start()
     {
         PlayerMovement.onInteractDelegate += PlayerMovement_OnInteract;
