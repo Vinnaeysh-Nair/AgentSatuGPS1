@@ -2223,11 +2223,10 @@ MonoBehaviour:
   playerHitLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackCounter: 0
+  attackCounter: 2
   attackDuration:
-  - 3
+  - 10
   - 5
-  - 2
   - 2
   stopTime: 0
   moveSpeed: 1000
@@ -2236,7 +2235,7 @@ MonoBehaviour:
   yDistToStartJumping: 3
   timeBetweenJumps: 3
   nextMovementPoint: 0
-  standStillDuration: 5
+  standStillDuration: 0
   damageToPlayer: 1
   atk2AreaOffset: 0
   atk2AreaSize: 0

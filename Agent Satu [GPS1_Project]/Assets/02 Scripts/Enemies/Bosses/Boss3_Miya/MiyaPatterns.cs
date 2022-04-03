@@ -88,7 +88,8 @@ public class MiyaPatterns : MonoBehaviour
         shootingAI.enabled = false;
  
         //Start Attack1
-        stopTime = Time.time + attackDuration[0];
+       // stopTime = Time.time + attackDuration[0];
+        attackCounter = 1;
         ChangeAttack();
     }
     
@@ -139,14 +140,17 @@ public class MiyaPatterns : MonoBehaviour
         else
         {
             NextMovementPoint();
+            
+            if (nextMovementPoint > atk1movementPoints.Length - 1)
+            {
+                nextMovementPoint = 0;
+                ChangeAttack();
+                return;
+            }
+            
             isStandingStill = true;
             Invoke(nameof(SetIsStandingStillToFalse), standStillDuration);
         }
-
-        // if (IsAttackDurationEnded())
-        // {
-        //     ChangeAttack();
-        // }
     }
     
     //melee
@@ -198,13 +202,14 @@ public class MiyaPatterns : MonoBehaviour
         
         if (IsAttackDurationEnded())
         {
-            ChangeAttack();
+             ChangeAttack();
         }
     }
 
     //flash bang helmet
     private void Attack4()
     {
+        attackCounter = 4;
         print("bang bang bang");
         //play blind telegraph animation
 
@@ -249,7 +254,8 @@ public class MiyaPatterns : MonoBehaviour
             trackingAI.enabled = false;
             shootingAI.enabled = false;
         }
-        
+
+       
         CalcAttackEndTime();
     }
 
@@ -329,12 +335,6 @@ public class MiyaPatterns : MonoBehaviour
     {
         rb.velocity = new Vector2(0f, 0f);
         nextMovementPoint++;
-        // if (nextMovementPoint > atk1movementPoints.Length - 1)
-        // {
-        //     nextMovementPoint = 0;
-        //     ChangeAttack();
-        // }
-        ChangeAttack();
     }
 
     private void SetIsStandingStillToFalse()
