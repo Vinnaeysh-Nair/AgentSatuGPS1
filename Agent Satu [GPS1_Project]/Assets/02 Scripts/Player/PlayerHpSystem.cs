@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerHpSystem : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerHpSystem : MonoBehaviour
     [SerializeField] private int hpCountPlayer = 5;
     private int currHp;
 
+    public static int deathLevelIndex;
     
     void Start()
     {
@@ -25,6 +27,8 @@ public class PlayerHpSystem : MonoBehaviour
         healthBar.SetBarAmount(ConvertToPercentage());
 
         if (currHp > 0) return;
+
+        deathLevelIndex = SceneManager.GetActiveScene().buildIndex;
         sceneLoader.LoadLoseScene();
     }
 

@@ -119,7 +119,7 @@ public class TransitionScript : MonoBehaviour
     //Use in Lose Scene
     public void Restart()
     {
-        StartCoroutine(LoadLevel(lastLevelIndex));
+        StartCoroutine(LoadLevel(PlayerHpSystem.deathLevelIndex));
     }
 
     //Used in Win/Lose Scenes
