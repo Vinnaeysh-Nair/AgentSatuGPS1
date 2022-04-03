@@ -916,8 +916,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 694.7672, y: -62}
-  m_SizeDelta: {x: 701.7631, y: 40.4998}
+  m_AnchoredPosition: {x: 694.7672, y: -49.95227}
+  m_SizeDelta: {x: 701.7631, y: 16.4043}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &562938498
 MonoBehaviour:
@@ -3871,6 +3871,10 @@ PrefabInstance:
       value: 'Camera '
       objectReference: {fileID: 0}
     - target: {fileID: 6830485506945239126, guid: 457c1abfd01e4bf4492f845908bcb920, type: 3}
+      propertyPath: downBarrier
+      value: 
+      objectReference: {fileID: 547937469}
+    - target: {fileID: 6830485506945239126, guid: 457c1abfd01e4bf4492f845908bcb920, type: 3}
       propertyPath: leftBarrier
       value: 
       objectReference: {fileID: 661044685}
@@ -3881,6 +3885,10 @@ PrefabInstance:
     - target: {fileID: 6830485506945239126, guid: 457c1abfd01e4bf4492f845908bcb920, type: 3}
       propertyPath: thresholdYDown
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830485506945239126, guid: 457c1abfd01e4bf4492f845908bcb920, type: 3}
+      propertyPath: downBarrierCameraOffsetY
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6830485508466267081, guid: 457c1abfd01e4bf4492f845908bcb920, type: 3}
       propertyPath: m_Lens.OrthographicSize

@@ -29,7 +29,6 @@ public class OpenDoor : MonoBehaviour
             
             if (onAbleToInteractDelegate != null)
             {
-                //Collider2D buttonCollider = GetComponent<Collider2D>();
                 onAbleToInteractDelegate.Invoke(canOpen, transform);
             }
         }
@@ -43,7 +42,6 @@ public class OpenDoor : MonoBehaviour
             
             if (onAbleToInteractDelegate != null)
             {
-               // Collider2D buttonCollider = GetComponent<Collider2D>();
                 onAbleToInteractDelegate.Invoke(canOpen, transform);
             }
         }
