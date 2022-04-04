@@ -38,10 +38,8 @@ public class PlayerWeapon : MonoBehaviour
     private int currClip;
     private bool reloading = false;
 
-    //SoundSettings
-    [Header("Sound Settings")]
-    [SerializeField] AudioSource AdSource;
-    [SerializeField] AudioClip GunSound;
+    //SOUND
+    private Soundmanager soundManage;
 
     public delegate void OnAmmoUpdate();
     public event OnAmmoUpdate onAmmoUpdateDelegate;
@@ -118,7 +116,13 @@ public class PlayerWeapon : MonoBehaviour
                 currAmmoReserve = 0;
             } 
         }
-        
+
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
+
         UpdateAmmoDisplay();
     }
 
@@ -206,7 +210,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1")  && Time.time > nextFireTime)
         {
-            AdSource.PlayOneShot(GunSound);
+            soundManage.PlaySound("PistolShot");
             nextFireTime = Time.time + (1f / fireRate);
             Shoot();
         }
@@ -214,7 +218,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private void ContinuousShooting()
     {
-        AdSource.PlayOneShot(GunSound);
+        soundManage.PlaySound("Rifleshot");
         if (Input.GetButton("Fire1") && Time.time > nextFireTime)
         {
             nextFireTime = Time.time + (1f / fireRate);

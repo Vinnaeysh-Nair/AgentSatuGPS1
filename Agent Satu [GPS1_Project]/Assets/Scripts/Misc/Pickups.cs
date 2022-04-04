@@ -25,9 +25,8 @@ public class Pickups : MonoBehaviour
     [TextArea(3,7)] [SerializeField] private string notes;
 
 
-    //SoundForCollectibles
-    //SoundSettings
-    [SerializeField] private AudioClip PickUpSound;
+    //SOUND
+    private Soundmanager soundManage;
 
 
     void Start()
@@ -48,6 +47,12 @@ public class Pickups : MonoBehaviour
         }
         
         _weaponsArray = _playerInventory.GetWeaponsArray();
+
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
     }
     
 
@@ -57,7 +62,6 @@ public class Pickups : MonoBehaviour
         {
             if (_collected) return;
             _collected = true;
-            AudioSource.PlayClipAtPoint(PickUpSound, transform.position);
             gameObject.SetActive(false);
             _collected = false;
         }
@@ -68,10 +72,12 @@ public class Pickups : MonoBehaviour
         if (pickupId == 0)
         {
             TriggerEffect();
+            soundManage.PlaySound("HealthPickUp");
             _playerHp.ReplenishHealth(replenishAmount);
         }
         else
         {
+            soundManage.PlaySound("AmmoPickUp");
             TriggerReplenishAmmo();
         }
     }

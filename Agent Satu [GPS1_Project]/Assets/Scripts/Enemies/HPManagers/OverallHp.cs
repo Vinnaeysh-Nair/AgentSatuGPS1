@@ -27,13 +27,17 @@ public class OverallHp : EnemyHp
     public delegate void OnDamaged();
     public event OnDamaged onDamagedDelegate;
 
-    private AudioSource AD;
-    [SerializeField] AudioClip DieSound;
+    //SOUND
+    private Soundmanager soundManage;
 
 
     void Start()
     {
-        AD = GetComponent<AudioSource>();
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
         spawnPickups = GetComponent<SpawnPickups>();
 
@@ -84,7 +88,7 @@ public class OverallHp : EnemyHp
         //Die
         if (currHp <= 0)
         {
-            AD.PlayOneShot(DieSound);
+            soundManage.PlaySound("pain sound 1");
             Die(flingDirection);
         }
         
