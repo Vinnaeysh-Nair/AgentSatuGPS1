@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 public class CutsceneDialogueLoader : MonoBehaviour
 {
     [SerializeField] private TransitionScript transition;
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
+    [SerializeField] private Animator screenAnimator;
 
     [Header("For debugging: ")]
     [SerializeField] private int currCutscene;
@@ -15,6 +18,8 @@ public class CutsceneDialogueLoader : MonoBehaviour
     [SerializeField] private int currDialogue;
     [SerializeField] private int currLine = -1;
     [SerializeField] private int prevLine;
+
+    [SerializeField] private int swappedLine;
 
     private Line lineToSetInactive;
     
@@ -61,10 +66,13 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
     
     [System.Serializable]
-    public struct Dialogue
+    public class Dialogue
     {
         public int loadId;
+        
+        [Header("Ref:")]
         public Transform dialogueTransform;
+        private Image BgImage;
         
         [Header("Cutscene scene")]
         public bool loadsBackToCutscene;
@@ -78,15 +86,31 @@ public class CutsceneDialogueLoader : MonoBehaviour
         [Header("Info for next level to load (ignore if loading back to cutscene)")]
         [SerializeField] private string levelToLoadSceneName;
         public int levelToLoadIndex;
-    
+
+        public Sprite[] backgrounds;
         public Line[] lines;
+
+        private int bgCounter;
+        public void Awake()
+        {
+            BgImage = dialogueTransform.GetComponent<Image>();
+            BgImage.sprite = backgrounds[0];
+        }
+
+        public void SwitchBg()
+        {
+            bgCounter++;
+            BgImage.sprite = backgrounds[bgCounter];
+        }
     }
+    
     
     [System.Serializable]
     public class Line
     {
         public GameObject line;
         public bool staysInScene = false;
+        public bool switchesBg = false;
     }
     
 
@@ -105,6 +129,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
         foreach (Dialogue dialogue in dialoguesArray)
         {
+            dialogue.Awake();
             dialogue.dialogueTransform.gameObject.SetActive(false);
         }
         
@@ -232,8 +257,21 @@ public class CutsceneDialogueLoader : MonoBehaviour
             if (!previousLine.staysInScene)
             {
                 previousLine.line.SetActive(false);
+
+                if (previousLine.switchesBg && swappedLine != currLine)
+                {
+                    screenAnimator.Play("Screen_FadeToBlack");
+                    StartCoroutine(DialogueSwitchBg());
+
+                    swappedLine = currLine;
+
+                    prevLine--;
+                    currLine--;
+                    
+                    return;
+                }
             }
-           
+        
             
             Line thisLine = dialoguesArray[currDialogue].lines[currLine];
             thisLine.line.SetActive(true);
@@ -353,5 +391,11 @@ public class CutsceneDialogueLoader : MonoBehaviour
     private Panel GetCurrPanel()
     {
         return cutscenesArray[currCutscene].panels[currPanel];
+    }
+
+    private IEnumerator DialogueSwitchBg()
+    {
+        yield return new WaitForSeconds(.5f);
+        dialoguesArray[currDialogue].SwitchBg();
     }
 }
