@@ -197,8 +197,6 @@ public class PlayerWeapon : MonoBehaviour
         {
             SingleClickShooting();
         }
-        
-  
     }
     
     private bool ClipEmpty()
@@ -273,9 +271,7 @@ public class PlayerWeapon : MonoBehaviour
             weaponsArray[wepId].TotalAmmo = currTotalAmmo;
         }
     }
-
-  
-
+    
     private IEnumerator Reload()
     {
         if (!reloading)
