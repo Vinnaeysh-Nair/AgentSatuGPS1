@@ -1,19 +1,17 @@
 using UnityEngine;
+using System;
+
 
 public class DialogueAndLines : MonoBehaviour
 {
-    public Dialogue[] dialogue;
-
+    [Header("Ref:")]
+    [SerializeField] private Dialogue[] dialogue;
     [SerializeField] private DialogueManager dialogueManager;
-    [SerializeField] private int currDialogue = 0;
     
-    [SerializeField] private int currSentence;
+    private int currDialogue = 0;
+    private int currSentence;
 
-  //  public delegate void OnFinishDialogue();
-
-   // public static event OnFinishDialogue onFinishDialogueDelegate;
-
-    //private int prevDialogue;     //loop back to first dialogue
+    public event Action OnFinishDialogue;
 
 
     void Start()
@@ -36,11 +34,7 @@ public class DialogueAndLines : MonoBehaviour
                     
                     if (IsAllSentencesFinished())
                     {
-                       
                         currSentence = 0;
-                      
-
-                      //  prevDialogue = currDialogue;
                         currDialogue++;
                         
                         DisplayNextDialogue();
@@ -55,26 +49,27 @@ public class DialogueAndLines : MonoBehaviour
                 }
                 else
                 {
-                   // currDialogue = prevDialogue;
+             
                    // print("mo more dialogue");
+                    dialogueManager.DialogueBox.SetActive(false);
 
-                    // if (onFinishDialogueDelegate != null)
-                    // {
-                    //     onFinishDialogueDelegate.Invoke();       //trigger boss start after dialogue, not implementing yet
-                    // }
+                    if (OnFinishDialogue != null)
+                    {
+                        OnFinishDialogue.Invoke();
+                    }
                 }
                 
             }
         }
     }
 
-    public void DisplayNextDialogue()
+    private void DisplayNextDialogue()
     {
         dialogueManager.StartDialogue(dialogue[currDialogue]);
     }
 
 
-    public void TriggerNextSentence()
+    private void TriggerNextSentence()
     {
         dialogueManager.DisplayNextSentence(dialogue[currDialogue], currSentence);
     }
