@@ -14,6 +14,7 @@ TagManager:
   - Wall - Deflect
   - InviBarrier
   - PlayerBody
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - EnemyDetectionRange
   - Bullet - Enemy
   - Bullet - Player
-  - 
+  - PlatformDetector - Enemy
   - 
   - 
   - 
@@ -50,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 2159168263
     locked: 0
