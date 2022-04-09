@@ -32,8 +32,6 @@ public class TransitionScript : MonoBehaviour
 
     private bool playerEntered = false;
 
-    // public delegate void OnChangeLevel();
-    // public static event OnChangeLevel onChangeLevelDelegate;
 
     public static event Action OnChangeLevel;
     public static event Action<int> OnSceneChange;

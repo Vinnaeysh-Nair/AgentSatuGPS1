@@ -115,14 +115,13 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        TransitionScript.OnSceneChange += SwapMusic;
+        
         SetupArray(musicsArray, musicMixer);
         SetupArray(effectsArray, effectMixer);
-        TransitionScript.OnSceneChange += SwapMusic;
         
         ChangeMusicVol(musicVolume);
         ChangeEffectVol(effectsVolume);
-        
-        //SwapMusic(0);
     }
 
     private void SetupArray(SoundInfo[] soundsArray, AudioMixer mixer)
@@ -184,7 +183,7 @@ public class SoundManager : MonoBehaviour
         return null;
     }
 
-    public void PlayEffect(string name, bool randomisePitch = false, bool randomiseVol = false)
+    public AudioSource PlayEffect(string name, bool randomisePitch = false, bool randomiseVol = false)
     {
         EffectInfo foundEffect;
         for (int i = 0; i < effectsArray.Length; i++)
@@ -197,14 +196,15 @@ public class SoundManager : MonoBehaviour
                 if (randomiseVol) foundEffect.volume = foundEffect.RandomiseVolume();
                 
                 foundEffect.adSource.PlayOneShot(foundEffect.adClip);
-                return;
+                return foundEffect.adSource;
             }
         }
         Debug.LogWarning($"AudioManager : Effect is unavailable : Name: ({name})");
+        return null;
     }
     
     //overload for more methods of using
-    public void PlayEffect(AudioClip clip,  bool randomisePitch = false, bool randomiseVol = false)
+    public AudioSource PlayEffect(AudioClip clip, bool randomisePitch = false, bool randomiseVol = false)
     {
         EffectInfo foundEffect;
         for (int i = 0; i < effectsArray.Length; i++)
@@ -217,11 +217,12 @@ public class SoundManager : MonoBehaviour
                 if (randomiseVol) foundEffect.adSource.volume = foundEffect.RandomiseVolume();
                 
                 foundEffect.adSource.PlayOneShot(foundEffect.adClip);
-                return;
+                return foundEffect.adSource;
             }
         }
         //Here == no sound found
         Debug.LogWarning($"AudioManager : Effect is unavailable: AudioClip missing.");
+        return null;
     }
     
     private void SwapMusic(int index)

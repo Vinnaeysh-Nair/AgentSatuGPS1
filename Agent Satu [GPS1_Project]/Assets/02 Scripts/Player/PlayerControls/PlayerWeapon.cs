@@ -14,8 +14,8 @@ public class PlayerWeapon : MonoBehaviour
     
     [Header("Sound")] 
     [SerializeField] private AudioClip shootSound;
-  //  private AudioSource audsrc;
-  private SoundManager _soundManager;
+    [SerializeField] private AudioClip reloadSound;
+    private SoundManager _soundManager;
 
     
     private Transform[] firePoints;
@@ -182,8 +182,8 @@ public class PlayerWeapon : MonoBehaviour
         {
             return;
         }
-        
-        
+
+        if (reloading) return;
         
         //Shooting type
         if (isContinuousShooting)
@@ -268,8 +268,11 @@ public class PlayerWeapon : MonoBehaviour
         if (!reloading)
         {
             reloading = true;
+            
+            _soundManager.PlayEffect(reloadSound);
             yield return new WaitForSeconds(reloadTime);
 
+         
             //Check if reloadAmount exceeds reserve
             int reloadAmount = clipSize - currClip;
             if (reloadAmount > currAmmoReserve)

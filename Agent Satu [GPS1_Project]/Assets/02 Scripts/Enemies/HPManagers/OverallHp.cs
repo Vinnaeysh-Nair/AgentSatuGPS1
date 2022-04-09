@@ -90,7 +90,6 @@ public class OverallHp : EnemyHp
         //Die
         if (currHp <= 0)
         {
-            _soundManager.PlayEffect(deathSound, true);
             Die(flingDirection);
         }
         
@@ -105,6 +104,8 @@ public class OverallHp : EnemyHp
 
     public void Die(Vector2 flingDirection)
     {
+        _soundManager.PlayEffect(deathSound, true);
+        
         //Disable unwanted components
         if (transform.TryGetComponent(out EnemyAI_Melee enemyAIMelee))
         {

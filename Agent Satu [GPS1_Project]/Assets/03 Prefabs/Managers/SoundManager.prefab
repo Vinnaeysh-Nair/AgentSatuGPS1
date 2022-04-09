@@ -83,7 +83,7 @@ MonoBehaviour:
     adClip: {fileID: 8300000, guid: cc9a2de6338bc46418670b60a14183e8, type: 3}
     volume: 0.8
     pitch: 1
-    playOnAwake: 0
+    playOnAwake: 1
     loop: 1
     adSource: {fileID: 0}
   - name: Level 4 BGM
@@ -103,7 +103,7 @@ MonoBehaviour:
     adSource: {fileID: 0}
     minRandVol: 0.99
     maxRandVol: 1.01
-    minRandPitch: 0.8
+    minRandPitch: 0.724
     maxRandPitch: 1.2
   - name: SMGShot
     adClip: {fileID: 8300000, guid: af01badabebb6a24db91292fe1eb06f2, type: 3}
@@ -114,7 +114,7 @@ MonoBehaviour:
     adSource: {fileID: 0}
     minRandVol: 0.99
     maxRandVol: 1.01
-    minRandPitch: 0.8
+    minRandPitch: 0.753
     maxRandPitch: 1.2
   - name: RifleShot
     adClip: {fileID: 8300000, guid: ba62c7572af0381499a34351a183d7e3, type: 3}
@@ -125,7 +125,7 @@ MonoBehaviour:
     adSource: {fileID: 0}
     minRandVol: 0.99
     maxRandVol: 1.01
-    minRandPitch: 0.901
+    minRandPitch: 0.769
     maxRandPitch: 1.073
   - name: ShotgunShot
     adClip: {fileID: 8300000, guid: d8efd5ed594207145bf59144bf534fc1, type: 3}
@@ -136,7 +136,7 @@ MonoBehaviour:
     adSource: {fileID: 0}
     minRandVol: 0.99
     maxRandVol: 1.01
-    minRandPitch: 0.8
+    minRandPitch: 0.817
     maxRandPitch: 1.2
   - name: SniperShot
     adClip: {fileID: 8300000, guid: f8e3adddf625f9041ad2f6fd044f58af, type: 3}
@@ -147,5 +147,104 @@ MonoBehaviour:
     adSource: {fileID: 0}
     minRandVol: 0.99
     maxRandVol: 1.01
-    minRandPitch: 0.8
+    minRandPitch: 0.793
+    maxRandPitch: 1.15
+  - name: enem_death1
+    adClip: {fileID: 8300000, guid: e92d878fe427bf04d90798df6ef59907, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
     maxRandPitch: 1.2
+  - name: enem_death2
+    adClip: {fileID: 8300000, guid: 024e329ec657a2f49a8981ee8a9b87ba, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: enem_death3
+    adClip: {fileID: 8300000, guid: 46f6c53ed1e8f58479b34dca82a23821, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: enem_death4
+    adClip: {fileID: 8300000, guid: 7aa69c7aa24d5c348a1740a3ae81809c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: PistolReload
+    adClip: {fileID: 8300000, guid: d7b3751941546e74abd03d1d26364966, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: SMGReload
+    adClip: {fileID: 8300000, guid: d7998171b1842114983da3a8a4ef0d0c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: RifleReload
+    adClip: {fileID: 8300000, guid: 4b3ed33a3f300d94a8bff2aa50ea8e83, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: ShotgunReload
+    adClip: {fileID: 8300000, guid: 2d862604d209ed049870706ccc3c3b0c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: SniperReload
+    adClip: {fileID: 8300000, guid: cc3a03dabb96cca45be9ea33c6b62000, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
