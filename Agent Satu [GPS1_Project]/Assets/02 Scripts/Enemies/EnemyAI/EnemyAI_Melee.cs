@@ -29,7 +29,12 @@ public class EnemyAI_Melee : MonoBehaviour
     [SerializeField] [Range(0f, 3f)] private float startAtkDistX = 0f;
     
     [SerializeField] private LayerMask playerHitLayer;
-  
+
+
+    //SOUND
+    private Soundmanager soundManage;
+    [Header("SOUND")]
+    [SerializeField] AudioClip MeleeAttack;
 
     private float ignoreOffset = .5f;
     private Vector2 playerPos;
@@ -40,6 +45,14 @@ public class EnemyAI_Melee : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemyAgro = GetComponent<Enemy_Agro>();
         _enemyFlipped = GetComponent<Enemy_Flipped>();
+
+        //SoundManager
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
+
     }
     void FixedUpdate()
     {
@@ -123,6 +136,9 @@ public class EnemyAI_Melee : MonoBehaviour
                 _playerHpSystem = playerRoot.GetChild(0).GetComponent<PlayerHpSystem>();
             }
             _playerHpSystem.TakeDamage(damageToPlayer);
+
+            //Audio
+            soundManage.PlaySound(MeleeAttack);
         }
     }
 
