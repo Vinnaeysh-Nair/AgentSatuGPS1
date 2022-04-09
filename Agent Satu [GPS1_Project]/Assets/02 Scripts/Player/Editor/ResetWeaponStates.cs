@@ -1,19 +1,23 @@
 using UnityEditor;
 using UnityEngine;
 
-public class ResetWeaponStates : EditorWindow
+public class ResetWeaponStatesEditor : EditorWindow
 {
-    [MenuItem("Window/Custom/ResetWeaponEditor")]
+    [MenuItem("Window/Custom/ResetWeaponStatesEditor")]
     public static void ShowWindow()
     {
-        GetWindow<ResetWeaponStates>();
+        GetWindow<ResetWeaponStatesEditor>();
     }
 
     private void OnGUI()
     {
+        
+        GUILayout.Label("For PlayerWeaponSaveSo and PlayerInventory's weaponsArray: \nswaps their current states with the default state stored in the SO.");
+        
         if (GUILayout.Button("Reset"))
         {
             FindObjectOfType<PlayerInventory>().ResetGunState();
+            ProgressSaving.DeleteSaveFile();
         }
     }
 }
