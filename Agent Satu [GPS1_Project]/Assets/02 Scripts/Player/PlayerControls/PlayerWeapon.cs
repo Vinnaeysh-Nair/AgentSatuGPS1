@@ -34,7 +34,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float reloadTime = 1f;
     [SerializeField] private int clipSize;
     [SerializeField] private bool isContinuousShooting = false;
-    public bool isUnlocked = false;
 
     //Ammo counts
     private float nextFireTime = 0f;
@@ -69,22 +68,44 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnDestroy()
     {
-        WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
-        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+       WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
+       wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
     }
     
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
         pauseMenu = PauseMenu.Instance;
-
+ 
+        
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsArray = inventory.GetWeaponsArray();
-        
-        isUnlocked =  weaponsArray[wepId].IsUnlocked;
     }
 
     
+
+    private void OnEnable()
+    {
+        UpdateAmmoDisplay();
+
+        if (muzzleFlash.gameObject.activeSelf)
+        {
+            muzzleFlash.gameObject.SetActive(false);
+        }
+        
+        
+        if (wepId == 0) return;
+
+        //If theres a change in totalAmmo, update the reserve
+        int prevTotalAmmo = currTotalAmmo;
+        currTotalAmmo = weaponsArray[wepId].TotalAmmo;
+
+        int diff = currTotalAmmo - prevTotalAmmo;
+        if (diff > 0)
+        {
+            currAmmoReserve += diff;
+        }
+    }
 
 
     void Start()
@@ -92,8 +113,7 @@ public class PlayerWeapon : MonoBehaviour
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
-        //get unlocked status from inventory
-
+        
         audsrc = GetComponent<AudioSource>();
         
         //Get firepoints
@@ -124,29 +144,6 @@ public class PlayerWeapon : MonoBehaviour
         UpdateAmmoDisplay();
     }
 
-
-    private void OnEnable()
-    {
-        UpdateAmmoDisplay();
-
-        if (muzzleFlash.gameObject.activeSelf)
-        {
-            muzzleFlash.gameObject.SetActive(false);
-        }
-        
-        
-        if (wepId == 0) return;
-
-        //If theres a change in totalAmmo, update the reserve
-        int prevTotalAmmo = currTotalAmmo;
-        currTotalAmmo = weaponsArray[wepId].TotalAmmo;
-
-        int diff = currTotalAmmo - prevTotalAmmo;
-        if (diff > 0)
-        {
-            currAmmoReserve += diff;
-        }
-    }
 
     
     void Update()
@@ -253,12 +250,6 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         UpdateAmmoDisplay();
-        
-        //animCon.OnShooting();
-
-        //IEnumerator allows delay after a task
-        //yield return new WaitForSeconds(shootStanceDelay);
-        //animCon.OnStopShooting();
     }
 
 

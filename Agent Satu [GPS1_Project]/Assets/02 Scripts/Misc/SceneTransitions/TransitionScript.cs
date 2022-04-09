@@ -7,7 +7,7 @@ public class TransitionScript : MonoBehaviour
     //If is Lose Scene, dont override the lastLevelIndex
     [Header("If current scene is Lose Scene")]
     [SerializeField] private bool isLoseScene = false;
-    private static int lastLevelIndex;
+    public static int lastLevelIndex = 0;
     
     [Header("General")]
     //public KeyCode transitionButton;

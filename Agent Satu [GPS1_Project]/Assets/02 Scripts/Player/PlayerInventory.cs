@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private PlayerSaveSO playerSaveSo;
+    [SerializeField] private PlayerWeaponSaveSO playerWeaponSaveSo;
 
     [Header("Array elements corresponds to order of gun in the PlayerInventory object (Pistol is excluded)")]
-    [SerializeField] private Weapons[] weaponsArray;
+    [SerializeField] private  Weapons[] weaponsArray;
 
 
-    public delegate void OnSaveFinished();
-
-    public static event OnSaveFinished onSaveFinsihedDelegate;
-  
     [System.Serializable]
     public class Weapons
     {
@@ -23,8 +19,12 @@ public class PlayerInventory : MonoBehaviour
         [SerializeField] private bool isUnlocked;
 
         //Getter
-        public int WeaponId { get; set; }
-        
+        public int WeaponId
+        {
+            get => weaponId;
+            set => weaponId = value;
+        }
+
         public bool IsUnlocked
         {
             get => isUnlocked;
@@ -43,54 +43,35 @@ public class PlayerInventory : MonoBehaviour
     {
         return weaponsArray;
     }
-    public Weapons GetWeapon(int id)
+    
+    private void OnDestroy()
     {
-        return weaponsArray[id];
+        TransitionScript.onChangeLevelDelegate -= TransitionScript_OnChangeLevelDelegate;
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown("u"))
-    //     {
-    //         SaveGunState();
-    //     }
-    //     
-    //     if (Input.GetKeyDown("i"))
-    //     {
-    //         RetrieveGunState();
-    //     }
-    //
-    //     if (Input.GetKeyDown("o"))
-    //     {
-    //         ResetGunState();
-    //     }
-    // }
-
-    void Awake()
-    {
-        RetrieveGunState();
-    }
-
- 
-    void Start()
+    private void Awake()
     {
         TransitionScript.onChangeLevelDelegate += TransitionScript_OnChangeLevelDelegate;
+        RetrieveGunState();
+    }
+    
+    private void TransitionScript_OnChangeLevelDelegate()
+    {
+        SaveGunState();
     }
 
-    
-    
     private void SaveGunState()
     {
         print("saving");
         
-        ChangeGunState(weaponsArray, playerSaveSo.savedWepState);
+        ChangeGunState(weaponsArray, playerWeaponSaveSo.savedWepState);
     }
     
     private void RetrieveGunState()
     {
         print("retrieving");
    
-        ChangeGunState(playerSaveSo.savedWepState, weaponsArray);
+        ChangeGunState(playerWeaponSaveSo.savedWepState, weaponsArray);
     }
 
     
@@ -108,29 +89,18 @@ public class PlayerInventory : MonoBehaviour
             tempDest.TotalAmmo = tempSource.TotalAmmo;
             tempDest.IsUnlocked = tempSource.IsUnlocked;
         }
-
-        if (onSaveFinsihedDelegate != null)
-        {
-            onSaveFinsihedDelegate.Invoke();
-        }
-    }
-    
-    
-    private void TransitionScript_OnChangeLevelDelegate()
-    {
-        SaveGunState();
     }
 
 
-    private void ResetGunState()
+    public void ResetGunState()
     {
-        Weapons[] reset = playerSaveSo.resetWepState;
+        Weapons[] reset = playerWeaponSaveSo.resetWepState;
         
         ChangeGunState(reset, weaponsArray);
-        ChangeGunState(reset, playerSaveSo.savedWepState);
+        ChangeGunState(reset, playerWeaponSaveSo.savedWepState);
     }
-    
 
+    
     public void PrintInventory()
     {
         foreach (Weapons wep in weaponsArray)

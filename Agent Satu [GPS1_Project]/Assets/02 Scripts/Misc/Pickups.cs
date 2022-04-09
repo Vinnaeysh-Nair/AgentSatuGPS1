@@ -5,7 +5,6 @@ public class Pickups : MonoBehaviour
     //Components
     private PlayerInventory _playerInventory;
     private PlayerHpSystem _playerHp;
-    //private List<PlayerInventory.Weapons> _weaponsList;
     private PlayerInventory.Weapons[] _weaponsArray;
 
     private DisplayUnlockedWeapon _displayUnlockedWeapon;
@@ -66,7 +65,6 @@ public class Pickups : MonoBehaviour
             gameObject.SetActive(false);
             
             
-            
             _collected = false;
         }
     }
@@ -81,7 +79,6 @@ public class Pickups : MonoBehaviour
         {
             TriggerReplenishAmmo();
         }
-      
     }
 
     private void TriggerReplenishAmmo()
@@ -103,14 +100,9 @@ public class Pickups : MonoBehaviour
 
     private void UnlockWeapon(int wepId)
     {
-        if (_playerWeapons[wepId].isUnlocked) return;
+        if (_weaponsArray[wepId].IsUnlocked) return;
         
-        _playerWeapons[wepId].isUnlocked = true;
-        
-        //Update inventory
-        _playerInventory.GetWeapon(wepId).IsUnlocked = true;  
-    
-        
-        _displayUnlockedWeapon.DisplayWeapon(wepId);
+       _weaponsArray[wepId].IsUnlocked = true;
+       _displayUnlockedWeapon.DisplayWeapon(wepId);
     }
 }
