@@ -275,9 +275,17 @@ public class PlayerWeapon : MonoBehaviour
          
             //Check if reloadAmount exceeds reserve
             int reloadAmount = clipSize - currClip;
-            if (reloadAmount > currAmmoReserve)
+            if (reloadAmount > currAmmoReserve)     
             {
-                currClip = currAmmoReserve;
+                if (currAmmoReserve > clipSize)     //if reserve have enough
+                {
+                    currClip += reloadAmount;
+                }
+                else
+                {
+                    currClip += currAmmoReserve;
+                }
+            
                 currAmmoReserve = 0;
             }
             else

@@ -13,8 +13,8 @@ using System.Collections;
 public class MusicDatabase
 {
     [Header("Id is based on level index to play the specific music")]
-    public int musicId;
-    public string name;
+    public int sceneIndex;
+    public string musicNameToPlay;
 }
 
 [Serializable]
@@ -235,9 +235,9 @@ public class SoundManager : MonoBehaviour
 
         foreach (MusicDatabase music in musicDatabaseArray)
         {
-            if (music.musicId == index)
+            if (music.sceneIndex == index)
             {
-                _currMusicAudioSource = PlayMusic(music.name);
+                _currMusicAudioSource = PlayMusic(music.musicNameToPlay);
             }
         }
     }

@@ -49,14 +49,24 @@ MonoBehaviour:
   musicVolume: 0.8
   effectsVolume: 0.8
   musicDatabaseArray:
-  - musicId: 0
-    name: Main Menu BGM
-  - musicId: 1
-    name: Level 1 BGM
-  - musicId: 2
-    name: Level 1 BGM
-  - musicId: 3
-    name: Level 2 BGM
+  - sceneIndex: 0
+    musicNameToPlay: Main Menu BGM
+  - sceneIndex: 1
+    musicNameToPlay: Level 1 BGM
+  - sceneIndex: 2
+    musicNameToPlay: Level 1 BGM
+  - sceneIndex: 3
+    musicNameToPlay: Level 2 BGM
+  - sceneIndex: 4
+    musicNameToPlay: Level 2 BGM
+  - sceneIndex: 5
+    musicNameToPlay: Level 3 BGM
+  - sceneIndex: 6
+    musicNameToPlay: Level 3 BGM
+  - sceneIndex: 7
+    musicNameToPlay: Level 4 BGM
+  - sceneIndex: 8
+    musicNameToPlay: Level 4 BGM
   musicsArray:
   - name: Main Menu BGM
     adClip: {fileID: 8300000, guid: d566181e98677e64f81147fec4026372, type: 3}
@@ -248,3 +258,36 @@ MonoBehaviour:
     maxRandVol: 1.01
     minRandPitch: 0.9
     maxRandPitch: 1.1
+  - name: MeleeSwing
+    adClip: {fileID: 8300000, guid: 3eb1ab27cb3347b4bb596dcd747e1d30, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: pickupHealth
+    adClip: {fileID: 8300000, guid: 3956608ec310afa438531ff1575c057e, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: pickupAmmo
+    adClip: {fileID: 8300000, guid: 5ad703672808daa44857bf23fcf577b7, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165
