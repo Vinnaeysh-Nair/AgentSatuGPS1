@@ -21,6 +21,7 @@ public class CameraTarget : MonoBehaviour
     [SerializeField] private float thresholdYUp;
     [SerializeField] private float thresholdYDown;
     [SerializeField] private float downBarrierCameraOffsetY;
+    [SerializeField] [Range(0f, 1f)] private float cameraPosLerp = .5f;
 
     private float leftBarrierX;
     private float rightBarrierX;
@@ -57,7 +58,13 @@ public class CameraTarget : MonoBehaviour
         targetPos.x = Mathf.Clamp(targetPos.x, -thresholdX + playerPos.x, thresholdX + playerPos.x);
         targetPos.y = Mathf.Clamp(targetPos.y, -thresholdYDown + playerPos.y, thresholdYUp + playerPos.y);
 
-        transform.position = targetPos;
+        //transform.position = targetPos;
+
+        Vector2 lerpedPos;
+        lerpedPos.x = Mathf.Lerp(transform.position.x, targetPos.x, cameraPosLerp);
+        lerpedPos.y = Mathf.Lerp(transform.position.y, targetPos.y, cameraPosLerp);
+        transform.position = lerpedPos;
+        
         KeepCameraInBounds();
     }
 

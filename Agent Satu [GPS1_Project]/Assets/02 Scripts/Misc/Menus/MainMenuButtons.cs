@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Application = UnityEngine.Application;
 
-public class MainMenuButtons : MonoBehaviour
+public class MainMenuButtons : Menu
 {
     [SerializeField] private TransitionScript transition;
     [SerializeField] private int sceneToLoad;
@@ -11,18 +10,23 @@ public class MainMenuButtons : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     public void PlayGame()
     {
-        //SceneManager.LoadSceneAsync(sceneToLoad);
+        PlayUIClick();
+        
         transition.LoadNextLevel(sceneToLoad);
     }
 
     public void OpenOptions()
     {
+        PlayUIClick();
+        
         titleMenu.SetActive(false);
         optionMenu.SetActive(true);
     }
     
     public void BackToTitle()
     {
+        PlayUIClick();
+        
         titleMenu.SetActive(true);
         optionMenu.SetActive(false);
     }
@@ -30,6 +34,8 @@ public class MainMenuButtons : MonoBehaviour
     
     public void QuitGame()
     {
+        PlayUIClick();
+        
         Application.Quit();
     }
 }
