@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : Menu
 {
     #region Singleton
     public static PauseMenu Instance;
@@ -58,6 +58,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Unpause()
     {
+        PlayUIClick();
+        
         Time.timeScale = timeScaleBeforePause;
         
         gameIsPaused = false;
@@ -72,6 +74,8 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        PlayUIClick();
+        
         //Unpause to normal timeScale before going to main menu
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
@@ -79,18 +83,24 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenOptions()
     {
+        PlayUIClick();
+        
         pauseMain.SetActive(false);
-       options.SetActive(true);
+        options.SetActive(true);
     }
 
     public void BackToPauseMenu()
     {
+        PlayUIClick();
+        
         pauseMain.SetActive(true);
         options.SetActive(false);
     }
 
     public void Restart()
     {
+        PlayUIClick();
+        
         Time.timeScale = 1f;
         gameIsPaused = false;
         

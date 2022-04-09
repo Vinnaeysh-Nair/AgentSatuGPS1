@@ -1,0 +1,315 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3771336647935852840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2923333997582877605}
+  - component: {fileID: 4775058381294046061}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2923333997582877605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3771336647935852840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.09364, y: -4.834687, z: 0.2257076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4775058381294046061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3771336647935852840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4afd2de44feacf4487dce2a3103ee0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixer: {fileID: 24100000, guid: a2e8112d7f8d4d640ab79b0ef7a4a553, type: 2}
+  effectMixer: {fileID: 24100000, guid: b16d3e1141cacbb4ba2c2ec05a8cbcea, type: 2}
+  musicVolume: 0.8
+  effectsVolume: 0.8
+  musicDatabaseArray:
+  - sceneIndex: 0
+    musicNameToPlay: Main Menu BGM
+  - sceneIndex: 1
+    musicNameToPlay: Level 1 BGM
+  - sceneIndex: 2
+    musicNameToPlay: Level 1 BGM
+  - sceneIndex: 3
+    musicNameToPlay: Level 2 BGM
+  - sceneIndex: 4
+    musicNameToPlay: Level 2 BGM
+  - sceneIndex: 5
+    musicNameToPlay: Level 3 BGM
+  - sceneIndex: 6
+    musicNameToPlay: Level 3 BGM
+  - sceneIndex: 7
+    musicNameToPlay: Level 4 BGM
+  - sceneIndex: 8
+    musicNameToPlay: Level 4 BGM
+  musicsArray:
+  - name: Main Menu BGM
+    adClip: {fileID: 8300000, guid: d566181e98677e64f81147fec4026372, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Level 1 BGM
+    adClip: {fileID: 8300000, guid: a2cb1940278904f41b760d978a900440, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Level 2 BGM
+    adClip: {fileID: 8300000, guid: df20865f0729e7f439cd19f6f30c7497, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Level 3 BGM
+    adClip: {fileID: 8300000, guid: cc9a2de6338bc46418670b60a14183e8, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Level 4 BGM
+    adClip: {fileID: 8300000, guid: 7c9d3c14c2950d7408ac479226a0a2fd, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  effectsArray:
+  - name: PistolShot
+    adClip: {fileID: 8300000, guid: 535d6b0662c601b4e9ef59355264ec48, type: 3}
+    volume: 1
+    pitch: 0
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.724
+    maxRandPitch: 1.2
+  - name: SMGShot
+    adClip: {fileID: 8300000, guid: af01badabebb6a24db91292fe1eb06f2, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.753
+    maxRandPitch: 1.2
+  - name: RifleShot
+    adClip: {fileID: 8300000, guid: ba62c7572af0381499a34351a183d7e3, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.769
+    maxRandPitch: 1.073
+  - name: ShotgunShot
+    adClip: {fileID: 8300000, guid: d8efd5ed594207145bf59144bf534fc1, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.817
+    maxRandPitch: 1.2
+  - name: SniperShot
+    adClip: {fileID: 8300000, guid: f8e3adddf625f9041ad2f6fd044f58af, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.793
+    maxRandPitch: 1.15
+  - name: enem_death1
+    adClip: {fileID: 8300000, guid: e92d878fe427bf04d90798df6ef59907, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.2
+  - name: enem_death2
+    adClip: {fileID: 8300000, guid: 024e329ec657a2f49a8981ee8a9b87ba, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: enem_death3
+    adClip: {fileID: 8300000, guid: 46f6c53ed1e8f58479b34dca82a23821, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: enem_death4
+    adClip: {fileID: 8300000, guid: 7aa69c7aa24d5c348a1740a3ae81809c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: PistolReload
+    adClip: {fileID: 8300000, guid: d7b3751941546e74abd03d1d26364966, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: SMGReload
+    adClip: {fileID: 8300000, guid: d7998171b1842114983da3a8a4ef0d0c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: RifleReload
+    adClip: {fileID: 8300000, guid: 4b3ed33a3f300d94a8bff2aa50ea8e83, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: ShotgunReload
+    adClip: {fileID: 8300000, guid: 2d862604d209ed049870706ccc3c3b0c, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: SniperReload
+    adClip: {fileID: 8300000, guid: cc3a03dabb96cca45be9ea33c6b62000, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: MeleeSwing
+    adClip: {fileID: 8300000, guid: 3eb1ab27cb3347b4bb596dcd747e1d30, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: pickupHealth
+    adClip: {fileID: 8300000, guid: 3956608ec310afa438531ff1575c057e, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.9
+    maxRandPitch: 1.1
+  - name: pickupAmmo
+    adClip: {fileID: 8300000, guid: 5ad703672808daa44857bf23fcf577b7, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165
+  - name: jetExplosion
+    adClip: {fileID: 8300000, guid: 5dc987a022f92b247a55e9c156a66561, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165
+  - name: menuClick
+    adClip: {fileID: 8300000, guid: 5d7b35f533588ef4988fb87b242d97c9, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165

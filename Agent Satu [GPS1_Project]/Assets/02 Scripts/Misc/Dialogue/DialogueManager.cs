@@ -3,17 +3,32 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogueText;
+    [Header("Ref:")]
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI dialogueText;
 
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private DialogueAndLines dialogueAndLines;
+    
+    [Header("Settings:")]
+    [SerializeField] private TextColor[] textColors;
 
-    public TextColor[] textColors;
     
     [System.Serializable]
     public class TextColor
     {
         public int speakerId;
         public Color textColor;
+    }
+
+    public GameObject DialogueBox
+    {
+        get => dialogueBox;
+    }
+
+    public DialogueAndLines DialogueAndLines
+    {
+        get => dialogueAndLines;
     }
     
     public void StartDialogue(Dialogue dialogue)
@@ -40,12 +55,5 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.color = txtColor.textColor;
             }
         }
-    }
-
-
-    void EndDialogue()
-    {
-        //dialogueBox.SetActive(false);
-        Debug.Log("End of conversation");
     }
 }

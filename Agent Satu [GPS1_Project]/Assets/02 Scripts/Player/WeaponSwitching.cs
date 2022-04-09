@@ -4,18 +4,17 @@ public class WeaponSwitching : MonoBehaviour
 {
     public int selectedWeapon = 0;
     private PlayerWeapon[] playerWeapons;
-    //public event EventHandler OnWeaponChange;
-
-
-
+    private PlayerInventory.Weapons[] _weaponsArray;
+   
+    
     public delegate void OnWeaponChange();
     public event OnWeaponChange onWeaponChangeDelegate;
-
 
     
     void Start()
     {
         GetPlayerWeaponsArray();
+        _weaponsArray = GetComponent<PlayerInventory>().GetWeaponsArray();
         StartingWeapon();
     }
 
@@ -25,6 +24,7 @@ public class WeaponSwitching : MonoBehaviour
         int prevSelectedWeapon = selectedWeapon;
 
         if (playerWeapons[selectedWeapon].GetReloading()) return;
+     
 
         //Scroll wheel to change weapon
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -76,7 +76,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
-    void StartingWeapon()
+    private void StartingWeapon()
     {
         int i = 0;
         foreach (Transform weapon in transform)
@@ -104,7 +104,7 @@ public class WeaponSwitching : MonoBehaviour
             nextWep = 0;
         }
         
-        if (!playerWeapons[nextWep].isUnlocked) return false;
+        if (!_weaponsArray[nextWep].IsUnlocked) return false;
         return true;
     }
 
@@ -120,13 +120,13 @@ public class WeaponSwitching : MonoBehaviour
             prevWep = transform.childCount - 1;
         }
 
-        if (!playerWeapons[prevWep].isUnlocked) return false;
+        if (!_weaponsArray[prevWep].IsUnlocked) return false;
         return true;
     }
 
     private bool IsSpecificWeaponUnlocked(int key)
     {
-        if (!playerWeapons[key].isUnlocked) return false;
+        if (!_weaponsArray[key].IsUnlocked) return false;
         return true;
     }
 

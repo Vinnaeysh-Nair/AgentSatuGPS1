@@ -2,12 +2,26 @@ using UnityEngine;
 
 public class ZoneToTriggerDialogue : MonoBehaviour
 {
-    [SerializeField] bool inTalkingZone = false;
-    public GameObject DialogueBox;
+    [Header("Ref:")]
+    [SerializeField] private bool inTalkingZone = false;
+    [SerializeField] private DialogueManager dialogueManager;
     
+    private DialogueAndLines dialogueAndLines;
+    private GameObject DialogueBox;
+
+    private bool finishedDialogue = false;
+
+    void OnDestroy()
+    {
+        dialogueAndLines.OnFinishDialogue -= DialogueAndLines_OnFinishDialogue;
+    }
     
     void Start()
     {
+        dialogueAndLines = dialogueManager.DialogueAndLines;
+        DialogueBox = dialogueManager.DialogueBox;
+        
+        dialogueAndLines.OnFinishDialogue += DialogueAndLines_OnFinishDialogue;
         DialogueBox.SetActive(false);
     }
 
@@ -39,13 +53,21 @@ public class ZoneToTriggerDialogue : MonoBehaviour
         }
     }
 
-    void TriggeringDialogue()
+    private void TriggeringDialogue()
     {
+        if (finishedDialogue) return;
+        
         DialogueBox.SetActive(true);
     }
 
-    void DisableDialogue()
+    private void DisableDialogue()
     {
         DialogueBox.SetActive(false);
+    }
+
+    private void DialogueAndLines_OnFinishDialogue()
+    {
+        finishedDialogue = true;
+        dialogueAndLines.OnFinishDialogue -= DialogueAndLines_OnFinishDialogue;
     }
 }

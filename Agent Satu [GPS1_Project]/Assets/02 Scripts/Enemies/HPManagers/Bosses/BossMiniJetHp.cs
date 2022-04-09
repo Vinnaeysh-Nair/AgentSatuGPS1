@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class BossMiniJetHp : BossHp
 {
-    
     [Header("Ignore if this is jet to be summoned")]
     [SerializeField] [Range(0f, 1f)] private float summonThreshold;
 
+    [Header("Fx")] 
+    [SerializeField] private AudioClip explosionSound;
+    [SerializeField] private GameObject explosionVFX;
+    
     private static int killedBossesCount = 0;
 
     public delegate void OnReachingThreshold();
@@ -14,6 +17,9 @@ public class BossMiniJetHp : BossHp
 
     void Start()
     {
+        //reset static value
+        killedBossesCount = 0;
+        
         currHp = initialHp;
     }
 
@@ -56,13 +62,13 @@ public class BossMiniJetHp : BossHp
         if (currHp > 0) return;
         
         //Death logic
+        SoundManager.Instance.PlayEffect(explosionSound);
+        Instantiate(explosionVFX, transform.position, Quaternion.identity);
         killedBossesCount++;
        
         //print("ded" + killedBossesCount);
         if (killedBossesCount == 3)
         {
-            //reset static value
-            killedBossesCount = 0;
             CompleteLevel();
         }
            

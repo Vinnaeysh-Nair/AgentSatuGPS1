@@ -90,7 +90,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
         public Sprite[] backgrounds;
         public Line[] lines;
 
-        private int bgCounter;
+        private int _bgCounter;
         public void Awake()
         {
             BgImage = dialogueTransform.GetComponent<Image>();
@@ -99,8 +99,8 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
         public void SwitchBg()
         {
-            bgCounter++;
-            BgImage.sprite = backgrounds[bgCounter];
+            _bgCounter++;
+            BgImage.sprite = backgrounds[_bgCounter];
         }
     }
     
@@ -179,13 +179,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("y"))      //remove later
-        {
-            LoadCutScene();
-        }
-
         
-       
         if (Input.GetButtonDown("ProceedInteraction"))
         {
             if(cutsceneOrDialogue)
@@ -200,18 +194,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
         }
     }
 
-    public void LoadWinScene()
-    {
-        SceneManager.LoadScene("Win Scene");
-    }
     
-    
-    public void LoadCutScene()       //remove later
-    {
-        SceneManager.LoadScene("Cutscene Scene");
-    }
-
-
     //Disable all Panels except first Panel
     private void OpenFirstPanel(Cutscene thisCutscene)
     {
