@@ -9,7 +9,7 @@ public  class PlayerMain : MonoBehaviour
 
     private void OnDestroy()
     {
-        TransitionScript.onChangeLevelDelegate -= SavePlayerProgress;
+        TransitionScript.OnChangeLevel -= SavePlayerProgress;
     }
 
     void Awake()
@@ -19,7 +19,7 @@ public  class PlayerMain : MonoBehaviour
 
     void Start()
     {
-        TransitionScript.onChangeLevelDelegate += SavePlayerProgress;
+        TransitionScript.OnChangeLevel += SavePlayerProgress;
         
         LoadPlayerProgress();
     }

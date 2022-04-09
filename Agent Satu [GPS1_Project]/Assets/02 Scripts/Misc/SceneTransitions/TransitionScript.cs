@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+
 
 public class TransitionScript : MonoBehaviour
 {
@@ -30,8 +32,11 @@ public class TransitionScript : MonoBehaviour
 
     private bool playerEntered = false;
 
-    public delegate void OnChangeLevel();
-    public static event OnChangeLevel onChangeLevelDelegate;
+    // public delegate void OnChangeLevel();
+    // public static event OnChangeLevel onChangeLevelDelegate;
+
+    public static event Action OnChangeLevel;
+    public static event Action<int> OnSceneChange;
     
     // void Update()
     // {
@@ -44,6 +49,8 @@ public class TransitionScript : MonoBehaviour
 
     void Start()
     {
+        if(OnSceneChange != null) OnSceneChange.Invoke(SceneManager.GetActiveScene().buildIndex);
+        
         if (isLoseScene) return;
             
         //If already cutscene dont overwrite
@@ -69,11 +76,11 @@ public class TransitionScript : MonoBehaviour
     //Used in levels
     private void LoadNextLevel()
     {
-        if (onChangeLevelDelegate != null)
-        {
-            onChangeLevelDelegate.Invoke();
-        }
-        
+        // if (onChangeLevelDelegate != null)
+        // {
+        //     onChangeLevelDelegate.Invoke();
+        // }
+        if(OnChangeLevel != null) OnChangeLevel.Invoke();        
         
         int sceneIndexToLoad = 0;
         if (willTransitionToCutsceneOrDialogue)
@@ -102,6 +109,7 @@ public class TransitionScript : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadSceneAsync(levelIndex);
+        if(OnSceneChange != null) OnSceneChange.Invoke(levelIndex);
     }
     
 

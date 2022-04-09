@@ -6318,7 +6318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3339223920375488071, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3878159769706487153, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6384,6 +6384,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6640386501164261204, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d8efd5ed594207145bf59144bf534fc1, type: 3}
     - target: {fileID: 6867672099564068578, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.023
@@ -6452,7 +6456,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 911298406083836596, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 880bd2565d56e3f4281f843046dde2fe, type: 3}
 --- !u!4 &3770230396183092969 stripped
 Transform:
@@ -6578,8 +6583,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3283701403173319360, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3692781067055661873, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ba62c7572af0381499a34351a183d7e3, type: 3}
     - target: {fileID: 5175701008813708056, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
       propertyPath: clipCountText
       value: 
@@ -6672,7 +6681,8 @@ PrefabInstance:
       propertyPath: isUnlocked
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6733552251871046781, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8afb2c82fa742bd4789f730969c23e79, type: 3}
 --- !u!4 &15966607449010084 stripped
 Transform:
@@ -6754,7 +6764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5122190829833982661, guid: e759dacb1110b2842b1b252b20738941, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5362097992188540341, guid: e759dacb1110b2842b1b252b20738941, type: 3}
       propertyPath: m_RootOrder
@@ -6812,6 +6822,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869309773360737194, guid: e759dacb1110b2842b1b252b20738941, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af01badabebb6a24db91292fe1eb06f2, type: 3}
     - target: {fileID: 6278087401577739785, guid: e759dacb1110b2842b1b252b20738941, type: 3}
       propertyPath: clipCountText
       value: 
@@ -6872,7 +6886,8 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7218679301129135924, guid: e759dacb1110b2842b1b252b20738941, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e759dacb1110b2842b1b252b20738941, type: 3}
 --- !u!4 &622160230315400150 stripped
 Transform:
@@ -7056,6 +7071,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 6118853543422526231, guid: c0f9471948fb6f640a3417b8e6bbeeaa, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f8e3adddf625f9041ad2f6fd044f58af, type: 3}
     - target: {fileID: 6303592030453971961, guid: c0f9471948fb6f640a3417b8e6bbeeaa, type: 3}
       propertyPath: audClip
       value: 
@@ -7092,7 +7111,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5623595445347072900, guid: c0f9471948fb6f640a3417b8e6bbeeaa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c0f9471948fb6f640a3417b8e6bbeeaa, type: 3}
 --- !u!4 &1209956491500085039 stripped
 Transform:
@@ -7130,7 +7150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766542492912690347, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 786016975547402557, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
       propertyPath: m_Name
@@ -7144,6 +7164,10 @@ PrefabInstance:
       propertyPath: isContinuousShooting
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2678268627547454997, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 535d6b0662c601b4e9ef59355264ec48, type: 3}
     - target: {fileID: 2693204461373510531, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
       propertyPath: audClip
       value: 
@@ -7324,7 +7348,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.58
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3606057691517757586, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3b045b75d1b693247a2d785a83f762f0, type: 3}
 --- !u!4 &1040551323976327012 stripped
 Transform:

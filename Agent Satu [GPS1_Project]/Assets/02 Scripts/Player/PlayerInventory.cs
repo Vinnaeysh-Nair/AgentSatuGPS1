@@ -46,12 +46,12 @@ public class PlayerInventory : MonoBehaviour
     
     private void OnDestroy()
     {
-        TransitionScript.onChangeLevelDelegate -= TransitionScript_OnChangeLevelDelegate;
+        TransitionScript.OnChangeLevel -= TransitionScript_OnChangeLevelDelegate;
     }
 
     private void Awake()
     {
-        TransitionScript.onChangeLevelDelegate += TransitionScript_OnChangeLevelDelegate;
+        TransitionScript.OnChangeLevel += TransitionScript_OnChangeLevelDelegate;
         RetrieveGunState();
     }
     

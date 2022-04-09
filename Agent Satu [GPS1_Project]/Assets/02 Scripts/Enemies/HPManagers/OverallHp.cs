@@ -15,12 +15,6 @@ public class OverallHp : EnemyHp
     [Header("Edit: ")]
     [SerializeField] private int initialOverallHp;
 
-    //[Header("Audop")] 
-    //[SerializeField] private AudioClip deathSfx;
-
-    //private AudioSource audSrc;
-    
-
     
     private int legDismemberedCount = 0;
     private bool isHeadDismembered = false;
@@ -32,24 +26,24 @@ public class OverallHp : EnemyHp
     public delegate void OnDamaged();
     public event OnDamaged onDamagedDelegate;
 
-    //SOUND
-    private Soundmanager soundManage;
-    [Header("SOUND")]
-    [SerializeField] AudioClip DeathSound;
+    //Sound
+    private SoundManager _soundManager;
+    
+    [Header("Sound")]
+    [SerializeField] private AudioClip deathSound;
 
     void Start()
     {
-        soundManage = Soundmanager.instance;
-        if (soundManage == null)
-        {
-            Debug.LogError("No sound manager added into the scene");
-        }
+        _soundManager = SoundManager.Instance;
+        
+        // if (soundManage == null)
+        // {
+        //     Debug.LogError("No sound manager added into the scene");
+        // }
+        
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
         spawnPickups = GetComponent<SpawnPickups>();
-
-        //audSrc = GetComponent<AudioSource>();
-
-
+        
         base.currHp = initialOverallHp;
     }
 
@@ -96,7 +90,7 @@ public class OverallHp : EnemyHp
         //Die
         if (currHp <= 0)
         {
-            soundManage.PlaySound(DeathSound);
+            _soundManager.PlayEffect(deathSound, true);
             Die(flingDirection);
         }
         

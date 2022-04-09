@@ -1,99 +1,270 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
+using System.Collections;
+
+
 
 // Create the blueprint for properties the sound needs
-//System.serializble to be accesible through the properties tab in unity
+//  System.Serializable to be accessible through the Inspector in unity
 
-[System.Serializable]
-public class SoundInfo {
-    public string Name;
 
+[Serializable]
+public class MusicDatabase
+{
+    [Header("Id is based on level index to play the specific music")]
+    public int musicId;
+    public string name;
+}
+
+[Serializable]
+public class EffectInfo : SoundInfo
+{
     //Range helps make a slider
-    [Range(0f,1f)]
-    public float Volume = 0.7f;
-    [Range(0.5f, 5f)]
-    public float Pitch = 1f;
+    [Range(.5f, .99f)] public float minRandVol = .7f;
+    [Range(1.01f, 1.5f)] public float maxRandVol = 1.3f;
 
-    [Range(0f, 0.5f)]
-    public float randomVol = 0.1f;
-    [Range(0f, 0.5f)]
-    public float randomPitch = 0.1f;
-
-    public AudioClip AdClip;
-    // private because you want to acces it through a method
-    private AudioSource AdSource;
-
-    public void SetSource(AudioSource _source)
+    [Range(.5f, .99f)] public float minRandPitch = .7f;
+    [Range(1.01f, 1.5f)] public float maxRandPitch = 1.3f;
+    
+    public float RandomisePitch()
     {
-        AdSource = _source;
-        AdSource.clip = AdClip;
+        float newPitch = UnityEngine.Random.Range(minRandPitch, maxRandPitch);
+        return newPitch;
     }
 
-    public void Play() {
-
-        AdSource.volume = Volume * (1 +Random.Range(-randomVol / 2f , randomVol / 2f));
-        AdSource.pitch = Pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
-        AdSource.Play();
-        
+    public float RandomiseVolume()
+    {
+        float newVol = UnityEngine.Random.Range(minRandVol, maxRandVol);
+        return newVol;
     }
 }
 
-public class Soundmanager : MonoBehaviour
+[Serializable]
+public class SoundInfo {
+    
+    public string name;
+    public AudioClip adClip;
+    
+    [Range(0f, 1f)] public float volume = 0.7f;
+    [Range(0f, 1f)] public float pitch = 1f;
+    public bool playOnAwake;
+    public bool loop;
+    
+    
+    [HideInInspector]
+    public AudioSource adSource;     // private because you dont want to expose it to other scripts (other scripts cant use it), at the same time hide it from the inspector
+}
+
+
+
+public class SoundManager : MonoBehaviour
 {
     //using singleton
-    public static Soundmanager instance;
+    public static SoundManager Instance;
 
-    [SerializeField] SoundInfo[] sounds;
+
+    [Header("Mixer:")] 
+    [SerializeField] private AudioMixer musicMixer;
+    [SerializeField] private AudioMixer effectMixer;
+    
+    [Header("Volume:")] 
+    [SerializeField] [Range(0f, 1f)] private float musicVolume = .8f;
+    [SerializeField] [Range(0f, 1f)] private float effectsVolume = .8f;
+    
+    [Header("Music Database:")] 
+    [SerializeField] private MusicDatabase[] musicDatabaseArray;
+
+    
+    [Header("Main Arrays:")]
+    [SerializeField] SoundInfo[] musicsArray;
+    [SerializeField] EffectInfo[] effectsArray;
+    
+    private AudioSource _currMusicAudioSource;
+
+
+
+    public float MusicVolume
+    {
+        get => musicVolume;
+    }
+
+    public float EffectsVolume
+    {
+        get => effectsVolume;
+    }
+
+    void OnDestroy()
+    {
+        TransitionScript.OnSceneChange -= SwapMusic;
+    }
+
 
     void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
-            Debug.LogError("More than one audio manager in scene");
+           // Debug.LogError("More than one audio manager in scene");
+                 // can make sure there will always be one instead of only throwing an error message;
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            instance = this;
-        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].Name);
-            sounds[i].SetSource(_go.AddComponent<AudioSource>());
-        }
-
-        //PlaySound("BackgroundSound");
+        SetupArray(musicsArray, musicMixer);
+        SetupArray(effectsArray, effectMixer);
+        TransitionScript.OnSceneChange += SwapMusic;
+        
+        ChangeMusicVol(musicVolume);
+        ChangeEffectVol(effectsVolume);
+        
+        //SwapMusic(0);
     }
 
-    public void PlaySound(string _name)
+    private void SetupArray(SoundInfo[] soundsArray, AudioMixer mixer)
     {
-        for (int i = 0; i < sounds.Length; i++)
+        foreach (SoundInfo thisSoundInfo in soundsArray)
         {
-            if (sounds[i].Name == _name)
+            AudioSource source = gameObject.AddComponent<AudioSource>();
+            
+            source.clip = thisSoundInfo.adClip;
+            
+            //settings
+            source.volume = thisSoundInfo.volume;
+            source.pitch = thisSoundInfo.pitch;
+            source.playOnAwake = thisSoundInfo.playOnAwake;
+            source.loop = thisSoundInfo.loop;
+            
+            source.outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
+            
+            thisSoundInfo.adSource = source;
+        }
+    }
+
+    public AudioSource PlayMusic(string name)
+    {
+        SoundInfo foundMusic;
+        for (int i = 0; i < musicsArray.Length; i++)
+        {
+            if (musicsArray[i].name == name)
             {
-                sounds[i].Play();
+                foundMusic = musicsArray[i];
+                
+                StartCoroutine(FadeIn(foundMusic.adSource, 3f, 0f, foundMusic.volume));
+                foundMusic.adSource.Play();
+                return foundMusic.adSource;
+            }
+        }
+        //Here == no sound found
+        Debug.LogWarning($"AudioManager : Music is unavailable : Name: ({name})");
+        return null;
+    }
+    
+    //overload for more methods of using
+    public AudioSource PlayMusic(AudioClip clip)
+    {
+        SoundInfo foundMusic;
+        for (int i = 0; i < musicsArray.Length; i++)
+        {
+            if (musicsArray[i].adClip == clip)
+            {
+                foundMusic = musicsArray[i];
+                
+                StartCoroutine(FadeIn(foundMusic.adSource, 3f, 0f, foundMusic.volume));
+                foundMusic.adSource.Play();
+                return foundMusic.adSource;
+            }
+        }
+        //Here == no sound found
+        Debug.LogWarning($"AudioManager :Music is unavailable: AudioClip missing.");
+        return null;
+    }
+
+    public void PlayEffect(string name, bool randomisePitch = false, bool randomiseVol = false)
+    {
+        EffectInfo foundEffect;
+        for (int i = 0; i < effectsArray.Length; i++)
+        {
+            if (effectsArray[i].name == name)
+            {
+                foundEffect = effectsArray[i];
+
+                if (randomisePitch) foundEffect.pitch = foundEffect.RandomisePitch();
+                if (randomiseVol) foundEffect.volume = foundEffect.RandomiseVolume();
+                
+                foundEffect.adSource.PlayOneShot(foundEffect.adClip);
                 return;
             }
         }
-
-        //Here == no sound found
-        Debug.LogWarning("AudioManager : Sound unavailable : " +_name);
+        Debug.LogWarning($"AudioManager : Effect is unavailable : Name: ({name})");
     }
-
-    public void PlaySound(AudioClip _AD)
+    
+    //overload for more methods of using
+    public void PlayEffect(AudioClip clip,  bool randomisePitch = false, bool randomiseVol = false)
     {
-        for (int i = 0; i < sounds.Length; i++)
+        EffectInfo foundEffect;
+        for (int i = 0; i < effectsArray.Length; i++)
         {
-            if (sounds[i].AdClip == _AD)
+            if (effectsArray[i].adClip == clip)
             {
-                sounds[i].Play();
+                foundEffect = effectsArray[i];
+                
+                if (randomisePitch) foundEffect.adSource.pitch = foundEffect.RandomisePitch();
+                if (randomiseVol) foundEffect.adSource.volume = foundEffect.RandomiseVolume();
+                
+                foundEffect.adSource.PlayOneShot(foundEffect.adClip);
                 return;
             }
         }
-
         //Here == no sound found
-        Debug.LogWarning("AudioManager : Audio Clip unavailable : " + _AD);
+        Debug.LogWarning($"AudioManager : Effect is unavailable: AudioClip missing.");
+    }
+    
+    private void SwapMusic(int index)
+    {
+        if (_currMusicAudioSource != null)
+        {
+            _currMusicAudioSource.Stop();
+        }
+
+
+        foreach (MusicDatabase music in musicDatabaseArray)
+        {
+            if (music.musicId == index)
+            {
+                _currMusicAudioSource = PlayMusic(music.name);
+            }
+        }
+    }
+    
+    public void ChangeMusicVol(float value)
+    {
+        musicMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20f);
+        musicVolume = value;
+    }
+    
+    public void ChangeEffectVol(float value)
+    {   
+        effectMixer.SetFloat("EffectsVolume", Mathf.Log10(value) * 20f);
+        effectsVolume = value;
+    }
+
+   
+    private IEnumerator FadeIn(AudioSource source, float duration, float startVolume, float targetVolume)
+    {
+        float currTime = 0f;
+        startVolume = source.volume;
+
+        while (currTime < duration)
+        {
+            currTime += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, targetVolume, currTime / duration);
+
+            yield return null;
+        }
     }
 }

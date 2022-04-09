@@ -17,10 +17,11 @@ public class Pickups : MonoBehaviour
     private bool _collected = false;
     private PlayerWeapon[] _playerWeapons;
 
-    //SOUND
-    private Soundmanager soundManage;
-    [Header("SOUND")]
-    [SerializeField] AudioClip PickUpSound;
+    //Sound
+    private SoundManager _soundManager;
+    
+    [Header("Sound")]
+    [SerializeField] private AudioClip pickUpSound;
 
 
 
@@ -33,11 +34,12 @@ public class Pickups : MonoBehaviour
     void Start()
     {
         //SoundManager
-        soundManage = Soundmanager.instance;
-        if (soundManage == null)
-        {
-            Debug.LogError("No sound manager added into the scene");
-        }
+        _soundManager = SoundManager.Instance;
+        
+        // if (_soundManager == null)
+        // {
+        //     Debug.LogError("No sound manager added into the scene");
+        // }
 
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
 
@@ -65,7 +67,7 @@ public class Pickups : MonoBehaviour
             if (_collected) return;
             _collected = true;
 
-            soundManage.PlaySound(PickUpSound);
+            _soundManager.PlayEffect(pickUpSound, true);
             TriggerEffect();
             gameObject.SetActive(false);
             

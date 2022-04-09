@@ -12,10 +12,10 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Transform muzzleFlash;
     
     
-    [Header("Audio")] 
-    [SerializeField] private AudioClip audClip;
-    private AudioSource audsrc;
-
+    [Header("Sound")] 
+    [SerializeField] private AudioClip shootSound;
+  //  private AudioSource audsrc;
+  private SoundManager _soundManager;
 
     
     private Transform[] firePoints;
@@ -113,8 +113,8 @@ public class PlayerWeapon : MonoBehaviour
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
-        
-        audsrc = GetComponent<AudioSource>();
+        _soundManager = SoundManager.Instance;
+
         
         //Get firepoints
         int size = firePointContainer.childCount;
@@ -233,8 +233,8 @@ public class PlayerWeapon : MonoBehaviour
     
     private void Shoot()
     {
-        //Audio
-        audsrc.PlayOneShot(audClip);
+        //Sound
+        _soundManager.PlayEffect(shootSound, true);
         
         //Muzzle flash
         muzzleFlash.gameObject.SetActive(true);
