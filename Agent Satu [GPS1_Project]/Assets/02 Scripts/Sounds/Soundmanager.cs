@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
-
+using System.Collections.Generic;
 
 
 // Create the blueprint for properties the sound needs
@@ -82,8 +82,8 @@ public class SoundManager : MonoBehaviour
     
     private AudioSource _currMusicAudioSource;
 
-
-
+    private bool _isInBulletTime = false;
+    
     public float MusicVolume
     {
         get => musicVolume;
@@ -192,8 +192,14 @@ public class SoundManager : MonoBehaviour
             {
                 foundEffect = effectsArray[i];
 
-                if (randomisePitch) foundEffect.pitch = foundEffect.RandomisePitch();
-                if (randomiseVol) foundEffect.volume = foundEffect.RandomiseVolume();
+                float pitchDownFactor = 1f;
+                if (_isInBulletTime)
+                {
+                    pitchDownFactor = foundEffect.adSource.pitch;
+                }
+                
+                if (randomisePitch) foundEffect.adSource.pitch = foundEffect.RandomisePitch() * pitchDownFactor;
+                if (randomiseVol) foundEffect.adSource.volume = foundEffect.RandomiseVolume();
                 
                 foundEffect.adSource.PlayOneShot(foundEffect.adClip);
                 return foundEffect.adSource;
@@ -212,8 +218,14 @@ public class SoundManager : MonoBehaviour
             if (effectsArray[i].adClip == clip)
             {
                 foundEffect = effectsArray[i];
+
+                float pitchDownFactor = 1f;
+                if (_isInBulletTime)
+                {
+                    pitchDownFactor = foundEffect.adSource.pitch;
+                }
                 
-                if (randomisePitch) foundEffect.adSource.pitch = foundEffect.RandomisePitch();
+                if (randomisePitch) foundEffect.adSource.pitch = foundEffect.RandomisePitch() * pitchDownFactor;
                 if (randomiseVol) foundEffect.adSource.volume = foundEffect.RandomiseVolume();
                 
                 foundEffect.adSource.PlayOneShot(foundEffect.adClip);
@@ -254,16 +266,51 @@ public class SoundManager : MonoBehaviour
         effectsVolume = value;
     }
 
+    public void BulletTimePitchDown()
+    {
+        _isInBulletTime = true;
+        
+        foreach (EffectInfo effect in effectsArray)
+        {
+            AudioSource thisSource = effect.adSource;
+            thisSource.pitch *= .6f;
+        }
+
+        foreach (SoundInfo music in musicsArray)
+        {
+            AudioSource thisSource = music.adSource;
+            thisSource.pitch *= .6f;
+        }
+    }
+
+    public void BulletTimePitchReset()
+    {
+        _isInBulletTime = false;
+        
+        foreach (EffectInfo effect in effectsArray)
+        {
+            AudioSource thisSource = effect.adSource;
+            thisSource.pitch = effect.pitch;
+        }
+        
+        foreach (SoundInfo music in musicsArray)
+        {
+            AudioSource thisSource = music.adSource;
+            thisSource.pitch = music.pitch;
+        }
+    }
+
+    
    
-    private IEnumerator FadeIn(AudioSource source, float duration, float startVolume, float targetVolume)
+    private IEnumerator FadeIn(AudioSource source, float duration, float startValue, float targetValue)
     {
         float currTime = 0f;
-        startVolume = source.volume;
+        startValue = source.volume;
 
         while (currTime < duration)
         {
             currTime += Time.deltaTime;
-            source.volume = Mathf.Lerp(startVolume, targetVolume, currTime / duration);
+            source.volume = Mathf.Lerp(startValue, targetValue, currTime / duration);
 
             yield return null;
         }
