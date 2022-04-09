@@ -12,9 +12,10 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Transform muzzleFlash;
     
     
-    [Header("Audio")] 
+   /* [Header("Audio")] 
     [SerializeField] private AudioClip audClip;
     private AudioSource audsrc;
+   */
 
 
     
@@ -45,6 +46,8 @@ public class PlayerWeapon : MonoBehaviour
 
     //SOUND
     private Soundmanager soundManage;
+    [Header("SOUND")]
+    [SerializeField] AudioClip GunShotSound;
 
     public delegate void OnAmmoUpdate();
     public event OnAmmoUpdate onAmmoUpdateDelegate;
@@ -92,12 +95,19 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
+        //SoundManager
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
+
+
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
         //get unlocked status from inventory
 
-        audsrc = GetComponent<AudioSource>();
         
         //Get firepoints
         int size = firePointContainer.childCount;
@@ -121,13 +131,7 @@ public class PlayerWeapon : MonoBehaviour
             {
                 currClip = currTotalAmmo;
                 currAmmoReserve = 0;
-            } 
-        }
-
-        soundManage = Soundmanager.instance;
-        if (soundManage == null)
-        {
-            Debug.LogError("No sound manager added into the scene");
+            }
         }
 
         UpdateAmmoDisplay();
@@ -231,7 +235,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1")  && Time.time > nextFireTime)
         {
-            soundManage.PlaySound("PistolShot");
             nextFireTime = Time.time + (1f / fireRate);
             Shoot();
         }
@@ -239,7 +242,6 @@ public class PlayerWeapon : MonoBehaviour
 
     private void ContinuousShooting()
     {
-        soundManage.PlaySound("Rifleshot");
         if (Input.GetButton("Fire1") && Time.time > nextFireTime)
         {
             nextFireTime = Time.time + (1f / fireRate);
@@ -250,8 +252,8 @@ public class PlayerWeapon : MonoBehaviour
     private void Shoot()
     {
         //Audio
-        audsrc.PlayOneShot(audClip);
-        
+        soundManage.PlaySound(GunShotSound);
+
         //Muzzle flash
         muzzleFlash.gameObject.SetActive(true);
         StartCoroutine(SetMuzzleFlashInactive());

@@ -10,7 +10,7 @@ public class SoundInfo {
     //Range helps make a slider
     [Range(0f,1f)]
     public float Volume = 0.7f;
-    [Range(0.5f, 1-5f)]
+    [Range(0.5f, 5f)]
     public float Pitch = 1f;
 
     [Range(0f, 0.5f)]
@@ -81,6 +81,7 @@ public class Soundmanager : MonoBehaviour
         //Here == no sound found
         Debug.LogWarning("AudioManager : Sound unavailable : " +_name);
     }
+
     public void PlaySound(AudioClip _AD)
     {
         for (int i = 0; i < sounds.Length; i++)

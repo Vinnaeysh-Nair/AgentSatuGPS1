@@ -56,7 +56,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411152935796821365}
-  m_LocalRotation: {x: 0, y: 0, z: -0.9998873, w: 0.015016276}
+  m_LocalRotation: {x: 0, y: 0, z: -0.99988735, w: 0.0150121115}
   m_LocalPosition: {x: 0.06376039, y: -0.39622855, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   - {fileID: 2307156146029197139}
   - {fileID: 61035011311874350}
   m_Bounds:
-    m_Center: {x: -0.20726818, y: 0.14004707, z: 0}
+    m_Center: {x: -0.20725864, y: 0.14004564, z: 0}
     m_Extent: {x: 0.6145521, y: 0.66360533, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -283,7 +283,6 @@ GameObject:
   - component: {fileID: 882363784777689233}
   - component: {fileID: 882363784777689246}
   - component: {fileID: 5641395113602676130}
-  - component: {fileID: -974712352456511817}
   m_Layer: 15
   m_Name: GangMember_Melee
   m_TagString: Enemy
@@ -478,102 +477,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &-974712352456511817
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087085254440169723}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &2184025206215036960
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,14 +762,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2218774208849830739}
-  m_LocalRotation: {x: -0, y: -0, z: -0.080936894, w: 0.99671924}
+  m_LocalRotation: {x: -0, y: -0, z: -0.08094153, w: 0.9967189}
   m_LocalPosition: {x: 1.18, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8770227248896883107}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.286}
 --- !u!1 &2218774208885012206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2765320897481618281}
-  m_LocalRotation: {x: 0, y: 0, z: 0.087430276, w: 0.99617064}
+  m_LocalRotation: {x: 0, y: 0, z: 0.08743905, w: 0.9961699}
   m_LocalPosition: {x: 1.2395943, y: 0.00000015763642, z: 0}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1506,8 +1409,8 @@ MonoBehaviour:
   - {fileID: 2307156146029197139}
   - {fileID: 61035011311874350}
   m_Bounds:
-    m_Center: {x: -0.11108971, y: -0.036435843, z: 0}
-    m_Extent: {x: 0.91321766, y: 1.3069394, z: 0}
+    m_Center: {x: -0.111091614, y: -0.036437154, z: 0}
+    m_Extent: {x: 0.91321766, y: 1.3069395, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1714,7 +1617,7 @@ MonoBehaviour:
   - {fileID: 8287327125885394927}
   - {fileID: 5075385575914872193}
   m_Bounds:
-    m_Center: {x: -0.029125154, y: 0.06662023, z: 0}
+    m_Center: {x: -0.02912134, y: 0.06661928, z: 0}
     m_Extent: {x: 0.691121, y: 1.3528905, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -1914,8 +1817,8 @@ MonoBehaviour:
   - {fileID: 2165108229997080587}
   - {fileID: 7139927442251898017}
   m_Bounds:
-    m_Center: {x: -0.179304, y: -0.12706721, z: 0}
-    m_Extent: {x: 0.93671954, y: 0.8226682, z: 0}
+    m_Center: {x: -0.17929828, y: -0.1270684, z: 0}
+    m_Extent: {x: 0.93671954, y: 0.82266796, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2114,8 +2017,8 @@ MonoBehaviour:
   - {fileID: 7662737989387240086}
   - {fileID: 4653279071098048030}
   m_Bounds:
-    m_Center: {x: 0.13204437, y: -0.15644205, z: 0}
-    m_Extent: {x: 0.7016433, y: 1.519385, z: 0}
+    m_Center: {x: 0.13205773, y: -0.15644312, z: 0}
+    m_Extent: {x: 0.7016433, y: 1.5193849, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2378,8 +2281,8 @@ MonoBehaviour:
   - {fileID: 8770227248896883107}
   - {fileID: 6198989551019126759}
   m_Bounds:
-    m_Center: {x: 0.14364684, y: -0.0035750866, z: 0}
-    m_Extent: {x: 0.76394904, y: 1.4647865, z: 0}
+    m_Center: {x: 0.14364076, y: -0.0035778284, z: 0}
+    m_Extent: {x: 0.7639489, y: 1.4647875, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

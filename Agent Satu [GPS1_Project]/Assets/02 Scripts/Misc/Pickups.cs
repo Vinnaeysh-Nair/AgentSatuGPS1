@@ -17,12 +17,12 @@ public class Pickups : MonoBehaviour
     public int replenishAmount;
     private bool _collected = false;
     private PlayerWeapon[] _playerWeapons;
-    
-    //Audio
-    [Header("Audio")]
-    [SerializeField] private AudioClip pickupSound;
-    private AudioSource audSrc;
-    
+
+    //SOUND
+    private Soundmanager soundManage;
+    [Header("SOUND")]
+    [SerializeField] AudioClip PickUpSound;
+
 
 
     //Text
@@ -33,9 +33,13 @@ public class Pickups : MonoBehaviour
 
     void Start()
     {
-        audSrc = GetComponent<AudioSource>();
-        
-        
+        //SoundManager
+        soundManage = Soundmanager.instance;
+        if (soundManage == null)
+        {
+            Debug.LogError("No sound manager added into the scene");
+        }
+
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
 
         _playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
@@ -61,7 +65,8 @@ public class Pickups : MonoBehaviour
         {
             if (_collected) return;
             _collected = true;
-            
+
+            soundManage.PlaySound(PickUpSound);
             TriggerEffect();
             gameObject.SetActive(false);
             
@@ -75,6 +80,7 @@ public class Pickups : MonoBehaviour
     {
         if (pickupId == 0)
         {
+
             _playerHp.ReplenishHealth(replenishAmount);
         }
         else
