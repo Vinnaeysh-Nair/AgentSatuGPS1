@@ -11,7 +11,7 @@ public class LightController : MonoBehaviour
 
     void Start()
     {
-        like = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        //like = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         //thunderTiming = 10.0f;
         timer = 5.0f;
     }
