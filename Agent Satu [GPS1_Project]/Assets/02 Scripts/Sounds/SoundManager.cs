@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 
 // Create the blueprint for properties the sound needs
@@ -104,14 +105,16 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null)
-        {
-           // Debug.LogError("More than one audio manager in scene");
+        // Debug.LogError("More than one audio manager in scene");
                  // can make sure there will always be one instead of only throwing an error message;
-            Destroy(gameObject);
-            return;
+        if (Instance == null)
+        {
+            Instance = this;
         }
-        Instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 

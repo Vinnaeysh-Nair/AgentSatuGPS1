@@ -17,8 +17,8 @@ public class LimbHp : EnemyHp
     {
         dismemberment = GetComponent<Dismemberment>();
         overallHp = transform.parent.parent.GetComponent<OverallHp>();
-        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        
+  
+        tagManager = ObjectPooler.tagManager;
         base.currHp = initialLimbHp;
     }
 

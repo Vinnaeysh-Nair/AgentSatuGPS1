@@ -16,7 +16,7 @@ public class Ragdoll : MonoBehaviour
 
     void Start()
     {
-        tagManager = tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
+        tagManager = ObjectPooler.tagManager;
     }
     
     //Applied to original (not dismembered) limbs

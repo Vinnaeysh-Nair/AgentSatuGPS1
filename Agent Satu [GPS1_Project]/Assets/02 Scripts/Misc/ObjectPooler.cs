@@ -29,7 +29,7 @@ public class ObjectPooler : MonoBehaviour
     //Fields
     private const int smallPoolSize = 5;
     private const int bigPoolSize = 100;
-    private TagManager tagManager;
+    public static TagManager tagManager;
     
     
     [System.Serializable] 
@@ -75,8 +75,9 @@ public class ObjectPooler : MonoBehaviour
 
     void Start()
     {
-        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        
+      //  tagManager = transform.Find("/Essentials/ScriptableObjects/TagManager").GetComponent<TagManager>();
+      tagManager = FindObjectOfType<TagManager>();
+
         //Stops ObjectPooler from creating more pools than necessary when entering and exiting playmode.
         if (pools.Count > 0) pools.Clear();
         
