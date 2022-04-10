@@ -23,10 +23,12 @@ public class BulletTime : MonoBehaviour
     [SerializeField] private float abilityGauge = 1f;
     private bool activated = false;
 
+    private SoundManager _soundManager;
 
     void Start()
     {
         pauseMenu = PauseMenu.Instance;
+        _soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -75,6 +77,8 @@ public class BulletTime : MonoBehaviour
     
     private void ActivateBulletTime()
     {
+        _soundManager.BulletTimePitchDown();
+        
         activated = true;
         Time.timeScale *= slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * .02f;
@@ -88,8 +92,11 @@ public class BulletTime : MonoBehaviour
     
             Time.timeScale += (1f / backToNormalTimeLength) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+            
         }
         activated = false;
+        _soundManager.BulletTimePitchReset();
+     
     }
     
     private void DepleteGauge()

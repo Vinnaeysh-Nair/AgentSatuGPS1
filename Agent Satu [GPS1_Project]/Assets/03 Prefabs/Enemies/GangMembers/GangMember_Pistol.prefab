@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 62031457074694678}
   - component: {fileID: 62031457074694679}
   - component: {fileID: 62031457074694676}
-  - component: {fileID: 3648940868931027540}
   m_Layer: 11
   m_Name: GangMember_Pistol
   m_TagString: Enemy
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHp: 0
   initialOverallHp: 3
-  deathSfx: {fileID: 8300000, guid: 024e329ec657a2f49a8981ee8a9b87ba, type: 3}
+  deathSound: {fileID: 8300000, guid: 024e329ec657a2f49a8981ee8a9b87ba, type: 3}
 --- !u!114 &62031457074694678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,102 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyGun: {fileID: 5013963609158371001}
   isBurst: 0
---- !u!82 &3648940868931027540
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62031457074694894}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &172692498994997813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,8 +1174,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.17, y: 0.045449317}
-  m_Size: {x: 0.36, y: 1.39}
-  m_Direction: 0
+  m_Size: {x: 0.36, y: 1.1}
+  m_Direction: 1
 --- !u!233 &8159150442580327659
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -1287,8 +1190,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.33, y: 0.57}
-  m_ConnectedAnchor: {x: -0.6599998, y: 0.5149997}
+  m_Anchor: {x: 0.7, y: 0.57}
+  m_ConnectedAnchor: {x: -0.28999978, y: 0.5149997}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1716,8 +1619,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028890967, y: -0.008553147}
-  m_Size: {x: 1.084142, y: 2.2201996}
+  m_Offset: {x: 0.028890967, y: -0.15692525}
+  m_Size: {x: 1.084142, y: 1.85}
   m_Direction: 0
 --- !u!114 &8159150442947106540
 MonoBehaviour:
@@ -2316,7 +2219,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.17073745, y: 0.014217973}
   serializedVersion: 2
-  m_Radius: 0.49
+  m_Radius: 0.6
 --- !u!233 &8159150443364514754
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -2611,7 +2514,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.31, y: 0.12}
-  m_Size: {x: 0.44, y: 1.49}
+  m_Size: {x: 0.71, y: 1.49}
   m_Direction: 0
 --- !u!233 &8159150443563332138
 HingeJoint2D:
@@ -2627,8 +2530,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.09, y: 0.58}
-  m_ConnectedAnchor: {x: 0.3100003, y: 0.31}
+  m_Anchor: {x: 0.13, y: 0.68}
+  m_ConnectedAnchor: {x: 0.3500003, y: 0.41}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

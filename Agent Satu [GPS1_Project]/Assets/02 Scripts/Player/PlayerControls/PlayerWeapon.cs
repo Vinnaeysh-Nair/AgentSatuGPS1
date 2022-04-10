@@ -12,10 +12,10 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Transform muzzleFlash;
     
     
-    [Header("Audio")] 
-    [SerializeField] private AudioClip audClip;
-    private AudioSource audsrc;
-
+    [Header("Sound")] 
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip reloadSound;
+    private SoundManager _soundManager;
 
     
     private Transform[] firePoints;
@@ -34,7 +34,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float reloadTime = 1f;
     [SerializeField] private int clipSize;
     [SerializeField] private bool isContinuousShooting = false;
-    public bool isUnlocked = false;
 
     //Ammo counts
     private float nextFireTime = 0f;
@@ -69,22 +68,44 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnDestroy()
     {
-        WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
-        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+       WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
+       wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
     }
     
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
         pauseMenu = PauseMenu.Instance;
-
+ 
+        
         inventory = GetComponentInParent<PlayerInventory>();
         weaponsArray = inventory.GetWeaponsArray();
-        
-        isUnlocked =  weaponsArray[wepId].IsUnlocked;
     }
 
     
+
+    private void OnEnable()
+    {
+        UpdateAmmoDisplay();
+
+        if (muzzleFlash.gameObject.activeSelf)
+        {
+            muzzleFlash.gameObject.SetActive(false);
+        }
+        
+        
+        if (wepId == 0) return;
+
+        //If theres a change in totalAmmo, update the reserve
+        int prevTotalAmmo = currTotalAmmo;
+        currTotalAmmo = weaponsArray[wepId].TotalAmmo;
+
+        int diff = currTotalAmmo - prevTotalAmmo;
+        if (diff > 0)
+        {
+            currAmmoReserve += diff;
+        }
+    }
 
 
     void Start()
@@ -92,9 +113,8 @@ public class PlayerWeapon : MonoBehaviour
         WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
         wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
         
-        //get unlocked status from inventory
+        _soundManager = SoundManager.Instance;
 
-        audsrc = GetComponent<AudioSource>();
         
         //Get firepoints
         int size = firePointContainer.childCount;
@@ -124,29 +144,6 @@ public class PlayerWeapon : MonoBehaviour
         UpdateAmmoDisplay();
     }
 
-
-    private void OnEnable()
-    {
-        UpdateAmmoDisplay();
-
-        if (muzzleFlash.gameObject.activeSelf)
-        {
-            muzzleFlash.gameObject.SetActive(false);
-        }
-        
-        
-        if (wepId == 0) return;
-
-        //If theres a change in totalAmmo, update the reserve
-        int prevTotalAmmo = currTotalAmmo;
-        currTotalAmmo = weaponsArray[wepId].TotalAmmo;
-
-        int diff = currTotalAmmo - prevTotalAmmo;
-        if (diff > 0)
-        {
-            currAmmoReserve += diff;
-        }
-    }
 
     
     void Update()
@@ -185,8 +182,8 @@ public class PlayerWeapon : MonoBehaviour
         {
             return;
         }
-        
-        
+
+        if (reloading) return;
         
         //Shooting type
         if (isContinuousShooting)
@@ -236,8 +233,8 @@ public class PlayerWeapon : MonoBehaviour
     
     private void Shoot()
     {
-        //Audio
-        audsrc.PlayOneShot(audClip);
+        //Sound
+        _soundManager.PlayEffect(shootSound, true);
         
         //Muzzle flash
         muzzleFlash.gameObject.SetActive(true);
@@ -253,12 +250,6 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         UpdateAmmoDisplay();
-        
-        //animCon.OnShooting();
-
-        //IEnumerator allows delay after a task
-        //yield return new WaitForSeconds(shootStanceDelay);
-        //animCon.OnStopShooting();
     }
 
 
@@ -277,13 +268,24 @@ public class PlayerWeapon : MonoBehaviour
         if (!reloading)
         {
             reloading = true;
+            
+            _soundManager.PlayEffect(reloadSound);
             yield return new WaitForSeconds(reloadTime);
 
+         
             //Check if reloadAmount exceeds reserve
             int reloadAmount = clipSize - currClip;
-            if (reloadAmount > currAmmoReserve)
+            if (reloadAmount > currAmmoReserve)     
             {
-                currClip = currAmmoReserve;
+                if (currAmmoReserve > clipSize)     //if reserve have enough
+                {
+                    currClip += reloadAmount;
+                }
+                else
+                {
+                    currClip += currAmmoReserve;
+                }
+            
                 currAmmoReserve = 0;
             }
             else

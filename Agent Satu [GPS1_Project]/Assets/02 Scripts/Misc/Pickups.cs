@@ -5,7 +5,6 @@ public class Pickups : MonoBehaviour
     //Components
     private PlayerInventory _playerInventory;
     private PlayerHpSystem _playerHp;
-    //private List<PlayerInventory.Weapons> _weaponsList;
     private PlayerInventory.Weapons[] _weaponsArray;
 
     private DisplayUnlockedWeapon _displayUnlockedWeapon;
@@ -17,12 +16,13 @@ public class Pickups : MonoBehaviour
     public int replenishAmount;
     private bool _collected = false;
     private PlayerWeapon[] _playerWeapons;
+
+    //Sound
+    private SoundManager _soundManager;
     
-    //Audio
-    [Header("Audio")]
-    [SerializeField] private AudioClip pickupSound;
-    private AudioSource audSrc;
-    
+    [Header("Sound")]
+    [SerializeField] private AudioClip pickUpSound;
+
 
 
     //Text
@@ -33,9 +33,14 @@ public class Pickups : MonoBehaviour
 
     void Start()
     {
-        audSrc = GetComponent<AudioSource>();
+        //SoundManager
+        _soundManager = SoundManager.Instance;
         
-        
+        // if (_soundManager == null)
+        // {
+        //     Debug.LogError("No sound manager added into the scene");
+        // }
+
         Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
 
         _playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
@@ -61,10 +66,10 @@ public class Pickups : MonoBehaviour
         {
             if (_collected) return;
             _collected = true;
-            
+
+            _soundManager.PlayEffect(pickUpSound, true);
             TriggerEffect();
             gameObject.SetActive(false);
-            
             
             
             _collected = false;
@@ -75,13 +80,13 @@ public class Pickups : MonoBehaviour
     {
         if (pickupId == 0)
         {
+
             _playerHp.ReplenishHealth(replenishAmount);
         }
         else
         {
             TriggerReplenishAmmo();
         }
-      
     }
 
     private void TriggerReplenishAmmo()
@@ -103,14 +108,9 @@ public class Pickups : MonoBehaviour
 
     private void UnlockWeapon(int wepId)
     {
-        if (_playerWeapons[wepId].isUnlocked) return;
+        if (_weaponsArray[wepId].IsUnlocked) return;
         
-        _playerWeapons[wepId].isUnlocked = true;
-        
-        //Update inventory
-        _playerInventory.GetWeapon(wepId).IsUnlocked = true;  
-    
-        
-        _displayUnlockedWeapon.DisplayWeapon(wepId);
+       _weaponsArray[wepId].IsUnlocked = true;
+       _displayUnlockedWeapon.DisplayWeapon(wepId);
     }
 }

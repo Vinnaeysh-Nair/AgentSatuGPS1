@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class MiyaPatterns : MonoBehaviour
 {
@@ -7,8 +8,7 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private Collider2D[] platforms;
     [SerializeField] private BoxCollider2D atk3DetectionBox;
     [SerializeField] private Transform[] atk1movementPoints;
-
-    [SerializeField] private MiyaHp miyaHp;
+    
     [SerializeField] private Animator miyaAnim;
     [SerializeField] private Animator atk4BlindAnim;
 
@@ -30,7 +30,7 @@ public class MiyaPatterns : MonoBehaviour
     
     [Header("General")]
     [SerializeField] private int attackCounter = 0; //remove later
-    [SerializeField]private float[] attackDuration;     
+  //  [SerializeField]private float[] attackDuration;     
     [SerializeField] private float stopTime = 0f;     //remove later  
     
     [SerializeField] private float moveSpeed;
@@ -50,11 +50,13 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private int damageToPlayer = 1;
     [SerializeField] private float atk2AreaOffset;
     [SerializeField] private float atk2AreaSize;
+    [SerializeField] private float atk2Duration = 5f;
 
     [Header("Attack 3")]
     [SerializeField] private float dashSpeed = .2f;
     [SerializeField] private float timeBetweenDashes = 3f;
     [SerializeField] private float dashDuration = 1f;
+    [SerializeField] private float atk3Duration = 5f;
     
     private float nextDashTime = 0f;
     private bool isDoingAtk3 = false;
@@ -88,8 +90,6 @@ public class MiyaPatterns : MonoBehaviour
         shootingAI.enabled = false;
  
         //Start Attack1
-       // stopTime = Time.time + attackDuration[0];
-        attackCounter = 1;
         ChangeAttack();
     }
     
@@ -100,8 +100,6 @@ public class MiyaPatterns : MonoBehaviour
         playerPos = playerMovement.GetPlayerPos();
         //enemyFlipped.LookAtPlayer();
  
-        
-        //if hp == 50%, 75%, 20%, trigger atk4
         
         switch (attackCounter)
         {
@@ -217,23 +215,20 @@ public class MiyaPatterns : MonoBehaviour
         ChangeAttack();
     }
 
-    private void CalcAttackEndTime()
-    {
-        stopTime = 0f;
-        if (Time.time > stopTime)
-        {
-            stopTime = Time.time + attackDuration[attackCounter - 1];
-        }
-    }
     
     private void ChangeAttack()
     {
         attackCounter++;
+        UpdateAttackEndTime();
+        
+        //Loop back
         if (attackCounter > 3)
         {
             attackCounter = 1;
         }
-
+        
+        
+        //Adjustment for Atk1
         if (attackCounter == 1)
         {
             trackingAI.enabled = true;
@@ -254,19 +249,33 @@ public class MiyaPatterns : MonoBehaviour
             trackingAI.enabled = false;
             shootingAI.enabled = false;
         }
-
-       
-        CalcAttackEndTime();
     }
-
-    private void EnableShootingAI()
+    
+    private void CalcAttackEndTime(float duration)
     {
-        shootingAI.enabled = true;
+        stopTime = 0f;
+        if (Time.time > stopTime)
+        {
+            stopTime = Time.time + duration;
+        }
     }
 
     private bool IsAttackDurationEnded()
     {
         return Time.time > stopTime;
+    }
+
+    private void UpdateAttackEndTime()
+    {
+        switch (attackCounter)
+        {
+            case 2:
+                CalcAttackEndTime(atk2Duration);
+                break;
+            case 3:
+                CalcAttackEndTime(atk3Duration);
+                break;
+        }
     }
 
     private void MoveToTarget(Vector2 targetPos)
@@ -280,7 +289,7 @@ public class MiyaPatterns : MonoBehaviour
         {
             speedX *= -1;
         }
- 
+
         rb.AddForce(new Vector2(speedX, rb.velocity.y) * Time.fixedDeltaTime);
     }
 
@@ -292,6 +301,7 @@ public class MiyaPatterns : MonoBehaviour
     
     private bool ReachedTarget(Vector2 targetPos, bool targetIsPlayer)
     {
+
         float compDist = 0f;
         if (targetIsPlayer)
         {
@@ -418,6 +428,11 @@ public class MiyaPatterns : MonoBehaviour
             print("banged");
         }
         miyaAnim.Play("miyaIdle");
+    }
+    
+    private void EnableShootingAI()
+    {
+        shootingAI.enabled = true;
     }
     
     // private void OnDrawGizmos()

@@ -6,7 +6,7 @@ public class HandPlacement : MonoBehaviour
     [Header("RigLayer Targets")]
     [SerializeField] private Transform leftHandIKTarget;
     [SerializeField] private Transform rightHandIKTarget;
-
+ 
     private WeaponSwitching wepSwitch;
     
 
@@ -51,8 +51,16 @@ public class HandPlacement : MonoBehaviour
     
     private void Update()
     {
-        leftHandIKTarget.position = currLeftHandPos.position;
-        rightHandIKTarget.position = currRightHandPos.position;
+        if (leftHandIKTarget != null)
+        {
+            leftHandIKTarget.position = currLeftHandPos.position;
+        }
+
+        if (rightHandIKTarget != null)
+        {
+            rightHandIKTarget.position = currRightHandPos.position;
+        }
+        
     }
 
     private void WeaponSwitching_OnWeaponChange()
@@ -66,8 +74,15 @@ public class HandPlacement : MonoBehaviour
     void InitialPos()
     {
         HandPositions currPositions = positionsArray[0];
-        
-        currLeftHandPos = currPositions.leftHandPos;
-        currRightHandPos = currPositions.rightHandPos;
+
+        if (leftHandIKTarget != null)
+        {
+            currLeftHandPos = currPositions.leftHandPos; 
+        }
+
+        if (rightHandIKTarget != null)
+        {
+            currRightHandPos = currPositions.rightHandPos;
+        }
     }
 }
