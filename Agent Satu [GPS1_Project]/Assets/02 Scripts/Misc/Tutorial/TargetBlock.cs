@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class TargetBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
+    BoxCollider2D target;
+
     void Start()
     {
-        
+        target = gameObject.GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D temp)
     {
-        
+        Debug.Log("sus");
+        if (temp.tag == "Bullet")
+            Destroy(target);
     }
 }
