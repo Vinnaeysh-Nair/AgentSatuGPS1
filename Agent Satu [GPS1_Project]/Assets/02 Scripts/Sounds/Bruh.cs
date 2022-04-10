@@ -60,10 +60,10 @@ public class SoundInfo {
 
 
 
-public class SoundManager : MonoBehaviour
+public class Bruh : MonoBehaviour
 {
     //using singleton
-    public static SoundManager Instance;
+    public static Bruh Instance;
 
 
     [Header("Mixer:")] 
