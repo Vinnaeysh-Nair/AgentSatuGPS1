@@ -17,6 +17,7 @@ public class MusicDatabase
     public string musicNameToPlay;
 }
 
+
 [Serializable]
 public class EffectInfo : SoundInfo
 {
