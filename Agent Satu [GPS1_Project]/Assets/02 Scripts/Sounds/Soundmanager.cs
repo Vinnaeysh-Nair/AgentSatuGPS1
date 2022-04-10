@@ -237,6 +237,16 @@ public class SoundManager : MonoBehaviour
         return null;
     }
     
+    public void BulletTime_OnActivateBulletTime()
+    {
+        BulletTimePitchDown();
+    }
+
+    public void BulletTime_OnDeactivateBulletTime()
+    {
+        BulletTimePitchReset();
+    }
+    
     private void SwapMusic(int index)
     {
         if (_currMusicAudioSource != null)
@@ -266,7 +276,7 @@ public class SoundManager : MonoBehaviour
         effectsVolume = value;
     }
 
-    public void BulletTimePitchDown()
+    private void BulletTimePitchDown()
     {
         _isInBulletTime = true;
         
@@ -283,7 +293,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void BulletTimePitchReset()
+    private void BulletTimePitchReset()
     {
         _isInBulletTime = false;
         
@@ -299,9 +309,7 @@ public class SoundManager : MonoBehaviour
             thisSource.pitch = music.pitch;
         }
     }
-
     
-   
     private IEnumerator FadeIn(AudioSource source, float duration, float startValue, float targetValue)
     {
         float currTime = 0f;
