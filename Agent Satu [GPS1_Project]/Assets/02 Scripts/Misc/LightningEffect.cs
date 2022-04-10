@@ -8,7 +8,7 @@ public class LightningEffect : MonoBehaviour
     //private UnityEngine.Rendering.Universal.Light2D light;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D light;
     [SerializeField] private float lightTimer = 0.0f;
-    [Header("Must be within 1 and 0.1")]
+    [Range(0.1f,0.5f)]
     [SerializeField] private float fadeIntensity = 0.1f;
     private bool lightningable = true;
     private float tempTimer;
