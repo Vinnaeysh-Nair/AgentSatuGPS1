@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,15 +13,19 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch = false;
     private bool dodgeroll = false;
 
-
-
+    
     public delegate void OnInteract();
     public static event OnInteract onInteractDelegate;
+
+    
+    public static event Action OnFallOffMap;
+    private FallOffMap _fallOffMap;
+    
     
     private Vector2 playerPos;
 
 
-
+    
     //Getters
     public Vector2 GetPlayerPos()
     {
@@ -29,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<PlayerController>();
+    }
+
+    void Start()
+    {
+        _fallOffMap = FallOffMap.Instance;
     }
 
     void Update()
@@ -72,5 +83,11 @@ public class PlayerMovement : MonoBehaviour
         dodgeroll = false;
 
         playerPos = transform.position;
+
+        if (_fallOffMap == null) return;
+        if (_fallOffMap.IsOutOfMap(playerPos.y))
+        {
+            _fallOffMap.FallToDeath();
+        }
     }
 }
