@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public static event OnInteract onInteractDelegate;
 
     
-    public static event Action OnFallOffMap;
     private FallOffMap _fallOffMap;
     
     
