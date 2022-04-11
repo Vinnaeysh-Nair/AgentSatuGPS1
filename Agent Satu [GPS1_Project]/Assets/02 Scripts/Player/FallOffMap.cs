@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * The prefab containing this script is only put inside the scene whenever the player is expected to be able to fall out of map. (ex: Level 3-2)/
+ * Uses its own transform's y-position to determine the map limit for it to count as player falling out of map.
+ */
+
+
 public class FallOffMap : MonoBehaviour
 {
     #region Singleton
