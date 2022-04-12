@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class LightningEffect : MonoBehaviour
 {
     //private UnityEngine.Rendering.Universal.Light2D light;
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D light;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D like;
     [SerializeField] private float timer = 0.0f;
     private bool lightningable;
         
@@ -36,7 +36,7 @@ public class LightningEffect : MonoBehaviour
 
     void lightning()
     {
-        light.intensity = 1.0f;
+        like.intensity = 1.0f;
     }
 
 }
