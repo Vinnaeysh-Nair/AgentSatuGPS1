@@ -39,8 +39,7 @@ public class BulletBehaviour : MonoBehaviour
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
-      //  tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-      tagManager = ObjectPooler.tagManager;
+        tagManager = ObjectPooler.tagManager;
         
         GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
         playerHp = playerBody.GetComponent<PlayerHpSystem>();
@@ -177,7 +176,7 @@ public class BulletBehaviour : MonoBehaviour
     //Become inactive after a duration after being fired. 
     private IEnumerator SetBulletInactive(GameObject shotBullet)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         shotBullet.SetActive(false);
     }
 }

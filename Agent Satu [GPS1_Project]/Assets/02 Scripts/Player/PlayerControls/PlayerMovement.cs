@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Components
+    [SerializeField] private Transform playerCenter;
     private PlayerController controller;
 
     //General movement fields
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         jump = false;
         dodgeroll = false;
 
-        playerPos = transform.position;
+        playerPos = playerCenter.position;
 
         if (_fallOffMap == null) return;
         if (_fallOffMap.IsOutOfMap(playerPos.y))

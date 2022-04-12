@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class MissileLauncher : MonoBehaviour
@@ -11,7 +13,7 @@ public class MissileLauncher : MonoBehaviour
     [Header("Attack")] 
     [SerializeField] private GameObject missile;
     [SerializeField] private Transform spawnPosContainer;
-    [SerializeField] private Transform[] _spawnPosArray;
+    private Transform[] _spawnPosArray;
     
     [Header("Animation")]
     [SerializeField] private GameObject missileAnim;
@@ -27,22 +29,25 @@ public class MissileLauncher : MonoBehaviour
     void Awake()
     {
         _pooler = ObjectPooler.objPoolerInstance;
-    }
-
-
-    void Start()
-    {
+        
         int size = spawnPosContainer.childCount;
         _spawnPosArray = new Transform[size];
         for (int i = 0; i < size; i++)
         {
             _spawnPosArray[i] = spawnPosContainer.GetChild(i);
         }
-        
+    }
+
+    private void Start()
+    {
         StartLaunchAnimation();
     }
 
-    public void StartLaunchAnimation()
+    void OnEnable()
+    {
+        StartLaunchAnimation();
+    }
+    private void StartLaunchAnimation()
     {
         StartCoroutine(LaunchMissiles());
     }
@@ -52,10 +57,11 @@ public class MissileLauncher : MonoBehaviour
     {
         for (int i = 0; i < numberOfMissiles; i++)
         {
-            print("asdf");
             int spawnPosIndex = Random.Range(0, _spawnPosArray.Length);
 
-            _pooler.SpawnFromPool(missile.name, _spawnPosArray[spawnPosIndex].position, Quaternion.identity);
+            Vector2 pos = _spawnPosArray[spawnPosIndex].position;
+            Vector2 offsetX = new Vector2(Random.Range(-3f, 3f), 0f);
+            _pooler.SpawnFromPool(missile.name, pos + offsetX, Quaternion.identity);
         }
     }
     
@@ -79,11 +85,12 @@ public class MissileLauncher : MonoBehaviour
         }
         
         SpawnMissiles();
+        gameObject.SetActive(false);
     }
 
-    private IEnumerator DisableMissile(GameObject missile)
+    private IEnumerator DisableMissile(GameObject missileAnim)
     {
-        yield return new WaitForSeconds(3f);
-        missile.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        missileAnim.SetActive(false);
     }
 }

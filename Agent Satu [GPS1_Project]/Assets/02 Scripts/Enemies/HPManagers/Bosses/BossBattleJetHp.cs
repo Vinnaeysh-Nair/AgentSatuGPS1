@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class BossBattleJetHp : BossHp
 {
+    [Header("Ref:")] 
+    [SerializeField] private GameObject explosionFx;
+    [SerializeField] private AudioClip explosionSound;
+    
+    
     [Header("Ignore pivot version")]
     [SerializeField] private BarChangeSlider hpBar;
     void Start()
@@ -30,8 +35,17 @@ public class BossBattleJetHp : BossHp
         hpBar.SetBarAmount(percentage);
         
         if (currHp > 0) return;
-        CompleteLevel();
         
+        Die();
+        CompleteLevel();
         gameObject.SetActive(false);
+    }
+
+    private void Die()
+    {
+        GameObject fx = Instantiate(explosionFx, transform.position, Quaternion.identity);
+        fx.transform.localScale = transform.parent.localScale * 3f;
+
+        SoundManager.Instance.PlayEffect(explosionSound);
     }
 }

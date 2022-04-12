@@ -236,13 +236,13 @@ MonoBehaviour:
   timeToStartBattle: 1
   atkChangeBufferTime: 5
   goToPositionMoveSpeed: 3
-  goToIdleMoveSpeed: 5
+  goToIdleMoveSpeed: 6
   atk1ShotsPerBurst: 15
   atk1FireRate: 12
   atk1TimeUntilNextBurst: 3
   playerFollowOffset: {x: 0, y: 3, z: 0}
-  playerFollowSpeed: 5
-  timeTillAttack2: 10
+  playerFollowSpeed: 7
+  timeTillAttack2: 15
   atk2FireRate: 12
   nextPatternBufferTime: 3
   patterns:
@@ -250,7 +250,7 @@ MonoBehaviour:
     - {fileID: 4552666731396546161}
     - {fileID: 7050397678364414128}
     atk2ShotsPerBurst: 150
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4552666731396546161}
     atk2ShotsPerBurst: 160
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -268,11 +268,12 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4789677135738669523}
     atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
     timeStayingAtEndPoint: 0
+  missileLauncher: {fileID: 7353735089725731242}
   timeTillAttack1: 10
 --- !u!1 &982524528523599406
 GameObject:
@@ -497,13 +498,13 @@ MonoBehaviour:
   timeToStartBattle: 1
   atkChangeBufferTime: 5
   goToPositionMoveSpeed: 3
-  goToIdleMoveSpeed: 5
+  goToIdleMoveSpeed: 6
   atk1ShotsPerBurst: 15
   atk1FireRate: 12
   atk1TimeUntilNextBurst: 3
   playerFollowOffset: {x: 0, y: 3, z: 0}
-  playerFollowSpeed: 5
-  timeTillAttack2: 10
+  playerFollowSpeed: 7
+  timeTillAttack2: 15
   atk2FireRate: 12
   nextPatternBufferTime: 3
   patterns:
@@ -511,7 +512,7 @@ MonoBehaviour:
     - {fileID: 4552666731396546161}
     - {fileID: 7050397678364414128}
     atk2ShotsPerBurst: 150
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -520,7 +521,7 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4552666731396546161}
     atk2ShotsPerBurst: 160
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -529,11 +530,12 @@ MonoBehaviour:
     - {fileID: 4552666731396546161}
     - {fileID: 8615380413858509239}
     atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 3
+    atk2InPatternMoveSpeed: 5
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
     timeStayingAtEndPoint: 0
+  missileLauncher: {fileID: 7353735089725731242}
   timeTillAttack1: 10
 --- !u!1 &1215250032645173508
 GameObject:
@@ -567,6 +569,7 @@ Transform:
   m_Children:
   - {fileID: 4061381591041116637}
   - {fileID: 2106290416}
+  - {fileID: 7353735089248046873}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1307,6 +1310,7 @@ Transform:
   m_Children:
   - {fileID: 7977296897884009741}
   - {fileID: 5544152366528423287}
+  - {fileID: 7353735089725731243}
   m_Father: {fileID: 1215250032645173509}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1403,6 +1407,8 @@ MonoBehaviour:
   currHp: 0
   healthBar: {fileID: 0}
   initialHp: 5
+  explosionFx: {fileID: 4447203928096976665, guid: 1232324d1118ebe438d25fb674d63a4a, type: 3}
+  explosionSound: {fileID: 8300000, guid: fae57a447a788ac49babd29ab27134d4, type: 3}
   hpBar: {fileID: 0}
 --- !u!114 &1410753141
 MonoBehaviour:
@@ -1418,6 +1424,185 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointToGo: {fileID: 2106290416}
   moveSpeed: 1
+--- !u!1 &7353735089221693116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353735089221693117}
+  m_Layer: 0
+  m_Name: SpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353735089221693117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735089221693116}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7353735089248046873}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353735089248046872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353735089248046873}
+  m_Layer: 0
+  m_Name: MissileSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353735089248046873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735089248046872}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.4749998, y: 8.26, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7353735089221693117}
+  - {fileID: 7353735089803121155}
+  - {fileID: 7353735090300203212}
+  m_Father: {fileID: 1215250032645173509}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353735089725731241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353735089725731243}
+  - component: {fileID: 7353735089725731242}
+  m_Layer: 0
+  m_Name: Missile Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7353735089725731243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735089725731241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16, y: -0.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4061381591041116637}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353735089725731242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735089725731241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe82bf7b87611974ebf256de80640c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfMissiles: 4
+  missile: {fileID: 7008471406494011991, guid: a150f1181853f5b46a0cb6189fbad0f2, type: 3}
+  spawnPosContainer: {fileID: 7353735089248046873}
+  missileAnim: {fileID: 9014527515872281880, guid: 90e2b5a780cb69d48bd47e3bf07bf10b, type: 3}
+  launchRate: 1.45
+  missileFlySpeed: 6
+  minOffsetX: -0.5
+  maxOffsetX: 0.5
+--- !u!1 &7353735089803121154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353735089803121155}
+  m_Layer: 0
+  m_Name: SpawnPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353735089803121155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735089803121154}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7353735089248046873}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353735090300203187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353735090300203212}
+  m_Layer: 0
+  m_Name: SpawnPos (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353735090300203212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353735090300203187}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 34.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7353735089248046873}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7728638749386529583
 GameObject:
   m_ObjectHideFlags: 0
