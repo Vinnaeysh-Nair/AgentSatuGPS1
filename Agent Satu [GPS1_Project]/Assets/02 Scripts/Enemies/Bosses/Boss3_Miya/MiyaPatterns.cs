@@ -1,24 +1,17 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
+using UnityEditor.Search;
 
 public class MiyaPatterns : MonoBehaviour
 {
     [Header("Ref:")] 
     [SerializeField] private Collider2D[] platforms;
-    [SerializeField] private BoxCollider2D atk3DetectionBox;
-    [SerializeField] private Transform[] atk1movementPoints;
-    
     [SerializeField] private Animator miyaAnim;
-    [SerializeField] private Animator atk4BlindAnim;
-
     [SerializeField] private EnemyAI_Ranged shootingAI;
     [SerializeField] private ArmToPlayerTracking trackingAI;
-    
     [SerializeField] private LayerMask playerHitLayer;
 
     private PlayerHpSystem playerHpSystem;
-    
     private PlayerMovement playerMovement;
     private Vector2 playerPos;
 
@@ -44,6 +37,8 @@ public class MiyaPatterns : MonoBehaviour
     [Header("Attack 1")]
     [SerializeField] private int nextMovementPoint = 0;
     [SerializeField] private float standStillDuration = 5f;
+    [SerializeField] private Transform[] atk1movementPoints;
+
     private bool isStandingStill = false;
 
     [Header("Attack 2")] 
@@ -52,11 +47,17 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private float atk2AreaSize;
     [SerializeField] private float atk2Duration = 5f;
 
-    [Header("Attack 3")]
+    [Header("Attack 3")] 
+    [SerializeField] private BoxCollider2D atk3DetectionBox;
+    [SerializeField] private TrailRenderer bladeTrail;
     [SerializeField] private float dashSpeed = .2f;
     [SerializeField] private float timeBetweenDashes = 3f;
     [SerializeField] private float dashDuration = 1f;
     [SerializeField] private float atk3Duration = 5f;
+    
+    [Header("Attack 4")]
+    [SerializeField] private Animator atk4BlindAnim;
+
     
     private float nextDashTime = 0f;
     private bool isDoingAtk3 = false;
@@ -88,7 +89,8 @@ public class MiyaPatterns : MonoBehaviour
         atk4BlindAnim.gameObject.SetActive(false);
         trackingAI.enabled = false;
         shootingAI.enabled = false;
- 
+        bladeTrail.gameObject.SetActive(false);
+        
         //Start Attack1
         ChangeAttack();
     }
@@ -121,7 +123,11 @@ public class MiyaPatterns : MonoBehaviour
         Vector2 targetPos = atk1movementPoints[nextMovementPoint].position;
         if (!ReachedTarget(targetPos, false))
         {
-            if (isStandingStill) return;
+            // if (isStandingStill)
+            // {
+            //     
+            //     return;
+            // }
             
             MoveToTarget(targetPos);
             
@@ -137,7 +143,9 @@ public class MiyaPatterns : MonoBehaviour
         }
         else
         {
-            NextMovementPoint();
+            print("reached");
+            rb.velocity = new Vector2(0f, 0f);
+            nextMovementPoint++;
             
             if (nextMovementPoint > atk1movementPoints.Length - 1)
             {
@@ -179,6 +187,47 @@ public class MiyaPatterns : MonoBehaviour
         {
             ChangeAttack();
         }
+    }
+    
+    private void SetIsStandingStillToFalse()
+    {
+        isStandingStill = false;
+    }
+    
+    private void MoveToTarget(Vector2 targetPos)
+    {
+        enemyFlipped.LookAtPlayer();
+        float targetDir = targetPos.x - transform.position.x;
+
+
+        float speedX = moveSpeed;
+        if (targetDir < 0f)
+        {
+            speedX *= -1;
+        }
+
+        rb.AddForce(new Vector2(speedX, rb.velocity.y) * Time.fixedDeltaTime);
+    }
+    
+    private bool ReachedTarget(Vector2 targetPos, bool targetIsPlayer)
+    {
+        float compDist = .01f;
+        if (targetIsPlayer)
+        {
+            compDist = xDistToStartAttack;
+        }
+        else
+        {
+            //compDist = .8f;
+            compDist = 2f;
+        }
+        
+        if (Vector2.Distance(targetPos, transform.position) > compDist)
+        {
+            return false;
+        }
+        
+        return true;
     }
 
     //quick dash, leaving a trail that damages the player if not avoided
@@ -277,48 +326,14 @@ public class MiyaPatterns : MonoBehaviour
                 break;
         }
     }
-
-    private void MoveToTarget(Vector2 targetPos)
-    {
-        enemyFlipped.LookAtPlayer();
-        float targetDir = targetPos.x - transform.position.x;
-
-
-        float speedX = moveSpeed;
-        if (targetDir < 0f)
-        {
-            speedX *= -1;
-        }
-
-        rb.AddForce(new Vector2(speedX, rb.velocity.y) * Time.fixedDeltaTime);
-    }
-
+    
     private void Jump()
     {
         print("jumping");
         rb.AddForce(new Vector2(rb.velocity.x, jumpForce) * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
     
-    private bool ReachedTarget(Vector2 targetPos, bool targetIsPlayer)
-    {
 
-        float compDist = 0f;
-        if (targetIsPlayer)
-        {
-            compDist = xDistToStartAttack;
-        }
-        else
-        {
-            compDist = .8f;
-        }
-        
-        if (Vector2.Distance(targetPos, transform.position) > compDist)
-        {
-            return false;
-        }
-        
-        return true;
-    }
 
     private void SetIgnorePlatformCollisions()
     {
@@ -341,16 +356,7 @@ public class MiyaPatterns : MonoBehaviour
         }
     }
 
-    private void NextMovementPoint()
-    {
-        rb.velocity = new Vector2(0f, 0f);
-        nextMovementPoint++;
-    }
 
-    private void SetIsStandingStillToFalse()
-    {
-        isStandingStill = false;
-    }
 
     public void Attack2DamagePlayer()
     {
@@ -376,6 +382,8 @@ public class MiyaPatterns : MonoBehaviour
         isDoingAtk3 = false;
         atk3DetectionBox.enabled = true;
         
+        bladeTrail.gameObject.SetActive(true);
+        
         float dirX = 1f;
         if (!enemyFlipped.GetIsFacingRight())
         {
@@ -392,6 +400,8 @@ public class MiyaPatterns : MonoBehaviour
         
         rb.velocity = new Vector2(0f, 0f);
         atk3DetectionBox.enabled = false;
+        
+        bladeTrail.gameObject.SetActive(false);
     }
 
     private void Atk3Slash()
