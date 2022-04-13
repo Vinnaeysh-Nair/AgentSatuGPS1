@@ -28,7 +28,7 @@ public class TransitionScript : MonoBehaviour
     [SerializeField] private int loadId;
 
     
-    [SerializeField] private int cutsceneSceneIndex = 8;
+    private int cutsceneSceneIndex = 8;
 
     private bool playerEntered = false;
 
@@ -36,14 +36,6 @@ public class TransitionScript : MonoBehaviour
     public static event Action OnChangeLevel;
     public static event Action<int> OnSceneChange;
     
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown("y"))
-    //     {
-    //         //LoadNextLevel();
-    //         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //     }
-    // }
 
     void Start()
     {
@@ -74,10 +66,6 @@ public class TransitionScript : MonoBehaviour
     //Used in levels
     private void LoadNextLevel()
     {
-        // if (onChangeLevelDelegate != null)
-        // {
-        //     onChangeLevelDelegate.Invoke();
-        // }
         if(OnChangeLevel != null) OnChangeLevel.Invoke();        
         
         int sceneIndexToLoad = 0;

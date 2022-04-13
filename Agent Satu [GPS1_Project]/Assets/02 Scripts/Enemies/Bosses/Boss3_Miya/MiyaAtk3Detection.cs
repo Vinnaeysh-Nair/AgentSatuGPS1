@@ -6,11 +6,10 @@ public class MiyaAtk3Detection : MonoBehaviour
     public static event Action OnPlayerEnter;
 
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-      
             if (OnPlayerEnter != null)
             {
                 OnPlayerEnter.Invoke();

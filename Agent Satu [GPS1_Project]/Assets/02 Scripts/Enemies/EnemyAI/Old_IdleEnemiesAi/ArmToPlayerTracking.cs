@@ -10,7 +10,6 @@ public class ArmToPlayerTracking : MonoBehaviour
     private PlayerMovement playerMovement;
     
     
-    [SerializeField] private float followAngleOffset;
     private Vector2 playerPosition;
 
 
@@ -48,12 +47,12 @@ public class ArmToPlayerTracking : MonoBehaviour
         if (angleTowards > 90f || angleTowards < -90f)
         {
             //Inverted rotation
-            pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards - followAngleOffset);
+            pivotTransform.eulerAngles = new Vector3(180f, 0f, -angleTowards);
         }
         else
         {
             //Normal rotation
-            pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
+            pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards);
         }
     }
 }
