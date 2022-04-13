@@ -49,23 +49,29 @@ MonoBehaviour:
   musicVolume: 0.8
   effectsVolume: 0.8
   musicDatabaseArray:
-  - sceneIndex: 0
-    musicNameToPlay: Main Menu BGM
   - sceneIndex: 1
-    musicNameToPlay: Level 1 BGM
+    musicNameToPlay: Main Menu BGM
   - sceneIndex: 2
     musicNameToPlay: Level 1 BGM
   - sceneIndex: 3
-    musicNameToPlay: Level 2 BGM
+    musicNameToPlay: Level 1 BGM
   - sceneIndex: 4
     musicNameToPlay: Level 2 BGM
   - sceneIndex: 5
-    musicNameToPlay: Level 3 BGM
+    musicNameToPlay: Level 2 BGM
   - sceneIndex: 6
-    musicNameToPlay: Level 3 BGM
+    musicNameToPlay: Boss_MiniJet BGM
   - sceneIndex: 7
-    musicNameToPlay: Level 4 BGM
+    musicNameToPlay: Level 3 BGM
   - sceneIndex: 8
+    musicNameToPlay: Level 3 BGM
+  - sceneIndex: 9
+    musicNameToPlay: Boss_BattleJet BGM
+  - sceneIndex: 10
+    musicNameToPlay: Level 4 BGM
+  - sceneIndex: 11
+    musicNameToPlay: Level 4 BGM
+  - sceneIndex: 12
     musicNameToPlay: Level 4 BGM
   musicsArray:
   - name: Main Menu BGM
@@ -97,6 +103,27 @@ MonoBehaviour:
     loop: 1
     adSource: {fileID: 0}
   - name: Level 4 BGM
+    adClip: {fileID: 8300000, guid: a5f0d8694b33327438b95210d79c9c52, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Boss_MiniJet BGM
+    adClip: {fileID: 8300000, guid: cfc160aa81fb9d24e86f9f36081b6d80, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Boss_BattleJet BGM
+    adClip: {fileID: 8300000, guid: de0594e18ff7f724c80c20962f77597e, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
+    adSource: {fileID: 0}
+  - name: Boss_Miya BGM
     adClip: {fileID: 8300000, guid: 7c9d3c14c2950d7408ac479226a0a2fd, type: 3}
     volume: 0.8
     pitch: 1
@@ -291,7 +318,7 @@ MonoBehaviour:
     maxRandVol: 1.01
     minRandPitch: 0.827
     maxRandPitch: 1.165
-  - name: jetExplosion
+  - name: miniJetExplosion
     adClip: {fileID: 8300000, guid: 5dc987a022f92b247a55e9c156a66561, type: 3}
     volume: 0.8
     pitch: 0.8
@@ -304,6 +331,28 @@ MonoBehaviour:
     maxRandPitch: 1.165
   - name: menuClick
     adClip: {fileID: 8300000, guid: 5d7b35f533588ef4988fb87b242d97c9, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165
+  - name: missileExplosion
+    adClip: {fileID: 8300000, guid: f9b72258338d0cd468867b774e1c75ce, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.827
+    maxRandPitch: 1.165
+  - name: battlejetExplosion
+    adClip: {fileID: 8300000, guid: fae57a447a788ac49babd29ab27134d4, type: 3}
     volume: 0.8
     pitch: 0.8
     playOnAwake: 0

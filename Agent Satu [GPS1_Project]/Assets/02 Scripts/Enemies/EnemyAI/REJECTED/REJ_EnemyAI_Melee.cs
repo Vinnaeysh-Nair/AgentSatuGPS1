@@ -9,7 +9,7 @@ public class REJ_EnemyAI_Melee : MonoBehaviour
     
     //Fields
     public Transform[] patrolPoints;
-    private int currentPointIndex = 0;
+   // private int currentPointIndex = 0;
     
     [SerializeField] private float speed = 1f;
     private bool facingRight = false;

@@ -39,8 +39,7 @@ public class BulletBehaviour : MonoBehaviour
     void Awake()
     {
         pooler = ObjectPooler.objPoolerInstance;
-      //  tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-      tagManager = ObjectPooler.tagManager;
+        tagManager = ObjectPooler.tagManager;
         
         GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
         playerHp = playerBody.GetComponent<PlayerHpSystem>();

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 public class LightningEffect : MonoBehaviour
 {
-    //private UnityEngine.Rendering.Universal.Light2D light;
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D like;
+    
+    [SerializeField] private new Light2D light;
     [SerializeField] private float timer = 0.0f;
     private bool lightningable;
         
@@ -36,7 +34,7 @@ public class LightningEffect : MonoBehaviour
 
     void lightning()
     {
-        like.intensity = 1.0f;
+        light.intensity = 1.0f;
     }
 
 }

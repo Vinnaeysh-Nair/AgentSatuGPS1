@@ -246,7 +246,7 @@ public class PlayerWeapon : MonoBehaviour
         foreach (Transform firePoint in firePoints)
         {
             GameObject shotBullet = pooler.SpawnFromPool(bullet.name, firePoint.position, firePoint.rotation);
-            StartCoroutine(SetBulletInactive(shotBullet));
+            //StartCoroutine(SetBulletInactive(shotBullet));
         }
 
         UpdateAmmoDisplay();
@@ -322,12 +322,12 @@ public class PlayerWeapon : MonoBehaviour
         UpdateAmmoDisplay();
     }
     
-    //Become inactive after a duration after being fired. 
-    private IEnumerator SetBulletInactive(GameObject shotBullet)
-    {
-        yield return new WaitForSeconds(1f);
-        shotBullet.SetActive(false);
-    }
+    // //Become inactive after a duration after being fired. 
+    // private IEnumerator SetBulletInactive(GameObject shotBullet)
+    // {
+    //     yield return new WaitForSeconds(1f);
+    //     shotBullet.SetActive(false);
+    // }
 
     private IEnumerator SetMuzzleFlashInactive()
     {

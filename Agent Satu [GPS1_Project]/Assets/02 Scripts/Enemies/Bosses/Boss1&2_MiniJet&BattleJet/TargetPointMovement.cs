@@ -73,9 +73,9 @@ public class TargetPointMovement : MonoBehaviour
 
     [Space]
     [Header("[Attack 3]")]
+    [SerializeField] private MissileLauncher missileLauncher;
     [SerializeField] private float timeTillAttack1;
 
-    
     public event EventHandler OnReachingIdle;
 
    
@@ -231,9 +231,11 @@ public class TargetPointMovement : MonoBehaviour
         if (stopTime == 0f)
         {
             stopTime = Time.time + timeTillAttack1;
+            missileLauncher.gameObject.SetActive(true);
         }
         
-        //Mini jet only 1 attack
+  
+        
         if (isMiniJet) return;
         
         if (Time.time > stopTime && !idling)

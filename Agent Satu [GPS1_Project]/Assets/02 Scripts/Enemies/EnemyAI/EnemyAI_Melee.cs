@@ -49,12 +49,6 @@ public class EnemyAI_Melee : MonoBehaviour
 
         //SoundManager
         _soundManager = SoundManager.Instance;
-        
-        // if (soundManage == null)
-        // {
-        //     Debug.LogError("No sound manager added into the scene");
-        // }
-
     }
     void FixedUpdate()
     {
