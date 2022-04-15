@@ -206,6 +206,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39488696}
   m_CullTransparentMesh: 1
+--- !u!1001 &269933175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.09364
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.834687
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2257076
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923333997582877605, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771336647935852840, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
 --- !u!1 &473168461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,8 +2119,32 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
-      propertyPath: dialoguesArray.Array.data[3].levelToLoadIndex
+      propertyPath: dialoguesArray.Array.data[3].nextLoadId
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: cutscenesArray.Array.data[0].levelToLoadIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: cutscenesArray.Array.data[1].levelToLoadIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: dialoguesArray.Array.data[0].levelToLoadIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: dialoguesArray.Array.data[1].levelToLoadIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: dialoguesArray.Array.data[2].levelToLoadIndex
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
+      propertyPath: dialoguesArray.Array.data[3].levelToLoadIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: dialoguesArray.Array.data[3].lines.Array.size
@@ -2071,7 +2152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: dialoguesArray.Array.data[4].levelToLoadIndex
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: dialoguesArray.Array.data[4].lines.Array.size
@@ -2099,7 +2180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: cutscenesArray.Array.data[1].levelToLoadSceneName
-      value: Level 2-1
+      value: Dialogue 4
       objectReference: {fileID: 0}
     - target: {fileID: 1373914063, guid: c1aadefe7e804f3469847427f74d7464, type: 3}
       propertyPath: dialoguesArray.Array.data[2].levelToLoadSceneName
