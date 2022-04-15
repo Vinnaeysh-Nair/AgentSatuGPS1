@@ -15,7 +15,7 @@ public class TargetPointMovement : MonoBehaviour
    
     private Transform startPoint;
     private Transform endPoint;
-    private Transform playerPos;
+    private Vector2 playerPos;
     
     //Fields
     private bool inPosition;       
@@ -103,14 +103,20 @@ public class TargetPointMovement : MonoBehaviour
         return inPosition;  
     }
 
-
+    
     private void BattleJetGun_OnFiredAllShots(object sender, EventArgs e)
     {
         firedAllShots = true;
     }
 
-   
 
+    void OnDestroy()
+    {
+        flyIntoScene.onReachingPointDelegate -= FlyIntoScene_OnReachingTarget;
+        gun.OnFiredAllShots -= BattleJetGun_OnFiredAllShots;
+    }
+    
+    
     void OnDisable()
     {
          gun.OnFiredAllShots -= BattleJetGun_OnFiredAllShots;
@@ -121,7 +127,6 @@ public class TargetPointMovement : MonoBehaviour
         playerMovement = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
         synch = transform.parent.GetComponent<SynchGunMovements>();
         
-        playerPos = playerMovement.transform;
         gun.OnFiredAllShots += BattleJetGun_OnFiredAllShots;
 
         flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingTarget;
@@ -158,6 +163,7 @@ public class TargetPointMovement : MonoBehaviour
             return;
         }
         
+        playerPos = playerMovement.GetPlayerPos();
 
         switch (attackCounter)
         {
@@ -182,7 +188,7 @@ public class TargetPointMovement : MonoBehaviour
         
         
         //Track player constantly
-        if (Vector2.Distance(transform.position, playerPos.position + playerFollowOffset) > 0.01f)   //small value to offset inaccuracy
+        if (Vector2.Distance(transform.position, playerPos + (Vector2) playerFollowOffset) > 0.01f)   //small value to offset inaccuracy
         {
             Move(playerPos, playerFollowSpeed, playerFollowOffset);
         }
@@ -288,7 +294,7 @@ public class TargetPointMovement : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, startPoint.position) > 0.01f)
         {
-            Move(startPoint, goToPositionMoveSpeed);
+            Move(startPoint.position, goToPositionMoveSpeed);
         }
         else
         {
@@ -304,7 +310,7 @@ public class TargetPointMovement : MonoBehaviour
         //Movement and attack
         if (Vector2.Distance(transform.position, endPoint.position) > 0.01f)
         {
-            Move(endPoint, currPattern.atk2InPatternMoveSpeed);
+            Move(endPoint.position, currPattern.atk2InPatternMoveSpeed);
             
             if (currPattern.isBurst)
             {
@@ -400,7 +406,7 @@ public class TargetPointMovement : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, idlePoint.position) > 0.01f)
         {
-            Move(idlePoint, goToIdleMoveSpeed);
+            Move(idlePoint.position, goToIdleMoveSpeed);
             OnReachingIdle?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -435,13 +441,13 @@ public class TargetPointMovement : MonoBehaviour
     }
     
     
-    void Move(Transform target, float moveSpeed)
+    void Move(Vector2 targetPos, float moveSpeed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
     }
 
-    void Move(Transform target, float moveSpeed, Vector3 followOffSet)
+    void Move(Vector2 targetPos, float moveSpeed, Vector2 followOffSet)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position + followOffSet, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPos + followOffSet, moveSpeed * Time.deltaTime);
     }
 }

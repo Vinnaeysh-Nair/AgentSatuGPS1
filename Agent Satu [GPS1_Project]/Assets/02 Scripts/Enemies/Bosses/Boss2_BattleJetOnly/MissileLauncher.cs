@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,13 +21,19 @@ public class MissileLauncher : MonoBehaviour
 
     [SerializeField] private float minOffsetX = -.5f;
     [SerializeField] private float maxOffsetX = .5f;
+
+    [Space] 
+    [SerializeField] private AudioClip launchSound;
     
     
     private ObjectPooler _pooler;
+    private SoundManager _soundManager;
 
     void Awake()
     {
         _pooler = ObjectPooler.objPoolerInstance;
+        _soundManager = SoundManager.Instance;
+        
         
         int size = spawnPosContainer.childCount;
         _spawnPosArray = new Transform[size];
@@ -37,12 +42,7 @@ public class MissileLauncher : MonoBehaviour
             _spawnPosArray[i] = spawnPosContainer.GetChild(i);
         }
     }
-
-    private void Start()
-    {
-        StartLaunchAnimation();
-    }
-
+    
     void OnEnable()
     {
         StartLaunchAnimation();
@@ -60,20 +60,20 @@ public class MissileLauncher : MonoBehaviour
             int spawnPosIndex = Random.Range(0, _spawnPosArray.Length);
 
             Vector2 pos = _spawnPosArray[spawnPosIndex].position;
-            Vector2 offsetX = new Vector2(Random.Range(-3f, 3f), 0f);
+            Vector2 offsetX = new Vector2(Random.Range(-5, 6), 0f);
+
             _pooler.SpawnFromPool(missile.name, pos + offsetX, Quaternion.identity);
         }
     }
     
-
-
     //animation
     private IEnumerator LaunchMissiles()
     {
-        Vector2 launchPoint = transform.position;
-        
         for (int i = 0; i < numberOfMissiles; i++)
         {
+            _soundManager.PlayEffect(launchSound, true);
+
+            Vector2 launchPoint = transform.position;
             Vector2 randOffsetX = new Vector2(Random.Range(minOffsetX, maxOffsetX), 0f);
             launchPoint += randOffsetX;
             
