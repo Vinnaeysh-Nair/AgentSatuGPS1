@@ -135,6 +135,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4509210923724178089, guid: a85576027a76a4f46a516e71df15049f, type: 3}
+      propertyPath: muteSound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509210923724178102, guid: a85576027a76a4f46a516e71df15049f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509210923724178102, guid: a85576027a76a4f46a516e71df15049f, type: 3}
+      propertyPath: m_WaitForFirstFrame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509210923724178102, guid: a85576027a76a4f46a516e71df15049f, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4509210924454911016, guid: a85576027a76a4f46a516e71df15049f, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -242,7 +258,7 @@ GameObject:
   - component: {fileID: 879331835}
   - component: {fileID: 879331834}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Press e or space to continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

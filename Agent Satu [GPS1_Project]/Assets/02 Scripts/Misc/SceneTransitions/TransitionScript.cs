@@ -27,7 +27,7 @@ public class TransitionScript : MonoBehaviour
     [Header("Id for cutscene or dialogue to load")]
     [SerializeField] private int loadId;
 
-    
+    private int mainMenuIndex = 1;
     private int cutsceneSceneIndex = 15;
 
     private bool playerEntered = false;
@@ -119,6 +119,6 @@ public class TransitionScript : MonoBehaviour
     //Used in Win/Lose Scenes
     public void ReturnToMainMenu()
     {
-        StartCoroutine(LoadLevel(0));
+        StartCoroutine(LoadLevel(mainMenuIndex));
     }
 }
