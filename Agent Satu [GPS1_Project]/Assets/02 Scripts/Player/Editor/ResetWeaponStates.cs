@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using System.IO;
 
 public class ResetWeaponStatesEditor : EditorWindow
 {
@@ -17,7 +18,23 @@ public class ResetWeaponStatesEditor : EditorWindow
         if (GUILayout.Button("Reset"))
         {
             FindObjectOfType<PlayerInventory>().ResetGunState();
-            ProgressSaving.DeleteSaveFile();
+            DeleteSaveFile();
         }
+    }
+    
+    private static void DeleteSaveFile()
+    {
+        string jsonDir = ProgressSaving.jsonDir;
+        if (!File.Exists(jsonDir)) return;
+        
+        File.Delete(jsonDir);
+        
+        // string metaDir = $"{ProgressSaving.dir}.meta";
+        // File.Delete(metaDir);
+        
+        AssetDatabase.Refresh();
+       // Debug.Log(jsonDir);
+       //  AssetDatabase.DeleteAsset(jsonDir);
+       //  AssetDatabase.Refresh();
     }
 }
