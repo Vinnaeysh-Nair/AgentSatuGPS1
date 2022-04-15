@@ -16,7 +16,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
     
     //Dialogue
     private int currDialogue;
-    private int currLine = -1;
+    private int currLine;
     private int prevLine;
 
     private int swappedLine;

@@ -28,7 +28,7 @@ public class TransitionScript : MonoBehaviour
     [SerializeField] private int loadId;
 
     private int mainMenuIndex = 1;
-    private int cutsceneSceneIndex = 15;
+    private int cutsceneSceneIndex = 14;
 
     private bool playerEntered = false;
 

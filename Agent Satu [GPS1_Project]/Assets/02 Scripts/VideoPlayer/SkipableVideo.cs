@@ -6,7 +6,7 @@ public class SkipableVideo : VideoPlaying
     {
         if (Input.GetButtonDown("ProceedInteraction"))
         {
-            EndIntro();
+            EndVideo();
         }
     }
 }
