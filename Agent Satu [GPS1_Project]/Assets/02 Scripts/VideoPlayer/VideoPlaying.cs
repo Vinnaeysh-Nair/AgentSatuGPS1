@@ -22,10 +22,10 @@ public class VideoPlaying : MonoBehaviour
 
     private void EndPointReached(VideoPlayer vp)
     {
-        EndIntro();
+        EndVideo();
     }
 
-    protected void EndIntro()
+    protected void EndVideo()
     {
         transition.ReturnToMainMenu();
     }
