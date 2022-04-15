@@ -12,7 +12,6 @@ public class ResetWeaponStatesEditor : EditorWindow
 
     private void OnGUI()
     {
-        
         GUILayout.Label("For PlayerWeaponSaveSo and PlayerInventory's weaponsArray: \nswaps their current states with the default state stored in the SO.");
         
         if (GUILayout.Button("Reset"))
