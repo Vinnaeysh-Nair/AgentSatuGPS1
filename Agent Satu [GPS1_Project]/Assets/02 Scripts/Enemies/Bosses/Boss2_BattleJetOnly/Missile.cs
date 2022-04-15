@@ -31,8 +31,7 @@ public class Missile : MonoBehaviour
     private void FixedUpdate()
     {
         PointAtPlayer();
-        _missile.position = Vector2.MoveTowards(_missile.position, _playerMovement.GetPlayerPos(), moveSpeed);
-        
+        _missile.position = Vector2.MoveTowards(_missile.position, _playerMovement.GetPlayerPos(), moveSpeed * Time.fixedDeltaTime);
     }
     
     
