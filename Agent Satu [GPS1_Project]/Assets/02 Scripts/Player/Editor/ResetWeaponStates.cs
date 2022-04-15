@@ -24,17 +24,10 @@ public class ResetWeaponStatesEditor : EditorWindow
     
     private static void DeleteSaveFile()
     {
-        string jsonDir = ProgressSaving.jsonDir;
-        if (!File.Exists(jsonDir)) return;
+        string dir = ProgressSaving.dir;
+        if (!File.Exists(dir)) return;
         
-        File.Delete(jsonDir);
-        
-        // string metaDir = $"{ProgressSaving.dir}.meta";
-        // File.Delete(metaDir);
-        
+        File.Delete(dir);
         AssetDatabase.Refresh();
-       // Debug.Log(jsonDir);
-       //  AssetDatabase.DeleteAsset(jsonDir);
-       //  AssetDatabase.Refresh();
     }
 }

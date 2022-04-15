@@ -25,23 +25,22 @@ public static class ProgressSaving
     private static string _filePath = "/SaveFiles/";
     private static string _fileName = "PlayerSaveData";
     
-    public static string dir = $"{_filePath}{_fileName}";
-    public static string jsonDir = $"{dir}.json";
-
+    public static string dir = $"{Application.dataPath}{_filePath}{_fileName}.json";
+ 
     private static PlayerSaveData _playerSaveData;
     
     public static void SaveFile()
     {
         string data = JsonConvert.SerializeObject(_playerSaveData, Formatting.Indented);   
         
-        File.WriteAllText(jsonDir, data);
+        File.WriteAllText(dir, data);
     }
 
     public static bool LoadFile()
     {
-        if (!File.Exists(jsonDir)) return false;
+        if (!File.Exists(dir)) return false;
         
-        string data = File.ReadAllText(jsonDir);
+        string data = File.ReadAllText(dir);
         _playerSaveData = JsonConvert.DeserializeObject<PlayerSaveData>(data);
         
         return true;
