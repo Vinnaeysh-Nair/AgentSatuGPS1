@@ -25,22 +25,22 @@ public static class ProgressSaving
     private static string _filePath = "/SaveFiles/";
     private static string _fileName = "PlayerSaveData";
     
-    private static string _dir = $"{Application.dataPath}{_filePath}{_fileName}.json";
-
+    public static string dir = $"{Application.dataPath}{_filePath}{_fileName}.json";
+ 
     private static PlayerSaveData _playerSaveData;
     
     public static void SaveFile()
     {
         string data = JsonConvert.SerializeObject(_playerSaveData, Formatting.Indented);   
         
-        File.WriteAllText(_dir, data);
+        File.WriteAllText(dir, data);
     }
 
     public static bool LoadFile()
     {
-        if (!File.Exists(_dir)) return false;
+        if (!File.Exists(dir)) return false;
         
-        string data = File.ReadAllText(_dir);
+        string data = File.ReadAllText(dir);
         _playerSaveData = JsonConvert.DeserializeObject<PlayerSaveData>(data);
         
         return true;
@@ -55,13 +55,5 @@ public static class ProgressSaving
     {
         TransitionScript.lastLevelIndex = _playerSaveData.levelIndex;
         playerWeaponSaveSo.savedWepState = _playerSaveData.weaponsArray;
-    }
-
-    public static void DeleteSaveFile()
-    {
-        if (!File.Exists(_dir)) return;
-        
-        File.Delete(_dir);
-        UnityEditor.AssetDatabase.Refresh();
     }
 }

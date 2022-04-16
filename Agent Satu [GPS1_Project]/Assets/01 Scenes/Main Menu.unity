@@ -256,52 +256,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319615766}
   m_CullTransparentMesh: 0
---- !u!1 &352381962
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 352381964}
-  - component: {fileID: 352381963}
-  m_Layer: 0
-  m_Name: LevelSelect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &352381963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352381962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bf125931101fb7489705fda899191ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionScript: {fileID: 0}
-  indexToLoad: 0
---- !u!4 &352381964
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352381962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.09364, y: -4.834687, z: 0.2257076}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &548810367
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 1105155099}
-  sceneToLoad: 8
+  sceneToLoad: 2
   titleMenu: {fileID: 1882379310}
   optionMenu: {fileID: 896421220}
 --- !u!1001 &552587591
@@ -477,10 +431,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SoundManager '
       objectReference: {fileID: 0}
-    - target: {fileID: 4775058381294046061, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
-      propertyPath: musicsArray.Array.data[0].adClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d566181e98677e64f81147fec4026372, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
 --- !u!224 &603532731 stripped

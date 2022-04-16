@@ -2,8 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 
 
 // Create the blueprint for properties the sound needs
@@ -127,6 +125,8 @@ public class SoundManager : MonoBehaviour
         
         ChangeMusicVol(musicVolume);
         ChangeEffectVol(effectsVolume);
+        
+        SwapMusic(1);
     }
 
     private void SetupArray(SoundInfo[] soundsArray, AudioMixer mixer)

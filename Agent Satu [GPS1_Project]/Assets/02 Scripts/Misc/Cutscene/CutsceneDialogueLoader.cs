@@ -8,25 +8,25 @@ public class CutsceneDialogueLoader : MonoBehaviour
     [SerializeField] private TransitionScript transition;
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
     [SerializeField] private Animator screenAnimator;
-
-    [Header("For debugging: ")]
-    [SerializeField] private int currCutscene;
-    [SerializeField] private int currPanel;
-    [SerializeField] private int currSection;
     
+    //Cutscene
+    private int currCutscene;
+    private int currPanel;
+    private int currSection;
     
-    [SerializeField] private int currDialogue;
-    [SerializeField] private int currLine = -1;
-    [SerializeField] private int prevLine;
+    //Dialogue
+    private int currDialogue;
+    private int currLine;
+    private int prevLine;
 
-    [SerializeField] private int swappedLine;
+    private int swappedLine;
 
     private Line lineToSetInactive;
     
     [SerializeField] private Cutscene[] cutscenesArray;
     [SerializeField] private Dialogue[] dialoguesArray;
 
-    [SerializeField] private bool cutsceneOrDialogue = false;
+    private bool cutsceneOrDialogue = false;
 
         
     [System.Serializable]
@@ -149,7 +149,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
             if (currCutscene == -1)
             {
-                print("no cutscene");
+                Debug.LogWarning("No such Cutscene.");
                 return;
             }
             OpenFirstPanel(cutscenesArray[currCutscene]);
@@ -168,7 +168,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
             if (currDialogue == -1)
             {
-                print("no dialogue");
+                Debug.LogWarning("No such Dialogue.");
                 return;
             }
         
@@ -179,7 +179,6 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
     void Update()
     {
-        
         if (Input.GetButtonDown("ProceedInteraction"))
         {
             if(cutsceneOrDialogue)
@@ -189,7 +188,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
             }
             else
             {
-                 NextLine();
+                NextLine();
             }
         }
     }
@@ -219,6 +218,10 @@ public class CutsceneDialogueLoader : MonoBehaviour
             if (j > 0)
             {
                 panelObj.SetActive(false);
+            }
+            else
+            {
+                panelObj.SetActive(true);
             }
         }
     }

@@ -5,6 +5,11 @@ public class StartAnimation : MonoBehaviour
     [SerializeField] private FlyIntoScene _flyIntoScene;
     private Animator _animator;
 
+    void OnDestroy()
+    {
+        _flyIntoScene.onReachingPointDelegate -= StartAnimate;
+    }
+    
     void Start()
     {
         _animator = GetComponent<Animator>();

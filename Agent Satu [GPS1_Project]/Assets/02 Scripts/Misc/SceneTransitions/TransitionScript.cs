@@ -12,7 +12,6 @@ public class TransitionScript : MonoBehaviour
     public static int lastLevelIndex = 0;
     
     [Header("General")]
-    //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
     
@@ -27,8 +26,8 @@ public class TransitionScript : MonoBehaviour
     [Header("Id for cutscene or dialogue to load")]
     [SerializeField] private int loadId;
 
-    
-    [SerializeField] private int cutsceneSceneIndex = 8;
+    private int mainMenuIndex = 1;
+    private int cutsceneSceneIndex = 14;
 
     private bool playerEntered = false;
 
@@ -36,23 +35,16 @@ public class TransitionScript : MonoBehaviour
     public static event Action OnChangeLevel;
     public static event Action<int> OnSceneChange;
     
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown("y"))
-    //     {
-    //         //LoadNextLevel();
-    //         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //     }
-    // }
 
     void Start()
     {
-        if(OnSceneChange != null) OnSceneChange.Invoke(SceneManager.GetActiveScene().buildIndex);
+        int currIndex = SceneManager.GetActiveScene().buildIndex;
+        if(OnSceneChange != null) OnSceneChange.Invoke(currIndex);
         
         if (isLoseScene) return;
             
         //If already cutscene dont overwrite
-        lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        lastLevelIndex = currIndex;
         if (lastLevelIndex != cutsceneSceneIndex)
         {
             cutsceneDialogueSo.loadId = loadId;
@@ -70,16 +62,21 @@ public class TransitionScript : MonoBehaviour
             }
         }
     }
+    
+    void OnTriggerEnter2D(Collider2D entranceCollider)
+    {
+        if (entranceCollider.CompareTag("Player"))
+        {
+            if (playerEntered) return;
+            playerEntered = true;
+            
+            LoadNextLevel();
+        }
+    }
 
     //Used in levels
     private void LoadNextLevel()
     {
-        // if (onChangeLevelDelegate != null)
-        // {
-        //     onChangeLevelDelegate.Invoke();
-        // }
-        if(OnChangeLevel != null) OnChangeLevel.Invoke();        
-        
         int sceneIndexToLoad = 0;
         if (willTransitionToCutsceneOrDialogue)
         {
@@ -91,6 +88,7 @@ public class TransitionScript : MonoBehaviour
         }
         
         StartCoroutine(LoadLevel(sceneIndexToLoad));
+        if(OnChangeLevel != null) OnChangeLevel.Invoke();
     }
 
 
@@ -111,16 +109,7 @@ public class TransitionScript : MonoBehaviour
     }
     
 
-    void OnTriggerEnter2D(Collider2D entranceCollider)
-    {
-        if (entranceCollider.CompareTag("Player"))
-        {
-            if (playerEntered) return;
-            playerEntered = true;
-            
-            LoadNextLevel();
-        }
-    }
+
     
     //Use in Lose Scene
     public void Restart()
@@ -131,6 +120,6 @@ public class TransitionScript : MonoBehaviour
     //Used in Win/Lose Scenes
     public void ReturnToMainMenu()
     {
-        StartCoroutine(LoadLevel(0));
+        StartCoroutine(LoadLevel(mainMenuIndex));
     }
 }

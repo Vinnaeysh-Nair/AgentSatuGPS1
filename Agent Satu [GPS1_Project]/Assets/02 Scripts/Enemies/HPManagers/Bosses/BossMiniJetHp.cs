@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class BossMiniJetHp : BossHp
 {
@@ -13,21 +15,36 @@ public class BossMiniJetHp : BossHp
 
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
-    
 
+
+    private FlyIntoScene _flyIntoScene;
+    private bool _canTakeDamage = false;
+
+
+    void OnDestroy()
+    {
+        _flyIntoScene.onReachingPointDelegate -= FlyIntoScene_OnReachingPoint;
+    }
+    
     void Start()
     {
+        _flyIntoScene = GetComponent<FlyIntoScene>();
+        _flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingPoint;
+        
+
         //reset static value
         killedBossesCount = 0;
         
         currHp = initialHp;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.CompareTag("Bullet"))
+        if (col.collider.CompareTag("Bullet"))
         {
-            BulletBehaviour bullet = col.GetComponent<BulletBehaviour>();
+            if (!_canTakeDamage) return;
+            
+            BulletBehaviour bullet = col.collider.GetComponent<BulletBehaviour>();
            
             //Visual
             bullet.SpawnBulletImpactEffect();
@@ -56,6 +73,10 @@ public class BossMiniJetHp : BossHp
             if (onReachingThresholdDelegate != null)
             {
                 onReachingThresholdDelegate.Invoke();
+                
+                //temporarily cant take damage
+                _canTakeDamage = false;
+                StartCoroutine(SetCanTakeDamageToTrue());
             }
         }
 
@@ -73,5 +94,16 @@ public class BossMiniJetHp : BossHp
         }
            
         gameObject.SetActive(false);
+    }
+
+    private void FlyIntoScene_OnReachingPoint()
+    {
+        _canTakeDamage = true;
+    }
+    
+    private IEnumerator SetCanTakeDamageToTrue()
+    {
+        yield return new WaitForSeconds(5f);
+        _canTakeDamage = true;
     }
 }

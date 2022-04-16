@@ -15,11 +15,12 @@ public class MiyaHp : BossHp
         currHp = initialHp;
     }
     
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.collider.CompareTag("Bullet"))
+        if (col.CompareTag("Bullet"))
         {
-            int dmg = col.collider.GetComponent<BulletBehaviour>().GetBulletDmg();
+            print("entered");
+            int dmg = col.GetComponent<BulletBehaviour>().GetBulletDmg();
             
             TakeDamage(dmg);
             col.gameObject.SetActive(false);
