@@ -395,7 +395,7 @@ public class MiyaPatterns : MonoBehaviour
             attackCounter = 1;
         }
         
-        
+
         //Adjustment for Atk1
         if (attackCounter == 1)
         {
