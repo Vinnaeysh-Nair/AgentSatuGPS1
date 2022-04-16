@@ -13,10 +13,22 @@ public class BossMiniJetHp : BossHp
 
     public delegate void OnReachingThreshold();
     public static event OnReachingThreshold onReachingThresholdDelegate;
-    
 
+
+    private FlyIntoScene _flyIntoScene;
+    private bool _canTakeDamage = false;
+
+
+    void OnDestroy()
+    {
+        _flyIntoScene.onReachingPointDelegate -= FlyIntoScene_OnReachingPoint;
+    }
+    
     void Start()
     {
+        _flyIntoScene = GetComponent<FlyIntoScene>();
+        _flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingPoint;
+
         //reset static value
         killedBossesCount = 0;
         
@@ -27,6 +39,8 @@ public class BossMiniJetHp : BossHp
     {
         if (col.CompareTag("Bullet"))
         {
+            if (!_canTakeDamage) return;
+            
             BulletBehaviour bullet = col.GetComponent<BulletBehaviour>();
            
             //Visual
@@ -73,5 +87,10 @@ public class BossMiniJetHp : BossHp
         }
            
         gameObject.SetActive(false);
+    }
+
+    private void FlyIntoScene_OnReachingPoint()
+    {
+        _canTakeDamage = true;
     }
 }
