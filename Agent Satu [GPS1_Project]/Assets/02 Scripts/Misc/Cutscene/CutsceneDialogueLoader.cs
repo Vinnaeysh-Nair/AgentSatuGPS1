@@ -219,6 +219,10 @@ public class CutsceneDialogueLoader : MonoBehaviour
             {
                 panelObj.SetActive(false);
             }
+            else
+            {
+                panelObj.SetActive(true);
+            }
         }
     }
     
