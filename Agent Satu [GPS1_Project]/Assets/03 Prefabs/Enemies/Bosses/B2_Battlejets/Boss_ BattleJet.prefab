@@ -234,23 +234,23 @@ MonoBehaviour:
   note: 
   attackCounter: 1
   timeToStartBattle: 1
-  atkChangeBufferTime: 5
+  atkChangeBufferTime: 3
   goToPositionMoveSpeed: 6
-  goToIdleMoveSpeed: 6
-  atk1ShotsPerBurst: 15
-  atk1FireRate: 12
-  atk1TimeUntilNextBurst: 3
+  goToIdleMoveSpeed: 8
+  atk1ShotsPerBurst: 24
+  atk1FireRate: 36
+  atk1TimeUntilNextBurst: 1
   playerFollowOffset: {x: 0, y: 0, z: 0}
-  playerFollowSpeed: 9
+  playerFollowSpeed: 50
   timeTillAttack2: 20
-  atk2FireRate: 12
-  nextPatternBufferTime: 3
+  atk2FireRate: 24
+  nextPatternBufferTime: 1
   patterns:
   - patternPoints:
     - {fileID: 4552666731396546161}
     - {fileID: 7050397678364414128}
     atk2ShotsPerBurst: 150
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4552666731396546161}
     atk2ShotsPerBurst: 160
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4789677135738669523}
     atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -496,23 +496,23 @@ MonoBehaviour:
   note: 
   attackCounter: 1
   timeToStartBattle: 1
-  atkChangeBufferTime: 5
+  atkChangeBufferTime: 3
   goToPositionMoveSpeed: 6
-  goToIdleMoveSpeed: 6
-  atk1ShotsPerBurst: 15
-  atk1FireRate: 12
-  atk1TimeUntilNextBurst: 3
+  goToIdleMoveSpeed: 8
+  atk1ShotsPerBurst: 24
+  atk1FireRate: 36
+  atk1TimeUntilNextBurst: 1
   playerFollowOffset: {x: 0, y: 0, z: 0}
-  playerFollowSpeed: 9
+  playerFollowSpeed: 50
   timeTillAttack2: 20
-  atk2FireRate: 12
-  nextPatternBufferTime: 3
+  atk2FireRate: 24
+  nextPatternBufferTime: 1
   patterns:
   - patternPoints:
     - {fileID: 4552666731396546161}
     - {fileID: 7050397678364414128}
     atk2ShotsPerBurst: 150
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
     - {fileID: 7050397678364414128}
     - {fileID: 4552666731396546161}
     atk2ShotsPerBurst: 160
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -530,7 +530,7 @@ MonoBehaviour:
     - {fileID: 4552666731396546161}
     - {fileID: 8615380413858509239}
     atk2ShotsPerBurst: 50
-    atk2InPatternMoveSpeed: 5
+    atk2InPatternMoveSpeed: 15
     isBurst: 0
     timePerBurst: 0
     keepShootingAfterReachingEndPoint: 0
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPointMovement: {fileID: 8259341326964542862}
-  bullet: {fileID: 863672036732972301, guid: e2fcffcc0b84b374584bd96413f53d8c, type: 3}
+  bullet: {fileID: 863672036732972301, guid: dc306a5efc9e01b42bd4bfa2749932b6, type: 3}
   firePoint: {fileID: 3239014364380856223}
   canShoot: 1
   canBurstShoot: 1
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPointMovement: {fileID: 3270828171033316716}
-  bullet: {fileID: 863672036732972301, guid: e2fcffcc0b84b374584bd96413f53d8c, type: 3}
+  bullet: {fileID: 863672036732972301, guid: dc306a5efc9e01b42bd4bfa2749932b6, type: 3}
   firePoint: {fileID: 1981822358676721732}
   canShoot: 1
   canBurstShoot: 1

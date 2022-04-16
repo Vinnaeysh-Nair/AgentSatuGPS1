@@ -15,7 +15,7 @@ public class MiyaPatterns : MonoBehaviour
     private PlayerMovement playerMovement;
     private Vector2 playerPos;
 
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     private Enemy_Flipped enemyFlipped;
     private EnemyAI_Ranged shootingAI;
     private Enemy_Agro enemyAgro;
@@ -89,7 +89,6 @@ public class MiyaPatterns : MonoBehaviour
         playerMovement = playerBody.GetComponent<PlayerMovement>();
         playerHpSystem = playerBody.GetComponent<PlayerHpSystem>();
         
-        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         enemyFlipped = GetComponent<Enemy_Flipped>();
         enemyAgro = GetComponent<Enemy_Agro>();
@@ -279,10 +278,12 @@ public class MiyaPatterns : MonoBehaviour
     //quick dash, leaving a trail that damages the player if not avoided
     private void Attack3()
     {
+        bladeTrail.gameObject.SetActive(true);
         if (isStandingStill) return;
-        
+       
         if (Time.time > nextDashTime)
         {
+
             rb.velocity = new Vector2(0f, rb.velocity.y);
             Dash();
         
@@ -305,13 +306,13 @@ public class MiyaPatterns : MonoBehaviour
         
         isDoingAtk3 = false;
         atk3DetectionBox.enabled = true;
-        enemyAgro.enabled = false;
         
+        enemyAgro.enabled = false;
         isStandingStill = true;
+
+
         Invoke(nameof(SetIsStandingStillToFalse), 2f);
         
-        bladeTrail.Clear();
-        bladeTrail.gameObject.SetActive(true);
         
         float dirX = 1f;
         if (!enemyFlipped.GetIsFacingRight())
@@ -332,6 +333,7 @@ public class MiyaPatterns : MonoBehaviour
         dashEndPos = bodyCenter.position;
         dashDistanceTravelled = Vector2.Distance(dashEndPos, dashStartPos);
         atk3DetectionBox.size = new Vector2(dashDistanceTravelled - 3f, atk3DetectionBox.size.y);
+       
         
         StartCoroutine(DisableBladeTrail());
     }
@@ -339,7 +341,8 @@ public class MiyaPatterns : MonoBehaviour
     private IEnumerator DisableBladeTrail()
     {
         yield return new WaitForSeconds(3f);
-        
+        bladeTrail.Clear();
+
         bladeTrail.gameObject.SetActive(false);
         enemyAgro.enabled = true;
         atk3DetectionBox.enabled = false;

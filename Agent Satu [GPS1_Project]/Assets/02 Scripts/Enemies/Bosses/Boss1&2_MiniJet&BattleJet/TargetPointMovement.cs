@@ -188,7 +188,7 @@ public class TargetPointMovement : MonoBehaviour
         
         
         //Track player constantly
-        if (Vector2.Distance(transform.position, playerPos + (Vector2) playerFollowOffset) > 0.01f)   //small value to offset inaccuracy
+        if (Vector2.Distance(transform.position, playerPos + (Vector2) playerFollowOffset) > 0.1f)   //small value to offset inaccuracy
         {
             Move(playerPos, playerFollowSpeed, playerFollowOffset);
         }

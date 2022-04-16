@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHp: 0
   healthBar: {fileID: 4857427487924168674}
-  initialHp: 50
+  initialHp: 75
   summonThreshold: 0.5
   explosionSound: {fileID: 8300000, guid: 5dc987a022f92b247a55e9c156a66561, type: 3}
   explosionVFX: {fileID: 4447203928096976665, guid: 1232324d1118ebe438d25fb674d63a4a, type: 3}
@@ -727,6 +727,7 @@ MonoBehaviour:
     timePerBurst: 1
     keepShootingAfterReachingEndPoint: 1
     timeStayingAtEndPoint: 0
+  missileLauncher: {fileID: 0}
   timeTillAttack1: 5
 --- !u!1 &2945473302089705239
 GameObject:
@@ -980,6 +981,7 @@ MonoBehaviour:
     timePerBurst: 1
     keepShootingAfterReachingEndPoint: 1
     timeStayingAtEndPoint: 0
+  missileLauncher: {fileID: 0}
   timeTillAttack1: 5
 --- !u!1 &2945473302136862965
 GameObject:
