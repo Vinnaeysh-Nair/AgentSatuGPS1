@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &101348670 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6093146166809743288, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-  m_PrefabInstance: {fileID: 411602948}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &131774591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6284905173621640070, guid: 70aad461b2c62644f99733eeb64d5184, type: 3}
@@ -603,6 +598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 657152752, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
+      propertyPath: hpBar
+      value: 
+      objectReference: {fileID: 562938498}
     - target: {fileID: 1028974917125957210, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
       propertyPath: m_Name
       value: 'Boss_Miya '
@@ -651,22 +650,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6093146166809743265, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6093146166809743290, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: hpBar
-      value: 
-      objectReference: {fileID: 562938498}
-    - target: {fileID: 6093146166809743290, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: initialHp
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6093146166809743291, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 657152752}
     - target: {fileID: 6093146166809743291, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
       propertyPath: platforms.Array.data[0]
       value: 
@@ -679,8 +662,7 @@ PrefabInstance:
       propertyPath: platforms.Array.data[2]
       value: 
       objectReference: {fileID: 625189396}
-    m_RemovedComponents:
-    - {fileID: 6093146166809743294, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
 --- !u!4 &491472243 stripped
 Transform:
@@ -925,76 +907,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &657152749
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 657152750}
-  - component: {fileID: 657152752}
-  - component: {fileID: 657152751}
-  m_Layer: 15
-  m_Name: PlatformDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &657152750
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657152749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 101348670}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &657152751
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657152749}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.6, y: 4.06}
-  m_Size: {x: 2, y: 7}
-  m_Direction: 0
---- !u!50 &657152752
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657152749}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &659045001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,7 +1528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842552306964915185, guid: 48bb9ef7b43229c4fab9deba55a33289, type: 3}
       propertyPath: hpCountPlayer
-      value: 1000
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5842552307484546463, guid: 48bb9ef7b43229c4fab9deba55a33289, type: 3}
       propertyPath: m_LocalRotation.w

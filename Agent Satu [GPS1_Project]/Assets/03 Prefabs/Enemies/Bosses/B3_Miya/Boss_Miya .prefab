@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &657152749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657152750}
+  - component: {fileID: 657152751}
+  - component: {fileID: 657152752}
+  m_Layer: 11
+  m_Name: HitDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657152750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657152749}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6093146166809743288}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &657152751
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657152749}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.6, y: 4.06}
+  m_Size: {x: 2, y: 7}
+  m_Direction: 0
+--- !u!114 &657152752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657152749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f4977811e582b44810b778ba645e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currHp: 0
+  healthBar: {fileID: 0}
+  initialHp: 120
+  hpBar: {fileID: 0}
+  atk4HpThresholds:
+  - 0.75
+  - 0.5
+  - 0.2
 --- !u!1 &305924028702016326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,12 +2147,11 @@ GameObject:
   - component: {fileID: 6093146166809743295}
   - component: {fileID: 6093146166809743292}
   - component: {fileID: 6093146166809743293}
-  - component: {fileID: 6093146166809743290}
   - component: {fileID: 6093146166809743291}
   - component: {fileID: 6093146166809743264}
   - component: {fileID: 6093146166809743267}
   - component: {fileID: 6093146166809743266}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: MiyaBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2109,6 +2177,7 @@ Transform:
   - {fileID: 1028974917690258651}
   - {fileID: 1028974916654809008}
   - {fileID: 6735677211950352827}
+  - {fileID: 657152750}
   m_Father: {fileID: 1028974917125957213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2191,26 +2260,6 @@ MonoBehaviour:
   AgroRange: 1000
   detectionSpeed: 0
   loseDetectionSpeed: 0
---- !u!114 &6093146166809743290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919951640459548635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f4977811e582b44810b778ba645e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currHp: 0
-  healthBar: {fileID: 0}
-  initialHp: 5
-  hpBar: {fileID: 0}
-  atk4HpThresholds:
-  - 0.75
-  - 0.5
-  - 0.2
 --- !u!114 &6093146166809743291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,6 +2282,7 @@ MonoBehaviour:
   playerHitLayer:
     serializedVersion: 2
     m_Bits: 128
+  rb: {fileID: 6093146166809743294}
   moveSpeed: 1250
   jumpForce: 1750
   xDistToStartAttack: 3
