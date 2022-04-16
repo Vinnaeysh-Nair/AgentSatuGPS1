@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         canWallJumpLeft = (collidedPlatform.normal == Vector2.left);
         canWallJumpRight = (collidedPlatform.normal == Vector2.right);
         
-        if (canWallJumpLeft|| canWallJumpRight)
+        if (canWallJumpLeft || canWallJumpRight)
         {
             canWallJump = true;
             return;
@@ -356,6 +356,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ResetWallJump());
                 
             jumpedToLeft = true;
+            
+            //enable walljump of opposite side
+            jumpedToRight = false;
         }
         else if (canWallJumpRight && !jumpedToRight)
         {
@@ -365,6 +368,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ResetWallJump());
                 
             jumpedToRight = true;
+            
+            //enable walljump of opposite side
+            jumpedToLeft = false;
         }
         else
         {
