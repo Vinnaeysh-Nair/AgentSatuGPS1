@@ -370,17 +370,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99667727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.587678}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7578600435504314856}
-  m_RootOrder: 1
+  m_Father: {fileID: 7578600434198465651}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 104.44006, y: -6.920746}
-  m_SizeDelta: {x: 230.56104, y: 129.69061}
+  m_AnchoredPosition: {x: -495, y: -344.8}
+  m_SizeDelta: {x: -1049.439, y: -590.3094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &99667731
 CanvasRenderer:
@@ -433,7 +433,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 951101b373ce394478331c30780bcc92, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -10366,6 +10366,7 @@ RectTransform:
   - {fileID: 307690166}
   - {fileID: 573055740}
   - {fileID: 39488697}
+  - {fileID: 99667728}
   m_Father: {fileID: 7578600435504314856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10659,7 +10660,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7578600434198465651}
-  - {fileID: 99667728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10719,6 +10719,90 @@ MonoBehaviour:
       - {fileID: 9028615877741567721}
       - {fileID: 3322116334930028090}
       - {fileID: 6721225483664958626}
+  - loadId: 2
+    cutsceneTransform: {fileID: 95689128}
+    loadsBackToCutscene: 1
+    cutsceneOrDialogue: 0
+    nextLoadId: 1
+    levelToLoadSceneName: Dialogue 7
+    levelToLoadIndex: 0
+    panels:
+    - panelTransform: {fileID: 1901290871}
+      sections:
+      - {fileID: 728394207}
+      - {fileID: 904890899}
+      - {fileID: 756756763}
+      - {fileID: 2047130415}
+      - {fileID: 1794511536}
+      - {fileID: 1185613328}
+      - {fileID: 1681885802}
+    - panelTransform: {fileID: 650153688}
+      sections:
+      - {fileID: 1725024759}
+      - {fileID: 599610369}
+      - {fileID: 1417079055}
+      - {fileID: 1354891890}
+    - panelTransform: {fileID: 1289981010}
+      sections:
+      - {fileID: 2075879924}
+      - {fileID: 465832880}
+  - loadId: 3
+    cutsceneTransform: {fileID: 6858786}
+    loadsBackToCutscene: 1
+    cutsceneOrDialogue: 0
+    nextLoadId: 4
+    levelToLoadSceneName: Cutscene 5
+    levelToLoadIndex: -1
+    panels:
+    - panelTransform: {fileID: 1906361244}
+      sections:
+      - {fileID: 1329164583}
+      - {fileID: 633256078}
+      - {fileID: 735792211}
+      - {fileID: 935410903}
+      - {fileID: 677920957}
+      - {fileID: 2101246639}
+      - {fileID: 671514653}
+      - {fileID: 1196105657}
+      - {fileID: 2116624157}
+      - {fileID: 1002538449}
+  - loadId: 4
+    cutsceneTransform: {fileID: 1314878315}
+    loadsBackToCutscene: 0
+    cutsceneOrDialogue: 0
+    nextLoadId: 1
+    levelToLoadSceneName: Level 4-1
+    levelToLoadIndex: -2
+    panels:
+    - panelTransform: {fileID: 2103746373}
+      sections:
+      - {fileID: 2061177981}
+      - {fileID: 1778061498}
+      - {fileID: 773038954}
+      - {fileID: 1906234576}
+    - panelTransform: {fileID: 185172383}
+      sections:
+      - {fileID: 1703395067}
+      - {fileID: 1067847493}
+      - {fileID: 1285369261}
+      - {fileID: 163380120}
+      - {fileID: 4292333325331334409}
+      - {fileID: 3635965659227250588}
+      - {fileID: 1601230823821462632}
+    - panelTransform: {fileID: 1095988488}
+      sections:
+      - {fileID: 1984996121}
+      - {fileID: 255413184}
+      - {fileID: 392952220}
+      - {fileID: 1041314986}
+      - {fileID: 337486250}
+    - panelTransform: {fileID: 1594197664}
+      sections:
+      - {fileID: 360948097}
+      - {fileID: 195226048}
+      - {fileID: 632370804}
+      - {fileID: 2022066519}
+      - {fileID: 3009603537979483852}
   dialoguesArray:
   - loadId: 0
     dialogueTransform: {fileID: 1640147014}
@@ -10832,7 +10916,7 @@ MonoBehaviour:
     cutsceneOrDialogue: 0
     nextLoadId: 3
     levelToLoadSceneName: Cutscene 4
-    levelToLoadIndex: 1
+    levelToLoadIndex: -1
     backgrounds:
     - {fileID: 21300000, guid: e05ac6486c147d6429dd1a69b086a4de, type: 3}
     lines:
