@@ -444,18 +444,12 @@ public class PlayerController : MonoBehaviour
         
         rb.gravityScale = gravity;
     }
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.collider.CompareTag("Solid Ground"))
-    //     {
-    //         //animCon.OnLanding();
-    //     }
-    // }
+
     private RaycastHit2D TouchingPlatformCheck()
     {
         //Offset incase of uneven terrain
-        float extraHeightTest = .1f;
-        float extraWidthTest = .1f;
+        float extraHeightTest = .3f;
+        float extraWidthTest = .3f;
      
 
         //Draw BoxCast ground check
@@ -477,7 +471,7 @@ public class PlayerController : MonoBehaviour
              rayColor = Color.red;
          }
         
-        //See boxcast gizmos
+         //See boxcast gizmos
          Debug.DrawRay(lowerBodyPlatformDetector.bounds.center + new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
          Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, 0f), Vector2.down * (lowerBodyPlatformDetector.bounds.extents.y + extraHeightTest), rayColor);
          Debug.DrawRay(lowerBodyPlatformDetector.bounds.center - new Vector3(lowerBodyPlatformDetector.bounds.extents.x, lowerBodyPlatformDetector.bounds.extents.y), Vector2.right, rayColor);
