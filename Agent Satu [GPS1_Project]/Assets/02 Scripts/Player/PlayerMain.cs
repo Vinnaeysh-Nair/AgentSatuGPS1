@@ -46,7 +46,7 @@ public  class PlayerMain : MonoBehaviour
         ProgressSaving.SaveFile();
     }
 
-    private  void LoadPlayerProgress()
+    private void LoadPlayerProgress()
     {
         if (ProgressSaving.LoadFile())
         {

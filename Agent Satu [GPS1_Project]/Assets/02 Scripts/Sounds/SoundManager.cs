@@ -125,6 +125,8 @@ public class SoundManager : MonoBehaviour
         
         ChangeMusicVol(musicVolume);
         ChangeEffectVol(effectsVolume);
+        
+        SwapMusic(1);
     }
 
     private void SetupArray(SoundInfo[] soundsArray, AudioMixer mixer)

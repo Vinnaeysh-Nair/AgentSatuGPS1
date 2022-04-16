@@ -149,7 +149,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
             if (currCutscene == -1)
             {
-                print("no cutscene");
+                Debug.LogWarning("No such Cutscene.");
                 return;
             }
             OpenFirstPanel(cutscenesArray[currCutscene]);
@@ -168,7 +168,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
             if (currDialogue == -1)
             {
-                print("no dialogue");
+                Debug.LogWarning("No such Dialogue.");
                 return;
             }
         
@@ -179,7 +179,6 @@ public class CutsceneDialogueLoader : MonoBehaviour
 
     void Update()
     {
-        
         if (Input.GetButtonDown("ProceedInteraction"))
         {
             if(cutsceneOrDialogue)
@@ -189,7 +188,7 @@ public class CutsceneDialogueLoader : MonoBehaviour
             }
             else
             {
-                 NextLine();
+                NextLine();
             }
         }
     }

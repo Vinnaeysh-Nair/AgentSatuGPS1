@@ -12,7 +12,6 @@ public class TransitionScript : MonoBehaviour
     public static int lastLevelIndex = 0;
     
     [Header("General")]
-    //public KeyCode transitionButton;
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
     
@@ -39,12 +38,13 @@ public class TransitionScript : MonoBehaviour
 
     void Start()
     {
-        if(OnSceneChange != null) OnSceneChange.Invoke(SceneManager.GetActiveScene().buildIndex);
+        int currIndex = SceneManager.GetActiveScene().buildIndex;
+        if(OnSceneChange != null) OnSceneChange.Invoke(currIndex);
         
         if (isLoseScene) return;
             
         //If already cutscene dont overwrite
-        lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        lastLevelIndex = currIndex;
         if (lastLevelIndex != cutsceneSceneIndex)
         {
             cutsceneDialogueSo.loadId = loadId;
@@ -62,12 +62,21 @@ public class TransitionScript : MonoBehaviour
             }
         }
     }
+    
+    void OnTriggerEnter2D(Collider2D entranceCollider)
+    {
+        if (entranceCollider.CompareTag("Player"))
+        {
+            if (playerEntered) return;
+            playerEntered = true;
+            
+            LoadNextLevel();
+        }
+    }
 
     //Used in levels
     private void LoadNextLevel()
     {
-        if(OnChangeLevel != null) OnChangeLevel.Invoke();        
-        
         int sceneIndexToLoad = 0;
         if (willTransitionToCutsceneOrDialogue)
         {
@@ -79,6 +88,7 @@ public class TransitionScript : MonoBehaviour
         }
         
         StartCoroutine(LoadLevel(sceneIndexToLoad));
+        if(OnChangeLevel != null) OnChangeLevel.Invoke();
     }
 
 
@@ -99,16 +109,7 @@ public class TransitionScript : MonoBehaviour
     }
     
 
-    void OnTriggerEnter2D(Collider2D entranceCollider)
-    {
-        if (entranceCollider.CompareTag("Player"))
-        {
-            if (playerEntered) return;
-            playerEntered = true;
-            
-            LoadNextLevel();
-        }
-    }
+
     
     //Use in Lose Scene
     public void Restart()
