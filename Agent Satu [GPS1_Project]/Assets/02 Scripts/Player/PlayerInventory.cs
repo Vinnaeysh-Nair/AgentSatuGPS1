@@ -62,15 +62,11 @@ public class PlayerInventory : MonoBehaviour
 
     private void SaveGunState()
     {
-        print("saving");
-        
         ChangeGunState(weaponsArray, playerWeaponSaveSo.savedWepState);
     }
     
     private void RetrieveGunState()
     {
-        print("retrieving");
-   
         ChangeGunState(playerWeaponSaveSo.savedWepState, weaponsArray);
     }
 

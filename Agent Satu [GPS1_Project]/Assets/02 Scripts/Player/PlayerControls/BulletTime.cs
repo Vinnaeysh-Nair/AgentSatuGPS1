@@ -2,6 +2,9 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using JetBrains.Annotations;
+
 
 public class BulletTime : MonoBehaviour
 {
@@ -25,10 +28,24 @@ public class BulletTime : MonoBehaviour
 
     private SoundManager _soundManager;
 
+    public static event Action OnActivateBulletTime;
+    public static event Action OnDeactivateBulletTime;
+
+
+    void OnDestroy()
+    {
+        OnActivateBulletTime -= _soundManager.BulletTime_OnActivateBulletTime;
+        OnDeactivateBulletTime -= _soundManager.BulletTime_OnDeactivateBulletTime;
+    }
+
+
     void Start()
     {
         pauseMenu = PauseMenu.Instance;
         _soundManager = SoundManager.Instance;
+        
+        OnActivateBulletTime += _soundManager.BulletTime_OnActivateBulletTime;
+        OnDeactivateBulletTime += _soundManager.BulletTime_OnDeactivateBulletTime;
     }
 
     // Update is called once per frame
@@ -77,7 +94,7 @@ public class BulletTime : MonoBehaviour
     
     private void ActivateBulletTime()
     {
-        _soundManager.BulletTimePitchDown();
+        if(OnActivateBulletTime != null) OnActivateBulletTime.Invoke();
         
         activated = true;
         Time.timeScale *= slowdownFactor;
@@ -95,8 +112,7 @@ public class BulletTime : MonoBehaviour
             
         }
         activated = false;
-        _soundManager.BulletTimePitchReset();
-     
+        if(OnDeactivateBulletTime != null) OnDeactivateBulletTime.Invoke();
     }
     
     private void DepleteGauge()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ using UnityEngine;
     - for enemies, only drop one type of each enemies, as limbs of the same name can be reused by the pooler.
     - no additional rule for pooling standalone gameObjects, just drag and drop inside.
  */
+
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -23,13 +25,16 @@ public class ObjectPooler : MonoBehaviour
     #endregion
 
     //Components
+    //Add objects in inspector
     [Header("Insert gameObjects to pool here:")]
     [SerializeField] private GameObject[] objectArr;
 
+  
+
     //Fields
-    private const int smallPoolSize = 5;
+    private const int smallPoolSize = 10;
     private const int bigPoolSize = 100;
-    private TagManager tagManager;
+    public static TagManager tagManager;
     
     
     [System.Serializable] 
@@ -50,11 +55,7 @@ public class ObjectPooler : MonoBehaviour
                 this.size = smallPoolSize;
             
         }
-
-        public void SetName(string name)
-        {
-            this.name = name;
-        }
+        
         public string GetName()
         {
             return name;
@@ -75,32 +76,27 @@ public class ObjectPooler : MonoBehaviour
 
     void Start()
     {
-        tagManager = transform.Find("/ScriptableObjects/TagManager").GetComponent<TagManager>();
-        
+        tagManager = FindObjectOfType<TagManager>();
+
         //Stops ObjectPooler from creating more pools than necessary when entering and exiting playmode.
         if (pools.Count > 0) pools.Clear();
-        
         
         
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
         
         //Mainly for pooling limbs, also for bullet and FX
-        //Add characters in inspector
         foreach (GameObject obj in objectArr)
         {
-            //For objects with Limb gameObjects as children
-            if (obj.transform.childCount > 0)
+            //If tag is "Enemy", the obj is a limb container
+            //Finds all chidlren in obj, excludes bones, add to pools list
+            if (obj.CompareTag("Enemy"))
             {
-                //Finds all chidlren in obj, excludes bones, add to pools list
                 for (int i = 0; i < obj.transform.childCount; i++)
                 {
                     GameObject child = obj.transform.GetChild(i).gameObject;
+                    Pool newPool = new Pool(child.name, child);
+                    pools.Add(newPool);
 
-                    if (child.CompareTag(tagManager.tagSO.limbOthersTag) || child.CompareTag(tagManager.tagSO.limbLegTag) || child.CompareTag(tagManager.tagSO.limbHeadTag))
-                    {
-                        Pool newPool = new Pool(child.name, child);
-                        pools.Add(newPool);
-                    }
                 }
             }
             //For standalone objects

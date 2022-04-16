@@ -36,11 +36,6 @@ public class OverallHp : EnemyHp
     {
         _soundManager = SoundManager.Instance;
         
-        // if (soundManage == null)
-        // {
-        //     Debug.LogError("No sound manager added into the scene");
-        // }
-        
         ragdoll = transform.GetChild(0).GetComponent<Ragdoll>();
         spawnPickups = GetComponent<SpawnPickups>();
         
@@ -88,14 +83,12 @@ public class OverallHp : EnemyHp
         currHp -= dmg;
         
         //Die
-        if (currHp <= 0)
+        if (currHp == 0)
         {
             Die(flingDirection);
         }
         
         //Trigger detection when damaged
-        //OnDamaged?.Invoke(this, EventArgs.Empty);
-
         if (onDamagedDelegate != null)
         {
             onDamagedDelegate.Invoke();
