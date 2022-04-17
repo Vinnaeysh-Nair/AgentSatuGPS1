@@ -12,10 +12,13 @@ public class LightningEffect : MonoBehaviour
     private bool lightningable = true;
     private float tempTimer;
     private float[] lightningTimer;
+    private SoundManager sManager;
 
     void Start()
     {
         //light = .GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        sManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         if (lightTimer == 0)
             lightTimer = 1.0f;
         tempTimer = lightTimer;
@@ -46,6 +49,14 @@ public class LightningEffect : MonoBehaviour
     void lightning()
     {
         light.intensity = 1.0f;
+
+        int temp = Random.Range(1, 4);
+        if(temp == 1) 
+            sManager.PlayEffect("Thunder1");
+        else if(temp == 2) 
+            sManager.PlayEffect("Thunder2");
+        else 
+            sManager.PlayEffect("Thunder3");
     }
 
     IEnumerator fadeBackToDark()
