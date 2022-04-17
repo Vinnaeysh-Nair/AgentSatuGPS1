@@ -3,9 +3,15 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private Animator anim;
+    private SoundManager sManager;
 
     public delegate void OnCrouchEnd();
     public static OnCrouchEnd onCrouchEndDelegate;
+
+    private void Start()
+    {
+        sManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
 
     public void OnMoving()
     {
@@ -25,6 +31,7 @@ public class PlayerAnimationController : MonoBehaviour
     public void OnDodgerolling()
     {
         anim.SetBool("IsDodgerolling", true);
+        sManager.PlayEffect("DashSound");
     }
     
     public void OnDodgerollEnd()
