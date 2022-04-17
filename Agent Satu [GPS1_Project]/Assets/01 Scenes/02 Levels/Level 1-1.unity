@@ -4497,11 +4497,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 27.5, y: 0.7116699}
   m_EdgeRadius: 0
---- !u!95 &739419547 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4495569231901491824, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-  m_PrefabInstance: {fileID: 1836426315}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781618773
 GameObject:
   m_ObjectHideFlags: 0
@@ -5173,7 +5168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].name
@@ -5189,6 +5184,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[3].name
+      value: Chong Wick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[4].name
       value: Grace
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
@@ -5209,7 +5208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[3].speakerId
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
@@ -5253,8 +5252,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[4].sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.data[0]
-      value: 'Oh Hello Agent Chong!!
+      value: 'Hello there, Agent Chong!
 
 '
       objectReference: {fileID: 0}
@@ -5273,7 +5276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[1].sentences.Array.data[0]
-      value: 'Who the hell are you??
+      value: 'Eh, who''s this?
 
 '
       objectReference: {fileID: 0}
@@ -5287,7 +5290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[2].sentences.Array.data[0]
-      value: 'Shut up la! I am grace.We have a job for you Agent Chong!!
+      value: 'My name''s Grace, sir. I''m from SIIS, we have an urgent job for you!
 
 '
       objectReference: {fileID: 0}
@@ -5302,8 +5305,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[3].sentences.Array.data[0]
-      value: 'This neighbourhood is held by a large number of gang members, and we
-        need you to evacuate it and inform us of all of their narcotics operations.
+      value: 'Oooh, okay okay. What''s going on?
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[4].sentences.Array.data[0]
+      value: 'This neighbourhood is being controlled by a large gang, we need you
+        to clear the members out and investigate their narcotics operation.
 
 '
       objectReference: {fileID: 0}
@@ -8067,7 +8077,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1836426316}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1417128576
 MonoBehaviour:
@@ -8082,7 +8092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLoseScene: 0
-  transition: {fileID: 739419547}
   transitionTime: 1
   cutsceneDialogueSo: {fileID: 0}
   willTransitionToCutsceneOrDialogue: 0
@@ -10127,7 +10136,7 @@ PrefabInstance:
     - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: transition
       value: 
-      objectReference: {fileID: 739419547}
+      objectReference: {fileID: 0}
     - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: cutsceneSceneIndex
       value: 8

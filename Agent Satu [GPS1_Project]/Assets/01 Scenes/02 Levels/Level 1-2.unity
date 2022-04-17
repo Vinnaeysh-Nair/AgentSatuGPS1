@@ -2041,11 +2041,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 42, y: 42}
   m_EdgeRadius: 0
---- !u!95 &424907493 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4495569231901491824, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-  m_PrefabInstance: {fileID: 1508781784}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &457514355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,11 +4971,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.data[0]
-      value: susah nya!!!
+      value: Wah, this is harder than I thought.
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[1].sentences.Array.data[0]
-      value: Watch Out!. It's not done yet.
+      value: Watch out! You have incoming enemies!
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[2].sentences.Array.data[0]
@@ -7317,11 +7312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.data[0]
-      value: Are you seeing me? I am on fire!!
+      value: Woah, did you see that? I got them good.
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[1].sentences.Array.data[0]
-      value: Oh Yes! That got me excited!!
+      value: Yeah, I did! You're doing great, just be careful!
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290710108124, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: m_RootOrder
@@ -11324,7 +11319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1670457333}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2141427851
 MonoBehaviour:
@@ -11339,7 +11334,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLoseScene: 0
-  transition: {fileID: 424907493}
   transitionTime: 1
   cutsceneDialogueSo: {fileID: 0}
   willTransitionToCutsceneOrDialogue: 0
