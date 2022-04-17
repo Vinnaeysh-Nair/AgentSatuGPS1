@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3771336647935852840
+--- !u!1 &1763827230612281491
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2923333997582877605}
-  - component: {fileID: 4510891060443452789}
+  - component: {fileID: 341677628000786974}
+  - component: {fileID: 1348197738719268046}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2923333997582877605
+--- !u!4 &341677628000786974
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3771336647935852840}
+  m_GameObject: {fileID: 1763827230612281491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.09364, y: -4.834687, z: 0.2257076}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4510891060443452789
+--- !u!114 &1348197738719268046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3771336647935852840}
+  m_GameObject: {fileID: 1763827230612281491}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e0595e01b960c8439db177ed67d31af, type: 3}
@@ -366,6 +366,50 @@ MonoBehaviour:
     maxRandPitch: 1.165
   - name: missileLaunch
     adClip: {fileID: 8300000, guid: 250c9c6444c712f45b14aaa3d32780bb, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.883
+    maxRandPitch: 1.096
+  - name: DashSound
+    adClip: {fileID: 8300000, guid: 7dda984b6a4e47c4d840dfe311ec6577, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.883
+    maxRandPitch: 1.096
+  - name: Thunder1
+    adClip: {fileID: 8300000, guid: 9805cf5368f76864ab8874ef7e32cf94, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.883
+    maxRandPitch: 1.096
+  - name: Thunder2
+    adClip: {fileID: 8300000, guid: 05e52a96c04824e4694a0287f492c22d, type: 3}
+    volume: 0.8
+    pitch: 0.8
+    playOnAwake: 0
+    loop: 0
+    adSource: {fileID: 0}
+    minRandVol: 0.99
+    maxRandVol: 1.01
+    minRandPitch: 0.883
+    maxRandPitch: 1.096
+  - name: Thunder3
+    adClip: {fileID: 8300000, guid: 3a76da682c93d8d44a288cd48aa82317, type: 3}
     volume: 0.8
     pitch: 0.8
     playOnAwake: 0

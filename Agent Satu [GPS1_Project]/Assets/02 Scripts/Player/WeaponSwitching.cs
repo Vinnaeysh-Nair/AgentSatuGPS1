@@ -29,8 +29,17 @@ public class WeaponSwitching : MonoBehaviour
         //Scroll wheel to change weapon
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (!IsNextWeaponUnlocked()) return;
-            
+            if (!IsNextWeaponUnlocked())
+            {
+                // int temp = FindNextUnlockedWeapon();
+                // if (prevSelectedWeapon != temp)
+                // {
+                //     selectedWeapon = temp;
+                //     StartingWeapon();
+                //     WeaponIsSwitched();
+                // }
+                return;
+            }
             
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
@@ -43,8 +52,18 @@ public class WeaponSwitching : MonoBehaviour
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (!IsPrevWeaponUnlocked()) return;
-            
+            if (!IsPrevWeaponUnlocked())
+            {
+                // int temp = FindPrevUnlockedWeapon();
+                // if (prevSelectedWeapon != temp)
+                // {
+                //     selectedWeapon = temp;
+                //     print(temp);
+                //     StartingWeapon();
+                //     WeaponIsSwitched();
+                // }
+                return;
+            }
             
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
@@ -111,7 +130,7 @@ public class WeaponSwitching : MonoBehaviour
     private bool IsPrevWeaponUnlocked()
     {
         int prevWep = 0;
-        if (selectedWeapon - 1 >= 0)
+        if (selectedWeapon - 1 > 0)
         {
             prevWep = selectedWeapon - 1;
         }
@@ -140,10 +159,41 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    // private int FindNextUnlockedWeapon()
+    // {
+    //     int foundWep = 0;
+    //     for (int i = 0; i < _weaponsArray.Length; i++)
+    //     {
+    //         if (_weaponsArray[i].IsUnlocked && i != selectedWeapon)
+    //         {
+    //             foundWep = i;
+    //             return foundWep;
+    //         }
+    //     }
+    //     return 0;
+    // }
+    //
+    // private int FindPrevUnlockedWeapon()
+    // {
+    //     int foundWep = 0;
+    //     for (int i = _weaponsArray.Length - 1; i > 0; i--)
+    //     {
+    //         if (_weaponsArray[i].IsUnlocked)
+    //         {
+    //             foundWep = i;
+    //             print(foundWep);
+    //             return foundWep;
+    //         }
+    //     }
+    //
+    //     return foundWep;
+    // }
+    
     private void WeaponIsSwitched()
     {
         if (onWeaponChangeDelegate != null)
         {
+            print("invoked");
             onWeaponChangeDelegate.Invoke();
         }
     }
