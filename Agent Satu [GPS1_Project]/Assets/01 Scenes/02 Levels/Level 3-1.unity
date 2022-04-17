@@ -6765,11 +6765,6 @@ Transform:
   m_Father: {fileID: 703065395}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &424907493 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4495569231901491824, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-  m_PrefabInstance: {fileID: 1508781784}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &426975414
 GameObject:
   m_ObjectHideFlags: 0
@@ -19284,7 +19279,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 1514541030}
     m_Modifications:
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].name
+      value: Chong Wick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[2].name
       value: Chong Wick
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
@@ -19296,16 +19299,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[2].speakerId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[2].sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.data[0]
-      value: Are you seeing me? I am on fire!!
+      value: " (panting, breathing heavily, very tired) \r\nAiyo grace, this mountain
+        ah, so difficult to climb, why is my next mission here?\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[1].sentences.Array.data[0]
-      value: Oh Yes! That got me excited!!
+      value: "After your previous mission, we received intel that Dr Lee actually
+        betrayed 2B2T so Dr Lee hid himself in this mountain and you need to find
+        him before 2B2T does. This way, Dr Lee will help us gain more information
+        about 2B2T since we\u2019ll protect him."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
+      propertyPath: dialogue.Array.data[2].sentences.Array.data[0]
+      value: "Alright, I got it. I\u2019ll locate Dr Lee as soon as possible."
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290710108124, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: m_RootOrder
@@ -22261,12 +22280,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1514541030}
   m_Layer: 0
-  m_Name: Grace convo 2
+  m_Name: Grace convo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1514541030
 Transform:
   m_ObjectHideFlags: 0
@@ -22275,7 +22294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514541029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.5, y: 0.77, z: -0.34638596}
+  m_LocalPosition: {x: 4.5, y: 0.77, z: -0.34638596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29821,7 +29840,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1670457333}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2141427851
 MonoBehaviour:
@@ -29836,7 +29855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLoseScene: 0
-  transition: {fileID: 424907493}
   transitionTime: 1
   cutsceneDialogueSo: {fileID: 0}
   willTransitionToCutsceneOrDialogue: 0
