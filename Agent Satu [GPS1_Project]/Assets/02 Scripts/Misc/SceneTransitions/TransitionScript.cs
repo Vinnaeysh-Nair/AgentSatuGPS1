@@ -98,7 +98,7 @@ public class TransitionScript : MonoBehaviour
         StartCoroutine(LoadLevel(index));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    private IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
 
