@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 // Create the blueprint for properties the sound needs
 //  System.Serializable to be accessible through the Inspector in unity
@@ -126,7 +126,7 @@ public class SoundManager : MonoBehaviour
         ChangeMusicVol(musicVolume);
         ChangeEffectVol(effectsVolume);
         
-        SwapMusic(1);
+        SwapMusic(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void SetupArray(SoundInfo[] soundsArray, AudioMixer mixer)
