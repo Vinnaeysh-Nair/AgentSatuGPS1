@@ -4464,7 +4464,7 @@ Transform:
   - {fileID: 315486857}
   - {fileID: 813368260}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242918490
 GameObject:
@@ -4505,7 +4505,7 @@ Transform:
   - {fileID: 1573176650}
   - {fileID: 1713528036}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1280097586
 PrefabInstance:
@@ -4945,11 +4945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80b117792089874ebdbfd966ec15563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1344135593 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4495569231901491824, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-  m_PrefabInstance: {fileID: 2003205525}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1355709942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5226,7 +5221,7 @@ Transform:
   m_Children:
   - {fileID: 259206292239466579}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431454479
 GameObject:
@@ -5745,22 +5740,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[0].sentences.Array.data[0]
-      value: Good job there Agent Chong!
+      value: Good job, Agent Chong!
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[1].sentences.Array.data[0]
-      value: "What\u2019s Next?"
+      value: "Thanks, Grace. What\u2019s Next?"
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[2].sentences.Array.data[0]
-      value: 'There''s one more alley you haven''t explored. We need every piece
-        of information we can get on the people who are behind this.
+      value: 'There''s one more alley left, see if you can find more information.
+        We need to know who''s behind all this.
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290471625171, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: dialogue.Array.data[3].sentences.Array.data[0]
-      value: If you say so! I will not disappoint you  ;)
+      value: Okay, I'm on it!
       objectReference: {fileID: 0}
     - target: {fileID: 7046767290710108124, guid: de62d37eba61c594686cce408379f2ab, type: 3}
       propertyPath: m_RootOrder
@@ -8670,7 +8665,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1900514318}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1873962236
 MonoBehaviour:
@@ -8685,7 +8680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLoseScene: 0
-  transition: {fileID: 1344135593}
   transitionTime: 1
   cutsceneDialogueSo: {fileID: 0}
   willTransitionToCutsceneOrDialogue: 0
@@ -10215,7 +10209,7 @@ Transform:
   - {fileID: 533881972370710645}
   - {fileID: 1708595743}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533881971609871807
 GameObject:
