@@ -10,7 +10,7 @@ public class TransitionScript : MonoBehaviour
     [Header("If current scene is Lose Scene")]
     [SerializeField] private bool isLoseScene = false;
     public static int lastLevelIndex = 0;
-    
+            
     [Header("General")]
     [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
@@ -27,7 +27,7 @@ public class TransitionScript : MonoBehaviour
     [SerializeField] private int loadId;
 
     private int mainMenuIndex = 1;
-    private int cutsceneSceneIndex = 14;
+    private int cutsceneSceneIndex = 15;
 
     private bool playerEntered = false;
 
