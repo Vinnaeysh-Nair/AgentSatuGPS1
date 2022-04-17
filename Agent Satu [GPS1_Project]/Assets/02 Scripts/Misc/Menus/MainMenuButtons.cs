@@ -8,6 +8,9 @@ public class MainMenuButtons : Menu
 
     [SerializeField] private GameObject titleMenu;
     [SerializeField] private GameObject optionMenu;
+
+    private int _tutorialSceneIndex = 16;
+    
     public void PlayGame()
     {
         PlayUIClick();
@@ -29,6 +32,13 @@ public class MainMenuButtons : Menu
         
         titleMenu.SetActive(true);
         optionMenu.SetActive(false);
+    }
+
+    public void Tutorial()
+    {
+        PlayUIClick();
+        
+        transition.LoadNextLevel(_tutorialSceneIndex);
     }
     
     
