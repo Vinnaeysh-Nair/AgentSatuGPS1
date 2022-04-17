@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class TargetBlock : MonoBehaviour
 {
-    BoxCollider2D target;
-
-    void Start()
+    
+    class tBlock
     {
-        target = gameObject.GetComponent<BoxCollider2D>();
+        [SerializeField] private GameObject[] temp2;
+        [SerializeField] private CircleCollider2D cCollider;
+    }
+
+    private tBlock[] t1;
+    private void Start()
+    {
+        //cCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D temp)
     {
-        Debug.Log("sus");
-        if (temp.tag == "Bullet")
-            Destroy(target);
+        Debug.Log("Hit by" + temp);
+        Destroy(gameObject);
+        if (gameObject.tag == "Bullet")
+        {
+            Debug.Log("Hit by" + temp);
+        }
     }
 }
