@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 22736244}
   - component: {fileID: 22736243}
   m_Layer: 0
-  m_Name: Light 2D (1)
+  m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,8 +241,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
-      propertyPath: willTransitionToCutsceneOrDialogue
+      propertyPath: loadId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
+      propertyPath: cutsceneOrDialogue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676973062, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
+      propertyPath: willTransitionToCutsceneOrDialogue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4495569230947641529, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
       propertyPath: m_LocalPosition.x
