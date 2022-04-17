@@ -15,12 +15,13 @@ public class TransitionScript : MonoBehaviour
     //If is Lose Scene, dont override the lastLevelIndex
     [Header("If current scene is Lose Scene")]
     [SerializeField] private bool isLoseScene = false;
+    
     public static int lastLevelIndex = 0;
     public static int currLevelIndex = 0;
             
     [Header("General")]
-    [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
+    private Animator transition;
     
     [Space] [Header("Cutscenes & dialogue")] 
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
@@ -38,8 +39,13 @@ public class TransitionScript : MonoBehaviour
 
     public static event Action OnChangeLevel;
     public static event Action<int> OnSceneChange;
-    
 
+
+    void Awake()
+    {
+        transition = transform.GetChild(0).GetComponent<Animator>();
+    }
+    
     void Start()
     {
         currLevelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -73,8 +79,11 @@ public class TransitionScript : MonoBehaviour
         {
             if (playerEntered) return;
             playerEntered = true;
-            
-            LoadNextLevel();
+
+            if (!IsTutorialScene())
+                LoadNextLevel();
+            else
+                ReturnToMainMenu();
         }
     }
 
@@ -94,7 +103,6 @@ public class TransitionScript : MonoBehaviour
         StartCoroutine(LoadLevel(sceneIndexToLoad));
         if(OnChangeLevel != null) OnChangeLevel.Invoke();
     }
-
 
     //Used cutscene
     public void LoadNextLevel(int index)
