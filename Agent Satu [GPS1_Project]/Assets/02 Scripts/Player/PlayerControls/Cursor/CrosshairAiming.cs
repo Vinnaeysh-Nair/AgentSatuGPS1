@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CrosshairAiming : MonoBehaviour
@@ -23,10 +24,17 @@ public class CrosshairAiming : MonoBehaviour
         cam = Camera.main;
     }
 
+    private void OnDestroy()
+    {
+        ShowCursor(true);
+    }
+
     void Start()
     {
         pivotTransform = GetComponent<Transform>();
         pauseMenu = PauseMenu.Instance;
+
+        ShowCursor(false);
     }
     
     //Fix camera not following after a certain distance from spawn position
@@ -56,5 +64,9 @@ public class CrosshairAiming : MonoBehaviour
             pivotTransform.eulerAngles = new Vector3(0f, 0f, angleTowards - followAngleOffset);
         }
     }
-    
+
+    public static void ShowCursor(bool status)
+    {
+        Cursor.visible = status;
+    }
 }
