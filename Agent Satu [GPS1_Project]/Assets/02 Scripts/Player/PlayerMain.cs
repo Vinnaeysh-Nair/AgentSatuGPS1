@@ -47,6 +47,7 @@ public  class PlayerMain : MonoBehaviour
     
     private void SavePlayerProgress()
     {
+        print("saving");
         ProgressSaving.RecordPlayerData(TransitionScript.lastLevelIndex, playerWeaponSaveSo.savedWepState);
         ProgressSaving.SaveFile();
     }
