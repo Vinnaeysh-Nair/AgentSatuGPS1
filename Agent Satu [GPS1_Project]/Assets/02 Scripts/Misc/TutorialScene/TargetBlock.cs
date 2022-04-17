@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class TargetBlock : MonoBehaviour
 {
-    BoxCollider2D target;
+    private CircleCollider2D targetCollider;
+    private int targetHealth = 3;
 
     void Start()
     {
-        target = gameObject.GetComponent<BoxCollider2D>();
+        targetCollider = GetComponent<CircleCollider2D>();
     }
 
-    void OnTriggerEnter2D(Collider2D temp)
+    void Update()
     {
-        Debug.Log("sus");
-        if (temp.tag == "Bullet")
-            Destroy(target);
+        if(targetHealth<=0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D temp)
+    {
+        if (temp.gameObject.tag == "Bullet")
+        {
+            targetHealth--;
+        }
     }
 }
