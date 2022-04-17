@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class TargetBlock : MonoBehaviour
 {
-    
-    class tBlock
+    private CircleCollider2D targetCollider;
+    private int targetHealth = 3;
+
+    void Start()
     {
-        [SerializeField] private GameObject[] temp2;
-        [SerializeField] private CircleCollider2D cCollider;
+        targetCollider = GetComponent<CircleCollider2D>();
     }
 
-    private tBlock[] t1;
-    private void Start()
+    void Update()
     {
-        //cCollider = gameObject.GetComponent<CircleCollider2D>();
-    }
-
-    void OnTriggerEnter2D(Collider2D temp)
-    {
-        Debug.Log("Hit by" + temp);
-        Destroy(gameObject);
-        if (gameObject.tag == "Bullet")
+        if(targetHealth<=0)
         {
-            Debug.Log("Hit by" + temp);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D temp)
+    {
+        if (temp.gameObject.tag == "Bullet")
+        {
+            targetHealth--;
         }
     }
 }
