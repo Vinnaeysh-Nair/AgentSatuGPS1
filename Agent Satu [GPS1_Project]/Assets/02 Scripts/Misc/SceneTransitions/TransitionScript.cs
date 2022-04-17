@@ -6,14 +6,22 @@ using System;
 
 public class TransitionScript : MonoBehaviour
 {
+    //scene index info
+    private static int mainMenuIndex = 1;
+    private static int cutsceneSceneIndex = 15;
+    private static int tutorialSceneIndex = 16;
+    
+    
     //If is Lose Scene, dont override the lastLevelIndex
     [Header("If current scene is Lose Scene")]
     [SerializeField] private bool isLoseScene = false;
-    public static int lastLevelIndex = 0;
     
+    public static int lastLevelIndex = 0;
+    public static int currLevelIndex = 0;
+            
     [Header("General")]
-    [SerializeField] private Animator transition;
     [SerializeField] private float transitionTime = 1f;
+    private Animator transition;
     
     [Space] [Header("Cutscenes & dialogue")] 
     [SerializeField] private CutsceneDialogueSO cutsceneDialogueSo;
@@ -25,26 +33,28 @@ public class TransitionScript : MonoBehaviour
     
     [Header("Id for cutscene or dialogue to load")]
     [SerializeField] private int loadId;
-
-    private int mainMenuIndex = 1;
-    private int cutsceneSceneIndex = 14;
-
+    
     private bool playerEntered = false;
 
 
     public static event Action OnChangeLevel;
     public static event Action<int> OnSceneChange;
-    
 
+
+    void Awake()
+    {
+        transition = transform.GetChild(0).GetComponent<Animator>();
+    }
+    
     void Start()
     {
-        int currIndex = SceneManager.GetActiveScene().buildIndex;
-        if(OnSceneChange != null) OnSceneChange.Invoke(currIndex);
+        currLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        if(OnSceneChange != null) OnSceneChange.Invoke(currLevelIndex);
         
         if (isLoseScene) return;
             
         //If already cutscene dont overwrite
-        lastLevelIndex = currIndex;
+        lastLevelIndex = currLevelIndex;
         if (lastLevelIndex != cutsceneSceneIndex)
         {
             cutsceneDialogueSo.loadId = loadId;
@@ -69,8 +79,11 @@ public class TransitionScript : MonoBehaviour
         {
             if (playerEntered) return;
             playerEntered = true;
-            
-            LoadNextLevel();
+
+            if (!IsTutorialScene())
+                LoadNextLevel();
+            else
+                ReturnToMainMenu();
         }
     }
 
@@ -91,14 +104,13 @@ public class TransitionScript : MonoBehaviour
         if(OnChangeLevel != null) OnChangeLevel.Invoke();
     }
 
-
     //Used cutscene
     public void LoadNextLevel(int index)
     {
         StartCoroutine(LoadLevel(index));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    private IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
 
@@ -121,5 +133,11 @@ public class TransitionScript : MonoBehaviour
     public void ReturnToMainMenu()
     {
         StartCoroutine(LoadLevel(mainMenuIndex));
+    }
+
+    public static bool IsTutorialScene()
+    {
+        if (currLevelIndex == tutorialSceneIndex) return true;
+        return false;
     }
 }

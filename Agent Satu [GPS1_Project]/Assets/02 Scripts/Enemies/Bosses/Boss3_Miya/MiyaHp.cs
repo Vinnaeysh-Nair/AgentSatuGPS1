@@ -19,7 +19,6 @@ public class MiyaHp : BossHp
     {
         if (col.CompareTag("Bullet"))
         {
-            print("entered");
             int dmg = col.GetComponent<BulletBehaviour>().GetBulletDmg();
             
             TakeDamage(dmg);

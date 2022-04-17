@@ -49,6 +49,7 @@ public class EnemyAI_Melee : MonoBehaviour
 
         //SoundManager
         _soundManager = SoundManager.Instance;
+        _playerHpSystem = PlayerMain.Instance.PlayerHpSystem;
     }
     void FixedUpdate()
     {
@@ -123,16 +124,8 @@ public class EnemyAI_Melee : MonoBehaviour
         
         if (hitPlayer != null)
         {
-            Transform playerRoot = hitPlayer.transform.root;
-            
-            //If no ref already
-            if (_playerHpSystem == null)
-            {
-                //Locate PlayerBody to get hp system script
-                _playerHpSystem = playerRoot.GetChild(0).GetComponent<PlayerHpSystem>();
-            }
             _playerHpSystem.TakeDamage(damageToPlayer);
-
+            
             //Audio
             _soundManager.PlayEffect(meleeSwing, true);
         }

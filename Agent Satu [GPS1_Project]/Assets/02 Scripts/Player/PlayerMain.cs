@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public  class PlayerMain : MonoBehaviour
 {
     [SerializeField] private PlayerWeaponSaveSO playerWeaponSaveSo;
@@ -29,12 +30,16 @@ public  class PlayerMain : MonoBehaviour
     
     private void OnDestroy()
     {
+        if (TransitionScript.IsTutorialScene()) return;
+        
         TransitionScript.OnChangeLevel -= SavePlayerProgress;
     }
 
     
     void Start()
     {
+        if (TransitionScript.IsTutorialScene()) return;     //do not allow tutorial stats to carry over
+        
         TransitionScript.OnChangeLevel += SavePlayerProgress;
         
         LoadPlayerProgress();

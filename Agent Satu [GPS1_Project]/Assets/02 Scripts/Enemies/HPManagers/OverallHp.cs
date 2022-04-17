@@ -23,6 +23,9 @@ public class OverallHp : EnemyHp
     public delegate void OnDeath();
     public event OnDeath onDeathDelegate;
 
+    private bool _isDead = false;
+    
+
     public delegate void OnDamaged();
     public event OnDamaged onDamagedDelegate;
 
@@ -82,21 +85,24 @@ public class OverallHp : EnemyHp
         if (currHp <= 0) return;
         currHp -= dmg;
         
-        //Die
-        if (currHp == 0)
-        {
-            Die(flingDirection);
-        }
-        
         //Trigger detection when damaged
         if (onDamagedDelegate != null)
         {
             onDamagedDelegate.Invoke();
         }
+        
+        //Die
+        if (currHp <= 0)
+        {
+            Die(flingDirection);
+            enabled = false;
+        }
     }
 
     public void Die(Vector2 flingDirection)
     {
+        if (!enabled) return;   
+        
         _soundManager.PlayEffect(deathSound, true);
         
         //Disable unwanted components
