@@ -49,6 +49,7 @@ public class PauseMenu : Menu
 
     private void Pause()
     {
+        CrosshairAiming.ShowCursor(true);
         timeScaleBeforePause = Time.timeScale;
         
         Time.timeScale = 0f;
@@ -59,6 +60,7 @@ public class PauseMenu : Menu
     public void Unpause()
     {
         PlayUIClick();
+        CrosshairAiming.ShowCursor(false);
         
         Time.timeScale = timeScaleBeforePause;
         
