@@ -6,7 +6,7 @@ public class FollowMouse : MonoBehaviour
     [SerializeField] private CrosshairAiming aim;
 
     
-    void FixedUpdate()
+    void Update()
     {
        transform.position = aim.GetMousePos();
     }
