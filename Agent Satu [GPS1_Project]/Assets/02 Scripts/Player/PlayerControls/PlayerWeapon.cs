@@ -15,7 +15,9 @@ public class PlayerWeapon : MonoBehaviour
     [Header("Sound")] 
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip reloadSound;
+    
     private SoundManager _soundManager;
+    private AudioSource _reloadSource;
 
     
     private Transform[] firePoints;
@@ -40,8 +42,11 @@ public class PlayerWeapon : MonoBehaviour
     private int currTotalAmmo;
     private int currAmmoReserve;
     private int currClip;
+    
     private bool reloading = false;
+    private Coroutine reloadRoutine;
 
+    
     
     public static event Action<int, int, int> OnAmmoUpdate;
 
@@ -63,9 +68,19 @@ public class PlayerWeapon : MonoBehaviour
         weaponsArray = inventory.GetWeaponsArray();
     }
 
-    
+    void OnDisable()
+    {
+        if (reloadRoutine != null)
+            StopCoroutine(reloadRoutine);
+        
+        if (_reloadSource != null)
+            _reloadSource.Stop();
+        
+        reloading = false;
+    }
 
-    private void OnEnable()
+
+    void OnEnable()
     {
         UpdateAmmoDisplay();
 
@@ -150,7 +165,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (Input.GetButtonDown("Reload") || ClipEmpty())
             {
-                StartCoroutine(Reload());
+                reloadRoutine = StartCoroutine(Reload());
                 return;
             }
         }
@@ -247,7 +262,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             reloading = true;
             
-            _soundManager.PlayEffect(reloadSound);
+            _reloadSource = _soundManager.PlayEffect(reloadSound);
             yield return new WaitForSeconds(reloadTime);
 
          

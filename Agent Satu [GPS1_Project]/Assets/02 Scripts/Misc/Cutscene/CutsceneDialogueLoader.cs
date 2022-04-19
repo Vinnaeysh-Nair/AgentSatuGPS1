@@ -177,7 +177,6 @@ public class CutsceneDialogueLoader : MonoBehaviour
     }
 
 
-    private bool loaded = false;
     void Update()
     {
         if (Input.GetButtonDown("ProceedInteraction"))

@@ -8,8 +8,8 @@ public class DisplayUnlockedWeapon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI  newWeaponText;
     [SerializeField] [Range(0f, 5f)] private float timeBeforeDisabled = 3f;
     [SerializeField] private Image[] weaponImages;
-  
-    
+
+    private Image _lastImage;
  
     #region Singleton
     public static DisplayUnlockedWeapon Instance;
@@ -18,7 +18,7 @@ public class DisplayUnlockedWeapon : MonoBehaviour
         Instance = this;
     }
     #endregion
-
+    
     
     public void DisplayWeapon(int id)
     {
@@ -32,7 +32,12 @@ public class DisplayUnlockedWeapon : MonoBehaviour
                 Image foundImage = weaponImages[index];
                 foundImage.enabled = true;
 
+                if (_lastImage != null)
+                    _lastImage.enabled = false;
+
                 StartCoroutine(StopDisplaying(foundImage));
+
+                _lastImage = foundImage;
             }
         }
     }

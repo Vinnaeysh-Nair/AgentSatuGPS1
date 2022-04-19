@@ -22,8 +22,6 @@ public class WeaponSwitching : MonoBehaviour
     {
         int prevSelectedWeapon = selectedWeapon;
 
-        if (playerWeapons[selectedWeapon].GetReloading()) return;
-     
 
         //Scroll wheel to change weapon
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
