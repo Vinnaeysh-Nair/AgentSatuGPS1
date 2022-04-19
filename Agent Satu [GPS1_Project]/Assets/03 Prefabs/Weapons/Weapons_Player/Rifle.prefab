@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6481542917932102076}
   - component: {fileID: 6781102464412096916}
-  - component: {fileID: 5175701008813708056}
   - component: {fileID: 3692781067055661873}
   - component: {fileID: 6733552251871046781}
   m_Layer: 6
@@ -152,26 +151,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5175701008813708056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3283701403173319360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86158251980a4842a55b4434f6222d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipCountText: {fileID: 0}
-  reserveCountText: {fileID: 0}
-  wepNameAndArt:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &3692781067055661873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,13 +166,13 @@ MonoBehaviour:
   bullet: {fileID: 863672036732972301, guid: de0ef9a6f5a1cb74993413c71e2d3575, type: 3}
   firePointContainer: {fileID: 5781903251120156834}
   muzzleFlash: {fileID: 7140547849454381084}
-  audClip: {fileID: 8300000, guid: ba62c7572af0381499a34351a183d7e3, type: 3}
+  shootSound: {fileID: 0}
+  reloadSound: {fileID: 0}
   wepId: 2
   fireRate: 6
   reloadTime: 1.5
   clipSize: 25
   isContinuousShooting: 1
-  isUnlocked: 0
 --- !u!82 &6733552251871046781
 AudioSource:
   m_ObjectHideFlags: 0
