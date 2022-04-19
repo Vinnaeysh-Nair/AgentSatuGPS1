@@ -14,7 +14,7 @@ public class MainMenuButtons : Menu
     public void PlayGame()
     {
         PlayUIClick();
-        
+
         transition.LoadNextLevel(sceneToLoad);
     }
 
