@@ -651,11 +651,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 705f5a404a829b4439c427f4f5decd8a, type: 3}
---- !u!4 &456098459 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3977144182747463004, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-  m_PrefabInstance: {fileID: 937526527}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474180652
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,18 +949,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3977144182747463007, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: bodyCenter
-      value: 
-      objectReference: {fileID: 1998869074}
-    - target: {fileID: 3977144182747463007, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: yDistToStartJumping
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187344405715705953, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 35
-      objectReference: {fileID: 0}
     - target: {fileID: 7187344405942986486, guid: bf210f08588eb0e4fb915a7b355f462b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2584,37 +2567,6 @@ Transform:
   - {fileID: 210126199}
   m_Father: {fileID: 659045002}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1998869073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1998869074}
-  m_Layer: 15
-  m_Name: BodyCenter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1998869074
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998869073}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 4.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 456098459}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2068360966
 PrefabInstance:

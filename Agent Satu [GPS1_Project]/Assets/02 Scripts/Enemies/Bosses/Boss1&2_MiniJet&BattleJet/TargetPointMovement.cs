@@ -55,14 +55,16 @@ public class TargetPointMovement : MonoBehaviour
     [SerializeField] private float atk1FireRate;
     [SerializeField] private float atk1TimeUntilNextBurst;
     private bool atk1CanShoot = false;
+    
 
     
     [SerializeField] private Vector3 playerFollowOffset;
     [SerializeField] private float playerFollowSpeed;
+
+    [SerializeField] private float atk1TimeTillAtk2;
+
     
-    [SerializeField] private float timeTillAttack2;
-
-
+    
     [Space] [Header("[Attack 2]")]
     [SerializeField] private float atk2FireRate;
 
@@ -124,15 +126,14 @@ public class TargetPointMovement : MonoBehaviour
 
     void Start()
     {
-        playerMovement = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
+        playerMovement = PlayerMain.Instance.PlayerMovement;
         synch = transform.parent.GetComponent<SynchGunMovements>();
         
         gun.OnFiredAllShots += BattleJetGun_OnFiredAllShots;
 
         flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingTarget;
 
-        
-        
+
         //Wait time before starting battle
         startPoint = idlePoint;
         idling = true;
@@ -183,7 +184,7 @@ public class TargetPointMovement : MonoBehaviour
     {
         if (stopTime == 0f)
         {
-            stopTime = Time.time + timeTillAttack2;
+            stopTime = Time.time + atk1TimeTillAtk2;
         }
         
         
@@ -209,7 +210,6 @@ public class TargetPointMovement : MonoBehaviour
         if (Time.time > stopTime && !idling)
         {
             idling = true;
-            
             if (!isChangingAttack)
             {
                 StartCoroutine(StartNextAttack(atkChangeBufferTime));
