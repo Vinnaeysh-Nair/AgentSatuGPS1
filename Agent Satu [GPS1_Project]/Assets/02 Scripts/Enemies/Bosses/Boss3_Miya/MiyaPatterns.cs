@@ -77,6 +77,8 @@ public class MiyaPatterns : MonoBehaviour
     private float nextDashTime = 0f;
     private bool isDoingAtk3 = false;
 
+    private bool _battleStarted = false;
+
     void OnDestroy()
     {
         MiyaAtk3Detection.OnPlayerEnter -= MiyaAtk3_OnPlayerEnter;
@@ -100,10 +102,13 @@ public class MiyaPatterns : MonoBehaviour
         atk3DetectionBox.enabled = false;
         atk4BlindAnim.gameObject.SetActive(false);
         atk4FlashStart.gameObject.SetActive(false);
-        trackingAI.enabled = false;
-        shootingAI.enabled = false;
         bladeTrail.gameObject.SetActive(false);
         
+        trackingAI.enabled = false;
+        shootingAI.enabled = false;
+ 
+
+        StartCoroutine(StartBattle());
         //Start Attack1
         ChangeAttack();
     }
@@ -114,6 +119,13 @@ public class MiyaPatterns : MonoBehaviour
         
         playerPos = playerMovement.GetPlayerPos();
      
+        //if grounded
+        if (rb.velocity.y < .01f)
+        {
+            miyaAnim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        }
+        
+      
         switch (attackCounter)
         {
             case 1: 
@@ -125,12 +137,6 @@ public class MiyaPatterns : MonoBehaviour
             case 3:
                 Attack3();
                 break;
-        }
-
-        //if grounded
-        if (rb.velocity.y < .01f)
-        {
-            miyaAnim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         }
     }
     
@@ -282,7 +288,6 @@ public class MiyaPatterns : MonoBehaviour
        
         if (Time.time > nextDashTime)
         {
-
             rb.velocity = new Vector2(0f, rb.velocity.y);
             Dash();
         
@@ -396,10 +401,9 @@ public class MiyaPatterns : MonoBehaviour
         
 
         //Adjustment for Atk1
-        if (attackCounter == 1)
+        if (attackCounter == 1 && _battleStarted)
         {
-            trackingAI.enabled = true;
-            Invoke(nameof(EnableShootingAI), 1f);
+            StartShooting();
         }
         else
         {
@@ -416,6 +420,12 @@ public class MiyaPatterns : MonoBehaviour
             trackingAI.enabled = false;
             shootingAI.enabled = false;
         }
+    }
+
+    private void StartShooting()
+    {
+        trackingAI.enabled = true;
+        Invoke(nameof(EnableShootingAI), 1f);
     }
     
     private void CalcAttackEndTime(float duration)
@@ -471,9 +481,7 @@ public class MiyaPatterns : MonoBehaviour
             Physics2D.IgnoreCollision(platform, col, status);
         }
     }
-
-   
-  
+    
     private void MiyaHp_OnReachingThreshold()
     {
         Attack4();
@@ -489,6 +497,13 @@ public class MiyaPatterns : MonoBehaviour
     private void EnableShootingAI()
     {
         shootingAI.enabled = true;
+    }
+
+    private IEnumerator StartBattle()
+    {
+        yield return new WaitForSeconds(3f);
+        _battleStarted = true;
+        StartShooting();
     }
     
     // private void OnDrawGizmos()
