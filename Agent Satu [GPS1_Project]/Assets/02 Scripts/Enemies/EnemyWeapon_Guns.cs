@@ -46,20 +46,7 @@ public class EnemyWeapon_Guns : MonoBehaviour
         }
     }
 
-    //For testing
-    // void Update()
-    // {
-    //     if (!testShooting) return;
-    //     if (isBurst)
-    //     {
-    //         StartBurstShooting();
-    //     }
-    //     else
-    //     {
-    //         StartShooting();
-    //     }
-    // }
-    //
+
     
     //Call from enemy AI script, when player is detected
     //For single shot firing pattern (eg. pistol)

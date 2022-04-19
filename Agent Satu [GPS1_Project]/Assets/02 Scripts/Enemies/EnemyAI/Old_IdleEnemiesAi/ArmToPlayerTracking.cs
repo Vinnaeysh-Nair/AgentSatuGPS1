@@ -7,17 +7,17 @@ public class ArmToPlayerTracking : MonoBehaviour
     [SerializeField] private OverallHp overallHp;
     [SerializeField] private Enemy_Agro enemyAgro;
    
-    private PlayerMovement playerMovement;
+    private PlayerMovement _playerMovement;
     
     
-    private Vector2 playerPosition;
+    private Vector2 _playerPosition;
 
 
  
     
     void Start()
     {
-        playerMovement  = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<PlayerMovement>();
+        _playerMovement  = PlayerMain.Instance.PlayerMovement;
         
         if(overallHp != null)
             overallHp.onDeathDelegate += OverallHp_OnDeath;
@@ -28,7 +28,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     {
         if (!enemyAgro.GetInRange()) return;
 
-        playerPosition = playerMovement.GetPlayerPos();
+        _playerPosition = _playerMovement.GetPlayerPos();
         PointToPlayer();
     }
 
@@ -40,7 +40,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     
     private void PointToPlayer()
     {
-        Vector2 lookDir = (Vector2) pivotTransform.position - playerPosition;
+        Vector2 lookDir = (Vector2) pivotTransform.position - _playerPosition;
         float angleTowards = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
         

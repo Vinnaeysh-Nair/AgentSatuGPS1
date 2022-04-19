@@ -109,6 +109,7 @@ public class MiyaPatterns : MonoBehaviour
  
 
         StartCoroutine(StartBattle());
+        
         //Start Attack1
         ChangeAttack();
     }

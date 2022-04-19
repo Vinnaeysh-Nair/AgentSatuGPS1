@@ -41,38 +41,17 @@ public class PlayerWeapon : MonoBehaviour
     private int currAmmoReserve;
     private int currClip;
     private bool reloading = false;
-    //
-    // public delegate void OnAmmoUpdate();
-    // public event OnAmmoUpdate onAmmoUpdateDelegate;
 
+    
     public static event Action<int, int, int> OnAmmoUpdate;
 
-    public int WepId
-    {
-        get => wepId;
-    }
-
-    public int CurrClip
-    {
-        get => currClip;
-    }
-
-    public int CurrReserve
-    {
-        get => currAmmoReserve;
-    }
 
 
     public bool GetReloading()
     {
         return reloading;
     }
-
-    private void OnDestroy()
-    {
-      // WeaponSwitching.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
-      // WeaponSwitching.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
-    }
+    
     
     void Awake()
     {
@@ -112,9 +91,6 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        //WeaponSwitching.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
-        //WeaponSwitching.OnWeaponChange += WeaponSwitching_OnWeaponChange;
-        
         _soundManager = SoundManager.Instance;
 
         
