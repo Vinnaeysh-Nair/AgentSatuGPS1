@@ -16,7 +16,7 @@ public class MiyaPatterns : MonoBehaviour
     private PlayerMovement playerMovement;
     private Vector2 playerPos;
 
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Enemy_Flipped enemyFlipped;
     private EnemyAI_Ranged shootingAI;
     private Enemy_Agro enemyAgro;
@@ -89,6 +89,7 @@ public class MiyaPatterns : MonoBehaviour
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         enemyFlipped = GetComponent<Enemy_Flipped>();
         enemyAgro = GetComponent<Enemy_Agro>();
@@ -170,7 +171,6 @@ public class MiyaPatterns : MonoBehaviour
             return;
         }
         
-        
         if (isStandingStill) return;
         MoveToTarget(nextTargetPos);
     }
@@ -182,7 +182,6 @@ public class MiyaPatterns : MonoBehaviour
         {
             MoveToTarget(playerPos);
             
-  
             miyaAnim.SetBool("IsAttacking", false);
             bladeTrail.gameObject.SetActive(false);
         }
@@ -244,8 +243,7 @@ public class MiyaPatterns : MonoBehaviour
     private void MoveToTarget(Vector2 targetPos, bool canJump = true)
     {
         float targetDir = targetPos.x - bodyCenter.position.x;
-
-
+        
         float speedX = moveSpeed;
         if (targetDir < 0f)
         {
