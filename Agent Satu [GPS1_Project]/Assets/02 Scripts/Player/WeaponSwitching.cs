@@ -193,7 +193,6 @@ public class WeaponSwitching : MonoBehaviour
     {
         if (onWeaponChangeDelegate != null)
         {
-            print("invoked");
             onWeaponChangeDelegate.Invoke();
         }
     }

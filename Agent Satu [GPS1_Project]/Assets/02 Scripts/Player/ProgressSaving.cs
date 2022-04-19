@@ -54,4 +54,12 @@ public static class ProgressSaving
         TransitionScript.lastLevelIndex = _playerSaveData.levelIndex;
         playerWeaponSaveSo.savedWepState = _playerSaveData.weaponsArray;
     }
+    
+    public static bool DeleteSaveFile()
+    {
+        if (!File.Exists(dir)) return false;
+        
+        File.Delete(dir);
+        return true;
+    }
 }
