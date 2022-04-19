@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using System;
 
 
 public class PlayerWeapon : MonoBehaviour
@@ -41,9 +41,11 @@ public class PlayerWeapon : MonoBehaviour
     private int currAmmoReserve;
     private int currClip;
     private bool reloading = false;
+    //
+    // public delegate void OnAmmoUpdate();
+    // public event OnAmmoUpdate onAmmoUpdateDelegate;
 
-    public delegate void OnAmmoUpdate();
-    public event OnAmmoUpdate onAmmoUpdateDelegate;
+    public static event Action<int, int, int> OnAmmoUpdate;
 
     public int WepId
     {
@@ -68,8 +70,8 @@ public class PlayerWeapon : MonoBehaviour
 
     private void OnDestroy()
     {
-       WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
-       wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
+      // WeaponSwitching.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
+      // WeaponSwitching.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
     }
     
     void Awake()
@@ -110,8 +112,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        WeaponSwitching wepSwitch = transform.parent.GetComponent<WeaponSwitching>();
-        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+        //WeaponSwitching.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+        //WeaponSwitching.OnWeaponChange += WeaponSwitching_OnWeaponChange;
         
         _soundManager = SoundManager.Instance;
 
@@ -299,12 +301,13 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    private void UpdateAmmoDisplay()
+    public void UpdateAmmoDisplay()
     {
-        if (onAmmoUpdateDelegate != null)
-        {
-            onAmmoUpdateDelegate.Invoke();
-        }
+        // if (onAmmoUpdateDelegate != null)
+        // {
+        //     onAmmoUpdateDelegate.Invoke();
+        // }
+        if(OnAmmoUpdate != null) OnAmmoUpdate.Invoke(wepId, currClip, currAmmoReserve);
     }
 
     //For pickup items
@@ -321,13 +324,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         UpdateAmmoDisplay();
     }
-    
-    // //Become inactive after a duration after being fired. 
-    // private IEnumerator SetBulletInactive(GameObject shotBullet)
-    // {
-    //     yield return new WaitForSeconds(1f);
-    //     shotBullet.SetActive(false);
-    // }
+
 
     private IEnumerator SetMuzzleFlashInactive()
     {

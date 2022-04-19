@@ -10,23 +10,18 @@ public class DisplayAmmoCount : MonoBehaviour
     
     [SerializeField] private Image[] wepNameAndArt;
 
-    public static DisplayAmmoCount Instance;
     private PlayerWeapon _playerWeapon;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        _playerWeapon.onAmmoUpdateDelegate -= PlayerWeapon_OnAmmoUpdate;
+        PlayerWeapon.OnAmmoUpdate -= PlayerWeapon_OnAmmoUpdate;
     }
-
-    private void Start()
+    
+    
+    void Start()
     {
-        _playerWeapon = GetComponent<PlayerWeapon>();
-        _playerWeapon.onAmmoUpdateDelegate += PlayerWeapon_OnAmmoUpdate;
+        PlayerWeapon.OnAmmoUpdate  += PlayerWeapon_OnAmmoUpdate;
     }
 
 
@@ -61,8 +56,8 @@ public class DisplayAmmoCount : MonoBehaviour
         SetWepArt(wepId);
     }
 
-    private void PlayerWeapon_OnAmmoUpdate()
+    private void PlayerWeapon_OnAmmoUpdate(int id, int clip, int reserve)
     {
-        UpdateAmmoDisplay(_playerWeapon.WepId, _playerWeapon.CurrClip, _playerWeapon.CurrReserve);
+        UpdateAmmoDisplay(id, clip, reserve);
     }
 }

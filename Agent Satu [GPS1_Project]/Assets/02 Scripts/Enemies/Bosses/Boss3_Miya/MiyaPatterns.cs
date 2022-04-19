@@ -85,9 +85,9 @@ public class MiyaPatterns : MonoBehaviour
     
     void Start()
     {
-        Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
-        playerMovement = playerBody.GetComponent<PlayerMovement>();
-        playerHpSystem = playerBody.GetComponent<PlayerHpSystem>();
+        PlayerMain playerMain = PlayerMain.Instance;
+        playerMovement = playerMain.PlayerMovement;
+        playerHpSystem = playerMain.PlayerHpSystem;
         
         col = GetComponent<Collider2D>();
         enemyFlipped = GetComponent<Enemy_Flipped>();
@@ -146,7 +146,6 @@ public class MiyaPatterns : MonoBehaviour
         }
         else
         {
-            //print("reached");
             rb.velocity = new Vector2(0f, 0f);
             nextMovementPoint++;
             

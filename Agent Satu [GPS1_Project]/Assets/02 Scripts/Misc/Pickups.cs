@@ -36,15 +36,12 @@ public class Pickups : MonoBehaviour
         //SoundManager
         _soundManager = SoundManager.Instance;
         
-        // if (_soundManager == null)
-        // {
-        //     Debug.LogError("No sound manager added into the scene");
-        // }
 
-        Transform playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
-
+        PlayerMain playerMain = PlayerMain.Instance;
+        Transform playerBody = playerMain.transform;
+        
         _playerInventory = playerBody.Find("WeaponPivot/PlayerInventory").GetComponent<PlayerInventory>();
-        _playerHp = playerBody.GetComponent<PlayerHpSystem>();
+        _playerHp = playerMain.PlayerHpSystem;
    
         _displayUnlockedWeapon = DisplayUnlockedWeapon.Instance;
         

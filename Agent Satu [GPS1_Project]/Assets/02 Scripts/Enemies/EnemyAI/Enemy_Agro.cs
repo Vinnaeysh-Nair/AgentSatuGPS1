@@ -43,7 +43,7 @@ public class Enemy_Agro : MonoBehaviour
     
     void Start()
     {
-        playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+        playerBody = PlayerMain.Instance.transform;
         enemflip = GetComponent<Enemy_Flipped>();
         
         overallHp = GetComponent<OverallHp>();

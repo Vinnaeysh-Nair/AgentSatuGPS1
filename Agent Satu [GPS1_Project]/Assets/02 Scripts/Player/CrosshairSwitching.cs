@@ -9,27 +9,28 @@ public class CrosshairSwitching : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int currCrosshair = 0;
 
-    [System.Serializable]
+    [Serializable]
     public class Crosshair
     {
         [SerializeField] private string wepName;
         public int wepId;
         public Transform crosshairPrefab;
     }
+    
+    private void OnDestroy()
+    {
+        WeaponSwitching.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
+    }
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeCrosshair();
-        
-        wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+    
+        WeaponSwitching.OnWeaponChange += WeaponSwitching_OnWeaponChange;
     }
 
-    private void OnDestroy()
-    {
-        wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
-    }
-
+    
     private void WeaponSwitching_OnWeaponChange()
     {
         ChangeCrosshair();

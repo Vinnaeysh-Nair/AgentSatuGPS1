@@ -11,7 +11,7 @@ public class Enemy_Flipped : MonoBehaviour
     }
     void Start()
     {
-        playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+        playerBody = PlayerMain.Instance.transform;
         
         if (isFacingRight)
         {

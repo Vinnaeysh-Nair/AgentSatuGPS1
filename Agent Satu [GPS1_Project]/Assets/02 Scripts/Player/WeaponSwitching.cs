@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -7,9 +8,7 @@ public class WeaponSwitching : MonoBehaviour
     private PlayerInventory.Weapons[] _weaponsArray;
    
     
-    public delegate void OnWeaponChange();
-    public event OnWeaponChange onWeaponChangeDelegate;
-
+    public static event Action OnWeaponChange;
     
     void Start()
     {
@@ -27,55 +26,42 @@ public class WeaponSwitching : MonoBehaviour
      
 
         //Scroll wheel to change weapon
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
         {
             if (!IsNextWeaponUnlocked())
             {
-                // int temp = FindNextUnlockedWeapon();
-                // if (prevSelectedWeapon != temp)
-                // {
-                //     selectedWeapon = temp;
-                //     StartingWeapon();
-                //     WeaponIsSwitched();
-                // }
-                return;
+                int temp = FindNextUnlockedWeapon();
+                selectedWeapon = temp;
             }
-            
-            if (selectedWeapon >= transform.childCount - 1)
-                selectedWeapon = 0;
             else
             {
-                selectedWeapon++;
+                if (selectedWeapon >= transform.childCount - 1)
+                    selectedWeapon = 0;
+                else
+                    selectedWeapon++; 
             }
-            WeaponIsSwitched();
         }
         
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
+   
             if (!IsPrevWeaponUnlocked())
             {
-                // int temp = FindPrevUnlockedWeapon();
-                // if (prevSelectedWeapon != temp)
-                // {
-                //     selectedWeapon = temp;
-                //     print(temp);
-                //     StartingWeapon();
-                //     WeaponIsSwitched();
-                // }
-                return;
+                int temp = FindPrevUnlockedWeapon();
+               selectedWeapon = temp;
+                
             }
-            
-            if (selectedWeapon <= 0)
-                selectedWeapon = transform.childCount - 1;
             else
             {
-                selectedWeapon--;
+                if (selectedWeapon <= 0)
+                    selectedWeapon = transform.childCount - 1;
+                else
+                    selectedWeapon--; 
             }
-            WeaponIsSwitched();
         }
         
         //Changing through num keys
-        for(int i=0;i<10;i++)
+        for (int i = 0; i < 10 ; i++)
         {
             if(Input.GetKeyDown((KeyCode)(48+i)) && transform.childCount >= i)
             {
@@ -84,26 +70,30 @@ public class WeaponSwitching : MonoBehaviour
 
                 if (!IsSpecificWeaponUnlocked(i - 1)) return;
                 selectedWeapon = i-1;
-                WeaponIsSwitched();
             }
         }
         
-        
+
         if (prevSelectedWeapon != selectedWeapon)
         {
             StartingWeapon();
+            WeaponIsSwitched();
         }
     }
 
     private void StartingWeapon()
     {
         int i = 0;
-        foreach (Transform weapon in transform)
+
+        foreach (PlayerWeapon wep in playerWeapons)
         {
             if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
+            {
+                wep.gameObject.SetActive(true);
+                wep.UpdateAmmoDisplay();
+            }
             else
-                weapon.gameObject.SetActive(false);
+                wep.gameObject.SetActive(false);
             
             i++;
         }
@@ -159,41 +149,46 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
-    // private int FindNextUnlockedWeapon()
-    // {
-    //     int foundWep = 0;
-    //     for (int i = 0; i < _weaponsArray.Length; i++)
-    //     {
-    //         if (_weaponsArray[i].IsUnlocked && i != selectedWeapon)
-    //         {
-    //             foundWep = i;
-    //             return foundWep;
-    //         }
-    //     }
-    //     return 0;
-    // }
-    //
-    // private int FindPrevUnlockedWeapon()
-    // {
-    //     int foundWep = 0;
-    //     for (int i = _weaponsArray.Length - 1; i > 0; i--)
-    //     {
-    //         if (_weaponsArray[i].IsUnlocked)
-    //         {
-    //             foundWep = i;
-    //             print(foundWep);
-    //             return foundWep;
-    //         }
-    //     }
-    //
-    //     return foundWep;
-    // }
+    private int FindNextUnlockedWeapon()
+    {
+        int foundWep = 0;
+        for (int i = selectedWeapon; i < _weaponsArray.Length; i++)
+        {
+            if (_weaponsArray[i].IsUnlocked && i != selectedWeapon)
+            {
+                foundWep = i;
+                return foundWep;
+            }
+        }
+        return 0;
+    }
+    
+    private int FindPrevUnlockedWeapon()
+    {
+        int foundWep = 0;
+        
+        //if is pistol, search from last element
+        int start = 0;
+        if (selectedWeapon == 0)
+        {
+            start = _weaponsArray.Length - 1;
+        }
+        
+        for (int i = start; i > 0; i--)
+        {
+ 
+            if (_weaponsArray[i].IsUnlocked && i != selectedWeapon)
+            {
+                foundWep = i;
+                return foundWep;
+            }
+        }
+    
+        return foundWep;
+    }
     
     private void WeaponIsSwitched()
     {
-        if (onWeaponChangeDelegate != null)
-        {
-            onWeaponChangeDelegate.Invoke();
-        }
+        if(OnWeaponChange != null) OnWeaponChange.Invoke();
     }
 }

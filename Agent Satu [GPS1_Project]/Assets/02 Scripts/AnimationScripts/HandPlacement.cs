@@ -33,7 +33,7 @@ public class HandPlacement : MonoBehaviour
         //If have weapon switching, means its the player
         if (wepSwitch != null)
         {
-            wepSwitch.onWeaponChangeDelegate += WeaponSwitching_OnWeaponChange;
+            WeaponSwitching.OnWeaponChange += WeaponSwitching_OnWeaponChange;
         }
         
        
@@ -44,7 +44,7 @@ public class HandPlacement : MonoBehaviour
     {
         if (wepSwitch != null)
         {
-            wepSwitch.onWeaponChangeDelegate -= WeaponSwitching_OnWeaponChange;
+            WeaponSwitching.OnWeaponChange -= WeaponSwitching_OnWeaponChange;
         }
     }
 

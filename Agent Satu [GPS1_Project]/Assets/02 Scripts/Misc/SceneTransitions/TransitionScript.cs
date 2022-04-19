@@ -44,6 +44,7 @@ public class TransitionScript : MonoBehaviour
     void Awake()
     {
         transition = transform.GetChild(0).GetComponent<Animator>();
+        transition.enabled = false;
     }
     
     void Start()
@@ -112,6 +113,7 @@ public class TransitionScript : MonoBehaviour
 
     private IEnumerator LoadLevel(int levelIndex)
     {
+        transition.enabled = true;
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);

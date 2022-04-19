@@ -4,8 +4,11 @@ using UnityEngine;
 public  class PlayerMain : MonoBehaviour
 {
     [SerializeField] private PlayerWeaponSaveSO playerWeaponSaveSo;
+    [SerializeField] private CrosshairAiming crosshairAiming;
+
     private PlayerHpSystem _playerHpSystem;
     private PlayerMovement _playerMovement;
+
     
     #region Singleton
     public static PlayerMain Instance;
@@ -27,6 +30,13 @@ public  class PlayerMain : MonoBehaviour
     {
         get => _playerHpSystem;
     }
+
+
+    public CrosshairAiming CrosshairAiming
+    {
+        get => crosshairAiming;
+    }
+
     
     private void OnDestroy()
     {
