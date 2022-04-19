@@ -151,20 +151,15 @@ public class MiyaPatterns : MonoBehaviour
     //shoot Assault Rifle
     private void Attack1()
     {
-        if (!ReachedTarget(nextTargetPos, false))
-        {
-            if (isStandingStill) return;
-            
-            MoveToTarget(nextTargetPos);
-        }
-        else
+        nextTargetPos = atk1movementPoints[nextMovementPoint].position;
+        
+        if (ReachedTarget(nextTargetPos, false))
         {
             rb.velocity = new Vector2(0f, 0f);
             nextMovementPoint++;
-            nextTargetPos = atk1movementPoints[nextMovementPoint].position;
+           
             if (nextMovementPoint > atk1movementPoints.Length - 1)
             {
-               
                 nextMovementPoint = 0;
                 ChangeAttack();
                 return;
@@ -172,7 +167,12 @@ public class MiyaPatterns : MonoBehaviour
             
             isStandingStill = true;
             Invoke(nameof(SetIsStandingStillToFalse), standStillDuration);
+            return;
         }
+        
+        
+        if (isStandingStill) return;
+        MoveToTarget(nextTargetPos);
     }
 
     //melee
@@ -430,6 +430,7 @@ public class MiyaPatterns : MonoBehaviour
             trackingAI.enabled = false;
             shootingAI.enabled = false;
         }
+        bladeTrail.gameObject.SetActive(false);
     }
 
     private void StartShooting()
