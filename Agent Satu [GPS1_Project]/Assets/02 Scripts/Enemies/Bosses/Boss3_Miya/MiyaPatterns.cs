@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class MiyaPatterns : MonoBehaviour
 {
     [Header("Ref:")] 
@@ -39,6 +40,7 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private float standStillDuration = 5f;
     [SerializeField] private Transform[] atk1movementPoints;
 
+    private Vector2 nextTargetPos;
     private int nextMovementPoint = 0;
     private bool isStandingStill = false;
 
@@ -84,21 +86,14 @@ public class MiyaPatterns : MonoBehaviour
         MiyaAtk3Detection.OnPlayerEnter -= MiyaAtk3_OnPlayerEnter;
         MiyaHp.OnReachingThreshold -= MiyaHp_OnReachingThreshold;
     }
-    
-    void Start()
+
+    void Awake()
     {
-        PlayerMain playerMain = PlayerMain.Instance;
-        playerMovement = playerMain.PlayerMovement;
-        playerHpSystem = playerMain.PlayerHpSystem;
-        
         col = GetComponent<Collider2D>();
         enemyFlipped = GetComponent<Enemy_Flipped>();
         enemyAgro = GetComponent<Enemy_Agro>();
         shootingAI = GetComponent<EnemyAI_Ranged>();
- 
-        MiyaAtk3Detection.OnPlayerEnter += MiyaAtk3_OnPlayerEnter;
-        MiyaHp.OnReachingThreshold += MiyaHp_OnReachingThreshold;
-
+        
         atk3DetectionBox.enabled = false;
         atk4BlindAnim.gameObject.SetActive(false);
         atk4FlashStart.gameObject.SetActive(false);
@@ -106,9 +101,21 @@ public class MiyaPatterns : MonoBehaviour
         
         trackingAI.enabled = false;
         shootingAI.enabled = false;
- 
-
+    }
+    
+    void Start()
+    {
+        MiyaAtk3Detection.OnPlayerEnter += MiyaAtk3_OnPlayerEnter;
+        MiyaHp.OnReachingThreshold += MiyaHp_OnReachingThreshold;
+        
+        PlayerMain playerMain = PlayerMain.Instance;
+        playerMovement = playerMain.PlayerMovement;
+        playerHpSystem = playerMain.PlayerHpSystem;
+        
+        
         StartCoroutine(StartBattle());
+        
+        nextTargetPos = atk1movementPoints[0].position;
         
         //Start Attack1
         ChangeAttack();
@@ -144,20 +151,20 @@ public class MiyaPatterns : MonoBehaviour
     //shoot Assault Rifle
     private void Attack1()
     {
-        Vector2 targetPos = atk1movementPoints[nextMovementPoint].position;
-        if (!ReachedTarget(targetPos, false))
+        if (!ReachedTarget(nextTargetPos, false))
         {
             if (isStandingStill) return;
             
-            MoveToTarget(targetPos);
+            MoveToTarget(nextTargetPos);
         }
         else
         {
             rb.velocity = new Vector2(0f, 0f);
             nextMovementPoint++;
-            
+            nextTargetPos = atk1movementPoints[nextMovementPoint].position;
             if (nextMovementPoint > atk1movementPoints.Length - 1)
             {
+               
                 nextMovementPoint = 0;
                 ChangeAttack();
                 return;
@@ -167,7 +174,7 @@ public class MiyaPatterns : MonoBehaviour
             Invoke(nameof(SetIsStandingStillToFalse), standStillDuration);
         }
     }
-    
+
     //melee
     private void Attack2()
     {
@@ -236,7 +243,7 @@ public class MiyaPatterns : MonoBehaviour
     
     private void MoveToTarget(Vector2 targetPos, bool canJump = true)
     {
-        float targetDir = targetPos.x - transform.position.x;
+        float targetDir = targetPos.x - bodyCenter.position.x;
 
 
         float speedX = moveSpeed;
@@ -249,7 +256,7 @@ public class MiyaPatterns : MonoBehaviour
 
         if (!canJump) return;
         
-        float diff = targetPos.y - transform.position.y ;
+        float diff = targetPos.y - bodyCenter.position.y ;
         if (diff > yDistToStartJumping)
         {
             if (Time.time > nextJumpTime)
@@ -262,6 +269,8 @@ public class MiyaPatterns : MonoBehaviour
     
     private bool ReachedTarget(Vector2 targetPos, bool targetIsPlayer)
     {
+        float extraDistTest = .03f;
+        
         float compDist;
         if (targetIsPlayer)
         {
@@ -269,11 +278,11 @@ public class MiyaPatterns : MonoBehaviour
         }
         else
         {
-            compDist = 1f;
+            compDist = 2.8f;
         }
 
         
-        if (Vector2.Distance(targetPos, transform.position) > compDist)
+        if (Vector2.Distance(targetPos, bodyCenter.position) > compDist + extraDistTest)
         {
             return false;
         }

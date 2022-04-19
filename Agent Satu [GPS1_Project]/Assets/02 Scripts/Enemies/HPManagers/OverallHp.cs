@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
+
 
 //Attached to all gameObjects tagged with "Enemy" (auto - by SetupOverallHp script).
 public class OverallHp : EnemyHp
@@ -23,7 +23,7 @@ public class OverallHp : EnemyHp
     public delegate void OnDeath();
     public event OnDeath onDeathDelegate;
 
-    private bool _isDead = false;
+
     
 
     public delegate void OnDamaged();

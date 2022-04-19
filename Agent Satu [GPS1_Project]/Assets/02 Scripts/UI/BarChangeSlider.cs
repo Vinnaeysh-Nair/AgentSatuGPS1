@@ -4,7 +4,7 @@ public class BarChangeSlider : MonoBehaviour
 {
     private Slider bar;
 
-    void Start()
+    void Awake()
     {
        bar = GetComponent<Slider>();
     }

@@ -50,13 +50,13 @@ public class BulletBehaviour : MonoBehaviour
     //Each time spawned from pool
     void OnEnable()
     {
-        rb.velocity = transform.right * bulletSpeed;
-        
         //Reset boolean to allow bullet to hit again
         hitRegistered = false;
         
         //Reset deflected times
         deflectedTimes = 0;
+        
+        rb.velocity = transform.right * bulletSpeed;
         
         //Disable bullet after a duration
         StartCoroutine(SetBulletInactive(gameObject));
@@ -128,15 +128,16 @@ public class BulletBehaviour : MonoBehaviour
     //To detect hits on player (because HitDetectors are triggers)
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!col.CompareTag("Player")) return;
-        
-        if (!hitRegistered)
-        {
-            hitRegistered = true;
+        if (col.CompareTag("Player"))
+        {        
+            if (!hitRegistered)
+            {
+                hitRegistered = true;
 
-            SpawnBloodSplatterEffect();
+                SpawnBloodSplatterEffect();
             
-            PlayerTakeDamage();
+                PlayerTakeDamage();
+            }
         }
     }
 
