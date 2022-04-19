@@ -22,10 +22,8 @@ public class PlayerSaveData
 
 public static class ProgressSaving 
 {
-    private static string _filePath = "/SaveFiles/";
     private static string _fileName = "PlayerSaveData";
-    
-    public static string dir = $"{Application.dataPath}{_filePath}{_fileName}.json";
+    public static string dir = $"{Application.persistentDataPath}/{_fileName}";
  
     private static PlayerSaveData _playerSaveData;
     

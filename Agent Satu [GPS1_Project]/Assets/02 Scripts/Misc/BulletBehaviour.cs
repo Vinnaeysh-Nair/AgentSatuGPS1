@@ -41,8 +41,7 @@ public class BulletBehaviour : MonoBehaviour
         pooler = ObjectPooler.objPoolerInstance;
         tagManager = ObjectPooler.tagManager;
         
-        GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
-        playerHp = playerBody.GetComponent<PlayerHpSystem>();
+        playerHp = PlayerMain.Instance.PlayerHpSystem;
         
         rb = GetComponent<Rigidbody2D>();
     }

@@ -34,7 +34,7 @@ public class CameraTarget : MonoBehaviour
     
     void Start()
     { 
-        playerBody = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<Transform>();
+        playerBody = PlayerMain.Instance.transform;
         aim = playerBody.Find("WeaponPivot").GetComponent<CrosshairAiming>();
         
         followPlayer = transform.parent;
