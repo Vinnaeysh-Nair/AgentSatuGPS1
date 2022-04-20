@@ -1344,6 +1344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneTransitionNextLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 4495569231162917791, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c41808370ef45c479ac44b34462d93e, type: 3}
 --- !u!1 &1119858748
@@ -3388,6 +3392,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1786458357}
+    - target: {fileID: 1410753140, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: initialHp
+      value: 225
+      objectReference: {fileID: 0}
     - target: {fileID: 1215250032645173508, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: m_Name
       value: Boss_ BattleJet
@@ -3441,24 +3449,56 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: atk2FireRate
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeTillAttack1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillAttack2
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: atk1ShotsPerBurst
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: nextPatternBufferTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270828171033316716, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1TimeUntilNextBurst
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1FireRate
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: atk2FireRate
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: timeTillAttack1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: timeTillAttack2
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: atk1ShotsPerBurst
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
+      propertyPath: nextPatternBufferTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259341326964542862, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
       propertyPath: atk1TimeUntilNextBurst
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4233ec0587bee584cba638548617cdc2, type: 3}
