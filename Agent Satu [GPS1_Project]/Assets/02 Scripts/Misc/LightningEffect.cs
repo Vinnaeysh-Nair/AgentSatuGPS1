@@ -4,8 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class LightningEffect : MonoBehaviour
 {
-    //private UnityEngine.Rendering.Universal.Light2D light;
-    [SerializeField] private Light2D light;
+    [SerializeField] private new Light2D light;
     [SerializeField] private float lightTimer = 0.0f;
     [Range(0.1f, 0.5f)]
     [SerializeField] private float fadeIntensity = 0.1f;
@@ -16,7 +15,6 @@ public class LightningEffect : MonoBehaviour
 
     void Start()
     {
-        //light = .GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         sManager = SoundManager.Instance;
         
 
@@ -76,14 +74,12 @@ public class LightningEffect : MonoBehaviour
         while (true)
         {
             int temp = Random.Range(0, 3);
-            //Debug.Log(lightningTimer[temp]);
 
             if (lightningable)
             {
                 lightning();
                 lightningable = false;
             }
-            //Debug.Log("lightning triggered");
             yield return new WaitForSeconds(lightningTimer[temp]);
         }
     }
