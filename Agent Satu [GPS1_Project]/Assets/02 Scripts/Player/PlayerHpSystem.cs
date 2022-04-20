@@ -26,6 +26,7 @@ public class PlayerHpSystem : MonoBehaviour
         //Scale healthbar
         healthBar.SetBarAmount(ConvertToPercentage());
 
+
         if (currHp > 0) return;
 
         deathLevelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -34,8 +35,11 @@ public class PlayerHpSystem : MonoBehaviour
 
     public void ReplenishHealth(int amount)
     {
-        if (currHp == hpCountPlayer) return;
-        currHp += amount;
+        if (currHp + amount > hpCountPlayer)
+            currHp = hpCountPlayer;
+        else
+            currHp += amount;
+        
         
         //Scale healthbar
         healthBar.SetBarAmount(ConvertToPercentage());

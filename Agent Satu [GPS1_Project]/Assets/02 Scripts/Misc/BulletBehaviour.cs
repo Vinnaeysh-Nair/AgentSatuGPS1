@@ -45,7 +45,7 @@ public class BulletBehaviour : MonoBehaviour
         
         rb = GetComponent<Rigidbody2D>();
     }
-
+    
 
     //Each time spawned from pool
     void OnEnable()

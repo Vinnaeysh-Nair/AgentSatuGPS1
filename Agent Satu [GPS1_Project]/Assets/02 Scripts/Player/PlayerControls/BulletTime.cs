@@ -3,7 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using JetBrains.Annotations;
 
 
 public class BulletTime : MonoBehaviour
@@ -32,6 +31,7 @@ public class BulletTime : MonoBehaviour
     public static event Action OnDeactivateBulletTime;
 
 
+
     void OnDestroy()
     {
         OnActivateBulletTime -= _soundManager.BulletTime_OnActivateBulletTime;
@@ -46,6 +46,8 @@ public class BulletTime : MonoBehaviour
         
         OnActivateBulletTime += _soundManager.BulletTime_OnActivateBulletTime;
         OnDeactivateBulletTime += _soundManager.BulletTime_OnDeactivateBulletTime;
+        
+        ResetTimeSettings();
     }
 
     // Update is called once per frame
@@ -112,6 +114,7 @@ public class BulletTime : MonoBehaviour
             
         }
         activated = false;
+        ResetTimeSettings();
         if(OnDeactivateBulletTime != null) OnDeactivateBulletTime.Invoke();
     }
     
@@ -159,5 +162,11 @@ public class BulletTime : MonoBehaviour
         
             bulletTimeScreenEffect.GetComponent<Image>().color = color;
         }
+    }
+
+    private void ResetTimeSettings()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = .02f;
     }
 }

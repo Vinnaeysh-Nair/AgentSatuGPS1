@@ -25,8 +25,8 @@ public class MiyaPatterns : MonoBehaviour
     
     
     [Header("General")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float moveSpeed = 1250f;
+    [SerializeField] private float jumpForce = 1750f;
     [SerializeField] [Range(0f, 10f)] private float xDistToStartAttack = 1f;
     [SerializeField] [Range(0f, 10f)] private float yDistToStartJumping = 1f;
     [SerializeField] private float timeBetweenJumps = 3f;
@@ -49,8 +49,8 @@ public class MiyaPatterns : MonoBehaviour
     [SerializeField] private int atk2Dmg = 1;
     [SerializeField] private float timeBtwSlashes = .2f;
     [SerializeField] private Vector2 atk2AreaOffset;
-    [SerializeField] private float extraOffsetX;
-    [SerializeField] private float atk2AreaSize;
+    [SerializeField] private float extraOffsetX = 1f;
+    [SerializeField] private float atk2AreaSize = 1f;
 
     private float _nextAtk2SlashTime = 0f;
 
@@ -387,12 +387,12 @@ public class MiyaPatterns : MonoBehaviour
     //flash bang helmet
     private void Attack4()
     {
-        attackCounter = 4;
+       // attackCounter = 4;
   
         //play blind telegraph animation
         atk4FlashStart.gameObject.SetActive(true);
         
-        ChangeAttack();
+        //ChangeAttack();
     }
 
     private void ChangeAttack()

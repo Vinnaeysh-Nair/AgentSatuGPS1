@@ -16,20 +16,18 @@ public class PauseMenu : Menu
     [SerializeField] private GameObject options;
     
     
-    private Canvas pauseMenuCanvas;
-    
     private float timeScaleBeforePause;
+    
     
     [HideInInspector]
     public bool gameIsPaused = false;
 
 
-
     void Start()
     {
-        pauseMenuCanvas = GetComponent<Canvas>();
-        pauseMenuCanvas.enabled = false;
+        pauseMain.SetActive(false);
     }
+    
     
     // Update is called once per frame
     void Update()
@@ -42,6 +40,10 @@ public class PauseMenu : Menu
             }
             else
             {
+                if (options.activeSelf)
+                {
+                    BackToPauseMenu();
+                }
                 Unpause();
             }
         }
@@ -54,7 +56,7 @@ public class PauseMenu : Menu
         
         Time.timeScale = 0f;
         gameIsPaused = true;
-        pauseMenuCanvas.enabled = true;
+        pauseMain.SetActive(true);
     }
 
     public void Unpause()
@@ -65,13 +67,7 @@ public class PauseMenu : Menu
         Time.timeScale = timeScaleBeforePause;
         
         gameIsPaused = false;
-        pauseMenuCanvas.enabled = false;
-
-        if (!pauseMain.activeSelf)
-        {
-            pauseMain.SetActive(true);
-            options.SetActive(false);
-        }
+        pauseMain.SetActive(false);
     }
 
     public void LoadMainMenu()
@@ -86,7 +82,7 @@ public class PauseMenu : Menu
     public void OpenOptions()
     {
         PlayUIClick();
-        
+
         pauseMain.SetActive(false);
         options.SetActive(true);
     }
