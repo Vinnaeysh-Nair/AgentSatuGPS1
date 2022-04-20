@@ -35,16 +35,15 @@ public class MiyaHp : BossHp
         float percentage = (float) currHp / initialHp;
         hpBar.SetBarAmount(percentage);
 
-        if (percentage <= atk4HpThresholds[atk4ThresholdCounter])
+        if (atk4ThresholdCounter < atk4HpThresholds.Length)
         {
-            if (OnReachingThreshold != null)
+            if (percentage <= atk4HpThresholds[atk4ThresholdCounter])
             {
-                OnReachingThreshold.Invoke();
-            }
-
-            if(atk4ThresholdCounter < atk4HpThresholds.Length - 1)
+                if (OnReachingThreshold != null) OnReachingThreshold.Invoke();
                 atk4ThresholdCounter++;
+            }
         }
+ 
         
         if (currHp > 0) return;
         CompleteLevel();
