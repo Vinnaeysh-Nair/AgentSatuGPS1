@@ -387,12 +387,8 @@ public class MiyaPatterns : MonoBehaviour
     //flash bang helmet
     private void Attack4()
     {
-       // attackCounter = 4;
-  
         //play blind telegraph animation
         atk4FlashStart.gameObject.SetActive(true);
-        
-        //ChangeAttack();
     }
 
     private void ChangeAttack()
