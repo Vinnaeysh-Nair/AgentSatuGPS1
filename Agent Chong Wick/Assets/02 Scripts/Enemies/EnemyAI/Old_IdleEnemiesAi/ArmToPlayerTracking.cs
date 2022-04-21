@@ -12,7 +12,6 @@ public class ArmToPlayerTracking : MonoBehaviour
     
     private Vector2 _playerPosition;
 
-
  
     
     void Start()

@@ -39,6 +39,9 @@ public class CrosshairSwitching : MonoBehaviour
     private void ChangeCrosshair()
     {
         currCrosshair = wepSwitch.selectedWeapon;
-        spriteRenderer.sprite = crosshairs[currCrosshair].crosshairPrefab.GetComponent<SpriteRenderer>().sprite;
+
+        Transform temp = crosshairs[currCrosshair].crosshairPrefab;
+        spriteRenderer.sprite = temp.GetComponent<SpriteRenderer>().sprite;
+        transform.localScale = temp.localScale;
     }
 }

@@ -15,6 +15,7 @@ public class PlayerWeapon : MonoBehaviour
     [Header("Sound")] 
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioClip noAmmoSound;
     
     private SoundManager _soundManager;
     private AudioSource _reloadSource;
@@ -159,7 +160,7 @@ public class PlayerWeapon : MonoBehaviour
         
         
         //Below are guns that need to check for reloading
-        
+
         //If need to reload and have ammo
         if (HaveAmmo() && !ClipFull())
         {
@@ -170,11 +171,7 @@ public class PlayerWeapon : MonoBehaviour
             }
         }
         
-        //Check if clip is emptied too
-        if (ClipEmpty())
-        {
-            return;
-        }
+
 
         if (reloading) return;
         
@@ -226,6 +223,13 @@ public class PlayerWeapon : MonoBehaviour
     
     private void Shoot()
     {
+        //Check if clip is emptied too
+        if (ClipEmpty() && wepId != 0)
+        {
+            _soundManager.PlayEffect(noAmmoSound, true);
+            return;
+        }
+        
         //Sound
         _soundManager.PlayEffect(shootSound, true);
         
@@ -294,10 +298,6 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UpdateAmmoDisplay()
     {
-        // if (onAmmoUpdateDelegate != null)
-        // {
-        //     onAmmoUpdateDelegate.Invoke();
-        // }
         if(OnAmmoUpdate != null) OnAmmoUpdate.Invoke(wepId, currClip, currAmmoReserve);
     }
 
