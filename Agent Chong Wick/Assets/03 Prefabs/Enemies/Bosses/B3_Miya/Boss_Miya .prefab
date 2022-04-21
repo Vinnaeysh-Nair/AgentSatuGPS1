@@ -1520,8 +1520,7 @@ MonoBehaviour:
   playerHitLayer:
     serializedVersion: 2
     m_Bits: 128
-  rb: {fileID: 3977144182747463002}
-  moveSpeed: 1250
+  moveSpeed: 2000
   jumpForce: 1750
   xDistToStartAttack: 3
   yDistToStartJumping: 3
@@ -1537,16 +1536,16 @@ MonoBehaviour:
   atk2Dmg: 2
   timeBtwSlashes: 1
   atk2AreaOffset: {x: 1, y: -1.85}
-  extraOffsetX: 0.73
+  extraOffsetX: 1.55
   atk2AreaSize: 2.5
   atk3DetectionBox: {fileID: 7924422830033097693}
   bladeTrail: {fileID: 4857574943233274470}
-  atk3Dmg: 3
+  atk3Dmg: 10
   dashSpeed: 50
   timeBetweenDashes: 5
-  dashDuration: 0.3
+  dashDuration: 0.4
   atk3Duration: 15
-  atk3DamageDelay: 2
+  atk3DamageDelay: 1.25
   atk4FlashStart: {fileID: 4523721878521035614}
   atk4BlindAnim: {fileID: 7924422831297752130}
 --- !u!95 &3977144182747462980
@@ -1752,8 +1751,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 3743321173761842803}
   bullet: {fileID: 2374340452112123156, guid: dd4745f17c10edf4c9a11c5e297c7925, type: 3}
   fireRate: 6
-  burstInterval: 5
-  bulletPerBurst: 8
+  burstInterval: 3
+  bulletPerBurst: 12
 --- !u!1 &3673981115666125470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,7 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHp: 0
   healthBar: {fileID: 0}
-  initialHp: 120
+  initialHp: 175
   hpBar: {fileID: 7187344405715705954}
   atk4HpThresholds:
   - 0.75
