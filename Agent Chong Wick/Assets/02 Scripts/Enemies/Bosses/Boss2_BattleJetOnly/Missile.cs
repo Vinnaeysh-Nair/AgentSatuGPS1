@@ -22,7 +22,7 @@ public class Missile : MonoBehaviour
         _missile= transform.parent;
         
         PlayerMain playerMain = PlayerMain.Instance;
-        ;
+        
         _playerMovement = playerMain.PlayerMovement;
         _playerHpSystem = playerMain.PlayerHpSystem;
     }
