@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BossBattleJetHp : BossHp
 {
     [Header("Ref:")] 
@@ -10,10 +10,11 @@ public class BossBattleJetHp : BossHp
     [Header("Ignore pivot version")]
     [SerializeField] private BarChangeSlider hpBar;
 
+
     private FlyIntoScene _flyIntoScene;
     private bool _canTakeDamage = false;
-
-
+ 
+    
     void OnDestroy()
     {
         _flyIntoScene.onReachingPointDelegate -= FlyIntoScene_OnReachingPoint;
@@ -27,6 +28,8 @@ public class BossBattleJetHp : BossHp
 
         _flyIntoScene = GetComponent<FlyIntoScene>();
         _flyIntoScene.onReachingPointDelegate += FlyIntoScene_OnReachingPoint;
+        
+        SetHealthBarVisible(false);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -69,5 +72,11 @@ public class BossBattleJetHp : BossHp
     private void FlyIntoScene_OnReachingPoint()
     {
         _canTakeDamage = true;
+        SetHealthBarVisible(true);
+    }
+    
+    private void SetHealthBarVisible(bool status)
+    {
+        hpBar.gameObject.SetActive(status);
     }
 }

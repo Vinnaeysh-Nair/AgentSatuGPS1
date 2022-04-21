@@ -19,6 +19,8 @@ public class BossMiniJetHp : BossHp
 
     private FlyIntoScene _flyIntoScene;
     private bool _canTakeDamage = false;
+    private Color _initialFillColor;
+    private Color _inviPhaseColor = Color.gray;
 
 
     void OnDestroy()
@@ -36,6 +38,9 @@ public class BossMiniJetHp : BossHp
         killedBossesCount = 0;
         
         currHp = initialHp;
+
+        _initialFillColor = healthBar.FillSprite.color;
+        healthBar.SetVisible(false);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -76,6 +81,7 @@ public class BossMiniJetHp : BossHp
                 
                 //temporarily cant take damage
                 _canTakeDamage = false;
+                healthBar.SetFillColor(_inviPhaseColor);   
                 StartCoroutine(SetCanTakeDamageToTrue());
             }
         }
@@ -99,11 +105,13 @@ public class BossMiniJetHp : BossHp
     private void FlyIntoScene_OnReachingPoint()
     {
         _canTakeDamage = true;
+        healthBar.SetVisible(true);
     }
     
     private IEnumerator SetCanTakeDamageToTrue()
     {
         yield return new WaitForSeconds(5f);
         _canTakeDamage = true;
+        healthBar.SetFillColor(_initialFillColor);   
     }
 }
