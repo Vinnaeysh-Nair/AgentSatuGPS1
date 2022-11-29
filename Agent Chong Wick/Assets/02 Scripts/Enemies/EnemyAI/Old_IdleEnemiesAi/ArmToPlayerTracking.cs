@@ -23,6 +23,7 @@ public class ArmToPlayerTracking : MonoBehaviour
     void Update()
     {
         if (!enemyAgro.GetInRange()) return;
+        if (!enemyAgro.GetDetected()) return;
 
         _playerPosition = _playerMovement.GetPlayerPos();
         PointToPlayer();
