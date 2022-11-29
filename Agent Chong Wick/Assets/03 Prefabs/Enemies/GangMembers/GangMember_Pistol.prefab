@@ -136,6 +136,9 @@ MonoBehaviour:
   currHp: 0
   initialOverallHp: 3
   deathSound: {fileID: 8300000, guid: 024e329ec657a2f49a8981ee8a9b87ba, type: 3}
+  splatterSounds:
+  - {fileID: 8300000, guid: e957544cc63fb6146b1c6b6b331e8ab5, type: 3}
+  - {fileID: 8300000, guid: 27fd24b07b070ba45b78005dbe084d99, type: 3}
 --- !u!114 &62031457074694678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1948,7 +1951,6 @@ MonoBehaviour:
   pivotTransform: {fileID: 8159150443110042526}
   overallHp: {fileID: 62031457074694890}
   enemyAgro: {fileID: 62031457074694679}
-  followAngleOffset: 11
 --- !u!1 &8159150443170771100
 GameObject:
   m_ObjectHideFlags: 0

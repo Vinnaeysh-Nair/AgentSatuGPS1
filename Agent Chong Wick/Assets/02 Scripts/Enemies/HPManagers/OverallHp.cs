@@ -35,6 +35,8 @@ public class OverallHp : EnemyHp
     [Header("Sound")]
     [SerializeField] private AudioClip deathSound;
 
+    [SerializeField] private AudioClip[] splatterSounds;
+
     void Start()
     {
         _soundManager = SoundManager.Instance;
@@ -104,6 +106,7 @@ public class OverallHp : EnemyHp
         if (!enabled) return;   
         
         _soundManager.PlayEffect(deathSound, true);
+        PlayDeathSplatter();
         
         //Disable unwanted components
         if (transform.TryGetComponent(out EnemyAI_Melee enemyAIMelee))
@@ -133,5 +136,12 @@ public class OverallHp : EnemyHp
         {
             onDeathDelegate.Invoke();
         }
+    }
+
+    private void PlayDeathSplatter()
+    {
+        int index = Random.Range(0, splatterSounds.Length);
+
+        _soundManager.PlayEffect(splatterSounds[index]);
     }
 }
